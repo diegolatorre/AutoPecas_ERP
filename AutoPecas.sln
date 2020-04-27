@@ -3,7 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30002.166
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoPecas.Web", "AutoPecas.Web\AutoPecas.Web.csproj", "{BA670FF5-7C9D-4DED-94B7-7DCBFA232DD3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoPecas.Web", "AutoPecas.Web\AutoPecas.Web.csproj", "{BA670FF5-7C9D-4DED-94B7-7DCBFA232DD3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoPecas.Core", "AutoPecas.Core\AutoPecas.Core.csproj", "{77C4F40E-3DC2-47FD-BC97-7637E382F386}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infra", "Infra", "{1A20BA50-CCB9-487F-B4D2-2C67E9B118B6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{5D2E726F-AEDB-4CAA-AE32-BDB807D10027}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoPecas.Service", "AutoPecas.Service\AutoPecas.Service.csproj", "{86B3561E-0188-4818-8DC9-2A7B739DD1DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autopecas.Infra.Data", "Autopecas.Infra.Data\Autopecas.Infra.Data.csproj", "{4D1A1A82-48C6-4ACE-B48F-F9E5439C2832}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +25,25 @@ Global
 		{BA670FF5-7C9D-4DED-94B7-7DCBFA232DD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA670FF5-7C9D-4DED-94B7-7DCBFA232DD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA670FF5-7C9D-4DED-94B7-7DCBFA232DD3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77C4F40E-3DC2-47FD-BC97-7637E382F386}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77C4F40E-3DC2-47FD-BC97-7637E382F386}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77C4F40E-3DC2-47FD-BC97-7637E382F386}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77C4F40E-3DC2-47FD-BC97-7637E382F386}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86B3561E-0188-4818-8DC9-2A7B739DD1DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86B3561E-0188-4818-8DC9-2A7B739DD1DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86B3561E-0188-4818-8DC9-2A7B739DD1DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86B3561E-0188-4818-8DC9-2A7B739DD1DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D1A1A82-48C6-4ACE-B48F-F9E5439C2832}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D1A1A82-48C6-4ACE-B48F-F9E5439C2832}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D1A1A82-48C6-4ACE-B48F-F9E5439C2832}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D1A1A82-48C6-4ACE-B48F-F9E5439C2832}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{86B3561E-0188-4818-8DC9-2A7B739DD1DE} = {5D2E726F-AEDB-4CAA-AE32-BDB807D10027}
+		{4D1A1A82-48C6-4ACE-B48F-F9E5439C2832} = {1A20BA50-CCB9-487F-B4D2-2C67E9B118B6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {76D5A825-1AD2-4393-9C42-612E6720695B}

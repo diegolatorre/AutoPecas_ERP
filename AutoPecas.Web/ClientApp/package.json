@@ -26,6 +26,7 @@
     "bootstrap": "^4.3.1",
     "core-js": "^3.3.3",
     "jquery": "3.4.1",
+    "ng-zorro-antd": "^9.1.0",
     "oidc-client": "^1.9.1",
     "popper.js": "^1.16.0",
     "rxjs": "^6.5.3",
@@ -33,7 +34,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.803.24",
-    "@angular/cli": "8.3.14",
+    "@angular/cli": "^8.3.14",
     "@angular/compiler-cli": "8.2.12",
     "@angular/language-service": "8.2.12",
     "@types/jasmine": "~3.4.4",

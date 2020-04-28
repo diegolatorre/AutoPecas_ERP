@@ -4,6 +4,83 @@
     "C:\\Users\\dflim\\Projetos\\AutoPecas\\AutoPecas.Service\\AutoPecas.Service.csproj": {}
   },
   "projects": {
+    "C:\\Users\\dflim\\Projetos\\AutoPecas\\AutoPecas.Core\\AutoPecas.Core.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\dflim\\Projetos\\AutoPecas\\AutoPecas.Core\\AutoPecas.Core.csproj",
+        "projectName": "AutoPecas.Core",
+        "projectPath": "C:\\Users\\dflim\\Projetos\\AutoPecas\\AutoPecas.Core\\AutoPecas.Core.csproj",
+        "packagesPath": "C:\\Users\\dflim\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\dflim\\Projetos\\AutoPecas\\AutoPecas.Core\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\dflim\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "LinqKit.Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[3.1.3, )"
+            },
+            "Microsoft.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[3.1.3, )"
+            },
+            "Microsoft.Extensions.Options.ConfigurationExtensions": {
+              "target": "Package",
+              "version": "[3.1.3, )"
+            },
+            "Microsoft.NETCore.App": {
+              "target": "Package",
+              "version": "[2.2.8, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
     "C:\\Users\\dflim\\Projetos\\AutoPecas\\AutoPecas.Service\\AutoPecas.Service.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -29,7 +106,11 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\dflim\\Projetos\\AutoPecas\\AutoPecas.Core\\AutoPecas.Core.csproj": {
+                "projectPath": "C:\\Users\\dflim\\Projetos\\AutoPecas\\AutoPecas.Core\\AutoPecas.Core.csproj"
+              }
+            }
           }
         },
         "warningProperties": {

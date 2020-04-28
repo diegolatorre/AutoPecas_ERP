@@ -14,7 +14,7 @@ namespace Autopecas.Infra.Data
 
         #region DbSet
 
-        public DbSet<Peca> Peca { get; set; }
+        public DbSet<Peca> Pecas { get; set; }
 
         #endregion
 

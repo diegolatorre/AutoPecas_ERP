@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Autopecas.Infra.Data;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace AutoPecas.Service
 {
@@ -6,6 +7,10 @@ namespace AutoPecas.Service
     {
         public static IServiceCollection AddAppService(this IServiceCollection services)
         {
+            services
+                .AddDbContext<AutoPecasDbContext>()
+                .AddTransient<PecaService>();
+
             return services;
         }
     }

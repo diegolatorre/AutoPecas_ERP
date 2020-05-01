@@ -7,4 +7,53 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="ID" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="7d120612-a6fa-41c3-8132-c10085ef302d" ChangeDateTime="05/01/2020 01:37:41">
+    <Property Name="ElementName" Value="[dbo].[PECA].[ID]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[PECA]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="IDPRODUTO" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="43c4c32b-3bc9-414f-934b-5b102bb7ce83" ChangeDateTime="05/01/2020 01:38:00">
+    <Property Name="ElementName" Value="[dbo].[PECA].[VALOR]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[PECA]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CODIGOBARRAS" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="ed5075a2-17a0-4c50-bcfa-07d3868f3c2a" ChangeDateTime="05/01/2020 01:38:53">
+    <Property Name="ElementName" Value="[dbo].[PECA].[ORCAMENTO]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[PECA]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CATEGORIA" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="1fba5be7-c9d7-4f0b-8d8e-25ea98d24935" ChangeDateTime="05/01/2020 01:39:02">
+    <Property Name="ElementName" Value="[dbo].[PECA].[CATEGORIA]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[PECA]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="IDCATEGORIA" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="e7823094-dcb6-4eea-9f28-a8089adae111" ChangeDateTime="05/01/2020 01:40:32">
+    <Property Name="ElementName" Value="[dbo].[PECA].[ESTOQUEMINIMO]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[PECA]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="IDMARCA" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="ffd527a6-57ab-4d9c-844a-0231ac9e1e8b" ChangeDateTime="05/01/2020 01:50:48">
+    <Property Name="ElementName" Value="[dbo].[CATEGORIA].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[CATEGORIA]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="IDCATEGORIA" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="b77c8ca5-5c7b-4e4d-a042-d4eaeeefa788" ChangeDateTime="05/01/2020 01:52:12">
+    <Property Name="ElementName" Value="[dbo].[MARCA].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[MARCA]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="IDMARCA" />
+  </Operation>
 </Operations>

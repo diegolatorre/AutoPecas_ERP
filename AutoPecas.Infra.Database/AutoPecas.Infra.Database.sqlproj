@@ -121,6 +121,8 @@
   </ItemGroup>
   <ItemGroup>
     <Build Include="PECA.sql" />
+    <Build Include="CATEGORIA.sql" />
+    <Build Include="MARCA.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="AutoPecas.Infra.Database.refactorlog" />

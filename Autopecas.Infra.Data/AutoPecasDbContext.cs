@@ -33,7 +33,7 @@ namespace Autopecas.Infra.Data
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder
-                .UseSqlServer(_Config.GetConnectionString("RH"),
+                .UseSqlServer(_Config.GetConnectionString("AutoPecas"),
                 opts => opts.CommandTimeout((int)TimeSpan.FromMinutes(10).TotalSeconds)
             )
             .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)

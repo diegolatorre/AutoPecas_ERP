@@ -11,6 +11,5 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.pecaService.listar().subscribe(next => console.log(next));
   }
 }

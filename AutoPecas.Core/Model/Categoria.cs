@@ -3,13 +3,13 @@
 namespace AutoPecas.Core.Model
 {
     [DataContract]
-    public class Marca
+    public class Categoria
     {
         [DataMember]
         public int Id { get; set; }
 
         [DataMember]
-        public string  Nome { get; set; }
+        public string Nome { get; set; }
 
         [DataMember]
         public string Descricao { get; set; }

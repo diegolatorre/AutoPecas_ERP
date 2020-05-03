@@ -9,17 +9,17 @@ namespace AutoPecas.Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class MarcaController : Controller
+    public class CategoriaController : Controller
     {
-        private readonly MarcaService _service;
+        private readonly CategoriaService _service;
 
-        public MarcaController(MarcaService service)
+        public CategoriaController(CategoriaService service)
         {
             _service = service;
         }
 
         [HttpGet("lista")]
-        public async Task<ActionResult<IList<Marca>>> Lista()
+        public async Task<ActionResult<IList<Categoria>>> Lista()
         {
             try
             {
@@ -32,11 +32,11 @@ namespace AutoPecas.Web.Controllers
         }
 
         [HttpGet("{idPeca}")]
-        public async Task<ActionResult<Marca>> Obter(int idMarca)
+        public async Task<ActionResult<Categoria>> Obter(int idCategoria)
         {
             try
             {
-                return Ok(await _service.Obter(idMarca));
+                return Ok(await _service.Obter(idCategoria));
             }
             catch (Exception e)
             {

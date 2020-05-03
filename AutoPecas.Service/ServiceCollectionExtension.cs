@@ -9,7 +9,8 @@ namespace AutoPecas.Service
         {
             services
                 .AddDbContext<AutoPecasDbContext>()
-                .AddTransient<ProdutoService>();
+                .AddTransient<ProdutoService>()
+                .AddTransient<MarcaService>();
 
             return services;
         }

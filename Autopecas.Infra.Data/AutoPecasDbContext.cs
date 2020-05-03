@@ -14,7 +14,7 @@ namespace Autopecas.Infra.Data
 
         #region DbSet
 
-        public DbSet<Peca> Pecas { get; set; }
+        public DbSet<Produto> Produtos { get; set; }
 
         #endregion
 
@@ -27,7 +27,7 @@ namespace Autopecas.Infra.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .ApplyConfiguration(new PecaMap());
+                .ApplyConfiguration(new ProdutoMap());
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

@@ -9,7 +9,7 @@ namespace AutoPecas.Service
         {
             services
                 .AddDbContext<AutoPecasDbContext>()
-                .AddTransient<PecaService>();
+                .AddTransient<ProdutoService>();
 
             return services;
         }

@@ -123,6 +123,9 @@
     <Build Include="PRODUTO.sql" />
     <Build Include="CATEGORIA.sql" />
     <Build Include="MARCA.sql" />
+    <Build Include="CONTATO.sql" />
+    <Build Include="ENDERECO.sql" />
+    <Build Include="TELEFONE.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="AutoPecas.Infra.Database.refactorlog" />

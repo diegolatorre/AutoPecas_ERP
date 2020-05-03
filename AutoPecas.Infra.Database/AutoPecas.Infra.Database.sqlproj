@@ -120,7 +120,7 @@
     <Folder Include="Properties" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="PECA.sql" />
+    <Build Include="PRODUTO.sql" />
     <Build Include="CATEGORIA.sql" />
     <Build Include="MARCA.sql" />
   </ItemGroup>

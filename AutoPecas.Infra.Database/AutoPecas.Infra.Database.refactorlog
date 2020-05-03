@@ -56,4 +56,11 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="IDMARCA" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="4b8c5769-307b-484d-a5aa-6d9d2b411281" ChangeDateTime="05/03/2020 20:16:48">
+    <Property Name="ElementName" Value="[dbo].[PECA]" />
+    <Property Name="ElementType" Value="SqlTable" />
+    <Property Name="ParentElementName" Value="[dbo]" />
+    <Property Name="ParentElementType" Value="SqlSchema" />
+    <Property Name="NewName" Value="[PRODUTO]" />
+  </Operation>
 </Operations>

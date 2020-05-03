@@ -9,12 +9,12 @@ namespace Autopecas.Infra.Data.Map
         public void Configure(EntityTypeBuilder<Produto> builder)
         {
             builder
-                .ToTable("PECA")
+                .ToTable("PRODUTO")
                 .HasKey(p => p.Id);
 
             builder
                 .Property(p => p.Id)
-                .HasColumnName("ID")
+                .HasColumnName("IDPRODUTO")
                 .UseIdentityColumn()
                 .IsRequired();
 

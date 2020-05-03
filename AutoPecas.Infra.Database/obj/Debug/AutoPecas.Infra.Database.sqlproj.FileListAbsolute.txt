@@ -3,4 +3,7 @@ C:\Users\dflim\Projetos\AutoPecas\AutoPecas.Infra.Database\bin\Debug\AutoPecas.I
 C:\Users\dflim\Projetos\AutoPecas\AutoPecas.Infra.Database\bin\Debug\AutoPecas.Infra.Database.pdb
 C:\Users\dflim\Projetos\AutoPecas\AutoPecas.Infra.Database\obj\Debug\AutoPecas.Infra.Database.dll
 C:\Users\dflim\Projetos\AutoPecas\AutoPecas.Infra.Database\obj\Debug\AutoPecas.Infra.Database.pdb
-C:\Users\dflim\Projetos\AutoPecas\AutoPecas.Infra.Database\obj\Debug\AutoPecas.Infra.Database.sqlprojAssemblyReference.cache
+C:\Users\dflim\Projetos\AutoPecas\AutoPecas.Infra.Database\obj\Debug\Model.xml
+C:\Users\dflim\Projetos\AutoPecas\AutoPecas.Infra.Database\obj\Debug\refactor.xml
+C:\Users\dflim\Projetos\AutoPecas\AutoPecas.Infra.Database\obj\Debug\postdeploy.sql
+C:\Users\dflim\Projetos\AutoPecas\AutoPecas.Infra.Database\obj\Debug\predeploy.sql

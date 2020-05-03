@@ -7,27 +7,27 @@ using System.Threading.Tasks;
 
 namespace AutoPecas.Service
 {
-    public class ProdutoService
+    public class MarcaService
     {
         private readonly AutoPecasDbContext _AutoPecasDbContext;
 
-        public ProdutoService(AutoPecasDbContext autoPecasDbContext)
+        public MarcaService(AutoPecasDbContext autoPecasDbContext)
         {
             _AutoPecasDbContext = autoPecasDbContext;
         }
 
-        public async Task<Produto> Obter(int idPeca)
+        public async Task<Marca> Obter(int idMarca)
         {
             return await _AutoPecasDbContext
-                .Produtos
-                .Where(p => p.Id == idPeca)
+                .Marcas
+                .Where(p => p.Id == idMarca)
                 .FirstOrDefaultAsync();
         }
 
-        public async Task<IList<Produto>> Lista()
+        public async Task<IList<Marca>> Lista()
         {
             return await _AutoPecasDbContext
-                .Produtos
+                .Marcas
                 .ToListAsync();
         }
     }

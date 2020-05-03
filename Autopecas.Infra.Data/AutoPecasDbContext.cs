@@ -15,6 +15,7 @@ namespace Autopecas.Infra.Data
         #region DbSet
 
         public DbSet<Produto> Produtos { get; set; }
+        public DbSet<Marca> Marcas { get; set; }
 
         #endregion
 

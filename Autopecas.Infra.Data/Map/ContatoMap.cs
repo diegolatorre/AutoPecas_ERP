@@ -67,6 +67,16 @@ namespace Autopecas.Infra.Data.Map
                 .Property(p => p.Ativo)
                 .HasColumnName("ATIVO")
                 .IsRequired();
+
+            builder
+                .HasMany(p => p.Enderecos)
+                .WithOne(p => p.Contato)
+                .HasForeignKey(p => p.IdContato);
+
+            builder
+                .HasMany(p => p.Telefones)
+                .WithOne(p => p.Contato)
+                .HasForeignKey(p => p.IdContato);
         }
     }
 }

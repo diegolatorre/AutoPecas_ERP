@@ -1,9 +1,6 @@
 ﻿using AutoPecas.Core.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Autopecas.Infra.Data.Map
 {
@@ -23,22 +20,22 @@ namespace Autopecas.Infra.Data.Map
             builder
                 .Property(p => p.IdContato)
                 .HasColumnName("IDCONTATO")
-                .UseIdentityColumn();
+                .IsRequired();
 
             builder
                 .Property(p => p.Tipo)
                 .HasColumnName("TIPO")
-                .UseIdentityColumn();
+                .IsRequired();
 
             builder
                 .Property(p => p.Numero)
                 .HasColumnName("NUMERO")
-                .UseIdentityColumn();
+                .IsRequired();
 
             builder
-                .HasOne(p => p.Contato)
-                .WithMany()
-                .HasForeignKey(p => p.IdContato);
+            .HasOne(p => p.Contato)
+            .WithMany(p => p.Telefones)
+            .HasForeignKey(p => p.IdContato);
         }
     }
 }

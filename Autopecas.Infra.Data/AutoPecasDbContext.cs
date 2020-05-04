@@ -34,7 +34,10 @@ namespace Autopecas.Infra.Data
             modelBuilder
                 .ApplyConfiguration(new ProdutoMap())
                 .ApplyConfiguration(new MarcaMap())
-                .ApplyConfiguration(new CategoriaMap());
+                .ApplyConfiguration(new CategoriaMap())
+                .ApplyConfiguration(new ContatoMap())
+                .ApplyConfiguration(new EnderecoMap())
+                .ApplyConfiguration(new TelefoneMap());
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

@@ -41,9 +41,9 @@ namespace AutoPecas.Core.Model
         public bool Ativo { get; set; }
 
         [DataMember]
-        public ICollection<Endereco> Endereco { get; set; }
+        public ICollection<Endereco> Enderecos { get; set; }
 
         [DataMember]
-        public ICollection<Telefone> Telefone { get; set; }
+        public ICollection<Telefone> Telefones { get; set; }
     }
 }

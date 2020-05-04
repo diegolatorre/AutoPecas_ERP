@@ -48,7 +48,7 @@ namespace Autopecas.Infra.Data.Map
 
             builder
                 .HasOne(p => p.Contato)
-                .WithMany()
+                .WithMany(p => p.Enderecos)
                 .HasForeignKey(p => p.IdContato);
         }
     }

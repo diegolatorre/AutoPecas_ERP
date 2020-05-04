@@ -28,6 +28,8 @@ namespace AutoPecas.Service
         {
             return await _AutoPecasDbContext
                 .Produtos
+                .Include(p => p.Categoria)
+                .Include(p => p.Marca)
                 .ToListAsync();
         }
     }

@@ -32,7 +32,9 @@ namespace Autopecas.Infra.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .ApplyConfiguration(new ProdutoMap());
+                .ApplyConfiguration(new ProdutoMap())
+                .ApplyConfiguration(new MarcaMap())
+                .ApplyConfiguration(new CategoriaMap());
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

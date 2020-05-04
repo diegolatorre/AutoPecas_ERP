@@ -19,7 +19,7 @@ namespace AutoPecas.Web.Controllers
         }
 
         [HttpGet("lista")]
-        public async Task<ActionResult<IList<Marca>>> Lista()
+        public async Task<ActionResult<List<Marca>>> Lista()
         {
             try
             {

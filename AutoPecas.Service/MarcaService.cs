@@ -24,7 +24,7 @@ namespace AutoPecas.Service
                 .FirstOrDefaultAsync();
         }
 
-        public async Task<IList<Marca>> Lista()
+        public async Task<List<Marca>> Lista()
         {
             return await _AutoPecasDbContext
                 .Marcas

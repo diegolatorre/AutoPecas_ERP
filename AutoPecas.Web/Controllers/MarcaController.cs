@@ -31,7 +31,7 @@ namespace AutoPecas.Web.Controllers
             }
         }
 
-        [HttpGet("{idPeca}")]
+        [HttpGet("{idMarca}")]
         public async Task<ActionResult<Marca>> Obter(int idMarca)
         {
             try

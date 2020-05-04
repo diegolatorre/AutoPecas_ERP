@@ -3,23 +3,24 @@ using AutoPecas.Service;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace AutoPecas.Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CategoriaController : Controller
+    public class TelefoneController : Controller
     {
-        private readonly CategoriaService _service;
+        private readonly TelefoneService _service;
 
-        public CategoriaController(CategoriaService service)
+        public TelefoneController(TelefoneService service)
         {
             _service = service;
         }
 
         [HttpGet("lista")]
-        public async Task<ActionResult<IList<Categoria>>> Lista()
+        public async Task<ActionResult<IList<Telefone>>> Lista()
         {
             try
             {
@@ -31,17 +32,18 @@ namespace AutoPecas.Web.Controllers
             }
         }
 
-        [HttpGet("{idCategoria}")]
-        public async Task<ActionResult<Categoria>> Obter(int idCategoria)
+        [HttpGet("{idTelefone}")]
+        public async Task<ActionResult<Telefone>> Obter(int idTelefone)
         {
             try
             {
-                return Ok(await _service.Obter(idCategoria));
+                return Ok(await _service.Obter(idTelefone));
             }
             catch (Exception e)
             {
                 throw e;
             }
         }
+
     }
 }

@@ -19,7 +19,7 @@ namespace Autopecas.Infra.Data
         public DbSet<Categoria> Categorias { get; set; }
         public DbSet<Contato> Contatos { get; set; }
         public DbSet<Telefone> Telefones { get; set; }
-
+        public DbSet<Endereco> Enderecos { get; set; }
 
         #endregion
 

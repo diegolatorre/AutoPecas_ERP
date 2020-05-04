@@ -43,5 +43,8 @@ namespace AutoPecas.Core.Model
 
         [DataMember]
         public Marca Marca { get; set; }
+
+        [DataMember]
+        public Categoria Categoria { get; set; }
     }
 }

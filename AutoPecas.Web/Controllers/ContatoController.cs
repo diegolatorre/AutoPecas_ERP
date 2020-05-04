@@ -33,13 +33,26 @@ namespace AutoPecas.Web.Controllers
         }
 
         [HttpGet("{idContato}")]
-        public async Task<ActionResult<Categoria>> Obter(int idContato)
+        public async Task<ActionResult<Contato>> Obter(int idContato)
         {
             try
             {
                 return Ok(await _service.Obter(idContato));
             }
             catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<int>> Incluir(Contato contato)
+        {
+            try
+            {
+                return Ok(await _service.Incluir(contato));
+            }
+            catch(Exception e)
             {
                 throw e;
             }

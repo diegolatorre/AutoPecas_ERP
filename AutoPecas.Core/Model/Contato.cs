@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using System.Text;
 
 namespace AutoPecas.Core.Model
 {
@@ -39,9 +38,6 @@ namespace AutoPecas.Core.Model
 
         [DataMember]
         public bool Ativo { get; set; }
-
-        [DataMember]
-        public ICollection<Endereco> Enderecos { get; set; }
 
         [DataMember]
         public ICollection<Telefone> Telefones { get; set; }

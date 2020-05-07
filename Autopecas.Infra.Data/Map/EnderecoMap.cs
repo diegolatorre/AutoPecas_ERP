@@ -45,11 +45,6 @@ namespace Autopecas.Infra.Data.Map
                 .Property(p => p.Complemento)
                 .HasColumnName("COMPLEMENTO")
                 .IsRequired();
-
-            builder
-                .HasOne(p => p.Contato)
-                .WithMany(p => p.Enderecos)
-                .HasForeignKey(p => p.IdContato);
         }
     }
 }

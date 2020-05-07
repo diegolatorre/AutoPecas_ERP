@@ -15,7 +15,8 @@ namespace Autopecas.Infra.Data.Map
             builder
                 .Property(p => p.Id)
                 .HasColumnName("IDTELEFONE")
-                .UseIdentityColumn();
+                .UseIdentityColumn()
+                .IsRequired();
 
             builder
                 .Property(p => p.IdContato)
@@ -24,8 +25,7 @@ namespace Autopecas.Infra.Data.Map
 
             builder
                 .Property(p => p.Tipo)
-                .HasColumnName("TIPO")
-                .IsRequired();
+                .HasColumnName("TIPO");
 
             builder
                 .Property(p => p.Numero)
@@ -33,9 +33,9 @@ namespace Autopecas.Infra.Data.Map
                 .IsRequired();
 
             builder
-            .HasOne(p => p.Contato)
-            .WithMany(p => p.Telefones)
-            .HasForeignKey(p => p.IdContato);
+                .HasOne(p => p.Contato)
+                .WithMany(p => p.Telefones)
+                .HasForeignKey(p => p.IdContato);
         }
     }
 }

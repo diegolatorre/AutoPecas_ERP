@@ -35,8 +35,7 @@ namespace Autopecas.Infra.Data.Map
 
             builder
                 .Property(p => p.Rg)
-                .HasColumnName("RG")
-                .IsRequired();
+                .HasColumnName("RG");
 
             builder
                 .Property(p => p.Tipo)
@@ -50,28 +49,20 @@ namespace Autopecas.Infra.Data.Map
 
             builder
                 .Property(p => p.DataNascimento)
-                .HasColumnName("DATANASCIMENTO")
-                .IsRequired();
+                .HasColumnName("DATANASCIMENTO");
 
             builder
                 .Property(p => p.Sexo)
-                .HasColumnName("SEXO")
-                .IsRequired();
+                .HasColumnName("SEXO");
 
             builder
                 .Property(p => p.Observacao)
-                .HasColumnName("OBSERVACAO")
-                .IsRequired();
+                .HasColumnName("OBSERVACAO");
 
             builder
                 .Property(p => p.Ativo)
                 .HasColumnName("ATIVO")
                 .IsRequired();
-
-            builder
-                .HasMany(p => p.Enderecos)
-                .WithOne(p => p.Contato)
-                .HasForeignKey(p => p.IdContato);
 
             builder
                 .HasMany(p => p.Telefones)

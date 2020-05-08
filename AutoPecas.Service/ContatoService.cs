@@ -22,6 +22,7 @@ namespace AutoPecas.Service
                 .Contatos
                 .Where(p => p.Id == idContato)
                 .Include(p => p.Telefones)
+                .Include(p => p.Enderecos)
                 .FirstOrDefaultAsync();
         }
 
@@ -30,6 +31,7 @@ namespace AutoPecas.Service
             return await _AutoPecasDbContext
                 .Contatos
                 .Include(p => p.Telefones)
+                .Include(p => p.Enderecos)
                 .ToListAsync();
         }
 

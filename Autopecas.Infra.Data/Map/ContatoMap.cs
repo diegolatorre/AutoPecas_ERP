@@ -68,6 +68,11 @@ namespace Autopecas.Infra.Data.Map
                 .HasMany(p => p.Telefones)
                 .WithOne(p => p.Contato)
                 .HasForeignKey(p => p.IdContato);
+
+            builder
+                .HasMany(p => p.Enderecos)
+                .WithOne(p => p.Contato)
+                .HasForeignKey(p => p.IdContato);
         }
     }
 }

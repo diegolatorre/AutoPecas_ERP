@@ -1,9 +1,6 @@
 ﻿using AutoPecas.Core.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Autopecas.Infra.Data.Map
 {
@@ -43,8 +40,12 @@ namespace Autopecas.Infra.Data.Map
 
             builder
                 .Property(p => p.Complemento)
-                .HasColumnName("COMPLEMENTO")
-                .IsRequired();
+                .HasColumnName("COMPLEMENTO");
+
+            builder
+                .HasOne(p => p.Contato)
+                .WithMany(p => p.Enderecos)
+                .HasForeignKey(p => p.IdContato);
         }
     }
 }

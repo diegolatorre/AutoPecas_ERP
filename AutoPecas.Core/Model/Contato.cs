@@ -41,5 +41,8 @@ namespace AutoPecas.Core.Model
 
         [DataMember]
         public ICollection<Telefone> Telefones { get; set; }
+
+        [DataMember]
+        public ICollection<Endereco> Enderecos { get; set; }
     }
 }

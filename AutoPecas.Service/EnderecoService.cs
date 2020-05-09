@@ -32,5 +32,12 @@ namespace AutoPecas.Service
                 .Enderecos
                 .ToListAsync();
         }
+
+        public async Task<int> Incluir(Endereco endereco)
+        {
+            _AutoPecasDbContext.Add(endereco);
+
+            return await _AutoPecasDbContext.SaveChangesAsync();
+        }
     }
 }

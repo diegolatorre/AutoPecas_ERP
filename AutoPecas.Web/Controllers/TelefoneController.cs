@@ -45,5 +45,18 @@ namespace AutoPecas.Web.Controllers
             }
         }
 
+        [HttpPost]
+        public async Task<ActionResult<int>> Incluir(Telefone telefone)
+        {
+            try
+            {
+                return Ok(await _service.Incluir(telefone));
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
     }
 }

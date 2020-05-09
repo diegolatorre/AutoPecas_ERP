@@ -16,6 +16,13 @@ namespace AutoPecas.Service
             _AutoPecasDbContext = autoPecasDbContext;
         }
 
+        public async Task<IList<Telefone>> Lista()
+        {
+            return await _AutoPecasDbContext
+                .Telefones
+                .ToListAsync();
+        }
+
         public async Task<Telefone> Obter(int idTelefone)
         {
             return await _AutoPecasDbContext
@@ -24,11 +31,11 @@ namespace AutoPecas.Service
                 .FirstOrDefaultAsync();
         }
 
-        public async Task<IList<Telefone>> Lista()
+        public async Task<int> Incluir(Telefone telefone)
         {
-            return await _AutoPecasDbContext
-                .Telefones
-                .ToListAsync();
+            _AutoPecasDbContext.Add(telefone);
+
+            return await _AutoPecasDbContext.SaveChangesAsync();
         }
     }
 }

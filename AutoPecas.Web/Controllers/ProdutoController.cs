@@ -43,6 +43,19 @@ namespace AutoPecas.Web.Controllers
                 throw e;
             }
         }
+
+        [HttpPost]
+        public async Task<ActionResult<int>> Incluir(Produto produto)
+        {
+            try
+            {
+                return Ok(await _service.Incluir(produto));
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }
 

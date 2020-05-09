@@ -16,6 +16,13 @@ namespace AutoPecas.Service
             _AutoPecasDbContext = autoPecasDbContext;
         }
 
+        public async Task<List<Marca>> Lista()
+        {
+            return await _AutoPecasDbContext
+                .Marcas
+                .ToListAsync();
+        }
+
         public async Task<Marca> Obter(int idMarca)
         {
             return await _AutoPecasDbContext
@@ -24,11 +31,11 @@ namespace AutoPecas.Service
                 .FirstOrDefaultAsync();
         }
 
-        public async Task<List<Marca>> Lista()
+        public async Task<int> Incluir(Marca marca)
         {
-            return await _AutoPecasDbContext
-                .Marcas
-                .ToListAsync();
+            _AutoPecasDbContext.Add(marca);
+
+            return await _AutoPecasDbContext.SaveChangesAsync();
         }
     }
 }

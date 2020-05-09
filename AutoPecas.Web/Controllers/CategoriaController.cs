@@ -43,5 +43,18 @@ namespace AutoPecas.Web.Controllers
                 throw e;
             }
         }
+
+        [HttpPost]
+        public async Task<ActionResult<int>> Incluir(Categoria categoria)
+        {
+            try
+            {
+                return Ok(await _service.Incluir(categoria));
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }

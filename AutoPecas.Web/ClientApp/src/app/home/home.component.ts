@@ -1,15 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import { PecaService } from '../service/peca.service';
+import { ProdutoService } from '../service';
+import { Produto } from '../model/produto.model';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
 })
 export class HomeComponent implements OnInit {
-  public constructor(
-    private pecaService: PecaService
-  ) { }
+  produtos: Produto[];
+
+  public constructor (
+    private produtoService: ProdutoService
+  ) {}
 
   ngOnInit() {
+    this.listar();
+  }
+
+  listar() {
+    this.produtoService.listar().subscribe(next => {
+      console.log(next);
+      this.produtos = next;
+    });
   }
 }

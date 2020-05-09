@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './main/app.component';
 import { HomeComponent } from './home/home.component';
 import { NgZorroModule } from './shared/ngZorro.module';
+import { TabelaProdutoComponent } from './produto/tabela-produto/tabela-produto.component';
 
 @NgModule({
   declarations: [

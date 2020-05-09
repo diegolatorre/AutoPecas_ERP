@@ -24,5 +24,4 @@ export class TabelaProdutoComponent implements OnInit {
       this.produtos = next;
     });
   }
-
 }

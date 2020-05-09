@@ -6,8 +6,7 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './main/app.component';
 import { HomeComponent } from './home/home.component';
-import { NgZorroModule } from './shared/ngZorro.module';
-import { TabelaProdutoComponent } from './produto/tabela-produto/tabela-produto.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -20,8 +19,13 @@ import { TabelaProdutoComponent } from './produto/tabela-produto/tabela-produto.
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
+      {
+        path: 'produto',
+        loadChildren: () =>
+          import('./produto/produto.module').then((m) => m.ProdutoModule)
+      },
     ]),
-    NgZorroModule
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ProdutoService } from '../service';
 import { Produto } from '../model/produto.model';
 
 @Component({
@@ -9,18 +8,8 @@ import { Produto } from '../model/produto.model';
 export class HomeComponent implements OnInit {
   produtos: Produto[];
 
-  public constructor (
-    private produtoService: ProdutoService
-  ) {}
+  public constructor () {}
 
-  ngOnInit() {
-    this.listar();
-  }
+  ngOnInit() { }
 
-  listar() {
-    this.produtoService.listar().subscribe(next => {
-      console.log(next);
-      this.produtos = next;
-    });
-  }
 }

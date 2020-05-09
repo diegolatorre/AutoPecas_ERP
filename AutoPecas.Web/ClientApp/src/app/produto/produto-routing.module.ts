@@ -18,4 +18,6 @@ export class CadeiraRoutingModule {}
 export const RoutedComponents = [
   TabelaProdutoComponent
 ];
-export const EntryComponents = [];
+export const EntryComponents = [
+  TabelaProdutoComponent
+];

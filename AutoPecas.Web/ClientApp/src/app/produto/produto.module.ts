@@ -1,17 +1,15 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { TabelaProdutoComponent } from './tabela-produto/tabela-produto.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { NgZorroModule } from '../shared/ngZorro.module';
-import { CadeiraRoutingModule } from './produto-routing.module';
+import { CadeiraRoutingModule, EntryComponents, RoutedComponents } from './produto-routing.module';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 
 @NgModule({
-  declarations: [TabelaProdutoComponent],
+  declarations: [RoutedComponents],
+  entryComponents: [EntryComponents],
   imports: [
     CadeiraRoutingModule,
-    CommonModule,
     SharedModule,
-    NgZorroModule
+    NzButtonModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

@@ -1,1 +1,16 @@
-<button nz-button nzType="primary">Primary</button>
+<nz-table #basicTable [nzData]="produtos">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Descrição</th>
+      <th>Marca</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let produto of basicTable.data">
+      <td>{{ produto.id }}</td>
+      <td>{{ produto.descricao }}</td>
+      <td>{{ produto.marca.nome }}</td>
+    </tr>
+  </tbody>
+</nz-table>

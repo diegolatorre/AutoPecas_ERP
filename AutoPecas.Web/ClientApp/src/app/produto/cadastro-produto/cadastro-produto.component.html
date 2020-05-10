@@ -1,0 +1,34 @@
+<form nz-form [formGroup]="produtoForm" class="formulario">
+  <nz-form-item class="descricao">
+    <nz-form-label>Descrição</nz-form-label>
+    <nz-form-control>
+      <input nz-input formControlName="descricao">
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item class="codigoBarras">
+    <nz-form-label>Codigo de Barras</nz-form-label>
+    <nz-form-control>
+      <input nz-input formControlName="codigoBarras">
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item class="valorVenda">
+    <nz-form-label>Valor de Venda</nz-form-label>
+    <nz-form-control>
+      <input nz-input formControlName="valorVenda">
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item class="cadastrar">
+    <nz-form-control>
+      <button
+      nz-button
+      nzType="primary"
+      (click)="cadastrar()"
+      >
+        Cadastrar
+      </button>
+    </nz-form-control>
+  </nz-form-item>
+</form>

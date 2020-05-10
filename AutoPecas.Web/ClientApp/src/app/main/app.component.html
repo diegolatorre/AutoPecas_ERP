@@ -2,15 +2,14 @@
   <nz-header>
     <div class="logo"></div>
     <ul nz-menu nzTheme="dark" nzMode="horizontal">
+      <li nz-menu-item [routerLink]="['/']">Inicio</li>
       <li nz-menu-item [routerLink]="['/produto']">Produtos</li>
       <li nz-menu-item>Estoque</li>
       <li nz-menu-item>Financeiro</li>
     </ul>
   </nz-header>
   <nz-content>
-    <div class="inner-content">
-      <router-outlet></router-outlet>
-    </div>
+    <router-outlet></router-outlet>
   </nz-content>
   <nz-footer>Diego, Tales, Rafael ©2020</nz-footer>
 </nz-layout>

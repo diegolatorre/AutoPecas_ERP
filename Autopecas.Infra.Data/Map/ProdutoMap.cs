@@ -50,8 +50,7 @@ namespace Autopecas.Infra.Data.Map
 
             builder
                 .Property(p => p.Lucro)
-                .HasColumnName("LUCRO")
-                .IsRequired();
+                .HasColumnName("LUCRO");
 
             builder
                 .Property(p => p.EstoqueMinimo)

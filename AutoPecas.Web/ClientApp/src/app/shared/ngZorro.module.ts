@@ -5,6 +5,7 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 
 const modulos = [
   NzButtonModule,
@@ -12,7 +13,8 @@ const modulos = [
   NzMenuModule,
   NzTableModule,
   NzFormModule,
-  NzInputModule
+  NzInputModule,
+  NzCheckboxModule
 ];
 
 @NgModule({

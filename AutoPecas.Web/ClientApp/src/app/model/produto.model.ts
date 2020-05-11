@@ -9,7 +9,7 @@ export interface Produto {
   idMarca: number;
   valorCusto: number;
   valorVenda: number;
-  lucro: number;
+  lucro?: number;
   estoqueMinimo: number;
   estoqueMaximo: number;
   observacao: string;

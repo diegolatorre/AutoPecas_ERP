@@ -27,7 +27,7 @@ namespace AutoPecas.Core.Model
         public decimal ValorVenda { get; set; }
 
         [DataMember]
-        public decimal Lucro { get; set; }
+        public decimal? Lucro { get; set; }
 
         [DataMember]
         public int EstoqueMinimo { get; set; }

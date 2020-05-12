@@ -41,16 +41,19 @@ namespace Autopecas.Infra.Data.Map
             builder
                 .Property(p => p.ValorCusto)
                 .HasColumnName("VALORCUSTO")
+                .HasColumnType("DECIMAL(18,2)")
                 .IsRequired();
             
             builder
                 .Property(p => p.ValorVenda)
                 .HasColumnName("VALORVENDA")
+                .HasColumnType("DECIMAL(18,5)")
                 .IsRequired();
 
             builder
                 .Property(p => p.Lucro)
-                .HasColumnName("LUCRO");
+                .HasColumnName("LUCRO")
+                .HasColumnType("DECIMAL(3,2)");
 
             builder
                 .Property(p => p.EstoqueMinimo)

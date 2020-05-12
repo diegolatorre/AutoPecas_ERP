@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\dflim\\Projetos\\AutoPecas\\AutoPecas.Service\\AutoPecas.Service.csproj": {}
+    "C:\\Users\\dflim\\projetos\\AutoPecas\\AutoPecas.Service\\AutoPecas.Service.csproj": {}
   },
   "projects": {
-    "C:\\Users\\dflim\\Projetos\\AutoPecas\\AutoPecas.Core\\AutoPecas.Core.csproj": {
+    "C:\\Users\\dflim\\projetos\\AutoPecas\\AutoPecas.Core\\AutoPecas.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\dflim\\Projetos\\AutoPecas\\AutoPecas.Core\\AutoPecas.Core.csproj",
+        "projectUniqueName": "C:\\Users\\dflim\\projetos\\AutoPecas\\AutoPecas.Core\\AutoPecas.Core.csproj",
         "projectName": "AutoPecas.Core",
-        "projectPath": "C:\\Users\\dflim\\Projetos\\AutoPecas\\AutoPecas.Core\\AutoPecas.Core.csproj",
+        "projectPath": "C:\\Users\\dflim\\projetos\\AutoPecas\\AutoPecas.Core\\AutoPecas.Core.csproj",
         "packagesPath": "C:\\Users\\dflim\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\dflim\\Projetos\\AutoPecas\\AutoPecas.Core\\obj\\",
+        "outputPath": "C:\\Users\\dflim\\projetos\\AutoPecas\\AutoPecas.Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -88,14 +88,14 @@
         }
       }
     },
-    "C:\\Users\\dflim\\Projetos\\AutoPecas\\Autopecas.Infra.Data\\Autopecas.Infra.Data.csproj": {
+    "C:\\Users\\dflim\\projetos\\AutoPecas\\Autopecas.Infra.Data\\Autopecas.Infra.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\dflim\\Projetos\\AutoPecas\\Autopecas.Infra.Data\\Autopecas.Infra.Data.csproj",
+        "projectUniqueName": "C:\\Users\\dflim\\projetos\\AutoPecas\\Autopecas.Infra.Data\\Autopecas.Infra.Data.csproj",
         "projectName": "Autopecas.Infra.Data",
-        "projectPath": "C:\\Users\\dflim\\Projetos\\AutoPecas\\Autopecas.Infra.Data\\Autopecas.Infra.Data.csproj",
+        "projectPath": "C:\\Users\\dflim\\projetos\\AutoPecas\\Autopecas.Infra.Data\\Autopecas.Infra.Data.csproj",
         "packagesPath": "C:\\Users\\dflim\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\dflim\\Projetos\\AutoPecas\\Autopecas.Infra.Data\\obj\\",
+        "outputPath": "C:\\Users\\dflim\\projetos\\AutoPecas\\Autopecas.Infra.Data\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -114,8 +114,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\dflim\\Projetos\\AutoPecas\\AutoPecas.Core\\AutoPecas.Core.csproj": {
-                "projectPath": "C:\\Users\\dflim\\Projetos\\AutoPecas\\AutoPecas.Core\\AutoPecas.Core.csproj"
+              "C:\\Users\\dflim\\projetos\\AutoPecas\\AutoPecas.Core\\AutoPecas.Core.csproj": {
+                "projectPath": "C:\\Users\\dflim\\projetos\\AutoPecas\\AutoPecas.Core\\AutoPecas.Core.csproj"
               }
             }
           }
@@ -156,14 +156,14 @@
         }
       }
     },
-    "C:\\Users\\dflim\\Projetos\\AutoPecas\\AutoPecas.Service\\AutoPecas.Service.csproj": {
+    "C:\\Users\\dflim\\projetos\\AutoPecas\\AutoPecas.Service\\AutoPecas.Service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\dflim\\Projetos\\AutoPecas\\AutoPecas.Service\\AutoPecas.Service.csproj",
+        "projectUniqueName": "C:\\Users\\dflim\\projetos\\AutoPecas\\AutoPecas.Service\\AutoPecas.Service.csproj",
         "projectName": "AutoPecas.Service",
-        "projectPath": "C:\\Users\\dflim\\Projetos\\AutoPecas\\AutoPecas.Service\\AutoPecas.Service.csproj",
+        "projectPath": "C:\\Users\\dflim\\projetos\\AutoPecas\\AutoPecas.Service\\AutoPecas.Service.csproj",
         "packagesPath": "C:\\Users\\dflim\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\dflim\\Projetos\\AutoPecas\\AutoPecas.Service\\obj\\",
+        "outputPath": "C:\\Users\\dflim\\projetos\\AutoPecas\\AutoPecas.Service\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -182,11 +182,11 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\dflim\\Projetos\\AutoPecas\\AutoPecas.Core\\AutoPecas.Core.csproj": {
-                "projectPath": "C:\\Users\\dflim\\Projetos\\AutoPecas\\AutoPecas.Core\\AutoPecas.Core.csproj"
+              "C:\\Users\\dflim\\projetos\\AutoPecas\\AutoPecas.Core\\AutoPecas.Core.csproj": {
+                "projectPath": "C:\\Users\\dflim\\projetos\\AutoPecas\\AutoPecas.Core\\AutoPecas.Core.csproj"
               },
-              "C:\\Users\\dflim\\Projetos\\AutoPecas\\Autopecas.Infra.Data\\Autopecas.Infra.Data.csproj": {
-                "projectPath": "C:\\Users\\dflim\\Projetos\\AutoPecas\\Autopecas.Infra.Data\\Autopecas.Infra.Data.csproj"
+              "C:\\Users\\dflim\\projetos\\AutoPecas\\Autopecas.Infra.Data\\Autopecas.Infra.Data.csproj": {
+                "projectPath": "C:\\Users\\dflim\\projetos\\AutoPecas\\Autopecas.Infra.Data\\Autopecas.Infra.Data.csproj"
               }
             }
           }

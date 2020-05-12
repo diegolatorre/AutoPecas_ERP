@@ -9,6 +9,8 @@ import { ProdutoService } from 'src/app/service';
 })
 export class TabelaProdutoComponent implements OnInit {
   produtos: Produto[];
+  produtoDetalhes: Produto = { marca: { }, categoria: { } } as Produto;
+  visible = false;
 
   constructor(
     private produtoService: ProdutoService
@@ -23,5 +25,10 @@ export class TabelaProdutoComponent implements OnInit {
       console.log(next);
       this.produtos = next;
     });
+  }
+
+  detalhes(produto?: Produto) {
+    produto ? this.produtoDetalhes = produto : null;
+    this.visible = !this.visible;
   }
 }

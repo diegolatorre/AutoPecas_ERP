@@ -31,4 +31,10 @@ export class TabelaProdutoComponent implements OnInit {
     produto ? this.produtoDetalhes = produto : null;
     this.visible = !this.visible;
   }
+
+  filtrar() {
+    let t = this.produtos[0]
+    this.produtos = [];
+    this.produtos.push(t);
+  }
 }

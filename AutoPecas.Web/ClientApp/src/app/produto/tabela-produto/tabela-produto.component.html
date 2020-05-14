@@ -1,15 +1,30 @@
+<div>
+  <button nz-button nzType="primary" (click)="filtrar()">Filtrar</button>
+</div>
+
 <div class="produtos">
   <div *ngFor="let produto of produtos">
-    <nz-card class="produto" [nzTitle]="produto.descricao" [nzExtra]="extraTemplate">
-      <p>Código de Barras: {{ produto.codigoBarras }}</p>
-      <p>Marca: {{ produto.marca.nome }}</p>
-      <p>Valor: {{ produto.valorVenda }}</p>
+    <nz-card class="produto" [nzActions]="[acaoEditar, acaoDetalhes]">
+        <nz-card-meta [nzTitle]="produto.descricao" [nzDescription]="observacao"></nz-card-meta>
     </nz-card>
-    <ng-template #extraTemplate>
+    <ng-template #observacao>
+      {{ produto.observacao || "Produto sem descrição."}}
+    </ng-template>
+    <ng-template #acaoEditar>
+      <a>Editar</a>
+    </ng-template>
+    <ng-template #acaoDetalhes>
       <a (click)="detalhes(produto)">Detalhes</a>
     </ng-template>
   </div>
 </div>
+
+<nz-pagination
+  [nzPageIndex]="filtro.pagina"
+  [nzPageSize]="filtro.tamanho"
+  [nzTotal]="filtro.total"
+  (nzPageIndexChange)="paginar($event)">
+</nz-pagination>
 
 <nz-drawer [nzVisible]="visible" [nzWidth]="640" [nzClosable]="false" (nzOnClose)="detalhes()">
   <p class="title" style=" margin-bottom: 24px;">Detalhes do Produto</p>

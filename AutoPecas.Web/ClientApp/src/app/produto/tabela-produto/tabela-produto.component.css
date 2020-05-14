@@ -1,3 +1,9 @@
+:host {
+  height: 100vh;
+  display: grid;
+  grid-template-rows: 30px max-content 30px;
+  gap: 10px;
+}
 .produtos {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;

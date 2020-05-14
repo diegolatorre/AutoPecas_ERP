@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Produto } from 'src/app/model/produto.model';
 import { ProdutoService } from 'src/app/service';
+import { FiltroSpec } from 'src/app/model/geral/filtro-spec.model';
 
 @Component({
   selector: 'app-tabela-produto',
@@ -10,10 +11,19 @@ import { ProdutoService } from 'src/app/service';
 export class TabelaProdutoComponent implements OnInit {
   produtos: Produto[];
   produtoDetalhes: Produto = { marca: { }, categoria: { } } as Produto;
+
+  filtro = {
+    pagina: 1,
+    tamanho: 12,
+    total: null,
+    filtros: {},
+  } as FiltroSpec;
+
   visible = false;
 
   constructor(
-    private produtoService: ProdutoService
+    private produtoService: ProdutoService,
+    private changeDetectorRef: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
@@ -21,14 +31,28 @@ export class TabelaProdutoComponent implements OnInit {
   }
 
   listar() {
-    this.produtoService.listar().subscribe(next => {
+    this.produtoService.listar(this.filtro).subscribe(next => {
       console.log(next);
-      this.produtos = next;
+      this.filtro.total = next.total;
+      this.produtos = next.lista;
+      this.changeDetectorRef.markForCheck();
     });
+  }
+
+  paginar(pagina: number) {
+    console.log(pagina);
+    this.filtro.pagina = pagina;
+    this.listar();
   }
 
   detalhes(produto?: Produto) {
     produto ? this.produtoDetalhes = produto : null;
     this.visible = !this.visible;
+  }
+
+  filtrar() {
+    let t = this.produtos[0]
+    this.produtos = [];
+    this.produtos.push(t);
   }
 }

@@ -10,6 +10,8 @@ import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
 
 const modulos = [
   NzButtonModule,
@@ -22,7 +24,9 @@ const modulos = [
   NzCardModule,
   NzDrawerModule,
   NzDividerModule,
-  NzDescriptionsModule
+  NzDescriptionsModule,
+  NzPaginationModule,
+  NzPageHeaderModule
 ];
 
 @NgModule({

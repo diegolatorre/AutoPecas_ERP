@@ -1,4 +1,5 @@
 ﻿using AutoPecas.Core.Model;
+using AutoPecas.Core.Spec;
 using AutoPecas.Service;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -18,12 +19,12 @@ namespace AutoPecas.Web.Controllers
             _service = service;
         }
 
-        [HttpGet("lista")]
-        public async Task<ActionResult<IList<Produto>>> Lista()
+        [HttpPost("lista")]
+        public ActionResult<PaginacaoResultado<Produto>> Lista(FiltroSpec filtro)
         {
             try
             {
-                return Ok(await _service.Lista());
+                return Ok(_service.Lista(filtro));
             }
             catch (Exception e)
             {

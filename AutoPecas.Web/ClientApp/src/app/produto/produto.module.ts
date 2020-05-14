@@ -4,15 +4,18 @@ import { ProdutoRoutingModule, EntryComponents, RoutedComponents } from './produ
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { CadastroProdutoComponent } from './cadastro-produto/cadastro-produto.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { TabelaProdutoComponent } from './tabela-produto/tabela-produto.component';
+import { ParametrosModule } from './parametros/parametros.module';
 
 @NgModule({
-  declarations: [RoutedComponents, CadastroProdutoComponent],
+  declarations: [RoutedComponents, CadastroProdutoComponent, TabelaProdutoComponent],
   entryComponents: [EntryComponents],
   imports: [
     ProdutoRoutingModule,
     SharedModule,
     NzButtonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ParametrosModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

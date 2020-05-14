@@ -19,9 +19,14 @@
   </div>
 </div>
 
-<nz-pagination [nzPageIndex]="1" [nzTotal]="500"></nz-pagination>
+<nz-pagination
+  [nzPageIndex]="filtro.pagina"
+  [nzPageSize]="filtro.tamanho"
+  [nzTotal]="filtro.total"
+  (nzPageIndexChange)="paginar($event)">
+</nz-pagination>
 
-<nz-drawer *ngIf="visible" [nzVisible]="visible" [nzWidth]="640" [nzClosable]="false" (nzOnClose)="detalhes()">
+<nz-drawer [nzVisible]="visible" [nzWidth]="640" [nzClosable]="false" (nzOnClose)="detalhes()">
   <p class="title" style=" margin-bottom: 24px;">Detalhes do Produto</p>
   <nz-descriptions [nzColumn]="2" nzTitle="Produto">
     <nz-descriptions-item nzTitle="Descricao" [nzSpan]="1">{{ produtoDetalhes.descricao }}</nz-descriptions-item>

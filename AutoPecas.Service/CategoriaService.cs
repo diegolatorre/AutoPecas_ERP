@@ -1,5 +1,7 @@
 ﻿using Autopecas.Infra.Data;
 using AutoPecas.Core.Model;
+using AutoPecas.Core.Spec;
+using LinqKit;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;

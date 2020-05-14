@@ -1,5 +1,7 @@
 ﻿using Autopecas.Infra.Data;
 using AutoPecas.Core.Model;
+using AutoPecas.Core.Spec;
+using LinqKit;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -17,13 +19,30 @@ namespace AutoPecas.Service
             _AutoPecasDbContext = autoPecasDbContext;
         }
 
-        public async Task<IList<Produto>> Lista()
+        private void AplicarFiltro(FiltroSpec filtro, out IQueryable<Produto> query)
         {
-            return await _AutoPecasDbContext
-                .Produtos
-                .Include(p => p.Categoria)
-                .Include(p => p.Marca)
-                .ToListAsync();
+            query = _AutoPecasDbContext.Produtos
+                        .Include(p => p.Marca)
+                        .Include(p => p.Categoria)
+                        .AsExpandableEFCore();
+
+            var predicate = PredicateBuilder.New<Produto>(true);
+
+            query = query.Where(predicate);
+        }
+
+        public PaginacaoResultado<Produto> Lista(FiltroSpec filtro)
+        {
+            AplicarFiltro(filtro, out var query);
+
+            var resultado = new PaginacaoResultado<Produto>(query, filtro.Pagina, filtro.Tamanho, filtro.Total);
+
+            resultado.Lista = query
+                .Skip(filtro.Tamanho * (filtro.Pagina - 1))
+                .Take(filtro.Tamanho)
+                .ToListAsync().Result;
+
+            return resultado;
         }
 
         public async Task<Produto> Obter(int idPeca)

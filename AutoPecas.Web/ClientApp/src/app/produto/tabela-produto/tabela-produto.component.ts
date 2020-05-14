@@ -2,6 +2,8 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Produto } from 'src/app/model/produto.model';
 import { ProdutoService } from 'src/app/service';
 import { FiltroSpec } from 'src/app/model/geral/filtro-spec.model';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { FiltroProdutoComponent } from '../filtro-produto/filtro-produto.component';
 
 @Component({
   selector: 'app-tabela-produto',
@@ -22,6 +24,7 @@ export class TabelaProdutoComponent implements OnInit {
   visible = false;
 
   constructor(
+    private modal: NzModalService,
     private produtoService: ProdutoService,
     private changeDetectorRef: ChangeDetectorRef
   ) { }
@@ -49,8 +52,11 @@ export class TabelaProdutoComponent implements OnInit {
   }
 
   filtrar() {
-    let t = this.produtos[0]
-    this.produtos = [];
-    this.produtos.push(t);
+    const modal = this.modal.create({
+      nzTitle: 'Modal Title',
+      nzContent: FiltroProdutoComponent,
+      nzGetContainer: () => document.body,
+      nzOnOk: () => new Promise(resolve => setTimeout(resolve, 1000))
+    });
   }
 }

@@ -6,9 +6,10 @@ import { CadastroProdutoComponent } from './cadastro-produto/cadastro-produto.co
 import { ReactiveFormsModule } from '@angular/forms';
 import { TabelaProdutoComponent } from './tabela-produto/tabela-produto.component';
 import { ParametrosModule } from './parametros/parametros.module';
+import { FiltroProdutoComponent } from './filtro-produto/filtro-produto.component';
 
 @NgModule({
-  declarations: [RoutedComponents, CadastroProdutoComponent, TabelaProdutoComponent],
+  declarations: [RoutedComponents, CadastroProdutoComponent, TabelaProdutoComponent, FiltroProdutoComponent],
   entryComponents: [EntryComponents],
   imports: [
     ProdutoRoutingModule,

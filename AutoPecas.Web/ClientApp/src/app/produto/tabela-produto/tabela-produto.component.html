@@ -39,13 +39,13 @@
       {{ produtoDetalhes.observacao }}
     </nz-descriptions-item>
   </nz-descriptions>
-  <nz-divider></nz-divider>
-  <nz-descriptions [nzColumn]="2" nzTitle="Marca">
+  <nz-divider *ngIf="produtoDetalhes.marca"></nz-divider>
+  <nz-descriptions *ngIf="produtoDetalhes.marca" [nzColumn]="2" nzTitle="Marca">
     <nz-descriptions-item nzTitle="Nome" [nzSpan]="1">{{ produtoDetalhes.marca.nome }}</nz-descriptions-item>
     <nz-descriptions-item nzTitle="Descrição" [nzSpan]="1">{{ produtoDetalhes.marca.descricao }}</nz-descriptions-item>
   </nz-descriptions>
-  <nz-divider></nz-divider>
-  <nz-descriptions [nzColumn]="2" nzTitle="Categoria">
+  <nz-divider *ngIf="produtoDetalhes.categoria"></nz-divider>
+  <nz-descriptions *ngIf="produtoDetalhes.categoria" [nzColumn]="2" nzTitle="Categoria">
     <nz-descriptions-item nzTitle="Nome" [nzSpan]="1">{{ produtoDetalhes.categoria.nome }}</nz-descriptions-item>
     <nz-descriptions-item nzTitle="Descrição" [nzSpan]="1">{{ produtoDetalhes.categoria.descricao }}</nz-descriptions-item>
   </nz-descriptions>

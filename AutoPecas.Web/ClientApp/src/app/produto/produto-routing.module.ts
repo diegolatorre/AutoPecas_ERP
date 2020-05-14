@@ -18,7 +18,7 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class CadeiraRoutingModule {}
+export class ProdutoRoutingModule {}
 
 export const RoutedComponents = [
   TabelaProdutoComponent

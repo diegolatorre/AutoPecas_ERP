@@ -32,7 +32,6 @@ export class TabelaProdutoComponent implements OnInit {
 
   listar() {
     this.produtoService.listar(this.filtro).subscribe(next => {
-      console.log(next);
       this.filtro.total = next.total;
       this.produtos = next.lista;
       this.changeDetectorRef.markForCheck();
@@ -40,7 +39,6 @@ export class TabelaProdutoComponent implements OnInit {
   }
 
   paginar(pagina: number) {
-    console.log(pagina);
     this.filtro.pagina = pagina;
     this.listar();
   }

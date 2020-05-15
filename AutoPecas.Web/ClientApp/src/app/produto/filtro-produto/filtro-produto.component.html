@@ -1,1 +1,8 @@
-<p>filtro-produto works!</p>
+<form nz-form [formGroup]="filtroForm" class="formulario">
+  <nz-form-item class="descricao">
+    <nz-form-label>Descrição</nz-form-label>
+    <nz-form-control>
+      <input nz-input formControlName="descricao">
+    </nz-form-control>
+  </nz-form-item>
+</form>

@@ -4,6 +4,7 @@ import { ProdutoService } from 'src/app/service';
 import { FiltroSpec } from 'src/app/model/geral/filtro-spec.model';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { FiltroProdutoComponent } from '../filtro-produto/filtro-produto.component';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-tabela-produto',
@@ -13,6 +14,11 @@ import { FiltroProdutoComponent } from '../filtro-produto/filtro-produto.compone
 export class TabelaProdutoComponent implements OnInit {
   produtos: Produto[];
   produtoDetalhes: Produto = { marca: { }, categoria: { } } as Produto;
+
+  filtroForm = new FormGroup(
+    {
+      descricao: new FormControl(null),
+    });
 
   filtro = {
     pagina: 1,
@@ -34,7 +40,9 @@ export class TabelaProdutoComponent implements OnInit {
   }
 
   listar() {
+    console.log(this.filtro);
     this.produtoService.listar(this.filtro).subscribe(next => {
+      console.log(next);
       this.filtro.total = next.total;
       this.produtos = next.lista;
       this.changeDetectorRef.markForCheck();
@@ -52,11 +60,54 @@ export class TabelaProdutoComponent implements OnInit {
   }
 
   filtrar() {
-    const modal = this.modal.create({
-      nzTitle: 'Modal Title',
+    let l = true;
+    const filtroModal = this.modal.create({
+      nzTitle: 'Filtragem de produtos',
       nzContent: FiltroProdutoComponent,
-      nzGetContainer: () => document.body,
-      nzOnOk: () => new Promise(resolve => setTimeout(resolve, 1000))
+      nzComponentParams: {
+       filtro: this.filtroForm.value
+      },
+      nzFooter: [
+        {
+          label: 'Fechar',
+          shape: 'round',
+          onClick: () => filtroModal.destroy()
+        },
+        {
+          label: 'Limpar',
+          type: 'danger',
+          shape: 'round',
+          onClick: modal => { modal.limpar() }
+        },
+        {
+          label: 'Filtrar',
+          type: 'primary',
+          shape: 'round',
+          onClick: modal => { modal.filtrar() }
+        }
+      ],
+      nzClosable: false
+    });
+
+    filtroModal.afterClose.subscribe(filtro => {
+      if (filtro) {
+        this.filtroForm.patchValue({
+          descricao: filtro.descricao
+        });
+
+        Object.entries(filtro).forEach((f) => {
+          if (f[1] != null) {
+            const value = f[1] as any;
+            this.filtro.filtros[f[0]] = value
+          } else {
+            delete this.filtro.filtros[f[0]];
+          }
+        });
+
+        this.filtro.pagina = 1;
+        this.filtro.total = null;
+        this.listar();
+      }
     });
   }
 }

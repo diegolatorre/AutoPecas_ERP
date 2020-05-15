@@ -28,6 +28,11 @@ namespace AutoPecas.Service
 
             var predicate = PredicateBuilder.New<Produto>(true);
 
+            if (filtro.Filtros.TryGetValue("descricao", out var descricao))
+            {
+                predicate.And(p => p.Descricao.Contains((string)descricao));
+            }
+
             query = query.Where(predicate);
         }
 

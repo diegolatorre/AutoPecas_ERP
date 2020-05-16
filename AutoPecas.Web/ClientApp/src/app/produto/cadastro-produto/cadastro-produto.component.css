@@ -5,8 +5,8 @@
     "descricao codigoBarras ."
     "valorCusto valorVenda lucro"
     "estoqueMinimo estoqueMaximo ."
-    "observacao observacao observacao"
     "marca . ."
+    "observacao observacao observacao"
     "cadastrar cadastrar cadastrar";
   gap: 0px 10px;
 }

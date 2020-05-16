@@ -14,9 +14,9 @@ export class CadastroProdutoComponent implements OnInit {
     descricao: new FormControl(null, [Validators.required]),
     codigoBarras: new FormControl(null, [Validators.required]),
     valorCusto: new FormControl(null, [Validators.required]),
-    valorVenda: new FormControl(0, [Validators.required]),
+    valorVenda: new FormControl({ value: null, disabled: false }, [Validators.required]),
     checkLucro: new FormControl(false),
-    lucro: new FormControl(null),
+    lucro: new FormControl({ value: null, disabled: true }),
     estoqueMinimo: new FormControl(null, [Validators.required]),
     estoqueMaximo: new FormControl(null, [Validators.required]),
     marca: new FormControl(null, [Validators.required]),
@@ -47,6 +47,16 @@ export class CadastroProdutoComponent implements OnInit {
     } as Produto;
 
     this.produtoService.incluir(this.produto).subscribe(next => console.log('Produto Cadastrado'));
+  }
+
+  alteraLucro(valor: boolean) {
+    if (valor) {
+      this.produtoForm.get('lucro').enable();
+      this.produtoForm.get('valorVenda').disable();
+    } else {
+      this.produtoForm.get('lucro').disable();
+      this.produtoForm.get('valorVenda').enable();
+    }
   }
 
   marcaSelecionada(marca: Marca) {

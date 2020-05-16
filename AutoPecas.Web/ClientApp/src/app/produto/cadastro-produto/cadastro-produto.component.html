@@ -16,7 +16,7 @@
 
   <nz-form-item class="checkLucro">
     <nz-form-control>
-      <label nz-checkbox formControlName="checkLucro">Utilizar Lucro</label>
+      <label nz-checkbox (ngModelChange)="alteraLucro($event)" formControlName="checkLucro">Utilizar Calculo de Lucro</label>
     </nz-form-control>
   </nz-form-item>
 
@@ -32,7 +32,6 @@
     <nz-form-control>
       <input
         nz-input
-        [disabled]="produtoForm.get('checkLucro').value"
         formControlName="valorVenda">
     </nz-form-control>
   </nz-form-item>
@@ -42,7 +41,6 @@
     <nz-form-control>
       <input
       nz-input
-      [disabled]="!produtoForm.get('checkLucro').value"
       formControlName="lucro">
     </nz-form-control>
   </nz-form-item>
@@ -61,16 +59,19 @@
     </nz-form-control>
   </nz-form-item>
 
+  <nz-form-item class="marca">
+    <nz-form-label>Marca</nz-form-label>
+    <nz-form-control>
+      <app-auto-complete-marca (quandoSelecionado)="marcaSelecionada($event)"></app-auto-complete-marca>
+    </nz-form-control>
+  </nz-form-item>
+
   <nz-form-item class="observacao">
     <nz-form-label>Observação</nz-form-label>
     <nz-form-control>
       <textarea nz-input formControlName="observacao" nzAutosize></textarea>
     </nz-form-control>
   </nz-form-item>
-
-  <div class="marca">
-    <app-auto-complete-marca (quandoSelecionado)="marcaSelecionada($event)"></app-auto-complete-marca>
-  </div>
 
   <nz-form-item class="cadastrar">
     <nz-form-control>

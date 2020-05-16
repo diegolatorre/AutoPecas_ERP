@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Produto } from 'src/app/model/produto.model';
 import { ProdutoService } from 'src/app/service';
+import { Marca } from 'src/app/model/marca.model';
 
 @Component({
   selector: 'app-cadastro-produto',
@@ -18,6 +19,7 @@ export class CadastroProdutoComponent implements OnInit {
     lucro: new FormControl(null),
     estoqueMinimo: new FormControl(null, [Validators.required]),
     estoqueMaximo: new FormControl(null, [Validators.required]),
+    marca: new FormControl(null, [Validators.required]),
     observacao: new FormControl(null, Validators.required)
   });
 
@@ -35,7 +37,7 @@ export class CadastroProdutoComponent implements OnInit {
       descricao: this.produtoForm.get('descricao').value,
       codigoBarras: this.produtoForm.get('codigoBarras').value,
       idCategoria: 1,
-      idMarca: 1,
+      idMarca: this.produtoForm.get('marca').value,
       valorCusto: this.produtoForm.get('valorCusto').value,
       valorVenda: this.produtoForm.get('valorVenda').value,
       lucro: this.produtoForm.get('lucro').value,
@@ -45,6 +47,10 @@ export class CadastroProdutoComponent implements OnInit {
     } as Produto;
 
     this.produtoService.incluir(this.produto).subscribe(next => console.log('Produto Cadastrado'));
+  }
+
+  marcaSelecionada(marca: Marca) {
+    this.produtoForm.get('marca').setValue(marca.id);
   }
 
 }

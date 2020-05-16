@@ -1,1 +1,6 @@
-<p>auto-complete-marca works!</p>
+<input nz-input [formControl]="ctrlBusca" [nzAutocomplete]="auto">
+<nz-autocomplete (selectionChange)="teste($event)" #auto>
+    <nz-auto-option *ngFor="let opcao of data" [nzValue]="opcao" [nzLabel]="opcao.nome">{{ opcao.nome }}</nz-auto-option>
+    <nz-auto-option *ngIf="isLoading" nzValue="">Carregando ...</nz-auto-option>
+    <nz-auto-option *ngIf="(!data || data.length === 0) && !isLoading" nzDisabled nzValue="">Nada encontrado</nz-auto-option>
+</nz-autocomplete>

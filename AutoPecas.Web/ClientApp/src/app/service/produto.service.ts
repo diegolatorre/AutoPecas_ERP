@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Produto } from '../model/produto.model';
 import { FiltroSpec } from '../model/geral/filtro-spec.model';
 import { PaginacaoResultado } from '../model/geral/paginacao-resultado.model';
+import { Marca } from '../model/marca.model';
 
 @Injectable({
   providedIn: 'root',
@@ -27,5 +28,9 @@ export class ProdutoService {
 
   public incluir(produto: Produto): Observable<number> {
     return this.httpClient.post<number>(`${this.apiEndpoint}`, produto);
+  }
+
+  public busca(value: string): Observable<Marca[]> {
+    return this.httpClient.get<Marca[]>(`${this.apiEndpoint}/buscamarca/${value}`);
   }
 }

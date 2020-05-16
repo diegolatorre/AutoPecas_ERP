@@ -2,6 +2,7 @@
 using AutoPecas.Core.Spec;
 using AutoPecas.Service;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -51,6 +52,19 @@ namespace AutoPecas.Web.Controllers
             try
             {
                 return Ok(await _service.Incluir(produto));
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        [HttpGet("buscamarca/{texto}")]
+        public async Task<ActionResult<List<Marca>>> Busca(string texto)
+        {
+            try
+            {
+                return Ok(await _service.BuscaAsync(texto));
             }
             catch (Exception e)
             {

@@ -68,6 +68,10 @@
     </nz-form-control>
   </nz-form-item>
 
+  <div class="marca">
+    <app-auto-complete-marca (quandoSelecionado)="marcaSelecionada($event)"></app-auto-complete-marca>
+  </div>
+
   <nz-form-item class="cadastrar">
     <nz-form-control>
       <button

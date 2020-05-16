@@ -13,6 +13,8 @@ import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
 import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
 
 const modulos = [
   NzButtonModule,
@@ -28,7 +30,9 @@ const modulos = [
   NzDescriptionsModule,
   NzPaginationModule,
   NzPageHeaderModule,
-  NzModalModule
+  NzModalModule,
+  NzSelectModule,
+  NzAutocompleteModule
 ];
 
 @NgModule({

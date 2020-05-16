@@ -12,8 +12,9 @@ import { debounceTime, distinctUntilChanged, filter, tap } from 'rxjs/operators'
 })
 export class AutoCompleteMarcaComponent implements OnInit {
   ctrlBusca = new FormControl(null);
+  marcaSelecionada: Marca = null;
   isLoading = false;
-  Opcoes$: Observable<Marca[]>;
+  nadaEncontrado = false;
   data = [];
 
   @Output()
@@ -28,18 +29,42 @@ export class AutoCompleteMarcaComponent implements OnInit {
     .pipe(
       debounceTime(800),
       distinctUntilChanged(),
+      filter(
+        (texto) => typeof texto === 'string' && !!texto && texto.length >= 3
+      ),
       tap(() => this.isLoading = true)
     )
-    .subscribe((texto) => {
-      this.produtoService.busca(texto).subscribe(next => {
-        this.data = next;
-        this.isLoading = false;
-      });
+    .subscribe(texto => {
+      if (texto) {
+        this.produtoService.busca(texto).subscribe(next => {
+          console.log(next);
+          this.data = next;
+          this.isLoading = false;
+          if (next) {
+            this.nadaEncontrado = true;
+          }
+        });
+      }
     });
   }
 
-  teste(event: any) {
-    this.ctrlBusca.setValue(event.nzValue);
-    this.quandoSelecionado.emit(this.ctrlBusca.value);
+  seleciona(event: any) {
+    this.marcaSelecionada = event.nzValue;
+    this.ctrlBusca.setValue(this.marcaSelecionada);
+    this.quandoSelecionado.emit(this.marcaSelecionada);
+  }
+
+  verificaSelecionado() {
+    if (
+      !this.marcaSelecionada ||
+      this.marcaSelecionada !== this.ctrlBusca.value
+    ) {
+      if (this.marcaSelecionada) {
+        this.ctrlBusca.setValue(this.marcaSelecionada);
+      } else {
+        this.ctrlBusca.setValue(null);
+        this.marcaSelecionada = null;
+      }
+    }
   }
 }

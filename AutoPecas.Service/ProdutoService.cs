@@ -33,6 +33,16 @@ namespace AutoPecas.Service
                 predicate.And(p => p.Descricao.Contains((string)descricao));
             }
 
+            if (filtro.Filtros.TryGetValue("marca", out var marca))
+            {
+                predicate.And(p => p.IdMarca == (int)(long)marca);
+            }
+
+            if (filtro.Filtros.TryGetValue("categoria", out var categoria))
+            {
+                predicate.And(p => p.IdCategoria == (int)(long)categoria);
+            }
+
             query = query.Where(predicate);
         }
 

@@ -98,7 +98,7 @@ export class TabelaProdutoComponent implements OnInit {
         Object.entries(filtro).forEach((f) => {
           if (f[1] != null) {
             const value = f[1] as any;
-            this.filtro.filtros[f[0]] = value
+            value.id ? this.filtro.filtros[f[0]] = value.id : this.filtro.filtros[f[0]] = value;
           } else {
             delete this.filtro.filtros[f[0]];
           }

@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { NzModalRef } from 'ng-zorro-antd/modal';
+import { Marca } from 'src/app/model/marca.model';
+import { Categoria } from 'src/app/model/categoria.model';
 
 @Component({
   selector: 'app-filtro-produto',
@@ -11,6 +13,8 @@ export class FiltroProdutoComponent implements OnInit {
   filtroForm = new FormGroup(
     {
       descricao: new FormControl(null),
+      marca: new FormControl(null),
+      categoria: new FormControl(null),
     });
 
   @Input() filtro?: any;
@@ -19,7 +23,9 @@ export class FiltroProdutoComponent implements OnInit {
 
   ngOnInit(): void {
     this.filtroForm.patchValue({
-      descricao: this.filtro.descricao
+      descricao: this.filtro.descricao,
+      marca: this.filtro.marca,
+      categoria: this.filtro.categoria
     });
   }
 
@@ -29,6 +35,17 @@ export class FiltroProdutoComponent implements OnInit {
 
   filtrar(): void {
     this.modal.destroy(this.filtroForm.value);
+  }
+
+
+  marcaSelecionada(marca: Marca) {
+    console.log(marca);
+    this.filtroForm.get('marca').setValue(marca);
+  }
+
+  categoriaSelecionada(categoria: Categoria) {
+    console.log(categoria);
+    this.filtroForm.get('categoria').setValue(categoria);
   }
 
 }

@@ -1,9 +1,8 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { ProdutoService } from 'src/app/service';
 import { Marca } from 'src/app/model/marca.model';
-import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, tap } from 'rxjs/operators';
+import { MarcaService } from 'src/app/service/marca.service';
 
 @Component({
   selector: 'app-auto-complete-marca',
@@ -21,7 +20,7 @@ export class AutoCompleteMarcaComponent implements OnInit {
   readonly quandoSelecionado = new EventEmitter<Marca>();
 
   constructor(
-    private produtoService: ProdutoService
+    private marcaService: MarcaService
   ) { }
 
   ngOnInit(): void {
@@ -36,8 +35,7 @@ export class AutoCompleteMarcaComponent implements OnInit {
     )
     .subscribe(texto => {
       if (texto) {
-        this.produtoService.busca(texto).subscribe(next => {
-          console.log(next);
+        this.marcaService.busca(texto).subscribe(next => {
           this.data = next;
           this.isLoading = false;
           if (next) {

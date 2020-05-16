@@ -29,8 +29,4 @@ export class ProdutoService {
   public incluir(produto: Produto): Observable<number> {
     return this.httpClient.post<number>(`${this.apiEndpoint}`, produto);
   }
-
-  public busca(value: string): Observable<Marca[]> {
-    return this.httpClient.get<Marca[]>(`${this.apiEndpoint}/buscamarca/${value}`);
-  }
 }

@@ -5,7 +5,7 @@
     "descricao codigoBarras ."
     "valorCusto valorVenda lucro"
     "estoqueMinimo estoqueMaximo ."
-    "marca . ."
+    "marca categoria ."
     "observacao observacao observacao"
     "cadastrar cadastrar cadastrar";
   gap: 0px 10px;
@@ -44,6 +44,10 @@
 }
 .marca {
   grid-area: marca;
+  width: 100%;
+}
+.categoria {
+  grid-area: categoria;
   width: 100%;
 }
 .cadastrar {

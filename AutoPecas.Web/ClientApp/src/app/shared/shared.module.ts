@@ -3,9 +3,10 @@ import { CommonModule } from '@angular/common';
 import { NgZorroModule } from './ngZorro.module';
 import { AutoCompleteMarcaComponent } from './auto-complete/auto-complete-marca/auto-complete-marca.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AutoCompleteCategoriaComponent } from './auto-complete/auto-complete-categoria/auto-complete-categoria.component';
 
 @NgModule({
-  declarations: [AutoCompleteMarcaComponent],
+  declarations: [AutoCompleteMarcaComponent, AutoCompleteCategoriaComponent],
   imports: [
     CommonModule,
     NgZorroModule,
@@ -15,9 +16,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   exports: [
     CommonModule,
     NgZorroModule,
-    AutoCompleteMarcaComponent,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AutoCompleteMarcaComponent,
+    AutoCompleteCategoriaComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

@@ -11,7 +11,6 @@ import { Observable, of, from, Subject } from 'rxjs';
   styleUrls: ['./auto-complete-marca.component.css']
 })
 export class AutoCompleteMarcaComponent implements OnInit {
-  ctrlBusca = new FormControl(null);
   marcaSelecionada: Marca = null;
   isLoading = false;
   data = [];
@@ -48,5 +47,4 @@ export class AutoCompleteMarcaComponent implements OnInit {
     this.marcaSelecionada = marca;
     this.quandoSelecionado.emit(this.marcaSelecionada);
   }
-
 }

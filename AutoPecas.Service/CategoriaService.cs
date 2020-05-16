@@ -1,7 +1,5 @@
 ﻿using Autopecas.Infra.Data;
 using AutoPecas.Core.Model;
-using AutoPecas.Core.Spec;
-using LinqKit;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,6 +36,15 @@ namespace AutoPecas.Service
             _AutoPecasDbContext.Add(categoria);
 
             return await _AutoPecasDbContext.SaveChangesAsync();
+        }
+
+        public async Task<IList<Categoria>> Busca(string texto)
+        {
+            return await _AutoPecasDbContext
+                .Categorias
+                .Where(p => p.Nome.Contains(texto))
+                .Take(5)
+                .ToListAsync();
         }
     }
 }

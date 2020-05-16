@@ -1,13 +1,13 @@
 <nz-select
-  nzPlaceHolder="Selecione a marca"
+  nzPlaceHolder="Selecione a categoria"
   nzAllowClear
   nzShowSearch
   nzServerSearch
   nzNotFoundContent="Nada Encontrado"
   [nzLoading]="isLoading"
-  [(ngModel)]="marcaSelecionada"
+  [(ngModel)]="categoriaSelecionada"
   (ngModelChange)="seleciona($event)"
-  (nzOnSearch)="marcas.next($event)"
+  (nzOnSearch)="categorias.next($event)"
 >
   <ng-container *ngFor="let opcao of data">
     <nz-option *ngIf="!isLoading" [nzValue]="opcao" [nzLabel]="opcao.nome"></nz-option>

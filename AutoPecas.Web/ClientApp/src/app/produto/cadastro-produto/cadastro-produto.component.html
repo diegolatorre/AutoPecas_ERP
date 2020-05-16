@@ -66,6 +66,13 @@
     </nz-form-control>
   </nz-form-item>
 
+  <nz-form-item class="categoria">
+    <nz-form-label>Categoria</nz-form-label>
+    <nz-form-control>
+      <app-auto-complete-categoria (quandoSelecionado)="categoriaSelecionada($event)"></app-auto-complete-categoria>
+    </nz-form-control>
+  </nz-form-item>
+
   <nz-form-item class="observacao">
     <nz-form-label>Observação</nz-form-label>
     <nz-form-control>

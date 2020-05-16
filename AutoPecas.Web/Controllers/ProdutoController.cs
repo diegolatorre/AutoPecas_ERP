@@ -58,19 +58,6 @@ namespace AutoPecas.Web.Controllers
                 throw e;
             }
         }
-
-        [HttpGet("buscamarca/{texto}")]
-        public async Task<ActionResult<List<Marca>>> Busca(string texto)
-        {
-            try
-            {
-                return Ok(await _service.BuscaAsync(texto));
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-        }
     }
 }
 

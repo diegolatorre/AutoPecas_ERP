@@ -37,7 +37,7 @@ export class CadastroProdutoComponent implements OnInit {
       descricao: this.produtoForm.get('descricao').value,
       codigoBarras: this.produtoForm.get('codigoBarras').value,
       idCategoria: 1,
-      idMarca: this.produtoForm.get('marca').value,
+      idMarca: this.produtoForm.get('marca').value.id,
       valorCusto: this.produtoForm.get('valorCusto').value,
       valorVenda: this.produtoForm.get('valorVenda').value,
       lucro: this.produtoForm.get('lucro').value,
@@ -60,7 +60,8 @@ export class CadastroProdutoComponent implements OnInit {
   }
 
   marcaSelecionada(marca: Marca) {
-    this.produtoForm.get('marca').setValue(marca.id);
+    console.log(marca);
+    this.produtoForm.get('marca').setValue(marca);
   }
 
 }

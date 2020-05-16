@@ -1,12 +1,17 @@
-<input nz-input [formControl]="ctrlBusca" (blur)="verificaSelecionado()" [nzAutocomplete]="auto">
-<nz-autocomplete (selectionChange)="seleciona($event)" #auto>
-    <nz-auto-option *ngFor="let opcao of data" [nzValue]="opcao" [nzLabel]="opcao.nome">{{ opcao.nome }}</nz-auto-option>
-    <nz-auto-option *ngIf="isLoading" nzValue="">Carregando ...</nz-auto-option>
-    <nz-auto-option
-      *ngIf="(data.length === 0 || data == null) && !isLoading && ctrlBusca.value !== null"
-      nzDisabled
-      nzValue=""
+<nz-select
+      nzPlaceHolder="Selecione a marca"
+      nzAllowClear
+      nzShowSearch
+      nzServerSearch
+      [nzLoading]="isLoading"
+      [(ngModel)]="marcaSelecionada"
+      (ngModelChange)="seleciona($event)"
+      (nzOnSearch)="marcas.next($event)"
     >
-      Nada encontrado
-    </nz-auto-option>
-</nz-autocomplete>
+      <ng-container *ngFor="let opcao of data">
+        <nz-option *ngIf="!isLoading" [nzValue]="opcao" [nzLabel]="opcao.nome"></nz-option>
+      </ng-container>
+      <!-- <nz-option *ngIf="isLoading" nzDisabled nzCustomContent>
+        <i nz-icon nzType="loading" class="loading-icon"></i> Loading Data...
+      </nz-option> -->
+    </nz-select>

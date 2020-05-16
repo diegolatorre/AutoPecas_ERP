@@ -37,5 +37,14 @@ namespace AutoPecas.Service
 
             return await _AutoPecasDbContext.SaveChangesAsync();
         }
+
+        public async Task<IList<Marca>> Busca(string texto)
+        {
+            return await _AutoPecasDbContext
+                .Marcas
+                .Where(p => p.Nome.Contains(texto))
+                .Take(5)
+                .ToListAsync();
+        }
     }
 }

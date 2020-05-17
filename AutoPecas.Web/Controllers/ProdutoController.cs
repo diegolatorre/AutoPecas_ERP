@@ -21,11 +21,11 @@ namespace AutoPecas.Web.Controllers
         }
 
         [HttpPost("lista")]
-        public ActionResult<PaginacaoResultado<Produto>> Lista(FiltroSpec filtro)
+        public async Task<ActionResult<PaginacaoResultado<Produto>>> Lista(FiltroSpec filtro)
         {
             try
             {
-                return Ok(_service.Lista(filtro));
+                return Ok(await _service.Lista(filtro));
             }
             catch (Exception e)
             {

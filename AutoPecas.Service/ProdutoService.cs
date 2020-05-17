@@ -46,16 +46,16 @@ namespace AutoPecas.Service
             query = query.Where(predicate);
         }
 
-        public PaginacaoResultado<Produto> Lista(FiltroSpec filtro)
+        public async Task<PaginacaoResultado<Produto>> Lista(FiltroSpec filtro)
         {
             AplicarFiltro(filtro, out var query);
 
             var resultado = new PaginacaoResultado<Produto>(query, filtro.Pagina, filtro.Tamanho, filtro.Total);
 
-            resultado.Lista = query
+            resultado.Lista = await query
                 .Skip(filtro.Tamanho * (filtro.Pagina - 1))
                 .Take(filtro.Tamanho)
-                .ToListAsync().Result;
+                .ToListAsync();
 
             return resultado;
         }

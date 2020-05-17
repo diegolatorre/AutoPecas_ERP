@@ -16,8 +16,9 @@ export class ContatoService {
   constructor(private httpClient: HttpClient) { }
 
   public listar(filtro: FiltroSpec) {
-    return this.httpClient.get<Contato[]>(
-      `${this.apiEndpoint}/lista/`
+    return this.httpClient.post<PaginacaoResultado<Contato>>(
+      `${this.apiEndpoint}/lista/`,
+      filtro
     );
   }
 

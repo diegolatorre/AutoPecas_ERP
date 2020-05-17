@@ -21,7 +21,7 @@ const routes: Routes = [
 export class ProdutoRoutingModule {}
 
 export const RoutedComponents = [
-  TabelaProdutoComponent
+
 ];
 export const EntryComponents = [
   TabelaProdutoComponent

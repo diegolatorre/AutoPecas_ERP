@@ -1,1 +1,27 @@
-<p>tabela-contato works!</p>
+<div>
+  <!-- <button nz-button nzType="primary" (click)="filtrar()">Filtrar</button> -->
+</div>
+
+<div class="contatos">
+  <div *ngFor="let contato of contatos">
+    <nz-card class="contato" [nzActions]="[acaoEditar, acaoDetalhes]">
+        <nz-card-meta [nzTitle]="contato.nome" [nzDescription]="observacao"></nz-card-meta>
+    </nz-card>
+    <ng-template #observacao>
+      {{ contato.cpf || "Contato sem descrição."}}
+    </ng-template>
+    <ng-template #acaoEditar>
+      <a>Editar</a>
+    </ng-template>
+    <ng-template #acaoDetalhes>
+      <a (click)="detalhes(contato)">Detalhes</a>
+    </ng-template>
+  </div>
+</div>
+
+<nz-pagination
+  [nzPageIndex]="filtro.pagina"
+  [nzPageSize]="filtro.tamanho"
+  [nzTotal]="filtro.total"
+  (nzPageIndexChange)="paginar($event)">
+</nz-pagination>

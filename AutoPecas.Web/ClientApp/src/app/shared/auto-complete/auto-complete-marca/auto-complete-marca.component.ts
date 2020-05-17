@@ -1,6 +1,6 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Marca } from 'src/app/model/marca.model';
+import { Marca } from 'src/app/model/produto/marca.model';
 import { debounceTime, distinctUntilChanged, filter, tap } from 'rxjs/operators';
 import { MarcaService } from 'src/app/service/marca.service';
 import { Observable, of, from, Subject } from 'rxjs';

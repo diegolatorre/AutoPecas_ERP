@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Produto } from 'src/app/model/produto.model';
+import { Produto } from 'src/app/model/produto/produto.model';
 import { ProdutoService } from 'src/app/service';
-import { Marca } from 'src/app/model/marca.model';
-import { Categoria } from 'src/app/model/categoria.model';
+import { Marca } from 'src/app/model/produto/marca.model';
+import { Categoria } from 'src/app/model/produto/categoria.model';
 
 @Component({
   selector: 'app-cadastro-produto',

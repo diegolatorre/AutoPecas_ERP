@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { NzModalRef } from 'ng-zorro-antd/modal';
-import { Marca } from 'src/app/model/marca.model';
-import { Categoria } from 'src/app/model/categoria.model';
+import { Marca } from 'src/app/model/produto/marca.model';
+import { Categoria } from 'src/app/model/produto/categoria.model';
 
 @Component({
   selector: 'app-filtro-produto',

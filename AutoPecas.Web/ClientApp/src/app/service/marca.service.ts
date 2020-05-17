@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Marca } from '../model/marca.model';
+import { Marca } from '../model/produto/marca.model';
 
 @Injectable({
   providedIn: 'root',

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Produto } from '../model/produto.model';
+import { Produto } from '../model/produto/produto.model';
 import { FiltroSpec } from '../model/geral/filtro-spec.model';
 import { PaginacaoResultado } from '../model/geral/paginacao-resultado.model';
-import { Marca } from '../model/marca.model';
+import { Marca } from '../model/produto/marca.model';
 
 @Injectable({
   providedIn: 'root',

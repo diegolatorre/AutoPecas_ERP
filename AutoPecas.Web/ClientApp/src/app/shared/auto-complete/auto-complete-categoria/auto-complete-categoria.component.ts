@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Categoria } from 'src/app/model/categoria.model';
+import { Categoria } from 'src/app/model/produto/categoria.model';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, tap } from 'rxjs/operators';
 import { CategoriaService } from 'src/app/service/categoria.service';

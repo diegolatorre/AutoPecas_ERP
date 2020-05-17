@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { Produto } from 'src/app/model/produto.model';
+import { Produto } from 'src/app/model/produto/produto.model';
 import { ProdutoService } from 'src/app/service';
 import { FiltroSpec } from 'src/app/model/geral/filtro-spec.model';
 import { NzModalService } from 'ng-zorro-antd/modal';

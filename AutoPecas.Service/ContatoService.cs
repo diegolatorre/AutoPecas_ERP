@@ -1,5 +1,7 @@
 ﻿using Autopecas.Infra.Data;
 using AutoPecas.Core.Model;
+using AutoPecas.Core.Spec;
+using LinqKit;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,13 +18,35 @@ namespace AutoPecas.Service
             _AutoPecasDbContext = autoPecasDbContext;
         }
 
-        public async Task<IList<Contato>> Lista()
+        private void AplicarFiltro(FiltroSpec filtro, out IQueryable<Contato> query)
         {
-            return await _AutoPecasDbContext
-                .Contatos
-                .Include(p => p.Telefones)
-                .Include(p => p.Enderecos)
+            query = _AutoPecasDbContext.Contatos
+                        .Include(p => p.Telefones)
+                        .Include(p => p.Enderecos)
+                        .AsExpandableEFCore();
+
+            var predicate = PredicateBuilder.New<Contato>(true);
+
+            if (filtro.Filtros.TryGetValue("nome", out var nome))
+            {
+                predicate.And(p => p.Nome.Contains((string)nome));
+            }
+
+            query = query.Where(predicate);
+        }
+
+        public async Task<PaginacaoResultado<Contato>> Lista(FiltroSpec filtro)
+        {
+            AplicarFiltro(filtro, out var query);
+
+            var resultado = new PaginacaoResultado<Contato>(query, filtro.Pagina, filtro.Tamanho, filtro.Total);
+
+            resultado.Lista = await query
+                .Skip(filtro.Tamanho * (filtro.Pagina - 1))
+                .Take(filtro.Tamanho)
                 .ToListAsync();
+
+            return resultado;
         }
 
         public async Task<Contato> Obter(int idContato)

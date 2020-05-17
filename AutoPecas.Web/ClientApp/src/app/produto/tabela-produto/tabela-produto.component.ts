@@ -1,7 +1,10 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { Produto } from 'src/app/model/produto.model';
+import { Produto } from 'src/app/model/produto/produto.model';
 import { ProdutoService } from 'src/app/service';
 import { FiltroSpec } from 'src/app/model/geral/filtro-spec.model';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { FiltroProdutoComponent } from '../filtro-produto/filtro-produto.component';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-tabela-produto',
@@ -11,6 +14,11 @@ import { FiltroSpec } from 'src/app/model/geral/filtro-spec.model';
 export class TabelaProdutoComponent implements OnInit {
   produtos: Produto[];
   produtoDetalhes: Produto = { marca: { }, categoria: { } } as Produto;
+
+  filtroForm = new FormGroup(
+    {
+      descricao: new FormControl(null),
+    });
 
   filtro = {
     pagina: 1,
@@ -22,6 +30,7 @@ export class TabelaProdutoComponent implements OnInit {
   visible = false;
 
   constructor(
+    private modal: NzModalService,
     private produtoService: ProdutoService,
     private changeDetectorRef: ChangeDetectorRef
   ) { }
@@ -31,6 +40,7 @@ export class TabelaProdutoComponent implements OnInit {
   }
 
   listar() {
+    console.log(this.filtro);
     this.produtoService.listar(this.filtro).subscribe(next => {
       console.log(next);
       this.filtro.total = next.total;
@@ -40,7 +50,6 @@ export class TabelaProdutoComponent implements OnInit {
   }
 
   paginar(pagina: number) {
-    console.log(pagina);
     this.filtro.pagina = pagina;
     this.listar();
   }
@@ -51,8 +60,54 @@ export class TabelaProdutoComponent implements OnInit {
   }
 
   filtrar() {
-    let t = this.produtos[0]
-    this.produtos = [];
-    this.produtos.push(t);
+    let l = true;
+    const filtroModal = this.modal.create({
+      nzTitle: 'Filtragem de produtos',
+      nzContent: FiltroProdutoComponent,
+      nzComponentParams: {
+       filtro: this.filtroForm.value
+      },
+      nzFooter: [
+        {
+          label: 'Fechar',
+          shape: 'round',
+          onClick: () => filtroModal.destroy()
+        },
+        {
+          label: 'Limpar',
+          type: 'danger',
+          shape: 'round',
+          onClick: modal => { modal.limpar() }
+        },
+        {
+          label: 'Filtrar',
+          type: 'primary',
+          shape: 'round',
+          onClick: modal => { modal.filtrar() }
+        }
+      ],
+      nzClosable: false
+    });
+
+    filtroModal.afterClose.subscribe(filtro => {
+      if (filtro) {
+        this.filtroForm.patchValue({
+          descricao: filtro.descricao
+        });
+
+        Object.entries(filtro).forEach((f) => {
+          if (f[1] != null) {
+            const value = f[1] as any;
+            value.id ? this.filtro.filtros[f[0]] = value.id : this.filtro.filtros[f[0]] = value;
+          } else {
+            delete this.filtro.filtros[f[0]];
+          }
+        });
+
+        this.filtro.pagina = 1;
+        this.filtro.total = null;
+        this.listar();
+      }
+    });
   }
 }

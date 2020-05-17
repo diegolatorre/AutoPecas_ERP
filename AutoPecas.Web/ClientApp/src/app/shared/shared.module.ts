@@ -1,16 +1,26 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgZorroModule } from './ngZorro.module';
+import { AutoCompleteMarcaComponent } from './auto-complete/auto-complete-marca/auto-complete-marca.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AutoCompleteCategoriaComponent } from './auto-complete/auto-complete-categoria/auto-complete-categoria.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [AutoCompleteMarcaComponent, AutoCompleteCategoriaComponent],
   imports: [
     CommonModule,
-    NgZorroModule
+    NgZorroModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     CommonModule,
-    NgZorroModule
-  ]
+    NgZorroModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AutoCompleteMarcaComponent,
+    AutoCompleteCategoriaComponent,
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class SharedModule { }

@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './main/app.component';
 import { HomeComponent } from './home/home.component';
 import { SharedModule } from './shared/shared.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { SharedModule } from './shared/shared.module';
     HomeComponent
   ],
   imports: [
+    BrowserAnimationsModule,
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
@@ -23,6 +25,11 @@ import { SharedModule } from './shared/shared.module';
         path: 'produto',
         loadChildren: () =>
           import('./produto/produto.module').then((m) => m.ProdutoModule)
+      },
+      {
+        path: 'contato',
+        loadChildren: () =>
+          import('./contato/contato.module').then((m) => m.ContatoModule)
       },
     ]),
     SharedModule

@@ -1,0 +1,22 @@
+<form nz-form [formGroup]="filtroForm" class="formulario">
+  <nz-form-item class="descricao">
+    <nz-form-label>Descrição</nz-form-label>
+    <nz-form-control>
+      <input nz-input formControlName="descricao">
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item class="marca">
+    <nz-form-label>Marca</nz-form-label>
+    <nz-form-control>
+      <app-auto-complete-marca (quandoSelecionado)="marcaSelecionada($event)"></app-auto-complete-marca>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item class="categoria">
+    <nz-form-label>Categoria</nz-form-label>
+    <nz-form-control>
+      <app-auto-complete-categoria (quandoSelecionado)="categoriaSelecionada($event)"></app-auto-complete-categoria>
+    </nz-form-control>
+  </nz-form-item>
+</form>

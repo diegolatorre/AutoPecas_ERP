@@ -1,17 +1,18 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { CadeiraRoutingModule, EntryComponents, RoutedComponents } from './produto-routing.module';
+import { ProdutoRoutingModule, EntryComponents, RoutedComponents } from './produto-routing.module';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { CadastroProdutoComponent } from './cadastro-produto/cadastro-produto.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TabelaProdutoComponent } from './tabela-produto/tabela-produto.component';
 import { ParametrosModule } from './parametros/parametros.module';
+import { FiltroProdutoComponent } from './filtro-produto/filtro-produto.component';
 
 @NgModule({
-  declarations: [RoutedComponents, CadastroProdutoComponent, TabelaProdutoComponent],
+  declarations: [RoutedComponents, CadastroProdutoComponent, TabelaProdutoComponent, FiltroProdutoComponent],
   entryComponents: [EntryComponents],
   imports: [
-    CadeiraRoutingModule,
+    ProdutoRoutingModule,
     SharedModule,
     NzButtonModule,
     ReactiveFormsModule,

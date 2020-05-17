@@ -1,0 +1,18 @@
+<nz-select
+  nzPlaceHolder="Selecione a marca"
+  nzAllowClear
+  nzShowSearch
+  nzServerSearch
+  nzNotFoundContent="Nada Encontrado"
+  [nzLoading]="isLoading"
+  [(ngModel)]="marcaSelecionada"
+  (ngModelChange)="seleciona($event)"
+  (nzOnSearch)="marcas.next($event)"
+>
+  <ng-container *ngFor="let opcao of data">
+    <nz-option *ngIf="!isLoading" [nzValue]="opcao" [nzLabel]="opcao.nome"></nz-option>
+  </ng-container>
+  <nz-option *ngIf="isLoading" nzDisabled nzCustomContent>
+    <i nz-icon nzType="loading" class="loading-icon"></i> Carregando...
+  </nz-option>
+</nz-select>

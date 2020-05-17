@@ -2,6 +2,7 @@
 using AutoPecas.Core.Spec;
 using AutoPecas.Service;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -20,11 +21,11 @@ namespace AutoPecas.Web.Controllers
         }
 
         [HttpPost("lista")]
-        public ActionResult<PaginacaoResultado<Produto>> Lista(FiltroSpec filtro)
+        public async Task<ActionResult<PaginacaoResultado<Produto>>> Lista(FiltroSpec filtro)
         {
             try
             {
-                return Ok(_service.Lista(filtro));
+                return Ok(await _service.Lista(filtro));
             }
             catch (Exception e)
             {

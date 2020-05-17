@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Produto } from 'src/app/model/produto.model';
+import { Produto } from 'src/app/model/produto/produto.model';
 import { ProdutoService } from 'src/app/service';
+import { Marca } from 'src/app/model/produto/marca.model';
+import { Categoria } from 'src/app/model/produto/categoria.model';
 
 @Component({
   selector: 'app-cadastro-produto',
@@ -13,11 +15,13 @@ export class CadastroProdutoComponent implements OnInit {
     descricao: new FormControl(null, [Validators.required]),
     codigoBarras: new FormControl(null, [Validators.required]),
     valorCusto: new FormControl(null, [Validators.required]),
-    valorVenda: new FormControl(0, [Validators.required]),
+    valorVenda: new FormControl({ value: null, disabled: false }, [Validators.required]),
     checkLucro: new FormControl(false),
-    lucro: new FormControl(null),
+    lucro: new FormControl({ value: null, disabled: true }),
     estoqueMinimo: new FormControl(null, [Validators.required]),
     estoqueMaximo: new FormControl(null, [Validators.required]),
+    marca: new FormControl(null, [Validators.required]),
+    categoria: new FormControl(null, [Validators.required]),
     observacao: new FormControl(null, Validators.required)
   });
 
@@ -34,8 +38,8 @@ export class CadastroProdutoComponent implements OnInit {
     this.produto = {
       descricao: this.produtoForm.get('descricao').value,
       codigoBarras: this.produtoForm.get('codigoBarras').value,
-      idCategoria: 1,
-      idMarca: 1,
+      idCategoria: this.produtoForm.get('categoria').value.id,
+      idMarca: this.produtoForm.get('marca').value.id,
       valorCusto: this.produtoForm.get('valorCusto').value,
       valorVenda: this.produtoForm.get('valorVenda').value,
       lucro: this.produtoForm.get('lucro').value,
@@ -47,4 +51,23 @@ export class CadastroProdutoComponent implements OnInit {
     this.produtoService.incluir(this.produto).subscribe(next => console.log('Produto Cadastrado'));
   }
 
+  alteraLucro(valor: boolean) {
+    if (valor) {
+      this.produtoForm.get('lucro').enable();
+      this.produtoForm.get('valorVenda').disable();
+    } else {
+      this.produtoForm.get('lucro').disable();
+      this.produtoForm.get('valorVenda').enable();
+    }
+  }
+
+  marcaSelecionada(marca: Marca) {
+    console.log(marca);
+    this.produtoForm.get('marca').setValue(marca);
+  }
+
+  categoriaSelecionada(categoria: Categoria) {
+    console.log(categoria);
+    this.produtoForm.get('categoria').setValue(categoria);
+  }
 }

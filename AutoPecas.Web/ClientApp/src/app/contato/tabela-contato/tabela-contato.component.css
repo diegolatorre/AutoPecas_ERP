@@ -1,0 +1,15 @@
+:host {
+  height: 100vh;
+  display: grid;
+  grid-template-rows: 30px max-content 30px;
+  gap: 10px;
+}
+.contatos {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 10px 10px;
+}
+.contato {
+    width: 100%;
+    display: block;
+}

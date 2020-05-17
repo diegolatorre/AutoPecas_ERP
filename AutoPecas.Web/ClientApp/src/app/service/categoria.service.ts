@@ -15,14 +15,14 @@ export class CategoriaService {
   constructor(private httpClient: HttpClient) { }
 
   public listar(filtro: FiltroSpec) {
-    return this.httpClient.get<Categoria>(`${this.apiEndpoint}/lista/`);
+    return this.httpClient.get<Categoria[]>(`${this.apiEndpoint}/lista/`);
   }
   public search(content: string) {
 
     console.log(JSON.parse(content));
     
 
-    return this.httpClient.get<Categoria>(`${this.apiEndpoint}/search/`);
+    return this.httpClient.get<Categoria[]>(`${this.apiEndpoint}/search/`);
   }
 
   public obter(id: number): Observable<Categoria> {
@@ -30,6 +30,10 @@ export class CategoriaService {
   }
 
   public incluir(categoria: Categoria): Observable<number> {
+
+    console.log(categoria);
+    
+
     return this.httpClient.post<number>(`${this.apiEndpoint}`, categoria);
   }
 }

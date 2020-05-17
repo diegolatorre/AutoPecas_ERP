@@ -25,3 +25,41 @@
   [nzTotal]="filtro.total"
   (nzPageIndexChange)="paginar($event)">
 </nz-pagination>
+
+<nz-drawer [nzVisible]="visible" [nzWidth]="640" [nzClosable]="false" (nzOnClose)="detalhes()">
+  <p class="title" style=" margin-bottom: 24px;">Detalhes do Contato</p>
+  <nz-descriptions [nzColumn]="2" nzTitle="Produto">
+    <nz-descriptions-item nzTitle="Nome" [nzSpan]="1">{{ contatoDetalhes.nome }}</nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Apelido" [nzSpan]="1">{{ contatoDetalhes.apelido }}</nz-descriptions-item>
+    <nz-descriptions-item nzTitle="CPF" [nzSpan]="1">{{ contatoDetalhes.cpf }}</nz-descriptions-item>
+    <nz-descriptions-item nzTitle="RG" [nzSpan]="1">{{ contatoDetalhes.rg }}</nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Tipo" [nzSpan]="1">{{ contatoDetalhes.tipo }}</nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Profissao" [nzSpan]="1">{{ contatoDetalhes.profissao }}</nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Data de Nascimento" [nzSpan]="1">{{ contatoDetalhes.dataNascimento }}</nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Sexo" [nzSpan]="1">{{ contatoDetalhes.sexo }}</nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Observação" [nzSpan]="2">
+      {{ contatoDetalhes.observacao || "Sem observação" }}
+    </nz-descriptions-item>
+  </nz-descriptions>
+
+  <nz-divider *ngIf="contatoDetalhes.enderecos"></nz-divider>
+
+  <div *ngIf="contatoDetalhes.enderecos">
+    <nz-descriptions *ngFor="let endereco of contatoDetalhes.enderecos" [nzColumn]="2" nzTitle="Endereço">
+      <nz-descriptions-item nzTitle="Logradouro" [nzSpan]="1">{{ endereco.logradouro }}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Estado" [nzSpan]="1">{{ endereco.uf }}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Bairro" [nzSpan]="1">{{ endereco.bairro }}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Complemento" [nzSpan]="1">{{ endereco.complemento }}</nz-descriptions-item>
+    </nz-descriptions>
+
+    <nz-divider></nz-divider>
+  </div>
+
+  <div *ngIf="contatoDetalhes.telefones">
+    <nz-descriptions *ngFor="let telefone of contatoDetalhes.telefones" [nzColumn]="2" [nzTitle]="'Telefone ' + telefone.tipo.toLowerCase()">
+      <nz-descriptions-item nzTitle="Numero" [nzSpan]="1">{{ telefone.numero }}</nz-descriptions-item>
+    </nz-descriptions>
+
+    <nz-divider></nz-divider>
+  </div>
+</nz-drawer>

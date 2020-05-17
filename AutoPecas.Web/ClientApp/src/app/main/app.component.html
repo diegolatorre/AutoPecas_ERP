@@ -1,0 +1,16 @@
+<nz-layout class="layout">
+  <nz-header>
+    <div class="logo"></div>
+    <ul nz-menu nzTheme="dark" nzMode="horizontal">
+      <li nz-menu-item [routerLink]="['/']">Inicio</li>
+      <li nz-menu-item [routerLink]="['/produto']">Produtos</li>
+      <li nz-menu-item [routerLink]="['/produto/cadastro']">Cadastro Produtos</li>
+      <li nz-menu-item [routerLink]="['/produto/categoria']">Categorias</li>
+      <li nz-menu-item>Financeiro</li>
+    </ul>
+  </nz-header>
+  <nz-content>
+    <router-outlet></router-outlet>
+  </nz-content>
+</nz-layout>
+

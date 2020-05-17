@@ -56,4 +56,39 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="IDMARCA" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="4b8c5769-307b-484d-a5aa-6d9d2b411281" ChangeDateTime="05/03/2020 20:16:48">
+    <Property Name="ElementName" Value="[dbo].[PECA]" />
+    <Property Name="ElementType" Value="SqlTable" />
+    <Property Name="ParentElementName" Value="[dbo]" />
+    <Property Name="ParentElementType" Value="SqlSchema" />
+    <Property Name="NewName" Value="[PRODUTO]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="e294ca9d-7439-4035-8df2-c15bb5c8d29b" ChangeDateTime="05/03/2020 22:46:28">
+    <Property Name="ElementName" Value="[dbo].[CONTATO].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[CONTATO]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="IDCONTATO" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="017ed0e5-d2d2-49cb-a4f7-b3a315098032" ChangeDateTime="05/03/2020 22:58:13">
+    <Property Name="ElementName" Value="[dbo].[ENDERECO].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ENDERECO]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="IDCONTATO" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="ac3f7910-28a1-441e-9fbb-81a4d3de8ae1" ChangeDateTime="05/03/2020 23:02:50">
+    <Property Name="ElementName" Value="[dbo].[TELEFONE].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[TELEFONE]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="IDTELEFONE" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="a4fe4303-9b02-4876-b83a-89008b6bab55" ChangeDateTime="05/04/2020 01:22:46">
+    <Property Name="ElementName" Value="[dbo].[TELEFONE].[TELEFONE]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[TELEFONE]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="NUMERO" />
+  </Operation>
 </Operations>

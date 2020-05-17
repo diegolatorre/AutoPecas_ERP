@@ -14,7 +14,12 @@ namespace Autopecas.Infra.Data
 
         #region DbSet
 
-        public DbSet<Peca> Pecas { get; set; }
+        public DbSet<Produto> Produtos { get; set; }
+        public DbSet<Marca> Marcas { get; set; }
+        public DbSet<Categoria> Categorias { get; set; }
+        public DbSet<Contato> Contatos { get; set; }
+        public DbSet<Telefone> Telefones { get; set; }
+        public DbSet<Endereco> Enderecos { get; set; }
 
         #endregion
 
@@ -27,7 +32,12 @@ namespace Autopecas.Infra.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .ApplyConfiguration(new PecaMap());
+                .ApplyConfiguration(new ProdutoMap())
+                .ApplyConfiguration(new MarcaMap())
+                .ApplyConfiguration(new CategoriaMap())
+                .ApplyConfiguration(new ContatoMap())
+                .ApplyConfiguration(new EnderecoMap())
+                .ApplyConfiguration(new TelefoneMap());
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

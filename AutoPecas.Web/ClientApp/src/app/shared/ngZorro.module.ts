@@ -1,0 +1,36 @@
+import { NgModule } from '@angular/core';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzLayoutModule } from 'ng-zorro-antd/layout';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzDrawerModule } from 'ng-zorro-antd/drawer';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
+
+const modulos = [
+  NzButtonModule,
+  NzLayoutModule,
+  NzMenuModule,
+  NzTableModule,
+  NzFormModule,
+  NzInputModule,
+  NzCheckboxModule,
+  NzCardModule,
+  NzDrawerModule,
+  NzDividerModule,
+  NzDescriptionsModule,
+  NzPaginationModule,
+  NzPageHeaderModule
+];
+
+@NgModule({
+  imports: [modulos],
+  exports: [modulos]
+})
+export class NgZorroModule { }

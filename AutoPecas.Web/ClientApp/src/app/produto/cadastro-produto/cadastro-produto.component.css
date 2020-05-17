@@ -1,0 +1,47 @@
+.formulario {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-areas:
+    "descricao codigoBarras ."
+    "valorCusto valorVenda lucro"
+    "estoqueMinimo estoqueMaximo ."
+    "observacao observacao observacao"
+    "cadastrar cadastrar cadastrar";
+  gap: 0px 10px;
+}
+.descricao {
+  grid-area: descricao;
+  width: 100%;
+}
+.codigoBarras {
+  grid-area: codigoBarras;
+  width: 100%;
+}
+.valorCusto {
+  grid-area: valorCusto;
+  width: 100%;
+}
+.valorVenda {
+  grid-area: valorVenda;
+  width: 100%;
+}
+.lucro {
+  grid-area: lucro;
+  width: 100%;
+}
+.estoqueMinimo {
+  grid-area: estoqueMinimo;
+  width: 100%;
+}
+.estoqueMaximo {
+  grid-area: estoqueMaximo;
+  width: 100%;
+}
+.observacao {
+  grid-area: observacao;
+  width: 100%;
+}
+.cadastrar {
+  grid-area: cadastrar;
+  width: 100%;
+}

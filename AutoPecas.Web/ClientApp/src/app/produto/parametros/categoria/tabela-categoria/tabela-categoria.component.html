@@ -1,0 +1,40 @@
+<h2 nz-typography>Categorias</h2>
+
+
+<button nz-button nzType="primary" [routerLink]="['/produto/categoria/cadastro']">Novo</button>
+
+<br/>
+<br/>
+
+<nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+    <input type="text" nz-input placeholder="input search text" name="contentSearch" />
+</nz-input-group>
+<ng-template #suffixIconButton>
+    <button nz-button nzType="primary" nzSearch (click)="search()"><i nz-icon nzType="search" nzTheme="outline"></i></button>
+</ng-template>
+
+<br/>
+<br/>
+
+<nz-table #basicTable [nzData]="listOfData">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nome</th>
+            <th>Descrição</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let data of basicTable.data">
+            <td>{{data.id}}</td>
+            <td>{{data.nome}}</td>
+            <td>{{data.descricao}}</td>
+            <td>
+                <button nz-button nzType="primary" [routerLink]="['/produto/categoria/editar', data.id]"><i nz-icon nzType="edit" nzTheme="outline"></i></button>
+                <nz-divider nzType="vertical"></nz-divider>
+                <button nz-button nzType="danger" [routerLink]="['/produto/categoria/cadastro']"><i nz-icon nzType="close" nzTheme="outline"></i></button>
+            </td>
+        </tr>
+    </tbody>
+</nz-table>

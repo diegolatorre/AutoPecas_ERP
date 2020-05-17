@@ -1,19 +1,16 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
-import { AppComponent } from './app.component';
-import { NavMenuComponent } from './nav-menu/nav-menu.component';
+import { AppComponent } from './main/app.component';
 import { HomeComponent } from './home/home.component';
-
-import { NzButtonModule } from 'ng-zorro-antd/button';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavMenuComponent,
     HomeComponent
   ],
   imports: [
@@ -22,8 +19,13 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
+      {
+        path: 'produto',
+        loadChildren: () =>
+          import('./produto/produto.module').then((m) => m.ProdutoModule)
+      },
     ]),
-    NzButtonModule
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

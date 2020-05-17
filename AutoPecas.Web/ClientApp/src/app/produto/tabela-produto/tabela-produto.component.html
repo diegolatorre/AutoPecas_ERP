@@ -1,0 +1,53 @@
+<div>
+  <button nz-button nzType="primary" (click)="filtrar()">Filtrar</button>
+</div>
+
+<div class="produtos">
+  <div *ngFor="let produto of produtos">
+    <nz-card class="produto" [nzActions]="[acaoEditar, acaoDetalhes]">
+        <nz-card-meta [nzTitle]="produto.descricao" [nzDescription]="observacao"></nz-card-meta>
+    </nz-card>
+    <ng-template #observacao>
+      {{ produto.observacao || "Produto sem descrição."}}
+    </ng-template>
+    <ng-template #acaoEditar>
+      <a>Editar</a>
+    </ng-template>
+    <ng-template #acaoDetalhes>
+      <a (click)="detalhes(produto)">Detalhes</a>
+    </ng-template>
+  </div>
+</div>
+
+<nz-pagination
+  [nzPageIndex]="filtro.pagina"
+  [nzPageSize]="filtro.tamanho"
+  [nzTotal]="filtro.total"
+  (nzPageIndexChange)="paginar($event)">
+</nz-pagination>
+
+<nz-drawer [nzVisible]="visible" [nzWidth]="640" [nzClosable]="false" (nzOnClose)="detalhes()">
+  <p class="title" style=" margin-bottom: 24px;">Detalhes do Produto</p>
+  <nz-descriptions [nzColumn]="2" nzTitle="Produto">
+    <nz-descriptions-item nzTitle="Descricao" [nzSpan]="1">{{ produtoDetalhes.descricao }}</nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Codigo de Barras" [nzSpan]="1">{{ produtoDetalhes.codigoBarras }}</nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Valor de Custo" [nzSpan]="1">{{ produtoDetalhes.valorCusto }}</nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Valor de Venda" [nzSpan]="1">{{ produtoDetalhes.valorVenda }}</nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Estoque Mínimo" [nzSpan]="1">{{ produtoDetalhes.estoqueMinimo }}</nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Estoque Máximo" [nzSpan]="1">{{ produtoDetalhes.estoqueMaximo }}</nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Observação" [nzSpan]="2">
+      {{ produtoDetalhes.observacao }}
+    </nz-descriptions-item>
+  </nz-descriptions>
+  <nz-divider></nz-divider>
+  <nz-descriptions [nzColumn]="2" nzTitle="Marca">
+    <nz-descriptions-item nzTitle="Nome" [nzSpan]="1">{{ produtoDetalhes.marca.nome }}</nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Descrição" [nzSpan]="1">{{ produtoDetalhes.marca.descricao }}</nz-descriptions-item>
+  </nz-descriptions>
+  <nz-divider></nz-divider>
+  <nz-descriptions [nzColumn]="2" nzTitle="Categoria">
+    <nz-descriptions-item nzTitle="Nome" [nzSpan]="1">{{ produtoDetalhes.categoria.nome }}</nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Descrição" [nzSpan]="1">{{ produtoDetalhes.categoria.descricao }}</nz-descriptions-item>
+  </nz-descriptions>
+</nz-drawer>
+

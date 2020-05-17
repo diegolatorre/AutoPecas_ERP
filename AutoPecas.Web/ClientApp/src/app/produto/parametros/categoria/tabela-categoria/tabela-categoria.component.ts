@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoriaService } from 'src/app/service/categoria.service';
 import { FiltroSpec } from 'src/app/model/geral/filtro-spec.model';
-import { Categoria } from 'src/app/model/categoria.model';
-import { FormControl, Validators } from '@angular/forms';
+import { Categoria } from 'src/app/model/produto/categoria.model';
+import { Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-tabela-categoria',
@@ -13,7 +14,15 @@ export class TabelaCategoriaComponent implements OnInit {
 
   listOfData: Categoria[];
   value?: string;
-  filtro?: FiltroSpec;
+  filtro = {
+    pagina: 1,
+    tamanho: 2,
+    total: null,
+    filtros: {},
+  } as FiltroSpec;
+
+  busca: Subject<string> = new Subject<string>();
+  busca$ = this.busca.asObservable();
 
   contentSearch: string;
 
@@ -21,22 +30,33 @@ export class TabelaCategoriaComponent implements OnInit {
 
   ngOnInit(): void {
     this.listar();
+    this.busca$
+    .pipe(
+      debounceTime(800),
+      distinctUntilChanged()
+    )
+    .subscribe(texto => {
+      if (texto) {
+        this.filtro.filtros['nome'] = texto;
+        this.filtro.filtros['descricao'] = texto;
+      } else {
+        delete this.filtro.filtros['nome'];
+        delete this.filtro.filtros['descricao'];
+      }
+      this.listar();
+    });
   }
 
-
-  search() {
-    console.log(this.contentSearch);
-
-    this._service.search("teste").subscribe(next => {
-      this.listOfData = next;
-    });
+  paginar(pagina: number) {
+    this.filtro.pagina = pagina;
+    this.listar();
   }
 
   listar() {
     this._service.listar(this.filtro).subscribe(next => {
       console.log(next);
-      // this.filtro.total = next.total;
-      this.listOfData = next;
+      this.filtro.total = next.total;
+      this.listOfData = next.lista;
     });
   }
 }

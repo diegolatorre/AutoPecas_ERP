@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CategoriaService } from 'src/app/service/categoria.service';
-import { Categoria } from 'src/app/model/categoria.model';
 import { ActivatedRoute } from '@angular/router';
+import { Categoria } from 'src/app/model/produto/categoria.model';
 
 @Component({
   selector: 'app-cadastro-categoria',
@@ -64,6 +64,6 @@ export class CadastroCategoriaComponent implements OnInit {
       descricao: this.categoriaForm.get('descricao').value,
     } as Categoria;
 
-    this._service.incluir(this.categoria);
+    this._service.incluir(this.categoria).subscribe();
   }
 }

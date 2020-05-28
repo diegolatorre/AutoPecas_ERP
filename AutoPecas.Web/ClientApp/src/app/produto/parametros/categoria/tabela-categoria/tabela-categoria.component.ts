@@ -16,7 +16,7 @@ export class TabelaCategoriaComponent implements OnInit {
   value?: string;
   filtro = {
     pagina: 1,
-    tamanho: 2,
+    tamanho: 5,
     total: null,
     filtros: {},
   } as FiltroSpec;

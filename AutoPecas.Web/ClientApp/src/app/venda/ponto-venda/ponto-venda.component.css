@@ -1,0 +1,41 @@
+:host {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr repeat(2, 3fr) 1fr;
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+  height: 90vh;
+}
+.acao-produto {
+  grid-area: 1 / 1 / 2 / 2;
+  background-color: thistle;
+}
+.produtos {
+  grid-area: 2 / 1 / 4 / 2;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: 10px 10px;
+}
+.produto {
+  width: 100%;
+  display: block;
+}
+.paginacao-produtos {
+  grid-area: 4 / 1 / 5 / 2;
+}
+
+.acao-contato {
+  grid-area: 1 / 2 / 2 / 3;
+}
+.contato {
+  grid-area: 2 / 2 / 3 / 3;
+  border: 1px solid fuchsia;
+}
+.venda {
+  grid-area: 3 / 2 / 4 / 3;
+  border: 1px solid yellow;
+}
+.acao-venda {
+  grid-area: 4 / 2 / 5 / 3;
+}

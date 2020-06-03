@@ -1,0 +1,51 @@
+
+<div class="acao-produtos">
+  <button nz-button nzType="primary">Adicionar</button>
+</div>
+<div class="produtos">
+  <div *ngFor="let produto of listOfData">
+    <nz-card class="produto" [nzActions]="[acaoEditar, acaoDetalhes]">
+        <nz-card-meta [nzTitle]="produto.name" [nzDescription]="observacao"></nz-card-meta>
+    </nz-card>
+    <ng-template #observacao>
+      {{ produto.address || "Produto sem descrição."}}
+    </ng-template>
+    <ng-template #acaoEditar>
+      <a>Editar</a>
+    </ng-template>
+    <ng-template #acaoDetalhes>
+      <a>Detalhes</a>
+    </ng-template>
+  </div>
+</div>
+<div class="paginacao-produtos">
+  <nz-pagination>
+  </nz-pagination>
+</div>
+
+<div class="acao-contato">
+  <button nz-button nzType="primary">Adicionar</button>
+</div>
+<div class="contato">
+  <nz-descriptions nzTitle="Cliente">
+    <nz-descriptions-item nzTitle="Nome">Tales Bueno</nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Telefone">18100000000</nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Endereco">
+      No. 18, Wantang Road, Xihu District, Hangzhou, Zhejiang, China
+    </nz-descriptions-item>
+  </nz-descriptions>
+</div>
+<div class="venda">
+  <nz-descriptions nzTitle="Venda">
+    <nz-descriptions-item nzTitle="Total">R$1.0000,00</nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Desconto">10%</nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Data">
+      01/01/2020
+    </nz-descriptions-item>
+  </nz-descriptions>
+</div>
+<div class="acao-venda">
+  <button nz-button nzType="primary">Cancelar</button>
+  <button nz-button nzType="primary">Salvar</button>
+  <button nz-button nzType="primary">Finalizar</button>
+</div>

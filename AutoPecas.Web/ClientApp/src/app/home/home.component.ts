@@ -6,8 +6,6 @@ import { Produto } from '../model/produto/produto.model';
   templateUrl: './home.component.html',
 })
 export class HomeComponent implements OnInit {
-  produtos: Produto[];
-
   public constructor () {}
 
   ngOnInit() { }

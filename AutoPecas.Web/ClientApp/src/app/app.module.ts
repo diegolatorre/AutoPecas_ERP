@@ -31,6 +31,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         loadChildren: () =>
           import('./contato/contato.module').then((m) => m.ContatoModule)
       },
+      {
+        path: 'venda',
+        loadChildren: () =>
+          import('./venda/venda.module').then((m) => m.VendaModule)
+      },
     ]),
     SharedModule
   ],

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace AutoPecas.Core.Model
@@ -29,5 +30,7 @@ namespace AutoPecas.Core.Model
 
         [DataMember]
         public Contato Contato { get; set; }
+
+        public List<ProdutoVenda> Produtos { get; set; }
     }
 }

@@ -31,6 +31,7 @@ namespace AutoPecas.Core.Model
         [DataMember]
         public Contato Contato { get; set; }
 
-        public List<ProdutoVenda> Produtos { get; set; }
+        [DataMember]
+        public ICollection<ProdutoVenda> Produtos { get; set; }
     }
 }

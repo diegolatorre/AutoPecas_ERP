@@ -28,6 +28,7 @@ export class SelecionaProdutoComponent implements OnInit {
 
   fechar(): void {
     this.produtoVenda = {
+      idProduto: this.produto.id,
       quantidade: this.produtoVendaForm.get('quantidade').value,
       desconto: this.produtoVendaForm.get('desconto').value,
       valorFinal: this.produto.valorVenda * this.produtoVendaForm.get('quantidade').value,

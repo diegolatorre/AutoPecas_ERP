@@ -15,7 +15,7 @@ namespace AutoPecas.Web.Controllers
         public VendaController(VendaService service) => _service = service;
 
         [HttpPost]
-        public async Task<IActionResult> Venda([FromBody] Venda venda)
+        public async Task<IActionResult> Venda(Venda venda)
         {
             try
             {

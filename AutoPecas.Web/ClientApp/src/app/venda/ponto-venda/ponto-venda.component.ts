@@ -5,6 +5,7 @@ import { Venda } from 'src/app/model/venda/venda.model.model';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { SelecionaProdutoComponent } from '../seleciona-produto/seleciona-produto.component';
 import { ProdutoVenda } from 'src/app/model/venda/produto-venda.model';
+import { VendaService } from 'src/app/service/venda.service';
 
 @Component({
   selector: 'app-ponto-venda',
@@ -26,7 +27,8 @@ export class PontoVendaComponent implements OnInit {
 
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
-    private modal: NzModalService
+    private modal: NzModalService,
+    private vendaService: VendaService
   ) { }
 
   ngOnInit(): void {
@@ -70,5 +72,14 @@ export class PontoVendaComponent implements OnInit {
         this.paginar(this.filtro.pagina);
       }
     });
+  }
+
+  finalizar() {
+    this.venda.produtos = this.produtos;
+    this.venda.desconto = 0;
+    this.venda.status = '1';
+    this.venda.idContato = this.venda.contato.id;
+
+    this.vendaService.finalizar(this.venda).subscribe();
   }
 }

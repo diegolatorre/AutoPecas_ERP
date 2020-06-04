@@ -14,7 +14,9 @@ namespace AutoPecas.Service
                 .AddTransient<CategoriaService>()
                 .AddTransient<ContatoService>()
                 .AddTransient<EnderecoService>()
-                .AddTransient<TelefoneService>();
+                .AddTransient<TelefoneService>()
+                .AddTransient<VendaService>();
+
 
 
             return services;

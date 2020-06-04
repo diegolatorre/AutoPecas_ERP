@@ -111,13 +111,13 @@ export class TabelaContatoComponent implements OnInit {
   //   });
   // }
 
-  cadastrar() {
+  cadastrar(contato?: Contato) {
     const cadastroModal = this.modal.create({
       nzTitle: 'Novo Contato',
       nzContent: CadastroContatoComponent,
-      // nzComponentParams: {
-      //  contato: this.filtroForm.value
-      // },
+      nzComponentParams: {
+       editarContato: contato
+      },
       nzFooter: [
         {
           label: 'Fechar',

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ContatoService } from 'src/app/service/contato.service';
 import { Contato } from 'src/app/model/contato/contato.model';
@@ -23,11 +23,26 @@ export class CadastroContatoComponent implements OnInit {
       observacao: new FormControl(null, [Validators.required]),
     });
 
+  @Input() editarContato?: Contato;
+
   constructor(
     private contatoService: ContatoService
   ) { }
 
   ngOnInit(): void {
+    if(this.editarContato) {
+      this.contatoForm.patchValue({
+        nome: this.editarContato.nome,
+        apelido: this.editarContato.apelido,
+        cpf: this.editarContato.cpf,
+        rg: this.editarContato.rg,
+        tipo: this.editarContato.tipo,
+        profissao: this.editarContato.profissao,
+        dataNascimento: this.editarContato.dataNascimento,
+        sexo: this.editarContato.sexo,
+        observacao: this.editarContato.observacao
+      });
+    }
   }
 
   onChange(result: Date): void {
@@ -41,6 +56,7 @@ export class CadastroContatoComponent implements OnInit {
 
   cadastrar() {
     let contato = {
+      id: this.editarContato ? this.editarContato.id : null,
       nome: this.contatoForm.get('nome').value,
       apelido: this.contatoForm.get('apelido').value,
       cpf: this.contatoForm.get('cpf').value,
@@ -52,6 +68,11 @@ export class CadastroContatoComponent implements OnInit {
       observacao: this.contatoForm.get('observacao').value
     } as Contato;
 
-    this.contatoService.incluir(contato).subscribe();
+    if (this.editarContato) {
+      this.contatoService.editar(contato).subscribe();
+    } else {
+      this.contatoService.incluir(contato).subscribe();
+    }
+
   }
 }

@@ -11,7 +11,7 @@
       {{ contato.cpf || "Contato sem descrição."}}
     </ng-template>
     <ng-template #acaoEditar>
-      <a>Editar</a>
+      <a (click)="cadastrar(contato)">Editar</a>
     </ng-template>
     <ng-template #acaoDetalhes>
       <a (click)="detalhes(contato)">Detalhes</a>

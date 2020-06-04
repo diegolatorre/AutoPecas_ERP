@@ -68,6 +68,12 @@ namespace AutoPecas.Service
             return await _AutoPecasDbContext.SaveChangesAsync();
         }
 
+        public async Task<int> Editar(Contato contato)
+        {
+            _AutoPecasDbContext.Update(contato);
+            return await _AutoPecasDbContext.SaveChangesAsync();
+        }
+
         public async Task<IList<Contato>> Busca(string texto)
         {
             return await _AutoPecasDbContext

@@ -4,6 +4,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { FiltroSpec } from 'src/app/model/geral/filtro-spec.model';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { ContatoService } from 'src/app/service/contato.service';
+import { CadastroContatoComponent } from '../cadastro-contato/cadastro-contato.component';
 
 @Component({
   selector: 'app-tabela-contato',
@@ -109,4 +110,36 @@ export class TabelaContatoComponent implements OnInit {
   //     }
   //   });
   // }
+
+  cadastrar() {
+    const cadastroModal = this.modal.create({
+      nzTitle: 'Novo Contato',
+      nzContent: CadastroContatoComponent,
+      // nzComponentParams: {
+      //  contato: this.filtroForm.value
+      // },
+      nzFooter: [
+        {
+          label: 'Fechar',
+          shape: 'round',
+          onClick: () => cadastroModal.destroy()
+        },
+        {
+          label: 'Limpar',
+          type: 'danger',
+          shape: 'round',
+          onClick: modal => { modal.limpar() }
+        },
+        {
+          label: 'Cadastrar',
+          type: 'primary',
+          shape: 'round',
+          onClick: modal => { modal.cadastrar() }
+        }
+      ],
+      nzClosable: false
+    });
+
+    cadastroModal.afterClose.subscribe(filtro => this.listar());
+  }
 }

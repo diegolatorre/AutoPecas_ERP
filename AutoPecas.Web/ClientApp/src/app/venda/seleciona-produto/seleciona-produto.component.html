@@ -5,7 +5,7 @@
       <nz-descriptions [nzColumn]="2" nzTitle="Produto">
         <nz-descriptions-item nzTitle="Descricao" [nzSpan]="1">{{ produto.descricao }}</nz-descriptions-item>
         <nz-descriptions-item nzTitle="Codigo de Barras" [nzSpan]="1">{{ produto.codigoBarras }}</nz-descriptions-item>
-        <nz-descriptions-item nzTitle="Valor de Venda" [nzSpan]="1">{{ produto.valorVenda }}</nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Valor de Venda" [nzSpan]="1">{{ produto.valorVenda | currency: 'BRL' }}</nz-descriptions-item>
       </nz-descriptions>
 
       <form nz-form [formGroup]="produtoVendaForm" class="formulario">
@@ -24,7 +24,7 @@
         </nz-form-item>
       </form>
 
-      <p>Valor Final: {{ produto.valorVenda * produtoVendaForm.get('quantidade').value }}</p>
+      <p>Valor Final: {{ produto.valorVenda * produtoVendaForm.get('quantidade').value | currency: 'BRL' }}</p>
     </div>
   </nz-tab>
 

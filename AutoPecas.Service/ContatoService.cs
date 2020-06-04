@@ -3,6 +3,7 @@ using AutoPecas.Core.Model;
 using AutoPecas.Core.Spec;
 using LinqKit;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -61,6 +62,7 @@ namespace AutoPecas.Service
 
         public async Task<int> Incluir(Contato contato)
         {
+            contato.DataNascimento = DateTime.Now;
             _AutoPecasDbContext.Add(contato);
 
             return await _AutoPecasDbContext.SaveChangesAsync();

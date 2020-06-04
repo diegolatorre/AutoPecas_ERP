@@ -14,7 +14,7 @@
     <ng-template #observacao>
       <p>Quantidade: {{ produtoVenda.quantidade }}</p>
       <p>Desconto: {{ produtoVenda.desconto }}</p>
-      <p>Valor: {{ produtoVenda.valorFinal }}</p>
+      <p>Valor: {{ produtoVenda.valorFinal | currency: 'BRL' }}</p>
     </ng-template>
     <ng-template #acaoEditar>
       <a (click)="selecionaProduto(produtoVenda)">Editar</a>

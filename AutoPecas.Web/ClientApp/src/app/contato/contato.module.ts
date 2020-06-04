@@ -3,14 +3,14 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { ContatoRoutingModule, EntryComponents, RoutedComponents } from './contato-routing.module';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { TabelaContatoComponent } from './tabela-contato/tabela-contato.component';
+import { CadastroContatoComponent } from './cadastro-contato/cadastro-contato.component';
 
 @NgModule({
-  declarations: [RoutedComponents, TabelaContatoComponent],
+  declarations: [RoutedComponents, TabelaContatoComponent, CadastroContatoComponent],
   entryComponents: [EntryComponents],
   imports: [
     ContatoRoutingModule,
     SharedModule,
-    NzButtonModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

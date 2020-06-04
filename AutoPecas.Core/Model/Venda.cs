@@ -14,7 +14,7 @@ namespace AutoPecas.Core.Model
         public int IdContato { get; set; }
 
         [DataMember]
-        public string Status { get; set; }
+        public StatusVenda Status { get; set; }
 
         [DataMember]
         public DateTime DataCriacao { get; set; }

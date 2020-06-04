@@ -7,6 +7,7 @@ import { SelecionaProdutoComponent } from "../seleciona-produto/seleciona-produt
 import { ProdutoVenda } from "src/app/model/venda/produto-venda.model";
 import { VendaService } from "src/app/service/venda.service";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { StatusVendaEnum, StatusVendaLabel } from "src/app/model/enum/statusVenda.enum";
 
 @Component({
   selector: "app-ponto-venda",
@@ -22,11 +23,17 @@ export class PontoVendaComponent implements OnInit {
 
   produtos: ProdutoVenda[] = [];
   produtosExibicao: ProdutoVenda[] = [];
+
+  statusVendaEnum = StatusVendaEnum;
+  statusVendaLabel = StatusVendaLabel;
+
   venda = {
     contato: {} as Contato,
   } as Venda;
 
-  filtro = {
+  statusVenda
+
+  paginacao = {
     pagina: 1,
     tamanho: 8,
     total: null,
@@ -44,11 +51,11 @@ export class PontoVendaComponent implements OnInit {
     this.vendaForm.get('idContato').setValue(contato.id);
   }
 
-  paginar(pagina = this.filtro.pagina) {
-    this.filtro.pagina = pagina;
+  paginar(pagina = this.paginacao.pagina) {
+    this.paginacao.pagina = pagina;
     this.produtosExibicao = this.produtos.slice(
-      (this.filtro.pagina - 1) * this.filtro.tamanho,
-      this.filtro.tamanho * this.filtro.pagina
+      (this.paginacao.pagina - 1) * this.paginacao.tamanho,
+      this.paginacao.tamanho * this.paginacao.pagina
     );
   }
 
@@ -90,13 +97,13 @@ export class PontoVendaComponent implements OnInit {
 
   remover(produto: ProdutoVenda) {
     this.produtos.splice(this.produtos.indexOf(produto), 1);
-    this.paginar();
   }
 
-  finalizar() {
+  finalizar(status: StatusVendaEnum) {
     this.venda.produtos = this.produtos;
     this.venda.desconto = Number(this.vendaForm.get('desconto').value);
     this.venda.idContato = this.venda.contato.id;
+    this.venda.status = status;
 
     this.vendaService.finalizar(this.venda).subscribe();
   }

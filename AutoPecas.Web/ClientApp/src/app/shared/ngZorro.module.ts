@@ -15,6 +15,7 @@ import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
 
 const modulos = [
   NzButtonModule,
@@ -32,7 +33,8 @@ const modulos = [
   NzPageHeaderModule,
   NzModalModule,
   NzSelectModule,
-  NzAutocompleteModule
+  NzAutocompleteModule,
+  NzTabsModule
 ];
 
 @NgModule({

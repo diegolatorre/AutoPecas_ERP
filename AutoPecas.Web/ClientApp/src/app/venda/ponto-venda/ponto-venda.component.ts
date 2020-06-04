@@ -4,7 +4,7 @@ import { Contato } from 'src/app/model/contato/contato.model';
 import { Venda } from 'src/app/model/venda/venda.model.model';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { SelecionaProdutoComponent } from '../seleciona-produto/seleciona-produto.component';
-import { Produto } from 'src/app/model/produto/produto.model';
+import { ProdutoVenda } from 'src/app/model/venda/produto-venda.model';
 
 @Component({
   selector: 'app-ponto-venda',
@@ -12,16 +12,16 @@ import { Produto } from 'src/app/model/produto/produto.model';
   styleUrls: ['./ponto-venda.component.css']
 })
 export class PontoVendaComponent implements OnInit {
-  produtos: Produto[] = [];
+  produtos: ProdutoVenda[] = [];
+  produtosExibicao: ProdutoVenda[] = [];
   venda = {
     contato: { } as Contato
   } as Venda;
 
   filtro = {
     pagina: 1,
-    tamanho: 12,
+    tamanho: 8,
     total: null,
-    filtros: {},
   } as FiltroSpec;
 
   constructor(
@@ -34,6 +34,11 @@ export class PontoVendaComponent implements OnInit {
 
   contatoSelecionado(contato: Contato) {
     this.venda.contato = contato;
+  }
+
+  paginar(pagina: number) {
+    this.filtro.pagina = pagina;
+    this.produtosExibicao = this.produtos.slice((this.filtro.pagina - 1) * this.filtro.tamanho, this.filtro.tamanho * this.filtro.pagina);
   }
 
   selecionaProduto() {
@@ -61,6 +66,8 @@ export class PontoVendaComponent implements OnInit {
     selecionaModal.afterClose.subscribe(produto => {
       if (produto) {
         this.produtos.push(produto);
+        console.log(this.produtos);
+        this.paginar(this.filtro.pagina);
       }
     });
   }

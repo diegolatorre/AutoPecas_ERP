@@ -3,6 +3,8 @@ import { NzModalRef } from 'ng-zorro-antd/modal';
 import { Produto } from 'src/app/model/produto/produto.model';
 import { Marca } from 'src/app/model/produto/marca.model';
 import { Categoria } from 'src/app/model/produto/categoria.model';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ProdutoVenda } from 'src/app/model/venda/produto-venda.model';
 
 @Component({
   selector: 'app-seleciona-produto',
@@ -10,17 +12,29 @@ import { Categoria } from 'src/app/model/produto/categoria.model';
   styleUrls: ['./seleciona-produto.component.css']
 })
 export class SelecionaProdutoComponent implements OnInit {
-  produto = {
-    marca: { } as Marca,
-    categoria: { } as Categoria
-  } as Produto;
+  produtoVendaForm = new FormGroup(
+    {
+      quantidade: new FormControl(1, [Validators.required]),
+      desconto: new FormControl(0.00, [Validators.required]),
+    });
+
+  produto: Produto;
+  produtoVenda: ProdutoVenda;
+
   constructor(private modal: NzModalRef) { }
 
   ngOnInit(): void {
   }
 
   fechar(): void {
-    this.modal.destroy(this.produto.id ? this.produto : null);
+    this.produtoVenda = {
+      quantidade: this.produtoVendaForm.get('quantidade').value,
+      desconto: this.produtoVendaForm.get('desconto').value,
+      valorFinal: this.produto.valorVenda * this.produtoVendaForm.get('quantidade').value,
+      produto: this.produto
+    } as ProdutoVenda;
+
+    this.modal.destroy(this.produto.id ? this.produtoVenda : null);
   }
 
   selecionaProduto(produto: Produto) {

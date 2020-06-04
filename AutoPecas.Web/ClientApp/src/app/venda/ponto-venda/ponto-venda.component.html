@@ -3,12 +3,14 @@
   <button nz-button nzType="primary" (click)="selecionaProduto()">Seleciona</button>
 </div>
 <div class="produtos">
-  <div *ngFor="let produto of produtos">
+  <div *ngFor="let produtoVenda of produtosExibicao">
     <nz-card class="produto" [nzActions]="[acaoEditar, acaoDetalhes]">
-        <nz-card-meta [nzTitle]="produto.descricao" [nzDescription]="observacao"></nz-card-meta>
+        <nz-card-meta [nzTitle]="produtoVenda.produto.descricao" [nzDescription]="observacao"></nz-card-meta>
     </nz-card>
     <ng-template #observacao>
-      {{ produto.observacao || "Produto sem descrição."}}
+      <p>Quantidade: {{ produtoVenda.quantidade }}</p>
+      <p>Desconto: {{ produtoVenda.desconto }}</p>
+      <p>Valor: {{ produtoVenda.valorFinal }}</p>
     </ng-template>
     <ng-template #acaoEditar>
       <a>Editar</a>
@@ -19,8 +21,13 @@
   </div>
 </div>
 <div class="paginacao-produtos">
-  <nz-pagination>
-  </nz-pagination>
+  <nz-pagination
+    [nzPageIndex]="filtro.pagina"
+    [nzTotal]="produtos.length"
+    [nzPageSize]="filtro.tamanho"
+    [nzShowTotal]="totalTemplate"
+    (nzPageIndexChange)="paginar($event)"></nz-pagination>
+  <ng-template #totalTemplate let-total> Total {{ total }} produtos </ng-template>
 </div>
 
 <div class="acao-contato">

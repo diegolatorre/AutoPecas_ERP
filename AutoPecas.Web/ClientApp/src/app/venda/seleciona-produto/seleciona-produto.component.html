@@ -1,4 +1,4 @@
-<app-auto-complete-produto (quandoSelecionado)="selecionaProduto($event)"></app-auto-complete-produto>
+<app-auto-complete-produto *ngIf="!editarProduto" (quandoSelecionado)="selecionaProduto($event)"></app-auto-complete-produto>
 <nz-tabset>
   <nz-tab nzTitle="Informações da Venda">
     <div *ngIf="produto">

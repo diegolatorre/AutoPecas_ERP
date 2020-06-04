@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
 import { NzModalRef } from 'ng-zorro-antd/modal';
 import { Produto } from 'src/app/model/produto/produto.model';
 import { Marca } from 'src/app/model/produto/marca.model';
@@ -21,15 +21,26 @@ export class SelecionaProdutoComponent implements OnInit {
   produto: Produto;
   produtoVenda: ProdutoVenda;
 
-  constructor(private modal: NzModalRef) { }
+  @Input() editarProduto?: any;
+
+  constructor(
+    private modal: NzModalRef,
+    private changeDetectorRef: ChangeDetectorRef
+  ) { }
 
   ngOnInit(): void {
+    if (this.editarProduto) {
+      this.produto = this.editarProduto.produto;
+      this.produtoVendaForm.get('quantidade').setValue(this.editarProduto.quantidade);
+      this.produtoVendaForm.get('desconto').setValue(this.editarProduto.desconto);
+      this.changeDetectorRef.markForCheck();
+    }
   }
 
   fechar(): void {
     this.produtoVenda = {
       idProduto: this.produto.id,
-      quantidade: this.produtoVendaForm.get('quantidade').value,
+      quantidade: Number(this.produtoVendaForm.get('quantidade').value),
       desconto: this.produtoVendaForm.get('desconto').value,
       valorFinal: this.produto.valorVenda * this.produtoVendaForm.get('quantidade').value,
       produto: this.produto

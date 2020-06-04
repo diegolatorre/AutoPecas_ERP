@@ -4,7 +4,7 @@
 </div>
 <div class="produtos">
   <div *ngFor="let produtoVenda of produtosExibicao">
-    <nz-card class="produto" [nzActions]="[acaoEditar, acaoDetalhes]">
+    <nz-card class="produto" [nzActions]="[acaoEditar, acaoRemover]">
         <nz-card-meta [nzTitle]="produtoVenda.produto.descricao" [nzDescription]="observacao"></nz-card-meta>
     </nz-card>
     <ng-template #observacao>
@@ -13,10 +13,10 @@
       <p>Valor: {{ produtoVenda.valorFinal }}</p>
     </ng-template>
     <ng-template #acaoEditar>
-      <a>Editar</a>
+      <a (click)="selecionaProduto(produtoVenda)">Editar</a>
     </ng-template>
-    <ng-template #acaoDetalhes>
-      <a>Detalhes</a>
+    <ng-template #acaoRemover>
+      <a (click)="remover(produtoVenda)">Remover</a>
     </ng-template>
   </div>
 </div>

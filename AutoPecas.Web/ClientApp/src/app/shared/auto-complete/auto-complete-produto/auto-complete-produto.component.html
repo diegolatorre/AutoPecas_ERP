@@ -4,6 +4,7 @@
   nzShowSearch
   nzServerSearch
   nzNotFoundContent="Nada Encontrado"
+  [disabled]="disabled"
   [nzLoading]="isLoading"
   [(ngModel)]="produtoSelecionado"
   (ngModelChange)="seleciona($event)"

@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Produto } from 'src/app/model/produto/produto.model';
 import { Subject } from 'rxjs';
 import { ProdutoService } from 'src/app/service';
@@ -20,6 +20,8 @@ export class AutoCompleteProdutoComponent implements OnInit {
 
   @Output()
   readonly quandoSelecionado = new EventEmitter<Produto>();
+
+  @Input() disabled = false;
 
   constructor(
     private produtoService: ProdutoService

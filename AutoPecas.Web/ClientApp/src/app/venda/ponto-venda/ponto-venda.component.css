@@ -28,6 +28,9 @@
 .acao-contato {
   grid-area: 1 / 2 / 2 / 3;
 }
+.selecionar-contato {
+  width: 100%;
+}
 .contato {
   grid-area: 2 / 2 / 3 / 3;
   border: 1px solid fuchsia;

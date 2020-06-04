@@ -1,14 +1,14 @@
 
 <div class="acao-produtos">
-  <button nz-button nzType="primary">Adicionar</button>
+  <button nz-button nzType="primary" (click)="selecionaProduto()">Seleciona</button>
 </div>
 <div class="produtos">
-  <div *ngFor="let produto of listOfData">
+  <div *ngFor="let produto of produtos">
     <nz-card class="produto" [nzActions]="[acaoEditar, acaoDetalhes]">
-        <nz-card-meta [nzTitle]="produto.name" [nzDescription]="observacao"></nz-card-meta>
+        <nz-card-meta [nzTitle]="produto.descricao" [nzDescription]="observacao"></nz-card-meta>
     </nz-card>
     <ng-template #observacao>
-      {{ produto.address || "Produto sem descrição."}}
+      {{ produto.observacao || "Produto sem descrição."}}
     </ng-template>
     <ng-template #acaoEditar>
       <a>Editar</a>
@@ -24,15 +24,20 @@
 </div>
 
 <div class="acao-contato">
-  <button nz-button nzType="primary">Adicionar</button>
+  <app-auto-complete-contato
+    class="selecionar-contato"
+    (quandoSelecionado)="contatoSelecionado($event)">
+  </app-auto-complete-contato>
 </div>
 <div class="contato">
-  <nz-descriptions nzTitle="Cliente">
-    <nz-descriptions-item nzTitle="Nome">Tales Bueno</nz-descriptions-item>
-    <nz-descriptions-item nzTitle="Telefone">18100000000</nz-descriptions-item>
-    <nz-descriptions-item nzTitle="Endereco">
-      No. 18, Wantang Road, Xihu District, Hangzhou, Zhejiang, China
-    </nz-descriptions-item>
+  <nz-descriptions nzTitle="Cliente" *ngIf="venda.contato">
+    <nz-descriptions-item nzTitle="Nome">{{ venda.contato.nome }}</nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Apelido">{{ venda.contato.apelido }}</nz-descriptions-item>
+    <nz-descriptions-item nzTitle="CPF">{{ venda.contato.cpf }}</nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Profissão">{{ venda.contato.profissao }}</nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Sexo">{{ venda.contato.sexo }}</nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Data de Nascimento">{{ venda.contato.dataNascimento }}</nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Observacao">{{ venda.contato.observacao }}</nz-descriptions-item>
   </nz-descriptions>
 </div>
 <div class="venda">

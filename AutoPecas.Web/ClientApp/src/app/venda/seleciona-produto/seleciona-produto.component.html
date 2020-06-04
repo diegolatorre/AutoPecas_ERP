@@ -1,0 +1,22 @@
+<app-auto-complete-produto (quandoSelecionado)="selecionaProduto($event)"></app-auto-complete-produto>
+<nz-descriptions [nzColumn]="2" nzTitle="Produto">
+  <nz-descriptions-item nzTitle="Descricao" [nzSpan]="1">{{ produto.descricao }}</nz-descriptions-item>
+  <nz-descriptions-item nzTitle="Codigo de Barras" [nzSpan]="1">{{ produto.codigoBarras }}</nz-descriptions-item>
+  <nz-descriptions-item nzTitle="Valor de Custo" [nzSpan]="1">{{ produto.valorCusto }}</nz-descriptions-item>
+  <nz-descriptions-item nzTitle="Valor de Venda" [nzSpan]="1">{{ produto.valorVenda }}</nz-descriptions-item>
+  <nz-descriptions-item nzTitle="Estoque Mínimo" [nzSpan]="1">{{ produto.estoqueMinimo }}</nz-descriptions-item>
+  <nz-descriptions-item nzTitle="Estoque Máximo" [nzSpan]="1">{{ produto.estoqueMaximo }}</nz-descriptions-item>
+  <nz-descriptions-item nzTitle="Observação" [nzSpan]="2">
+    {{ produto.observacao }}
+  </nz-descriptions-item>
+</nz-descriptions>
+<nz-divider *ngIf="produto.marca"></nz-divider>
+<nz-descriptions *ngIf="produto.marca" [nzColumn]="2" nzTitle="Marca">
+  <nz-descriptions-item nzTitle="Nome" [nzSpan]="1">{{ produto.marca.nome }}</nz-descriptions-item>
+  <nz-descriptions-item nzTitle="Descrição" [nzSpan]="1">{{ produto.marca.descricao }}</nz-descriptions-item>
+</nz-descriptions>
+<nz-divider *ngIf="produto.categoria"></nz-divider>
+<nz-descriptions *ngIf="produto.categoria" [nzColumn]="2" nzTitle="Categoria">
+  <nz-descriptions-item nzTitle="Nome" [nzSpan]="1">{{ produto.categoria.nome }}</nz-descriptions-item>
+  <nz-descriptions-item nzTitle="Descrição" [nzSpan]="1">{{ produto.categoria.descricao }}</nz-descriptions-item>
+</nz-descriptions>

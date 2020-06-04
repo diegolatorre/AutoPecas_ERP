@@ -5,15 +5,14 @@ import { VendaRoutingModule } from './venda-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { PontoVendaComponent } from './ponto-venda/ponto-venda.component';
+import { SelecionaProdutoComponent } from './seleciona-produto/seleciona-produto.component';
 
 @NgModule({
-  declarations: [PontoVendaComponent],
-  entryComponents: [EntryComponents],
+  declarations: [PontoVendaComponent, SelecionaProdutoComponent],
+  entryComponents: [SelecionaProdutoComponent],
   imports: [
-    SharedModule,
-    NzTableModule,
     VendaRoutingModule,
-    CommonModule
+    SharedModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

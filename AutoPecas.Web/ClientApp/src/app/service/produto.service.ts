@@ -22,6 +22,10 @@ export class ProdutoService {
     );
   }
 
+  public busca(texto: string): Observable<Produto[]> {
+    return this.httpClient.get<Produto[]>(`${this.apiEndpoint}/busca/${texto}`);
+  }
+
   public obter(idProduto: number): Observable<Produto> {
     return this.httpClient.get<Produto>(`${this.apiEndpoint}/${idProduto}`);
   }

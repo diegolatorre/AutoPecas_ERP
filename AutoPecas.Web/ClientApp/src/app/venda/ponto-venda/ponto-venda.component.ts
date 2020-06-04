@@ -1,5 +1,10 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FiltroSpec } from 'src/app/model/geral/filtro-spec.model';
+import { Contato } from 'src/app/model/contato/contato.model';
+import { Venda } from 'src/app/model/venda/venda.model.model';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { SelecionaProdutoComponent } from '../seleciona-produto/seleciona-produto.component';
+import { Produto } from 'src/app/model/produto/produto.model';
 
 @Component({
   selector: 'app-ponto-venda',
@@ -7,7 +12,10 @@ import { FiltroSpec } from 'src/app/model/geral/filtro-spec.model';
   styleUrls: ['./ponto-venda.component.css']
 })
 export class PontoVendaComponent implements OnInit {
-  listOfData: any[] = [];
+  produtos: Produto[] = [];
+  venda = {
+    contato: { } as Contato
+  } as Venda;
 
   filtro = {
     pagina: 1,
@@ -17,21 +25,43 @@ export class PontoVendaComponent implements OnInit {
   } as FiltroSpec;
 
   constructor(
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
+    private modal: NzModalService
   ) { }
 
   ngOnInit(): void {
-    this.listOfData = new Array(12).fill(0).map((_, index) => {
-      return {
-        id: index,
-        name: `Edward King ${index}`,
-        age: 32,
-        address: `London, Park Lane no. ${index}`
-      };
+  }
+
+  contatoSelecionado(contato: Contato) {
+    this.venda.contato = contato;
+  }
+
+  selecionaProduto() {
+    console.log('teste');
+    const selecionaModal = this.modal.create({
+      nzTitle: 'Filtragem de produtos',
+      nzContent: SelecionaProdutoComponent,
+      nzWidth: '80%',
+      nzFooter: [
+        {
+          label: 'Cancelar',
+          shape: 'round',
+          onClick: () => selecionaModal.destroy()
+        },
+        {
+          label: 'Adicionar',
+          type: 'primary',
+          shape: 'round',
+          onClick: modal => { modal.fechar() }
+        }
+      ],
+      nzClosable: false
     });
 
-    this.changeDetectorRef.markForCheck();
-
-    console.log(this.listOfData);
+    selecionaModal.afterClose.subscribe(produto => {
+      if (produto) {
+        this.produtos.push(produto);
+      }
+    });
   }
 }

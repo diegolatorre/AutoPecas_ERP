@@ -64,6 +64,7 @@ export class TabelaProdutoComponent implements OnInit {
     const filtroModal = this.modal.create({
       nzTitle: 'Filtragem de produtos',
       nzContent: FiltroProdutoComponent,
+      nzWidth: 800,
       nzComponentParams: {
        filtro: this.filtroForm.value
       },

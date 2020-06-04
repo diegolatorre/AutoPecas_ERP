@@ -22,6 +22,10 @@ export class ContatoService {
     );
   }
 
+  public busca(texto: string): Observable<Contato[]> {
+    return this.httpClient.get<Contato[]>(`${this.apiEndpoint}/busca/${texto}`);
+  }
+
   public obter(idContato: number): Observable<Contato> {
     return this.httpClient.get<Contato>(`${this.apiEndpoint}/${idContato}`);
   }

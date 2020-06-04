@@ -37,7 +37,6 @@ export class FiltroProdutoComponent implements OnInit {
     this.modal.destroy(this.filtroForm.value);
   }
 
-
   marcaSelecionada(marca: Marca) {
     console.log(marca);
     this.filtroForm.get('marca').setValue(marca);

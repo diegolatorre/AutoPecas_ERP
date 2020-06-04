@@ -50,14 +50,22 @@
 <div class="venda">
   <nz-descriptions nzTitle="Venda">
     <nz-descriptions-item nzTitle="Total">R$1.0000,00</nz-descriptions-item>
-    <nz-descriptions-item nzTitle="Desconto">10%</nz-descriptions-item>
     <nz-descriptions-item nzTitle="Data">
       01/01/2020
     </nz-descriptions-item>
   </nz-descriptions>
+
+  <form nz-form [formGroup]="vendaForm" class="formulario">
+    <nz-form-item class="desconto">
+      <nz-form-label>Desconto</nz-form-label>
+      <nz-form-control>
+        <input nz-input formControlName="desconto">
+      </nz-form-control>
+    </nz-form-item>
+  </form>
 </div>
 <div class="acao-venda">
   <button nz-button nzType="primary">Cancelar</button>
-  <button nz-button nzType="primary">Salvar</button>
-  <button nz-button (click)="finalizar()" nzType="primary">Finalizar</button>
+  <button nz-button nzType="primary" [disabled]="true">Salvar</button>
+  <button nz-button (click)="finalizar()" nzType="primary" [disabled]="vendaForm.invalid || produtos.length == 0">Finalizar</button>
 </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { FiltroSpec } from "src/app/model/geral/filtro-spec.model";
 import { Contato } from "src/app/model/contato/contato.model";
 import { Venda } from "src/app/model/venda/venda.model.model";
@@ -6,6 +6,7 @@ import { NzModalService } from "ng-zorro-antd/modal";
 import { SelecionaProdutoComponent } from "../seleciona-produto/seleciona-produto.component";
 import { ProdutoVenda } from "src/app/model/venda/produto-venda.model";
 import { VendaService } from "src/app/service/venda.service";
+import { FormGroup, FormControl, Validators } from "@angular/forms";
 
 @Component({
   selector: "app-ponto-venda",
@@ -13,6 +14,12 @@ import { VendaService } from "src/app/service/venda.service";
   styleUrls: ["./ponto-venda.component.css"],
 })
 export class PontoVendaComponent implements OnInit {
+  vendaForm = new FormGroup(
+    {
+      desconto: new FormControl(0.00, [Validators.required]),
+      idContato: new FormControl(null, [Validators.required])
+    });
+
   produtos: ProdutoVenda[] = [];
   produtosExibicao: ProdutoVenda[] = [];
   venda = {
@@ -26,7 +33,6 @@ export class PontoVendaComponent implements OnInit {
   } as FiltroSpec;
 
   constructor(
-    private changeDetectorRef: ChangeDetectorRef,
     private modal: NzModalService,
     private vendaService: VendaService
   ) {}
@@ -35,6 +41,7 @@ export class PontoVendaComponent implements OnInit {
 
   contatoSelecionado(contato: Contato) {
     this.venda.contato = contato;
+    this.vendaForm.get('idContato').setValue(contato.id);
   }
 
   paginar(pagina = this.filtro.pagina) {
@@ -88,8 +95,7 @@ export class PontoVendaComponent implements OnInit {
 
   finalizar() {
     this.venda.produtos = this.produtos;
-    this.venda.desconto = 0;
-    this.venda.status = "1";
+    this.venda.desconto = Number(this.vendaForm.get('desconto').value);
     this.venda.idContato = this.venda.contato.id;
 
     this.vendaService.finalizar(this.venda).subscribe();

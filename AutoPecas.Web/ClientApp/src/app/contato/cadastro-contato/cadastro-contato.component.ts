@@ -30,6 +30,11 @@ export class CadastroContatoComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onChange(result: Date): void {
+    console.log('onChange: ', result);
+    console.log(this.contatoForm.get('dataNascimento').value);
+  }
+
   limpar() {
     this.contatoForm.reset();
   }
@@ -42,7 +47,7 @@ export class CadastroContatoComponent implements OnInit {
       rg: this.contatoForm.get('rg').value,
       tipo: this.contatoForm.get('tipo').value,
       profissao: this.contatoForm.get('profissao').value,
-      dataNascimento: null,
+      dataNascimento: this.contatoForm.get('dataNascimento').value,
       sexo: this.contatoForm.get('sexo').value,
       observacao: this.contatoForm.get('observacao').value
     } as Contato;

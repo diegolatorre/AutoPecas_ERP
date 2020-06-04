@@ -16,6 +16,7 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 
 const modulos = [
   NzButtonModule,
@@ -34,7 +35,8 @@ const modulos = [
   NzModalModule,
   NzSelectModule,
   NzAutocompleteModule,
-  NzTabsModule
+  NzTabsModule,
+  NzDatePickerModule
 ];
 
 @NgModule({

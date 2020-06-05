@@ -8,6 +8,7 @@ import { ProdutoVenda } from "src/app/model/venda/produto-venda.model";
 import { VendaService } from "src/app/service/venda.service";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { StatusVendaEnum, StatusVendaLabel } from "src/app/model/enum/statusVenda.enum";
+import { CadastroContatoComponent } from "src/app/contato/cadastro-contato/cadastro-contato.component";
 
 @Component({
   selector: "app-ponto-venda",
@@ -93,6 +94,38 @@ export class PontoVendaComponent implements OnInit {
         this.paginar();
       }
     });
+  }
+
+  cadastrarContato(contato?: Contato) {
+    const cadastroModal = this.modal.create({
+      nzTitle: 'Novo Contato',
+      nzContent: CadastroContatoComponent,
+      nzComponentParams: {
+       editarContato: contato
+      },
+      nzFooter: [
+        {
+          label: 'Fechar',
+          shape: 'round',
+          onClick: () => cadastroModal.destroy()
+        },
+        {
+          label: 'Limpar',
+          type: 'danger',
+          shape: 'round',
+          onClick: modal => { modal.limpar() }
+        },
+        {
+          label: 'Cadastrar',
+          type: 'primary',
+          shape: 'round',
+          onClick: modal => { modal.cadastrar() }
+        }
+      ],
+      nzClosable: false
+    });
+
+    cadastroModal.afterClose.subscribe(data => console.log(data));
   }
 
   remover(produto: ProdutoVenda) {

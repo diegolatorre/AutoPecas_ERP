@@ -140,6 +140,6 @@ export class TabelaContatoComponent implements OnInit {
       nzClosable: false
     });
 
-    cadastroModal.afterClose.subscribe(filtro => this.listar());
+    cadastroModal.afterClose.subscribe(() => this.listar());
   }
 }

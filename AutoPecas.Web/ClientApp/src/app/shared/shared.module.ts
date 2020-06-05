@@ -12,8 +12,8 @@ import { AutoCompleteProdutoComponent } from './auto-complete/auto-complete-prod
 /* Icon Configuration */
 import { IconDefinition } from '@ant-design/icons-angular';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { AccountBookFill, AlertFill, AlertOutline, SearchOutline } from '@ant-design/icons-angular/icons';
-const icons: IconDefinition[] = [ AccountBookFill, AlertOutline, AlertFill, SearchOutline ];
+import { AccountBookFill, AlertFill, AlertOutline, SearchOutline, UserAddOutline } from '@ant-design/icons-angular/icons';
+const icons: IconDefinition[] = [ AccountBookFill, AlertOutline, AlertFill, SearchOutline, UserAddOutline ];
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = {
   thousandSeparator: '.',

@@ -1,11 +1,5 @@
 <div class="titulo"><h2>Venda</h2></div>
-<div class="acao-produtos">
-  <button nz-button nzType="primary" (click)="selecionaProduto()">
-    Seleciona
-  </button>
-  <button nz-button nzType="primary"><i nz-icon nzType="search"></i>Search</button>
-  <i nz-icon nzType="search" nzTheme="outline"></i>
-</div>
+
 <div class="produtos">
   <div *ngFor="let produtoVenda of produtosExibicao">
     <nz-card class="produto" [nzActions]="[acaoEditar, acaoRemover]">
@@ -17,7 +11,7 @@
     <ng-template #observacao>
       <p>Quantidade: {{ produtoVenda.quantidade }}</p>
       <p>Desconto: {{ produtoVenda.desconto }}</p>
-      <p>Valor: {{ produtoVenda.valorFinal | currency: 'BRL' }}</p>
+      <p>Valor: {{ produtoVenda.valorFinal | currency: "BRL" }}</p>
     </ng-template>
     <ng-template #acaoEditar>
       <a (click)="selecionaProduto(produtoVenda)">Editar</a>
@@ -27,17 +21,27 @@
     </ng-template>
   </div>
 </div>
-<div class="paginacao-produtos">
-  <nz-pagination
-    [nzPageIndex]="paginacao.pagina"
-    [nzTotal]="produtos.length"
-    [nzPageSize]="paginacao.tamanho"
-    [nzShowTotal]="totalTemplate"
-    (nzPageIndexChange)="paginar($event)"
-  ></nz-pagination>
-  <ng-template #totalTemplate let-total>
-    Total: {{ total }} produtos
-  </ng-template>
+<div class="acao-produto">
+  <div class="paginacao">
+    <nz-pagination
+      [nzPageIndex]="paginacao.pagina"
+      [nzTotal]="produtos.length"
+      [nzPageSize]="paginacao.tamanho"
+      [nzShowTotal]="totalTemplate"
+      [nzHideOnSinglePage]="true"
+      (nzPageIndexChange)="paginar($event)"
+    ></nz-pagination>
+    <ng-template #totalTemplate let-total>
+      Total: {{ total }} produtos
+    </ng-template>
+  </div>
+
+  <div class="adicionar">
+    <button nz-button nzType="primary" (click)="selecionaProduto()">
+      <i nz-icon nzType="search"></i>
+      Adicionar Produtos
+    </button>
+  </div>
 </div>
 
 <div class="acao-contato">
@@ -46,6 +50,18 @@
     (quandoSelecionado)="contatoSelecionado($event)"
   >
   </app-auto-complete-contato>
+  <div class="cadastrar-contato">
+    <button
+      nz-button
+      nzType="primary"
+      nzShape="circle"
+      nz-tooltip
+      nzTooltipTitle="Novo Cliente"
+      (click)="cadastrarContato()"
+    >
+      <i nz-icon nzType="user-add"></i>
+    </button>
+  </div>
 </div>
 <div class="contato">
   <nz-descriptions nzTitle="Cliente" *ngIf="venda.contato">
@@ -90,11 +106,12 @@
   </form>
 </div>
 <div class="acao-venda">
-  <button nz-button nzType="primary">Cancelar</button>
+  <button nz-button nzType="primary" class="cancelar">Cancelar</button>
   <button
     nz-button
     (click)="finalizar(statusVendaEnum.Aberta)"
     nzType="primary"
+    class="salvar"
     [disabled]="
       vendaForm.invalid ||
       produtos.length == 0 ||
@@ -107,6 +124,7 @@
     nz-button
     (click)="finalizar(statusVendaEnum.Finalizada)"
     nzType="primary"
+    class="finalizar"
     [disabled]="vendaForm.invalid || produtos.length == 0"
   >
     Finalizar

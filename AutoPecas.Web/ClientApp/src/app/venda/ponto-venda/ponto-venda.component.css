@@ -10,9 +10,7 @@
   grid-area: 1 / 1 / 2 / 6;
 }
 
-.acao-produto {
-  grid-area: 2 / 1 / 3 / 2;
-}
+
 .produtos {
   grid-area: 3 / 1 / 5 / 2;
   display: grid;
@@ -24,15 +22,33 @@
   width: 100%;
   display: block;
 }
-.paginacao-produtos {
+.acao-produto {
   grid-area: 5 / 1 / 6 / 2;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+.paginacao {
+  grid-area: 1 / 1 / 2 / 2;
+}
+.adicionar {
+  grid-area: 1 / 2 / 2 / 3;
 }
 
 .acao-contato {
   grid-area: 2 / 2 / 3 / 3;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: 1fr;
+  grid-column-gap: 20px;
 }
 .selecionar-contato {
-  width: 100%;
+  grid-area: 1 / 1 / 2 / 2;
+}
+.cadastrar-contato {
+  grid-area: 1 / 2 / 2 / 3;
 }
 .contato {
   grid-area: 3 / 2 / 4 / 3;
@@ -44,4 +60,17 @@
 }
 .acao-venda {
   grid-area: 5 / 2 / 6 / 3;
+  display: grid;
+  grid-template-columns: 1fr repeat(3, auto);
+  grid-template-rows: 1fr;
+  grid-column-gap: 20px;
+}
+.cancelar {
+  grid-area: 1 / 2 / 2 / 3;
+}
+.salvar {
+  grid-area: 1 / 3 / 2 / 4;
+}
+.finalizar {
+  grid-area: 1 / 4 / 2 / 5;
 }

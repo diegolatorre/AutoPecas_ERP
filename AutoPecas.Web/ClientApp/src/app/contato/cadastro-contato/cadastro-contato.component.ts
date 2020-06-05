@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ContatoService } from 'src/app/service/contato.service';
 import { Contato } from 'src/app/model/contato/contato.model';
+import { NzModalRef } from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'app-cadastro-contato',
@@ -26,7 +27,8 @@ export class CadastroContatoComponent implements OnInit {
   @Input() editarContato?: Contato;
 
   constructor(
-    private contatoService: ContatoService
+    private contatoService: ContatoService,
+    private modal: NzModalRef
   ) { }
 
   ngOnInit(): void {
@@ -56,7 +58,7 @@ export class CadastroContatoComponent implements OnInit {
 
   cadastrar() {
     let contato = {
-      id: this.editarContato ? this.editarContato.id : null,
+      id: this.editarContato ? this.editarContato.id : 0,
       nome: this.contatoForm.get('nome').value,
       apelido: this.contatoForm.get('apelido').value,
       cpf: this.contatoForm.get('cpf').value,
@@ -71,7 +73,9 @@ export class CadastroContatoComponent implements OnInit {
     if (this.editarContato) {
       this.contatoService.editar(contato).subscribe();
     } else {
-      this.contatoService.incluir(contato).subscribe();
+      this.contatoService.incluir(contato).subscribe(next => {
+        this.modal.destroy(next);
+      });
     }
 
   }

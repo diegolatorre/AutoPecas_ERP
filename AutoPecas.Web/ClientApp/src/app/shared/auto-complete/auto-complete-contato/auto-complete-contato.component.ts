@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Contato } from 'src/app/model/contato/contato.model';
 import { Subject } from 'rxjs';
@@ -23,7 +23,8 @@ export class AutoCompleteContatoComponent implements OnInit {
   readonly quandoSelecionado = new EventEmitter<Contato>();
 
   constructor(
-    private contatoService: ContatoService
+    private contatoService: ContatoService,
+    private changeDetectorRef: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
@@ -45,6 +46,13 @@ export class AutoCompleteContatoComponent implements OnInit {
   }
 
   seleciona(contato: Contato) {
+    this.contatoSelecionado = contato;
+    this.quandoSelecionado.emit(this.contatoSelecionado);
+  }
+
+  selecionaManualmente(contato: Contato) {
+    this.data = [];
+    this.data.push(contato);
     this.contatoSelecionado = contato;
     this.quandoSelecionado.emit(this.contatoSelecionado);
   }

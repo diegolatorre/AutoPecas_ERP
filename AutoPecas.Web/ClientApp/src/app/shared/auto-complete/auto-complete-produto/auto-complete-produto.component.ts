@@ -50,4 +50,11 @@ export class AutoCompleteProdutoComponent implements OnInit {
     this.quandoSelecionado.emit(this.produtoSelecionado);
   }
 
+  selecionaManualmente(produto: Produto) {
+    this.data = [];
+    this.data.push(produto);
+    this.produtoSelecionado = produto;
+    this.quandoSelecionado.emit(this.produtoSelecionado);
+  }
+
 }

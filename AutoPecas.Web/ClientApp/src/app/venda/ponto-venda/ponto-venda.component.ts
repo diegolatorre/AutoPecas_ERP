@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { FiltroSpec } from "src/app/model/geral/filtro-spec.model";
 import { Contato } from "src/app/model/contato/contato.model";
 import { Venda } from "src/app/model/venda/venda.model.model";
@@ -9,6 +9,8 @@ import { VendaService } from "src/app/service/venda.service";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { StatusVendaEnum, StatusVendaLabel } from "src/app/model/enum/statusVenda.enum";
 import { CadastroContatoComponent } from "src/app/contato/cadastro-contato/cadastro-contato.component";
+import { AutoCompleteContatoComponent } from "src/app/shared/auto-complete/auto-complete-contato/auto-complete-contato.component";
+import { ContatoService } from "src/app/service/contato.service";
 
 @Component({
   selector: "app-ponto-venda",
@@ -40,9 +42,12 @@ export class PontoVendaComponent implements OnInit {
     total: null,
   } as FiltroSpec;
 
+  @ViewChild('AutoCompleteContato') autoCompleteContato: AutoCompleteContatoComponent;
+
   constructor(
     private modal: NzModalService,
-    private vendaService: VendaService
+    private vendaService: VendaService,
+    private contatoService: ContatoService
   ) {}
 
   ngOnInit(): void {}
@@ -125,7 +130,10 @@ export class PontoVendaComponent implements OnInit {
       nzClosable: false
     });
 
-    cadastroModal.afterClose.subscribe(data => console.log(data));
+    cadastroModal.afterClose.subscribe(data => {
+      console.log(data);
+      this.contatoService.obter(data).subscribe(next => this.autoCompleteContato.selecionaManualmente(next));
+    });
   }
 
   remover(produto: ProdutoVenda) {

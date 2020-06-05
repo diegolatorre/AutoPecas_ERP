@@ -97,6 +97,7 @@ export class PontoVendaComponent implements OnInit {
 
   remover(produto: ProdutoVenda) {
     this.produtos.splice(this.produtos.indexOf(produto), 1);
+    this.paginar();
   }
 
   finalizar(status: StatusVendaEnum) {

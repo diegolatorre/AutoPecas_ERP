@@ -3,7 +3,6 @@ using AutoPecas.Core.Model;
 using AutoPecas.Core.Spec;
 using LinqKit;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;

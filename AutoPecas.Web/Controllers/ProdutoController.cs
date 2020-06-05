@@ -59,6 +59,19 @@ namespace AutoPecas.Web.Controllers
             }
         }
 
+        [HttpPut]
+        public async Task<IActionResult> Editar(Produto produto)
+        {
+            try
+            {
+                return Ok(await _service.Editar(produto));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
         [HttpGet("busca/{texto}")]
         public async Task<ActionResult<List<Produto>>> Busca(string texto)
         {

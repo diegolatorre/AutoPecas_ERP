@@ -5,6 +5,7 @@ import { FiltroSpec } from 'src/app/model/geral/filtro-spec.model';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { FiltroProdutoComponent } from '../filtro-produto/filtro-produto.component';
 import { FormGroup, FormControl } from '@angular/forms';
+import { CadastroProdutoComponent } from '../cadastro-produto/cadastro-produto.component';
 
 @Component({
   selector: 'app-tabela-produto',
@@ -110,5 +111,38 @@ export class TabelaProdutoComponent implements OnInit {
         this.listar();
       }
     });
+  }
+
+  cadastrar(produto?: Produto) {
+    const cadastroModal = this.modal.create({
+      nzTitle: 'Novo Produto',
+      nzContent: CadastroProdutoComponent,
+      nzComponentParams: {
+       editarProduto: produto
+      },
+      nzWidth: '80%',
+      nzFooter: [
+        {
+          label: 'Fechar',
+          shape: 'round',
+          onClick: () => cadastroModal.destroy()
+        },
+        {
+          label: 'Limpar',
+          type: 'danger',
+          shape: 'round',
+          onClick: modal => { modal.limpar() }
+        },
+        {
+          label: 'Cadastrar',
+          type: 'primary',
+          shape: 'round',
+          onClick: modal => { modal.cadastrar() }
+        }
+      ],
+      nzClosable: false
+    });
+
+    cadastroModal.afterClose.subscribe(filtro => this.listar());
   }
 }

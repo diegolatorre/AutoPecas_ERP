@@ -74,6 +74,13 @@ namespace AutoPecas.Service
 
             return await _AutoPecasDbContext.SaveChangesAsync();
         }
+
+        public async Task<int> Editar(Produto produto)
+        {
+            _AutoPecasDbContext.Update(produto);
+            return await _AutoPecasDbContext.SaveChangesAsync();
+        }
+
         public async Task<IList<Produto>> Busca(string texto)
         {
             return await _AutoPecasDbContext

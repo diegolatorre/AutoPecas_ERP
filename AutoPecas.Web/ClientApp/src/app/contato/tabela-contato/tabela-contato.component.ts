@@ -40,9 +40,7 @@ export class TabelaContatoComponent implements OnInit {
   }
 
   listar() {
-    console.log(this.filtro);
     this.contatoService.listar(this.filtro).subscribe(next => {
-      console.log(next);
       this.filtro.total = next.total;
       this.contatos = next.lista;
       this.changeDetectorRef.markForCheck();

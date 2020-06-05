@@ -47,11 +47,6 @@ export class CadastroContatoComponent implements OnInit {
     }
   }
 
-  onChange(result: Date): void {
-    console.log('onChange: ', result);
-    console.log(this.contatoForm.get('dataNascimento').value);
-  }
-
   limpar() {
     this.contatoForm.reset();
   }

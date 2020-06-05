@@ -89,12 +89,10 @@ export class CadastroProdutoComponent implements OnInit {
   }
 
   marcaSelecionada(marca: Marca) {
-    console.log(marca);
     this.produtoForm.get("marca").setValue(marca);
   }
 
   categoriaSelecionada(categoria: Categoria) {
-    console.log(categoria);
     this.produtoForm.get("categoria").setValue(categoria);
   }
 }

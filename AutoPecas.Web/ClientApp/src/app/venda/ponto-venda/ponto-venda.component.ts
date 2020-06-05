@@ -30,15 +30,11 @@ export class PontoVendaComponent implements OnInit {
   statusVendaEnum = StatusVendaEnum;
   statusVendaLabel = StatusVendaLabel;
 
-  venda = {
-    contato: {} as Contato,
-  } as Venda;
-
-  statusVenda
+  venda = { } as Venda;
 
   paginacao = {
     pagina: 1,
-    tamanho: 8,
+    tamanho: 4,
     total: null,
   } as FiltroSpec;
 
@@ -54,7 +50,7 @@ export class PontoVendaComponent implements OnInit {
 
   contatoSelecionado(contato: Contato) {
     this.venda.contato = contato;
-    this.vendaForm.get('idContato').setValue(contato.id);
+    this.vendaForm.get('idContato').setValue(contato ? contato.id : null);
   }
 
   paginar(pagina = this.paginacao.pagina) {
@@ -66,7 +62,6 @@ export class PontoVendaComponent implements OnInit {
   }
 
   selecionaProduto(produto?: ProdutoVenda) {
-    console.log("teste");
     const selecionaModal = this.modal.create({
       nzTitle: produto ? "Editar Produto" : "Selecionar Produto",
       nzContent: SelecionaProdutoComponent,
@@ -131,7 +126,6 @@ export class PontoVendaComponent implements OnInit {
     });
 
     cadastroModal.afterClose.subscribe(data => {
-      console.log(data);
       this.contatoService.obter(data).subscribe(next => this.autoCompleteContato.selecionaManualmente(next));
     });
   }

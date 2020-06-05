@@ -38,12 +38,10 @@ export class FiltroProdutoComponent implements OnInit {
   }
 
   marcaSelecionada(marca: Marca) {
-    console.log(marca);
     this.filtroForm.get('marca').setValue(marca);
   }
 
   categoriaSelecionada(categoria: Categoria) {
-    console.log(categoria);
     this.filtroForm.get('categoria').setValue(categoria);
   }
 

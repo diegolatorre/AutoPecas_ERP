@@ -11,7 +11,8 @@
     <ng-template #observacao>
       <p>Quantidade: {{ produtoVenda.quantidade }}</p>
       <p>Desconto: {{ produtoVenda.desconto }}</p>
-      <p>Valor: {{ produtoVenda.valorFinal | currency: "BRL" }}</p>
+      <p>Valor Unitário: {{ produtoVenda.produto.valorVenda | currency: "BRL" }}</p>
+      <p>Valor Total: {{ produtoVenda.valorFinal | currency: "BRL" }}</p>
     </ng-template>
     <ng-template #acaoEditar>
       <a (click)="selecionaProduto(produtoVenda)">Editar</a>
@@ -22,26 +23,47 @@
   </div>
 </div>
 <div class="acao-produto">
-  <div class="paginacao">
-    <nz-pagination
-      [nzPageIndex]="paginacao.pagina"
-      [nzTotal]="produtos.length"
-      [nzPageSize]="paginacao.tamanho"
-      [nzShowTotal]="totalTemplate"
-      [nzHideOnSinglePage]="true"
-      (nzPageIndexChange)="paginar($event)"
-    ></nz-pagination>
-    <ng-template #totalTemplate let-total>
-      Total: {{ total }} produtos
-    </ng-template>
-  </div>
+  <nz-pagination
+    [nzPageIndex]="paginacao.pagina"
+    [nzTotal]="produtos.length"
+    [nzPageSize]="paginacao.tamanho"
+    [nzShowTotal]="totalTemplate"
+    [nzHideOnSinglePage]="true"
+    (nzPageIndexChange)="paginar($event)"
+  ></nz-pagination>
+  <ng-template #totalTemplate let-total>
+    Total: {{ total }} produtos
+  </ng-template>
 
-  <div class="adicionar">
-    <button nz-button nzType="primary" (click)="selecionaProduto()">
-      <i nz-icon nzType="search"></i>
-      Adicionar Produtos
-    </button>
-  </div>
+  <button nz-button nzSize="large" nzShape="round" nzType="primary" (click)="selecionaProduto()">
+    <i nz-icon nzType="appstore-add" nzTheme="outline"></i>
+    Incluir Produto
+  </button>
+
+  <button
+    nz-button
+    (click)="finalizar(statusVendaEnum.Aberta)"
+    nzType="primary"
+    nzSize="large"
+    nzShape="round"
+    [disabled]="
+      vendaForm.invalid ||
+      produtos.length == 0 ||
+      venda.status == statusVendaEnum.Finalizada
+    "
+  >
+    Salvar
+  </button>
+  <button
+    nz-button
+    (click)="finalizar(statusVendaEnum.Finalizada)"
+    nzType="primary"
+    nzSize="large"
+    nzShape="round"
+    [disabled]="vendaForm.invalid || produtos.length == 0"
+  >
+    Finalizar
+  </button>
 </div>
 
 <div class="acao-contato">
@@ -65,7 +87,7 @@
   </div>
 </div>
 <div class="contato">
-  <nz-descriptions nzTitle="Cliente" *ngIf="venda.contato">
+  <nz-descriptions [nzColumn]="2" *ngIf="venda.contato">
     <nz-descriptions-item nzTitle="Nome">{{
       venda.contato.nome
     }}</nz-descriptions-item>
@@ -75,18 +97,13 @@
     <nz-descriptions-item nzTitle="CPF">{{
       venda.contato.cpf
     }}</nz-descriptions-item>
-    <nz-descriptions-item nzTitle="Profissão">{{
-      venda.contato.profissao
-    }}</nz-descriptions-item>
-    <nz-descriptions-item nzTitle="Sexo">{{
-      venda.contato.sexo
+    <nz-descriptions-item nzTitle="RG">{{
+      venda.contato.rg
     }}</nz-descriptions-item>
     <nz-descriptions-item nzTitle="Data de Nascimento">{{
-      venda.contato.dataNascimento
+      venda.contato.dataNascimento | amLocal | amDateFormat: 'DD/MM/YYYY'
     }}</nz-descriptions-item>
-    <nz-descriptions-item nzTitle="Observacao">{{
       venda.contato.observacao
-    }}</nz-descriptions-item>
   </nz-descriptions>
 </div>
 <div class="venda">
@@ -105,29 +122,4 @@
       </nz-form-control>
     </nz-form-item>
   </form>
-</div>
-<div class="acao-venda">
-  <button nz-button nzType="primary" class="cancelar">Cancelar</button>
-  <button
-    nz-button
-    (click)="finalizar(statusVendaEnum.Aberta)"
-    nzType="primary"
-    class="salvar"
-    [disabled]="
-      vendaForm.invalid ||
-      produtos.length == 0 ||
-      venda.status == statusVendaEnum.Finalizada
-    "
-  >
-    Salvar
-  </button>
-  <button
-    nz-button
-    (click)="finalizar(statusVendaEnum.Finalizada)"
-    nzType="primary"
-    class="finalizar"
-    [disabled]="vendaForm.invalid || produtos.length == 0"
-  >
-    Finalizar
-  </button>
 </div>

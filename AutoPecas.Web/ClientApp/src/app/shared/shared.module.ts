@@ -9,6 +9,12 @@ import { AutoCompleteCategoriaComponent } from './auto-complete/auto-complete-ca
 import { AutoCompleteContatoComponent } from './auto-complete/auto-complete-contato/auto-complete-contato.component';
 import { AutoCompleteProdutoComponent } from './auto-complete/auto-complete-produto/auto-complete-produto.component';
 
+/* Icon Configuration */
+import { IconDefinition } from '@ant-design/icons-angular';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { AccountBookFill, AlertFill, AlertOutline, SearchOutline } from '@ant-design/icons-angular/icons';
+const icons: IconDefinition[] = [ AccountBookFill, AlertOutline, AlertFill, SearchOutline ];
+
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = {
   thousandSeparator: '.',
   decimalMarker: ',',
@@ -22,6 +28,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {
     FormsModule,
     ReactiveFormsModule,
     NgxMaskModule.forRoot(options),
+    NzIconModule.forRoot(icons),
     MomentModule
   ],
   exports: [
@@ -31,6 +38,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = {
     ReactiveFormsModule,
     NgxMaskModule,
     MomentModule,
+    NzIconModule,
     AutoCompleteMarcaComponent,
     AutoCompleteCategoriaComponent,
     AutoCompleteContatoComponent,

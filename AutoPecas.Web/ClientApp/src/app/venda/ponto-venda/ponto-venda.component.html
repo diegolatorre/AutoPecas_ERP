@@ -1,7 +1,10 @@
+<div class="titulo"><h2>Venda</h2></div>
 <div class="acao-produtos">
   <button nz-button nzType="primary" (click)="selecionaProduto()">
     Seleciona
   </button>
+  <button nz-button nzType="primary"><i nz-icon nzType="search"></i>Search</button>
+  <i nz-icon nzType="search" nzTheme="outline"></i>
 </div>
 <div class="produtos">
   <div *ngFor="let produtoVenda of produtosExibicao">

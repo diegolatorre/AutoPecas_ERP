@@ -1,7 +1,7 @@
 .formulario {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(5, 1fr);
+  grid-template-rows: repeat(6, 1fr);
   grid-column-gap: 15px;
   grid-row-gap: 10px;
 }
@@ -50,4 +50,10 @@
 }
 .ativo {
   grid-area: 5 / 4 / 6 / 5;
+}
+.acao-form {
+  grid-area: 6 / 1 / 7 / 5;
+  display: grid;
+  grid-template-columns: 1fr auto auto auto;
+  grid-column-gap: 10px;
 }

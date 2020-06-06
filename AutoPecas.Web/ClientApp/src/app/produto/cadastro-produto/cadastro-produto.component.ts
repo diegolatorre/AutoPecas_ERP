@@ -12,26 +12,30 @@ import { Categoria } from "src/app/model/produto/categoria.model";
 })
 export class CadastroProdutoComponent implements OnInit {
   produtoForm = new FormGroup({
-    descricao: new FormControl(null, [Validators.required]),
-    codigoBarras: new FormControl(null, [Validators.required]),
+    descricao: new FormControl(null, [Validators.required, Validators.minLength(3)]),
+    codigoBarras: new FormControl(null, [Validators.required, Validators.minLength(13)]),
     valorCusto: new FormControl(null, [Validators.required]),
     valorVenda: new FormControl({ value: null, disabled: false }, [
       Validators.required,
     ]),
     checkLucro: new FormControl(false),
     lucro: new FormControl({ value: null, disabled: true }),
-    estoqueMinimo: new FormControl(null, [Validators.required]),
-    estoqueMaximo: new FormControl(null, [Validators.required]),
+    estoqueMinimo: new FormControl(0, [Validators.required]),
+    estoqueMaximo: new FormControl(0, [Validators.required]),
     marca: new FormControl(null, [Validators.required]),
     categoria: new FormControl(null, [Validators.required]),
-    observacao: new FormControl(null, Validators.required),
+    observacao: new FormControl(null),
   });
 
   produto: Produto;
 
+  exibirErro = false;
+
   @Input() editarProduto?: Produto;
 
-  constructor(private produtoService: ProdutoService) {}
+  constructor(
+    private produtoService: ProdutoService
+  ) {}
 
   ngOnInit(): void {
     if (this.editarProduto) {

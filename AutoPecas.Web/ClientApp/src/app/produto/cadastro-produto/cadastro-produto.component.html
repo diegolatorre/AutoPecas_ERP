@@ -1,74 +1,86 @@
 <form nz-form [formGroup]="produtoForm" class="formulario">
   <nz-form-item class="descricao">
-    <nz-form-label>Descrição</nz-form-label>
-    <nz-form-control>
-      <input nz-input formControlName="descricao">
+    <nz-form-label nzRequired>Descrição</nz-form-label>
+    <nz-form-control
+      nzHasFeedback
+      nzErrorTip="Deve conter pelo mensos 3 caracteres"
+    >
+      <input nz-input formControlName="descricao" />
     </nz-form-control>
   </nz-form-item>
 
   <nz-form-item class="codigoBarras">
-    <nz-form-label>Codigo de Barras</nz-form-label>
-    <nz-form-control>
-      <input nz-input formControlName="codigoBarras">
+    <nz-form-label nzRequired>Codigo de Barras</nz-form-label>
+    <nz-form-control nzHasFeedback nzErrorTip="Deve conter 13 dígitos">
+      <input nz-input formControlName="codigoBarras" mask="0000000000000" />
     </nz-form-control>
   </nz-form-item>
 
   <nz-form-item class="check-lucro">
     <nz-form-control>
-      <label nz-checkbox (ngModelChange)="alteraLucro($event)" formControlName="checkLucro">Utilizar Calculo de Lucro</label>
+      <label
+        nz-checkbox
+        (ngModelChange)="alteraLucro($event)"
+        formControlName="checkLucro"
+        >Utilizar Calculo de Lucro</label
+      >
     </nz-form-control>
   </nz-form-item>
 
   <nz-form-item class="valorCusto">
-    <nz-form-label>Valor de Custo</nz-form-label>
+    <nz-form-label nzRequired>Valor de Custo</nz-form-label>
     <nz-form-control>
-      <input nz-input formControlName="valorCusto">
+      <nz-input-group nzPrefix="R$">
+        <input nz-input formControlName="valorCusto" mask="separator.2" />
+      </nz-input-group>
     </nz-form-control>
   </nz-form-item>
 
   <nz-form-item class="valorVenda">
-    <nz-form-label>Valor de Venda</nz-form-label>
+    <nz-form-label nzRequired>Valor de Venda</nz-form-label>
     <nz-form-control>
-      <input
-        nz-input
-        formControlName="valorVenda">
+      <nz-input-group nzPrefix="R$">
+        <input nz-input formControlName="valorVenda" mask="separator.2" />
+      </nz-input-group>
     </nz-form-control>
   </nz-form-item>
 
   <nz-form-item class="lucro">
     <nz-form-label>Porcentagem de Lucro</nz-form-label>
     <nz-form-control>
-      <input
-      nz-input
-      formControlName="lucro">
+      <input nz-input formControlName="lucro" />
     </nz-form-control>
   </nz-form-item>
 
   <nz-form-item class="estoqueMinimo">
     <nz-form-label>Quantidade Minima de Estoque</nz-form-label>
     <nz-form-control>
-      <input nz-input formControlName="estoqueMinimo">
+      <input nz-input formControlName="estoqueMinimo" />
     </nz-form-control>
   </nz-form-item>
 
   <nz-form-item class="estoqueMaximo">
     <nz-form-label>Quantidade Máxima de Estoque</nz-form-label>
     <nz-form-control>
-      <input nz-input formControlName="estoqueMaximo">
+      <input nz-input formControlName="estoqueMaximo" />
     </nz-form-control>
   </nz-form-item>
 
   <nz-form-item class="marca">
-    <nz-form-label>Marca</nz-form-label>
+    <nz-form-label nzRequired>Marca</nz-form-label>
     <nz-form-control>
-      <app-auto-complete-marca (quandoSelecionado)="marcaSelecionada($event)"></app-auto-complete-marca>
+      <app-auto-complete-marca
+        (quandoSelecionado)="marcaSelecionada($event)"
+      ></app-auto-complete-marca>
     </nz-form-control>
   </nz-form-item>
 
   <nz-form-item class="categoria">
-    <nz-form-label>Categoria</nz-form-label>
+    <nz-form-label nzRequired>Categoria</nz-form-label>
     <nz-form-control>
-      <app-auto-complete-categoria (quandoSelecionado)="categoriaSelecionada($event)"></app-auto-complete-categoria>
+      <app-auto-complete-categoria
+        (quandoSelecionado)="categoriaSelecionada($event)"
+      ></app-auto-complete-categoria>
     </nz-form-control>
   </nz-form-item>
 
@@ -78,4 +90,31 @@
       <textarea nz-input formControlName="observacao" nzAutosize></textarea>
     </nz-form-control>
   </nz-form-item>
+
+  <div class="acao-form">
+    <p></p>
+    <button nz-button nzShape="round" nzType="primary">
+      Cancelar
+    </button>
+
+    <button
+      nz-button
+      (click)="produtoForm.reset()"
+      nzType="primary"
+      nzShape="round"
+    >
+      Limpar
+    </button>
+    <button
+      nz-button
+      (click)="cadastrar()"
+      nzType="primary"
+      nzShape="round"
+      [disabled]="produtoForm.invalid"
+    >
+      Cadastrar
+    </button>
+  </div>
 </form>
+
+<nz-alert *ngIf="produtoForm.invalid" nzType="warning" nzMessage="Necessário preencher todos os campos obrigatórios" nzShowIcon></nz-alert>

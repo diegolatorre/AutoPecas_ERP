@@ -103,25 +103,7 @@ export class AppComponent {
       nzTitle: 'Novo Produto',
       nzContent: CadastroProdutoComponent,
       nzWidth: '80%',
-      nzFooter: [
-        {
-          label: 'Fechar',
-          shape: 'round',
-          onClick: () => cadastroModal.destroy()
-        },
-        {
-          label: 'Limpar',
-          type: 'danger',
-          shape: 'round',
-          onClick: modal => { modal.limpar() }
-        },
-        {
-          label: 'Cadastrar',
-          type: 'primary',
-          shape: 'round',
-          onClick: modal => { modal.cadastrar() }
-        }
-      ],
+      nzFooter: null,
       nzClosable: false
     });
   }

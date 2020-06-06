@@ -1,19 +1,15 @@
 :host {
+  height: 100vh;
   display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 50px 1fr 60px;
-  grid-column-gap: 10px;
-  height: 90vh;
+  grid-template-rows: 30px max-content 30px;
+  gap: 10px;
 }
 .produtos {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-column-gap: 10px;
-  grid-row-gap: 15px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 10px 10px;
 }
-
-.acao {
-  display: grid;
-  grid-template-columns: 1fr auto auto;
-  grid-column-gap: 10px;
+.produto {
+    width: 100%;
+    display: block;
 }

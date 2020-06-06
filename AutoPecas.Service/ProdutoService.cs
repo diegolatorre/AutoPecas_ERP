@@ -3,6 +3,7 @@ using AutoPecas.Core.Model;
 using AutoPecas.Core.Spec;
 using LinqKit;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -73,13 +74,6 @@ namespace AutoPecas.Service
 
             return await _AutoPecasDbContext.SaveChangesAsync();
         }
-
-        public async Task<int> Editar(Produto produto)
-        {
-            _AutoPecasDbContext.Update(produto);
-            return await _AutoPecasDbContext.SaveChangesAsync();
-        }
-
         public async Task<IList<Produto>> Busca(string texto)
         {
             return await _AutoPecasDbContext

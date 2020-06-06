@@ -57,18 +57,15 @@ namespace Autopecas.Infra.Data.Map
 
             builder
                 .Property(p => p.EstoqueMinimo)
-                .HasColumnName("ESTOQUEMINIMO")
-                .IsRequired();
+                .HasColumnName("ESTOQUEMINIMO");
 
             builder
                 .Property(p => p.EstoqueMaximo)
-                .HasColumnName("ESTOQUEMAXIMO")
-                .IsRequired();
+                .HasColumnName("ESTOQUEMAXIMO");
 
             builder
                 .Property(p => p.Observacao)
-                .HasColumnName("OBSERVACAO")
-                .IsRequired();
+                .HasColumnName("OBSERVACAO");
 
             builder
                 .Property(p => p.Ativo)

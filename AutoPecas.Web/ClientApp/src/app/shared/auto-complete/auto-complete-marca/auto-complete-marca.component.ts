@@ -47,11 +47,4 @@ export class AutoCompleteMarcaComponent implements OnInit {
     this.marcaSelecionada = marca;
     this.quandoSelecionado.emit(this.marcaSelecionada);
   }
-
-  selecionaManualmente(marca: Marca) {
-    this.data = [];
-    this.data.push(marca);
-    this.marcaSelecionada = marca;
-    this.quandoSelecionado.emit(this.marcaSelecionada);
-  }
 }

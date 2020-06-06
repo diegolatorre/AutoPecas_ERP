@@ -59,6 +59,7 @@ export class TabelaCategoriaComponent implements OnInit {
 
   listar() {
     this._service.listar(this.filtro).subscribe(next => {
+      console.log(next);
       this.filtro.total = next.total;
       this.listOfData = next.lista;
     });

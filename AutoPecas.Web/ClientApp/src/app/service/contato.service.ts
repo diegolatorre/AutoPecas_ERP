@@ -33,8 +33,4 @@ export class ContatoService {
   public incluir(contato: Contato): Observable<number> {
     return this.httpClient.post<number>(`${this.apiEndpoint}`, contato);
   }
-
-  public editar(contato: Contato): Observable<number> {
-    return this.httpClient.put<number>(`${this.apiEndpoint}`, contato);
-  }
 }

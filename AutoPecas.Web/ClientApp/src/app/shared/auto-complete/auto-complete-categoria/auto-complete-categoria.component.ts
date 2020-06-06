@@ -49,11 +49,4 @@ export class AutoCompleteCategoriaComponent implements OnInit {
     this.quandoSelecionado.emit(this.categoriaSelecionada);
   }
 
-  selecionaManualmente(categoria: Categoria) {
-    this.data = [];
-    this.data.push(categoria);
-    this.categoriaSelecionada = categoria;
-    this.quandoSelecionado.emit(this.categoriaSelecionada);
-  }
-
 }

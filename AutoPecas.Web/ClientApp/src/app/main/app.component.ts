@@ -21,25 +21,8 @@ export class AppComponent {
     const cadastroModal = this.modal.create({
       nzTitle: 'Novo Contato',
       nzContent: CadastroContatoComponent,
-      nzFooter: [
-        {
-          label: 'Fechar',
-          shape: 'round',
-          onClick: () => cadastroModal.destroy()
-        },
-        {
-          label: 'Limpar',
-          type: 'danger',
-          shape: 'round',
-          onClick: modal => { modal.limpar() }
-        },
-        {
-          label: 'Cadastrar',
-          type: 'primary',
-          shape: 'round',
-          onClick: modal => { modal.cadastrar() }
-        }
-      ],
+      nzWidth: '80%',
+      nzFooter: null,
       nzClosable: false
     });
   }

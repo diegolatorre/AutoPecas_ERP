@@ -1,6 +1,6 @@
 <form nz-form [formGroup]="contatoForm" class="formulario">
   <nz-form-item class="nome">
-    <nz-form-label>Nome</nz-form-label>
+    <nz-form-label nzRequired>Nome</nz-form-label>
     <nz-form-control>
       <input nz-input formControlName="nome">
     </nz-form-control>
@@ -61,4 +61,33 @@
       <input nz-input formControlName="observacao">
     </nz-form-control>
   </nz-form-item>
+
+  <div class="acao-form">
+    <p></p>
+    <button nz-button nzShape="round" nzType="primary">
+      <i nz-icon nzType="close-square" nzTheme="outline"></i>
+      Cancelar
+    </button>
+
+    <button
+      nz-button
+      (click)="contatoForm.reset()"
+      nzType="primary"
+      nzShape="round"
+      *ngIf="!editarContato"
+    >
+      <i nz-icon nzType="clear" nzTheme="outline"></i>
+      Limpar
+    </button>
+    <button
+      nz-button
+      (click)="cadastrar()"
+      nzType="primary"
+      nzShape="round"
+      [disabled]="contatoForm.invalid"
+    >
+      <i nz-icon nzType="save" nzTheme="outline"></i>
+      {{ editarContato ? 'Salvar' : 'Cadastrar' }}
+    </button>
+  </div>
 </form>

@@ -14,14 +14,14 @@ export class CadastroContatoComponent implements OnInit {
     {
       idContato: new FormControl(null),
       nome: new FormControl(null, [Validators.required]),
-      apelido: new FormControl(null, [Validators.required]),
-      cpf: new FormControl(null, [Validators.required]),
-      rg: new FormControl(null, [Validators.required]),
+      apelido: new FormControl(null),
+      cpf: new FormControl(null),
+      rg: new FormControl(null),
       tipo: new FormControl(null, [Validators.required]),
-      profissao: new FormControl(null, [Validators.required]),
-      dataNascimento: new FormControl(null, [Validators.required]),
-      sexo: new FormControl(null, [Validators.required]),
-      observacao: new FormControl(null, [Validators.required]),
+      profissao: new FormControl(null),
+      dataNascimento: new FormControl(null),
+      sexo: new FormControl(null),
+      observacao: new FormControl(null),
     });
 
   @Input() editarContato?: Contato;

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "OS9x5aJPqMR0HvLN+Q8oLVTIG1Mnf+/K9N7nZz9njrZB08UKk6BmO4fCFyJibnQJBhT+ZepE/twgm2Htp7towA==",
+  "dgSpecHash": "vsnDK1KmOszUyrQihLs1F11OFq6P1pcFG3TgST20POq5M5+O4urVFBmKKsO+PfFTfEtNfJV3B7cZKt2MA+C4JA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\tales\\Desktop\\AutoPecas\\AutoPecas.Service\\AutoPecas.Service.csproj",
+  "projectFilePath": "C:\\Users\\tales\\Desktop\\AutoPecs\\AutoPecas.Service\\AutoPecas.Service.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\tales\\.nuget\\packages\\linqkit.microsoft.entityframeworkcore\\3.0.0\\linqkit.microsoft.entityframeworkcore.3.0.0.nupkg.sha512",
     "C:\\Users\\tales\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\3.1.3\\microsoft.aspnetcore.jsonpatch.3.1.3.nupkg.sha512",

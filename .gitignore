@@ -23,11 +23,12 @@ bld/
 [Bb]in/
 [Oo]bj/
 [Ll]og/
+..vs/
+vs/
 .vs/
-.vs\
-.vs/AutoPecas/DesignTimeBuild
-.vs/AutoPecas/v16
-.vs\AutoPecas\v16
+
+.AutoPecas.Service\obj
+
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/

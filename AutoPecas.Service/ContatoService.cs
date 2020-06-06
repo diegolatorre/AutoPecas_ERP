@@ -62,10 +62,18 @@ namespace AutoPecas.Service
 
         public async Task<int> Incluir(Contato contato)
         {
-            contato.DataNascimento = DateTime.Now;
             _AutoPecasDbContext.Add(contato);
+            await _AutoPecasDbContext.SaveChangesAsync();
 
-            return await _AutoPecasDbContext.SaveChangesAsync();
+            return contato.Id;
+        }
+
+        public async Task<int> Editar(Contato contato)
+        {
+            _AutoPecasDbContext.Update(contato);
+            await _AutoPecasDbContext.SaveChangesAsync();
+
+            return contato.Id;
         }
 
         public async Task<IList<Contato>> Busca(string texto)

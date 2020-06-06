@@ -50,7 +50,6 @@ export class SelecionaProdutoComponent implements OnInit {
   }
 
   selecionaProduto(produto: Produto) {
-    console.log(produto);
     this.produto = produto;
   }
 }

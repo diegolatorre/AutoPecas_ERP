@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { FiltroSpec } from "src/app/model/geral/filtro-spec.model";
 import { Contato } from "src/app/model/contato/contato.model";
 import { Venda } from "src/app/model/venda/venda.model.model";
@@ -8,6 +8,9 @@ import { ProdutoVenda } from "src/app/model/venda/produto-venda.model";
 import { VendaService } from "src/app/service/venda.service";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { StatusVendaEnum, StatusVendaLabel } from "src/app/model/enum/statusVenda.enum";
+import { CadastroContatoComponent } from "src/app/contato/cadastro-contato/cadastro-contato.component";
+import { AutoCompleteContatoComponent } from "src/app/shared/auto-complete/auto-complete-contato/auto-complete-contato.component";
+import { ContatoService } from "src/app/service/contato.service";
 
 @Component({
   selector: "app-ponto-venda",
@@ -27,28 +30,27 @@ export class PontoVendaComponent implements OnInit {
   statusVendaEnum = StatusVendaEnum;
   statusVendaLabel = StatusVendaLabel;
 
-  venda = {
-    contato: {} as Contato,
-  } as Venda;
-
-  statusVenda
+  venda = { } as Venda;
 
   paginacao = {
     pagina: 1,
-    tamanho: 8,
+    tamanho: 4,
     total: null,
   } as FiltroSpec;
 
+  @ViewChild('AutoCompleteContato') autoCompleteContato: AutoCompleteContatoComponent;
+
   constructor(
     private modal: NzModalService,
-    private vendaService: VendaService
+    private vendaService: VendaService,
+    private contatoService: ContatoService
   ) {}
 
   ngOnInit(): void {}
 
   contatoSelecionado(contato: Contato) {
     this.venda.contato = contato;
-    this.vendaForm.get('idContato').setValue(contato.id);
+    this.vendaForm.get('idContato').setValue(contato ? contato.id : null);
   }
 
   paginar(pagina = this.paginacao.pagina) {
@@ -60,7 +62,6 @@ export class PontoVendaComponent implements OnInit {
   }
 
   selecionaProduto(produto?: ProdutoVenda) {
-    console.log("teste");
     const selecionaModal = this.modal.create({
       nzTitle: produto ? "Editar Produto" : "Selecionar Produto",
       nzContent: SelecionaProdutoComponent,
@@ -95,8 +96,43 @@ export class PontoVendaComponent implements OnInit {
     });
   }
 
+  cadastrarContato(contato?: Contato) {
+    const cadastroModal = this.modal.create({
+      nzTitle: 'Novo Contato',
+      nzContent: CadastroContatoComponent,
+      nzComponentParams: {
+       editarContato: contato
+      },
+      nzFooter: [
+        {
+          label: 'Fechar',
+          shape: 'round',
+          onClick: () => cadastroModal.destroy()
+        },
+        {
+          label: 'Limpar',
+          type: 'danger',
+          shape: 'round',
+          onClick: modal => { modal.limpar() }
+        },
+        {
+          label: 'Cadastrar',
+          type: 'primary',
+          shape: 'round',
+          onClick: modal => { modal.cadastrar() }
+        }
+      ],
+      nzClosable: false
+    });
+
+    cadastroModal.afterClose.subscribe(data => {
+      this.contatoService.obter(data).subscribe(next => this.autoCompleteContato.selecionaManualmente(next));
+    });
+  }
+
   remover(produto: ProdutoVenda) {
     this.produtos.splice(this.produtos.indexOf(produto), 1);
+    this.paginar();
   }
 
   finalizar(status: StatusVendaEnum) {

@@ -1,20 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { CategoriaService } from 'src/app/service/categoria.service';
+import { MarcaService } from 'src/app/service/marca.service';
 import { FiltroSpec } from 'src/app/model/geral/filtro-spec.model';
-import { Categoria } from 'src/app/model/produto/categoria.model';
+import { Marca } from 'src/app/model/produto/marca.model';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, tap } from 'rxjs/operators';
 import { NzModalService } from 'ng-zorro-antd/modal';
-import { CadastroCategoriaComponent } from '../cadastro-categoria/cadastro-categoria.component';
+import { CadastroMarcaComponent } from '../cadastro-marca/cadastro-marca.component';
 
 @Component({
-  selector: 'app-tabela-categoria',
-  templateUrl: './tabela-categoria.component.html',
-  styleUrls: ['./tabela-categoria.component.css']
+  selector: 'app-tabela-marca',
+  templateUrl: './tabela-marca.component.html',
+  styleUrls: ['./tabela-marca.component.css']
 })
-export class TabelaCategoriaComponent implements OnInit {
+export class TabelaMarcaComponent implements OnInit {
 
-  listOfData: Categoria[];
+  listOfData: Marca[];
   value?: string;
   filtro = {
     pagina: 1,
@@ -29,7 +29,7 @@ export class TabelaCategoriaComponent implements OnInit {
   contentSearch: string;
 
   constructor(
-    private _service: CategoriaService,
+    private _service: MarcaService,
     private modal: NzModalService
     ) { }
 
@@ -59,16 +59,16 @@ export class TabelaCategoriaComponent implements OnInit {
 
   listar() {
     this._service.listar(this.filtro).subscribe(next => {
-      console.log(next);
       this.filtro.total = next.total;
       this.listOfData = next.lista;
+      console.log(this.listOfData);
     });
   }
 
-  cadastrarCategoria() {
+  cadastrarMarca() {
     const cadastroModal = this.modal.create({
-      nzTitle: 'Nova Categoria',
-      nzContent: CadastroCategoriaComponent,
+      nzTitle: 'Nova Marca',
+      nzContent: CadastroMarcaComponent,
       nzFooter: [
         {
           label: 'Fechar',
@@ -92,3 +92,4 @@ export class TabelaCategoriaComponent implements OnInit {
     });
   }
 }
+

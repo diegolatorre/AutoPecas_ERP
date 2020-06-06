@@ -51,6 +51,10 @@ export class CadastroProdutoComponent implements OnInit {
     this.produtoService.incluir(this.produto).subscribe(next => console.log('Produto Cadastrado'));
   }
 
+  limpar() {
+    this.produtoForm.reset();
+  }
+
   alteraLucro(valor: boolean) {
     if (valor) {
       this.produtoForm.get('lucro').enable();

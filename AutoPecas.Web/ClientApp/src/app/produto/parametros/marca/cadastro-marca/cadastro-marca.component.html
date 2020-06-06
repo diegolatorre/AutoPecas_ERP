@@ -1,0 +1,30 @@
+<h1>{{title}}</h1>
+<form nz-form [formGroup]="marcaForm">
+
+  <nz-form-item>
+    <nz-form-label>Nome</nz-form-label>
+    <nz-form-control nzErrorTip="Please input your username!">
+        <input nz-input formControlName="nome" placeholder="input placeholder"/>
+      </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label>Descrição</nz-form-label>
+    <nz-form-control nzErrorTip="Please input your username!">
+        <input nz-input formControlName="descricao" placeholder="input placeholder"/>
+      </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-control>
+      <button
+      nz-button
+      nzType="primary"
+      (click)="submitForm()"
+      [disabled]="marcaForm.invalid"
+      >
+        {{btnName}}
+      </button>
+    </nz-form-control>
+  </nz-form-item>
+</form>

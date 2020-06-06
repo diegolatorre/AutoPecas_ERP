@@ -1,56 +1,53 @@
 .formulario {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-areas:
-    "descricao codigoBarras ."
-    "valorCusto valorVenda lucro"
-    "estoqueMinimo estoqueMaximo ."
-    "marca categoria ."
-    "observacao observacao observacao"
-    "cadastrar cadastrar cadastrar";
-  gap: 0px 10px;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  grid-column-gap: 15px;
+  grid-row-gap: 10px;
 }
 .descricao {
-  grid-area: descricao;
+  grid-area: 1 / 1 / 2 / 4;
   width: 100%;
 }
 .codigoBarras {
-  grid-area: codigoBarras;
+  grid-area: 1 / 4 / 2 / 5;
   width: 100%;
 }
 .valorCusto {
-  grid-area: valorCusto;
+  grid-area: 2 / 1 / 3 / 2;
   width: 100%;
 }
 .valorVenda {
-  grid-area: valorVenda;
+  grid-area: 2 / 2 / 3 / 3;
   width: 100%;
 }
 .lucro {
-  grid-area: lucro;
+  grid-area: 2 / 3 / 3 / 4;
   width: 100%;
 }
-.estoqueMinimo {
-  grid-area: estoqueMinimo;
-  width: 100%;
+.check-lucro {
+  grid-area: 2 / 4 / 3 / 5;
 }
-.estoqueMaximo {
-  grid-area: estoqueMaximo;
-  width: 100%;
-}
-.observacao {
-  grid-area: observacao;
+.categoria {
+  grid-area: 3 / 1 / 4 / 3;
   width: 100%;
 }
 .marca {
-  grid-area: marca;
+  grid-area: 3 / 3 / 4 / 5;
   width: 100%;
 }
-.categoria {
-  grid-area: categoria;
+.estoqueMinimo {
+  grid-area: 4 / 1 / 5 / 3;
+  width: 80%;
+}
+.estoqueMaximo {
+  grid-area: 4 / 3 / 5 / 5;
+  width: 80%;
+}
+.observacao {
+  grid-area: 5 / 1 / 6 / 4;
   width: 100%;
 }
-.cadastrar {
-  grid-area: cadastrar;
-  width: 100%;
+.ativo {
+  grid-area: 5 / 4 / 6 / 5;
 }

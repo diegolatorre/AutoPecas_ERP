@@ -102,6 +102,7 @@ export class AppComponent {
     const cadastroModal = this.modal.create({
       nzTitle: 'Novo Produto',
       nzContent: CadastroProdutoComponent,
+      nzWidth: '80%',
       nzFooter: [
         {
           label: 'Fechar',

@@ -30,10 +30,10 @@ namespace AutoPecas.Core.Model
         public decimal? Lucro { get; set; }
 
         [DataMember]
-        public int EstoqueMinimo { get; set; }
+        public int? EstoqueMinimo { get; set; }
 
         [DataMember]
-        public int EstoqueMaximo { get; set; }
+        public int? EstoqueMaximo { get; set; }
 
         [DataMember]
         public string Observacao { get; set; }

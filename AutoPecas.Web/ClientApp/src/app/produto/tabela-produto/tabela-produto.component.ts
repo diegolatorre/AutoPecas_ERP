@@ -44,7 +44,6 @@ export class TabelaProdutoComponent implements OnInit {
     this.produtoService.listar(this.filtro).subscribe(next => {
       this.filtro.total = next.total;
       this.produtos = next.lista;
-      this.changeDetectorRef.markForCheck();
     });
   }
 

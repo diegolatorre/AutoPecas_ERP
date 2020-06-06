@@ -52,9 +52,27 @@ export class CadastroProdutoComponent implements OnInit {
     this.produtoForm.reset();
   }
 
+  alteraLucro(valor: boolean) {
+    if (valor) {
+      this.produtoForm.get("lucro").enable();
+      this.produtoForm.get("valorVenda").disable();
+    } else {
+      this.produtoForm.get("lucro").disable();
+      this.produtoForm.get("valorVenda").enable();
+    }
+  }
+
+  marcaSelecionada(marca: Marca) {
+    this.produtoForm.get("marca").setValue(marca);
+  }
+
+  categoriaSelecionada(categoria: Categoria) {
+    this.produtoForm.get("categoria").setValue(categoria);
+  }
+
   cadastrar() {
     this.produto = {
-      id: this.editarProduto ? this.editarProduto.id : null,
+      id: this.editarProduto ? this.editarProduto.id : 0,
       descricao: this.produtoForm.get("descricao").value,
       codigoBarras: this.produtoForm.get("codigoBarras").value,
       idCategoria: this.produtoForm.get("categoria").value.id,
@@ -76,23 +94,5 @@ export class CadastroProdutoComponent implements OnInit {
       .incluir(this.produto)
       .subscribe(() => console.log("Produto Cadastrado"));
     }
-  }
-
-  alteraLucro(valor: boolean) {
-    if (valor) {
-      this.produtoForm.get("lucro").enable();
-      this.produtoForm.get("valorVenda").disable();
-    } else {
-      this.produtoForm.get("lucro").disable();
-      this.produtoForm.get("valorVenda").enable();
-    }
-  }
-
-  marcaSelecionada(marca: Marca) {
-    this.produtoForm.get("marca").setValue(marca);
-  }
-
-  categoriaSelecionada(categoria: Categoria) {
-    this.produtoForm.get("categoria").setValue(categoria);
   }
 }

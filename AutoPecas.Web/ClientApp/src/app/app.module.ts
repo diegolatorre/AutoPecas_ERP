@@ -41,6 +41,11 @@ import { NZ_I18N, pt_BR } from 'ng-zorro-antd/i18n';
         loadChildren: () =>
           import('./venda/venda.module').then((m) => m.VendaModule)
       },
+      {
+        path: 'movimentacao',
+        loadChildren: () =>
+          import('./movimentacao/movimentacao.module').then((m) => m.MovimentacaoModule)
+      },
     ]),
     SharedModule
   ],

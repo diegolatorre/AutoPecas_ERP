@@ -4,9 +4,11 @@ import { CadeiraRoutingModule, EntryComponents, RoutedComponents } from './param
 import { ReactiveFormsModule } from '@angular/forms';
 import { TabelaCategoriaComponent } from './categoria/tabela-categoria/tabela-categoria.component';
 import { CadastroCategoriaComponent } from './categoria/cadastro-categoria/cadastro-categoria.component';
+import { TabelaMarcaComponent } from './marca/tabela-marca/tabela-marca.component';
+import { CadastroMarcaComponent } from './marca/cadastro-marca/cadastro-marca.component';
 
 @NgModule({
-  declarations: [RoutedComponents, CadastroCategoriaComponent, TabelaCategoriaComponent],
+  declarations: [RoutedComponents, CadastroCategoriaComponent, TabelaCategoriaComponent, TabelaMarcaComponent, CadastroMarcaComponent],
   entryComponents: [EntryComponents],
   imports: [
     CadeiraRoutingModule,

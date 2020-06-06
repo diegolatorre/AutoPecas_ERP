@@ -24,3 +24,8 @@ nz-content {
   padding: 0 50px;
   margin-top: 75px;
 }
+
+.settings{
+  position: absolute;
+  right: 0;
+}

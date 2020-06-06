@@ -20,6 +20,9 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
 
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+
 const modulos = [
   NzButtonModule,
   NzLayoutModule,
@@ -40,7 +43,8 @@ const modulos = [
   NzTabsModule,
   NzDatePickerModule,
   NzToolTipModule,
-  NzSkeletonModule
+  NzSkeletonModule,
+  NzDropDownModule,
 ];
 
 @NgModule({

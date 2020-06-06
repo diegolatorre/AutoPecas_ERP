@@ -57,6 +57,10 @@ export class CadastroCategoriaComponent implements OnInit {
     }
   }
 
+  limpar() {
+    this.categoriaForm.reset();
+  }
+
   submitForm() {
 
     this.categoria = {

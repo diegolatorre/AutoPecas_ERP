@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { TabelaProdutoComponent } from './tabela-produto/tabela-produto.component';
 import { CadastroProdutoComponent } from './cadastro-produto/cadastro-produto.component';
+import { SucessoCadastroComponent } from './sucesso-cadastro/sucesso-cadastro.component';
 
 const routes: Routes = [
   {
@@ -11,6 +12,10 @@ const routes: Routes = [
   {
     path: 'cadastro',
     component: CadastroProdutoComponent,
+  },
+  {
+    path: 'sucesso',
+    component: SucessoCadastroComponent,
   }
 ];
 

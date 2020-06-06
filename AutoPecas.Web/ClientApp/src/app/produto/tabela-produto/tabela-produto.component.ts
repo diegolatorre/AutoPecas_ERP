@@ -25,7 +25,7 @@ export class TabelaProdutoComponent implements OnInit {
     pagina: 1,
     tamanho: 12,
     total: null,
-    filtros: {},
+    filtros: { },
   } as FiltroSpec;
 
   visible = false;
@@ -36,7 +36,7 @@ export class TabelaProdutoComponent implements OnInit {
     private changeDetectorRef: ChangeDetectorRef
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.listar();
   }
 
@@ -110,6 +110,11 @@ export class TabelaProdutoComponent implements OnInit {
     });
   }
 
+  limparFiltro() {
+    this.filtro.filtros = { };
+    this.listar();
+  }
+
   cadastrar(produto?: Produto) {
     const cadastroModal = this.modal.create({
       nzTitle: 'Novo Produto',
@@ -118,26 +123,9 @@ export class TabelaProdutoComponent implements OnInit {
        editarProduto: produto
       },
       nzWidth: '80%',
-      nzFooter: [
-        {
-          label: 'Fechar',
-          shape: 'round',
-          onClick: () => cadastroModal.destroy()
-        },
-        {
-          label: 'Limpar',
-          type: 'danger',
-          shape: 'round',
-          onClick: modal => { modal.limpar() }
-        },
-        {
-          label: 'Cadastrar',
-          type: 'primary',
-          shape: 'round',
-          onClick: modal => { modal.cadastrar() }
-        }
-      ],
-      nzClosable: false
+      nzFooter: null,
+      nzClosable: false,
+      nzMaskClosable: false
     });
 
     cadastroModal.afterClose.subscribe(filtro => this.listar());

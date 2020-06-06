@@ -7,9 +7,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { TabelaProdutoComponent } from './tabela-produto/tabela-produto.component';
 import { ParametrosModule } from './parametros/parametros.module';
 import { FiltroProdutoComponent } from './filtro-produto/filtro-produto.component';
+import { SucessoCadastroComponent } from './sucesso-cadastro/sucesso-cadastro.component';
 
 @NgModule({
-  declarations: [RoutedComponents, CadastroProdutoComponent, TabelaProdutoComponent, FiltroProdutoComponent],
+  declarations: [RoutedComponents, CadastroProdutoComponent, TabelaProdutoComponent, FiltroProdutoComponent, SucessoCadastroComponent],
   entryComponents: [EntryComponents],
   imports: [
     ProdutoRoutingModule,

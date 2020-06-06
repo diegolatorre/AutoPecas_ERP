@@ -70,6 +70,7 @@
     <nz-form-label nzRequired>Marca</nz-form-label>
     <nz-form-control>
       <app-auto-complete-marca
+        #AutoCompleteMarca
         (quandoSelecionado)="marcaSelecionada($event)"
       ></app-auto-complete-marca>
     </nz-form-control>
@@ -79,6 +80,7 @@
     <nz-form-label nzRequired>Categoria</nz-form-label>
     <nz-form-control>
       <app-auto-complete-categoria
+        #AutoCompleteCategoria
         (quandoSelecionado)="categoriaSelecionada($event)"
       ></app-auto-complete-categoria>
     </nz-form-control>
@@ -93,7 +95,8 @@
 
   <div class="acao-form">
     <p></p>
-    <button nz-button nzShape="round" nzType="primary">
+    <button nz-button nzShape="round" nzType="primary" (click)="fechar()">
+      <i nz-icon nzType="close-square" nzTheme="outline"></i>
       Cancelar
     </button>
 
@@ -102,7 +105,9 @@
       (click)="produtoForm.reset()"
       nzType="primary"
       nzShape="round"
+      *ngIf="!editarProduto"
     >
+      <i nz-icon nzType="clear" nzTheme="outline"></i>
       Limpar
     </button>
     <button
@@ -112,7 +117,8 @@
       nzShape="round"
       [disabled]="produtoForm.invalid"
     >
-      Cadastrar
+      <i nz-icon nzType="save" nzTheme="outline"></i>
+      {{ editarProduto ? 'Salvar' : 'Cadastrar' }}
     </button>
   </div>
 </form>

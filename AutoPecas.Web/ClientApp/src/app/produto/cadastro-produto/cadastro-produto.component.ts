@@ -1,16 +1,20 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, ViewChild, AfterViewInit } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { Produto } from "src/app/model/produto/produto.model";
 import { ProdutoService } from "src/app/service";
 import { Marca } from "src/app/model/produto/marca.model";
 import { Categoria } from "src/app/model/produto/categoria.model";
+import { Router } from "@angular/router";
+import { NzModalRef } from 'ng-zorro-antd/modal';
+import { AutoCompleteCategoriaComponent } from "src/app/shared/auto-complete/auto-complete-categoria/auto-complete-categoria.component";
+import { AutoCompleteMarcaComponent } from "src/app/shared/auto-complete/auto-complete-marca/auto-complete-marca.component";
 
 @Component({
   selector: "app-cadastro-produto",
   templateUrl: "./cadastro-produto.component.html",
   styleUrls: ["./cadastro-produto.component.css"],
 })
-export class CadastroProdutoComponent implements OnInit {
+export class CadastroProdutoComponent implements OnInit, AfterViewInit {
   produtoForm = new FormGroup({
     descricao: new FormControl(null, [Validators.required, Validators.minLength(3)]),
     codigoBarras: new FormControl(null, [Validators.required, Validators.minLength(13)]),
@@ -33,8 +37,13 @@ export class CadastroProdutoComponent implements OnInit {
 
   @Input() editarProduto?: Produto;
 
+  @ViewChild('AutoCompleteCategoria') autoCompleteCategoria: AutoCompleteCategoriaComponent;
+  @ViewChild('AutoCompleteMarca') autoCompleteMarca: AutoCompleteMarcaComponent;
+
   constructor(
-    private produtoService: ProdutoService
+    private produtoService: ProdutoService,
+    private router: Router,
+    private modal: NzModalRef
   ) {}
 
   ngOnInit(): void {
@@ -49,6 +58,13 @@ export class CadastroProdutoComponent implements OnInit {
         estoqueMaximo: this.editarProduto.estoqueMaximo,
         observacao: this.editarProduto.observacao,
       });
+    }
+  }
+
+  ngAfterViewInit() {
+    if (this.editarProduto) {
+      this.autoCompleteCategoria.selecionaManualmente(this.editarProduto.categoria);
+      this.autoCompleteMarca.selecionaManualmente(this.editarProduto.marca);
     }
   }
 
@@ -74,6 +90,10 @@ export class CadastroProdutoComponent implements OnInit {
     this.produtoForm.get("categoria").setValue(categoria);
   }
 
+  fechar() {
+    this.modal.destroy();
+  }
+
   cadastrar() {
     this.produto = {
       id: this.editarProduto ? this.editarProduto.id : 0,
@@ -92,11 +112,17 @@ export class CadastroProdutoComponent implements OnInit {
     if (this.editarProduto) {
       this.produtoService
         .editar(this.produto)
-        .subscribe(() => console.log("Produto Editado"));
+        .subscribe(() => {
+          this.router.navigate(['produto', 'sucesso']);
+          this.fechar();
+        });
     } else {
       this.produtoService
       .incluir(this.produto)
-      .subscribe(() => console.log("Produto Cadastrado"));
+      .subscribe(() => {
+        this.router.navigate(['produto', 'sucesso']);
+        this.fechar();
+      });
     }
   }
 }

@@ -21,6 +21,7 @@ import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzAlertModule } from 'ng-zorro-antd/alert';
+import { NzResultModule } from 'ng-zorro-antd/result';
 
 const modulos = [
   NzButtonModule,
@@ -44,7 +45,8 @@ const modulos = [
   NzToolTipModule,
   NzSkeletonModule,
   NzDropDownModule,
-  NzAlertModule
+  NzAlertModule,
+  NzResultModule
 ];
 
 @NgModule({

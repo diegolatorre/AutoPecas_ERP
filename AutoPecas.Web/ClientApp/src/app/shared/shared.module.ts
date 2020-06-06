@@ -20,7 +20,12 @@ import {
   UserAddOutline,
   PlusSquareOutline,
   PlusSquareFill,
-  AppstoreAddOutline
+  AppstoreAddOutline,
+  ClearOutline,
+  FilterOutline,
+  SaveOutline,
+  RollbackOutline,
+  CloseSquareOutline
 } from "@ant-design/icons-angular/icons";
 const icons: IconDefinition[] = [
   AccountBookFill,
@@ -30,7 +35,12 @@ const icons: IconDefinition[] = [
   UserAddOutline,
   PlusSquareOutline,
   PlusSquareFill,
-  AppstoreAddOutline
+  AppstoreAddOutline,
+  ClearOutline,
+  FilterOutline,
+  SaveOutline,
+  RollbackOutline,
+  CloseSquareOutline
 ];
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = {

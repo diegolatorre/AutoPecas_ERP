@@ -31,8 +31,20 @@
     Total: {{ total }} produtos
   </ng-template>
 
-  <button nz-button nzType="primary" (click)="filtrar()">Filtrar</button>
-  <button nz-button nzType="primary" (click)="cadastrar()">Cadastrar</button>
+  <button nz-button nzShape="round" nzType="primary" (click)="limparFiltro()">
+    <i nz-icon nzType="clear" nzTheme="outline"></i>
+    Limpar Filtro
+  </button>
+
+  <button nz-button nzShape="round" nzType="primary" (click)="filtrar()">
+    <i nz-icon nzType="filter" nzTheme="outline"></i>
+    Filtrar
+  </button>
+
+  <button nz-button nzShape="round" nzType="primary" (click)="cadastrar()">
+    <i nz-icon nzType="plus-square" nzTheme="outline"></i>
+    Cadastrar
+  </button>
 </div>
 
 <nz-drawer [nzVisible]="visible" [nzWidth]="640" [nzClosable]="false" (nzOnClose)="detalhes()">

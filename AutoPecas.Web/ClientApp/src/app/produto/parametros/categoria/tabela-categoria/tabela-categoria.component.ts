@@ -4,6 +4,8 @@ import { FiltroSpec } from 'src/app/model/geral/filtro-spec.model';
 import { Categoria } from 'src/app/model/produto/categoria.model';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, tap } from 'rxjs/operators';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { CadastroCategoriaComponent } from '../cadastro-categoria/cadastro-categoria.component';
 
 @Component({
   selector: 'app-tabela-categoria',
@@ -26,7 +28,10 @@ export class TabelaCategoriaComponent implements OnInit {
 
   contentSearch: string;
 
-  constructor(private _service: CategoriaService) { }
+  constructor(
+    private _service: CategoriaService,
+    private modal: NzModalService
+    ) { }
 
   ngOnInit(): void {
     this.listar();
@@ -54,8 +59,36 @@ export class TabelaCategoriaComponent implements OnInit {
 
   listar() {
     this._service.listar(this.filtro).subscribe(next => {
+      console.log(next);
       this.filtro.total = next.total;
       this.listOfData = next.lista;
+    });
+  }
+
+  cadastrarCategoria() {
+    const cadastroModal = this.modal.create({
+      nzTitle: 'Nova Categoria',
+      nzContent: CadastroCategoriaComponent,
+      nzFooter: [
+        {
+          label: 'Fechar',
+          shape: 'round',
+          onClick: () => cadastroModal.destroy()
+        },
+        {
+          label: 'Limpar',
+          type: 'danger',
+          shape: 'round',
+          onClick: modal => { modal.limpar() }
+        },
+        {
+          label: 'Cadastrar',
+          type: 'primary',
+          shape: 'round',
+          onClick: modal => { modal.submitForm() }
+        }
+      ],
+      nzClosable: false
     });
   }
 }

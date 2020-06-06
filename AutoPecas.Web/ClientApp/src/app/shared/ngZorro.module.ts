@@ -16,9 +16,9 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
-import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
-import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
-import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
+
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 
 const modulos = [
   NzButtonModule,
@@ -38,9 +38,8 @@ const modulos = [
   NzSelectModule,
   NzAutocompleteModule,
   NzTabsModule,
-  NzDatePickerModule,
-  NzToolTipModule,
-  NzSkeletonModule
+  NzDropDownModule,
+  NzIconModule
 ];
 
 @NgModule({

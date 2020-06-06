@@ -2,6 +2,7 @@
 using AutoPecas.Core.Spec;
 using AutoPecas.Service;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -55,19 +56,6 @@ namespace AutoPecas.Web.Controllers
             catch (Exception e)
             {
                 throw e;
-            }
-        }
-
-        [HttpPut]
-        public async Task<IActionResult> Editar(Produto produto)
-        {
-            try
-            {
-                return Ok(await _service.Editar(produto));
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
             }
         }
 

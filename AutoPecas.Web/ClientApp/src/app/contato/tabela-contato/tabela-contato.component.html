@@ -8,7 +8,7 @@
       {{ contato.cpf || "Contato sem descrição."}}
     </ng-template>
     <ng-template #acaoEditar>
-      <a (click)="cadastrar(contato)">Editar</a>
+      <a>Editar</a>
     </ng-template>
     <ng-template #acaoDetalhes>
       <a (click)="detalhes(contato)">Detalhes</a>
@@ -36,7 +36,7 @@
     <nz-descriptions-item nzTitle="RG" [nzSpan]="1">{{ contatoDetalhes.rg }}</nz-descriptions-item>
     <nz-descriptions-item nzTitle="Tipo" [nzSpan]="1">{{ contatoDetalhes.tipo }}</nz-descriptions-item>
     <nz-descriptions-item nzTitle="Profissao" [nzSpan]="1">{{ contatoDetalhes.profissao }}</nz-descriptions-item>
-    <nz-descriptions-item nzTitle="Data de Nascimento" [nzSpan]="1">{{ contatoDetalhes.dataNascimento | amLocal | amDateFormat: 'DD/MM/YYYY' }}</nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Data de Nascimento" [nzSpan]="1">{{ contatoDetalhes.dataNascimento }}</nz-descriptions-item>
     <nz-descriptions-item nzTitle="Sexo" [nzSpan]="1">{{ contatoDetalhes.sexo }}</nz-descriptions-item>
     <nz-descriptions-item nzTitle="Observação" [nzSpan]="2">
       {{ contatoDetalhes.observacao || "Sem observação" }}

@@ -40,7 +40,9 @@ export class TabelaContatoComponent implements OnInit {
   }
 
   listar() {
+    console.log(this.filtro);
     this.contatoService.listar(this.filtro).subscribe(next => {
+      console.log(next);
       this.filtro.total = next.total;
       this.contatos = next.lista;
       this.changeDetectorRef.markForCheck();
@@ -109,13 +111,13 @@ export class TabelaContatoComponent implements OnInit {
   //   });
   // }
 
-  cadastrar(contato?: Contato) {
+  cadastrar() {
     const cadastroModal = this.modal.create({
       nzTitle: 'Novo Contato',
       nzContent: CadastroContatoComponent,
-      nzComponentParams: {
-       editarContato: contato
-      },
+      // nzComponentParams: {
+      //  contato: this.filtroForm.value
+      // },
       nzFooter: [
         {
           label: 'Fechar',
@@ -138,6 +140,6 @@ export class TabelaContatoComponent implements OnInit {
       nzClosable: false
     });
 
-    cadastroModal.afterClose.subscribe(() => this.listar());
+    cadastroModal.afterClose.subscribe(filtro => this.listar());
   }
 }

@@ -33,8 +33,4 @@ export class ProdutoService {
   public incluir(produto: Produto): Observable<number> {
     return this.httpClient.post<number>(`${this.apiEndpoint}`, produto);
   }
-
-  public editar(produto: Produto): Observable<number> {
-    return this.httpClient.put<number>(`${this.apiEndpoint}`, produto);
-  }
 }

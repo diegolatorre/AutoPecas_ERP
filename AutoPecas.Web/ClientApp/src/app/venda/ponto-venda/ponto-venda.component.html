@@ -87,24 +87,26 @@
   </div>
 </div>
 <div class="contato">
-  <nz-descriptions [nzColumn]="2" *ngIf="venda.contato">
-    <nz-descriptions-item nzTitle="Nome">{{
-      venda.contato.nome
-    }}</nz-descriptions-item>
-    <nz-descriptions-item nzTitle="Apelido">{{
-      venda.contato.apelido
-    }}</nz-descriptions-item>
-    <nz-descriptions-item nzTitle="CPF">{{
-      venda.contato.cpf
-    }}</nz-descriptions-item>
-    <nz-descriptions-item nzTitle="RG">{{
-      venda.contato.rg
-    }}</nz-descriptions-item>
-    <nz-descriptions-item nzTitle="Data de Nascimento">{{
-      venda.contato.dataNascimento | amLocal | amDateFormat: 'DD/MM/YYYY'
-    }}</nz-descriptions-item>
-      venda.contato.observacao
-  </nz-descriptions>
+  <nz-skeleton [nzActive]="true" [nzLoading]="!venda.contato">
+    <nz-descriptions [nzColumn]="2" *ngIf="venda.contato">
+      <nz-descriptions-item nzTitle="Nome">{{
+        venda.contato.nome
+      }}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Apelido">{{
+        venda.contato.apelido
+      }}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="CPF">{{
+        venda.contato.cpf
+      }}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="RG">{{
+        venda.contato.rg
+      }}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Data de Nascimento">{{
+        venda.contato.dataNascimento | amLocal | amDateFormat: 'DD/MM/YYYY'
+      }}</nz-descriptions-item>
+        venda.contato.observacao
+    </nz-descriptions>
+  </nz-skeleton>
 </div>
 <div class="venda">
   <nz-descriptions nzTitle="Venda">

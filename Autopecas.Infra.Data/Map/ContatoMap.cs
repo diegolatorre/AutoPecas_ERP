@@ -70,6 +70,16 @@ namespace Autopecas.Infra.Data.Map
                 .HasMany(p => p.Enderecos)
                 .WithOne(p => p.Contato)
                 .HasForeignKey(p => p.IdContato);
+
+            builder
+                .HasMany(p => p.NotasOrigem)
+                .WithOne(p => p.ContatoOrigem)
+                .HasForeignKey(p => p.IdContatoOrigem);
+
+            builder
+                .HasMany(p => p.NotasDestino)
+                .WithOne(p => p.ContatoDestino)
+                .HasForeignKey(p => p.IdContatoDestino);
         }
     }
 }

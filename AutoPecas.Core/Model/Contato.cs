@@ -44,5 +44,11 @@ namespace AutoPecas.Core.Model
 
         [DataMember]
         public ICollection<Endereco> Enderecos { get; set; }
+
+        [DataMember]
+        public ICollection<Nota> NotasOrigem { get; set; }
+
+        [DataMember]
+        public ICollection<Nota> NotasDestino { get; set; }
     }
 }

@@ -22,8 +22,7 @@ namespace Autopecas.Infra.Data
         public DbSet<Endereco> Enderecos { get; set; }
         public DbSet<Venda> Vendas { get; set; }
         public DbSet<ProdutoVenda> ProdutosVenda { get; set; }
-
-
+        public DbSet<Nota> Notas { get; set; }
 
         #endregion
 

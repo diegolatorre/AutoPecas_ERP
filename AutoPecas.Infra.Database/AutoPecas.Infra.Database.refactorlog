@@ -112,4 +112,32 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="ATIVO" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="0835e2fa-90d0-40ff-b4d7-3e2dd62ccaf4" ChangeDateTime="06/07/2020 19:19:45">
+    <Property Name="ElementName" Value="[dbo].[NOTAS].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[NOTAS]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="IDPRODUTO" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="bb09288e-826c-47d0-a1b7-d3f4379cb3e4" ChangeDateTime="06/07/2020 19:20:07">
+    <Property Name="ElementName" Value="[dbo].[NOTAS].[IDPRODUTO]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[NOTAS]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="IDNOTA" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="3dcacd11-05f3-41cf-9084-f9d637a5ef97" ChangeDateTime="06/07/2020 19:28:36">
+    <Property Name="ElementName" Value="[dbo].[PRODUTONOTA].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[PRODUTONOTA]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="IDPRODUTONOTA" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="2342034c-6ea3-4d88-ad5b-3053bb7706a6" ChangeDateTime="06/07/2020 19:31:23">
+    <Property Name="ElementName" Value="[dbo].[NOTAS].[IDCONTATO]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[NOTAS]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="IDCONTATOORIGEM" />
+  </Operation>
 </Operations>

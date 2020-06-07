@@ -10,4 +10,13 @@ namespace AutoPecas.Core
         [Display(Description = "Finalizada")]
         Finalizada = 1,
     }
+
+    public enum TipoNota : int
+    {
+        [Display(Description = "Entrada")]
+        Entrada = 0,
+
+        [Display(Description = "Saída")]
+        Saida = 1,
+    }
 }

@@ -1,8 +1,8 @@
-import { Produto } from "../produto/produto.model";
+import { Produto } from '../produto/produto.model';
 
 export interface ProdutoNota {
-  idProdutoNota: number;
-  idNota: number;
+  idProdutoNota?: number;
+  idNota?: number;
   idProduto: number;
   quantidade: Number;
   produto: Produto;

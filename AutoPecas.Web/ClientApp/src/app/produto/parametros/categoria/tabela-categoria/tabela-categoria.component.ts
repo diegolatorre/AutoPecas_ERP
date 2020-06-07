@@ -64,7 +64,7 @@ export class TabelaCategoriaComponent implements OnInit {
     });
   }
 
-  cadastrarCategoria() {
+  cadastrarCategoria(categoria?: Categoria) {
     const cadastroModal = this.modal.create({
       nzTitle: 'Nova Categoria',
       nzContent: CadastroCategoriaComponent,
@@ -89,5 +89,36 @@ export class TabelaCategoriaComponent implements OnInit {
       ],
       nzClosable: false
     });
+  }
+
+  editar(categoria?: Categoria) {
+    const cadastroModal = this.modal.create({
+      nzTitle: 'Editar Categoria',
+      nzContent: CadastroCategoriaComponent,
+      nzComponentParams: {
+       categoria: categoria
+      },
+      nzFooter: [
+        {
+          label: 'Fechar',
+          shape: 'round',
+          onClick: () => cadastroModal.destroy()
+        },
+        {
+          label: 'Limpar',
+          type: 'danger',
+          shape: 'round',
+          onClick: modal => { modal.limpar() }
+        },
+        {
+          label: 'Salvar',
+          type: 'primary',
+          shape: 'round',
+          onClick: modal => { modal.submitFormEdit() }
+        }
+      ],
+      nzClosable: false
+    });
+    cadastroModal.afterClose.subscribe(() => this.listar());
   }
 }

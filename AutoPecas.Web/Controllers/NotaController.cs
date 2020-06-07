@@ -20,7 +20,7 @@ namespace AutoPecas.Web.Controllers
             _service = service;
         }
 
-        [HttpPost("lista")]
+        [HttpPost("entrada/lista")]
         public async Task<ActionResult<PaginacaoResultado<Nota>>> Lista(FiltroSpec filtro)
         {
             try
@@ -46,7 +46,7 @@ namespace AutoPecas.Web.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPost("entrada")]
         public async Task<ActionResult<int>> Incluir(Nota Nota)
         {
             try

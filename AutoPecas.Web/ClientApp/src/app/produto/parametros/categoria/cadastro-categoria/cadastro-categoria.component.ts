@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CategoriaService } from 'src/app/service/categoria.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Categoria } from 'src/app/model/produto/categoria.model';
+import { NzModalRef } from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'app-cadastro-categoria',
@@ -16,25 +17,27 @@ export class CadastroCategoriaComponent implements OnInit {
     nome: new FormControl(null, [Validators.required])
   });
 
-  constructor(private _service: CategoriaService, private route: ActivatedRoute) { }
+  constructor(
+    private _service: CategoriaService,
+    private router: Router,
+    private modal: NzModalRef
+  ) { }
 
-  categoria: Categoria = { descricao: 'teste', nome: 'ssas', id: 0 };
+  @Input() categoria?: Categoria;
 
   title: string;
-  catId: number;
   btnName: string;
 
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => this.catId = params['id']);
     this.obter();
   }
 
   obter() {
 
-    if (this.catId !== undefined) {
+    if (this.categoria !== undefined) {
 
-      this._service.obter(this.catId).subscribe(next => {
+      this._service.obter(this.categoria.id).subscribe(next => {
 
         this.categoria = next;
 
@@ -69,5 +72,18 @@ export class CadastroCategoriaComponent implements OnInit {
     } as Categoria;
 
     this._service.incluir(this.categoria).subscribe();
+  }
+
+  submitFormEdit() {
+
+    this.categoria = {
+      id: this.categoria.id,
+      nome: this.categoriaForm.get('nome').value,
+      descricao: this.categoriaForm.get('descricao').value,
+    } as Categoria;
+
+    this._service.editar(this.categoria).subscribe(() => {
+      this.modal.close();
+    });
   }
 }

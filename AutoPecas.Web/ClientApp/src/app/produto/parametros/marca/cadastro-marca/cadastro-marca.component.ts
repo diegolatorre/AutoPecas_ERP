@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MarcaService } from 'src/app/service/marca.service';
 import { ActivatedRoute } from '@angular/router';
 import { Marca } from 'src/app/model/produto/marca.model';
+import { NzModalRef } from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'app-cadastro-marca',
@@ -16,25 +17,26 @@ export class CadastroMarcaComponent implements OnInit {
     nome: new FormControl(null, [Validators.required])
   });
 
-  constructor(private _service: MarcaService, private route: ActivatedRoute) { }
-
-  marca: Marca = { descricao: 'teste', nome: 'ssas', id: 0 };
+  constructor(
+    private _service: MarcaService,
+    private route: ActivatedRoute,
+    private modal: NzModalRef
+    ) { }
 
   title: string;
-  marId: number;
   btnName: string;
 
+@Input() marca?: Marca;
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => this.marId = params['id']);
     this.obter();
   }
 
   obter() {
 
-    if (this.marId !== undefined) {
+    if (this.marca !== undefined) {
 
-      this._service.obter(this.marId).subscribe(next => {
+      this._service.obter(this.marca.id).subscribe(next => {
 
         this.marca = next;
 
@@ -69,5 +71,18 @@ export class CadastroMarcaComponent implements OnInit {
     } as Marca;
 
     this._service.incluir(this.marca).subscribe();
+  }
+
+  submitFormEdit() {
+
+    this.marca = {
+      id: this.marca.id,
+      nome: this.marcaForm.get('nome').value,
+      descricao: this.marcaForm.get('descricao').value,
+    } as Marca;
+
+    this._service.editar(this.marca).subscribe(() => {
+      this.modal.close();
+    });
   }
 }

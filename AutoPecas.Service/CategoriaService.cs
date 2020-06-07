@@ -3,6 +3,7 @@ using AutoPecas.Core.Model;
 using AutoPecas.Core.Spec;
 using LinqKit;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -64,6 +65,12 @@ namespace AutoPecas.Service
         {
             _AutoPecasDbContext.Add(categoria);
 
+            return await _AutoPecasDbContext.SaveChangesAsync();
+        }
+
+        public async Task<int> Editar(Categoria categoria)
+        {
+            _AutoPecasDbContext.Update(categoria);
             return await _AutoPecasDbContext.SaveChangesAsync();
         }
 

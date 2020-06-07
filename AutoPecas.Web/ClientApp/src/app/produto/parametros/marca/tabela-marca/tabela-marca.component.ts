@@ -91,5 +91,36 @@ export class TabelaMarcaComponent implements OnInit {
       nzClosable: false
     });
   }
+
+  editar(marca?: Marca) {
+    const cadastroModal = this.modal.create({
+      nzTitle: 'Editar Marca',
+      nzContent: CadastroMarcaComponent,
+      nzComponentParams: {
+        marca: marca
+      },
+      nzFooter: [
+        {
+          label: 'Fechar',
+          shape: 'round',
+          onClick: () => cadastroModal.destroy()
+        },
+        {
+          label: 'Limpar',
+          type: 'danger',
+          shape: 'round',
+          onClick: modal => { modal.limpar() }
+        },
+        {
+          label: 'Salvar',
+          type: 'primary',
+          shape: 'round',
+          onClick: modal => { modal.submitFormEdit() }
+        }
+      ],
+      nzClosable: false
+    });
+    cadastroModal.afterClose.subscribe(() => this.listar());
+  }
 }
 

@@ -10,10 +10,9 @@
         <div class="info-venda">
           <p>{{ statusVendaLabel.get(venda.status) }}</p>
           <p>Valor: {{ venda.valor | currency: 'BRL' }}</p>
-          <p>Data Abertura: {{ venda.dataCriacao | amLocal | amDateFormat: 'DD/MM/YYYY' }}</p>
-          <p></p>
-          <p *ngIf="venda.status == statusVendaEnum.Finalizada">Data Finalização: {{ venda.dataFinalizacao | amLocal | amDateFormat: 'DD/MM/YYYY' }}</p>
-          <p *ngIf="venda.status == statusVendaEnum.Aberta">Ultima modificação: {{ venda.dataFinalizacao | amTimeAgo: true }}</p>
+          <p class="data">Data Abertura: {{ venda.dataCriacao | amLocal | amDateFormat: 'DD/MM/YYYY' }}</p>
+          <p *ngIf="venda.status == statusVendaEnum.Finalizada" class="data">Data Finalização: {{ venda.dataFinalizacao | amLocal | amDateFormat: 'DD/MM/YYYY' }}</p>
+          <p *ngIf="venda.status == statusVendaEnum.Aberta" class="data">Ultima modificação: {{ venda.dataFinalizacao | amTimeAgo: true }}</p>
         </div>
       </ng-template>
       <ng-template #acaoDetalhes>

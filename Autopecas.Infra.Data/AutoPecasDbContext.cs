@@ -42,7 +42,9 @@ namespace Autopecas.Infra.Data
                 .ApplyConfiguration(new EnderecoMap())
                 .ApplyConfiguration(new TelefoneMap())
                 .ApplyConfiguration(new VendaMap())
-                .ApplyConfiguration(new ProdutoVendaMap());
+                .ApplyConfiguration(new ProdutoVendaMap())
+                .ApplyConfiguration(new NotaMap())
+                .ApplyConfiguration(new ProdutoNotaMap());
 
         }
 

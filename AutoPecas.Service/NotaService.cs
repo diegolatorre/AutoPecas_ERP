@@ -68,11 +68,11 @@ namespace AutoPecas.Service
             nota.IdContatoOrigem = 1;
             nota.IdContatoDestino = venda.IdContato;
 
-            //nota.Produtos = venda.Produtos.Select(p => new ProdutoNota()
-            //{
-            //    IdProduto = p.IdProduto,
-            //    Quantidade = p.Quantidade
-            //}).ToList();
+            nota.Produtos = venda.Produtos.Select(p => new ProdutoNota()
+            {
+                IdProduto = p.IdProduto,
+                Quantidade = p.Quantidade
+            }).ToList();
 
             nota.Observacao = "Nota gerada a partir da venda:" + venda.Id.ToString();
 

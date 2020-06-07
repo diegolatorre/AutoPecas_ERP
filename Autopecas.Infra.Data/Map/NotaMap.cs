@@ -42,12 +42,12 @@ namespace Autopecas.Infra.Data.Map
 
             builder
                 .HasOne(p => p.ContatoOrigem)
-                .WithMany()
+                .WithMany(p => p.NotasOrigem)
                 .HasForeignKey(p => p.IdContatoOrigem);
 
             builder
                 .HasOne(p => p.ContatoDestino)
-                .WithMany()
+                .WithMany(p => p.NotasDestino)
                 .HasForeignKey(p => p.IdContatoDestino);
         }
     }

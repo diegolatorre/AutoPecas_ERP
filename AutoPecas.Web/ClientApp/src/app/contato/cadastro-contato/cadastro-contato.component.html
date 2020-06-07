@@ -1,7 +1,7 @@
 <form nz-form [formGroup]="contatoForm" class="formulario">
   <nz-form-item class="nome">
     <nz-form-label nzRequired>Nome</nz-form-label>
-    <nz-form-control>
+    <nz-form-control nzHasFeedback nzErrorTip="Deve conter pelo menos 3 caracteres">
       <input nz-input formControlName="nome">
     </nz-form-control>
   </nz-form-item>
@@ -13,24 +13,41 @@
     </nz-form-control>
   </nz-form-item>
 
-  <nz-form-item class="cpf">
+  <nz-form-item *ngIf="contatoForm.get('tipo').value == 'C'" class="cpf">
     <nz-form-label>CPF</nz-form-label>
-    <nz-form-control>
-      <input nz-input formControlName="cpf">
+    <nz-form-control nzHasFeedback nzErrorTip="Deve conter 11 numeros">
+      <input mask="000.000.000-00" nz-input formControlName="cpf">
     </nz-form-control>
   </nz-form-item>
 
-  <nz-form-item class="rg">
+  <nz-form-item *ngIf="contatoForm.get('tipo').value == 'F'" class="cnpj">
+    <nz-form-label>CNPJ</nz-form-label>
+    <nz-form-control nzHasFeedback nzErrorTip="Deve conter 14 numeros">
+      <input mask="00.000.000/0000-00" nz-input formControlName="cpf">
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item *ngIf="contatoForm.get('tipo').value == 'C'" class="rg">
     <nz-form-label>RG</nz-form-label>
-    <nz-form-control>
-      <input nz-input formControlName="rg">
+    <nz-form-control nzHasFeedback nzErrorTip="Deve conter 9 numeros">
+      <input mask="00.000.000-0" nz-input formControlName="rg">
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item *ngIf="contatoForm.get('tipo').value == 'F'" class="inscricao-estadual">
+    <nz-form-label>Inscrição Estadual</nz-form-label>
+    <nz-form-control nzHasFeedback nzErrorTip="Deve conter 12 numeros">
+      <input mask="000.000.000.000" nz-input formControlName="inscricaoEstadual">
     </nz-form-control>
   </nz-form-item>
 
   <nz-form-item class="Tipo">
     <nz-form-label>Tipo</nz-form-label>
     <nz-form-control>
-      <input nz-input formControlName="tipo">
+      <nz-radio-group formControlName="tipo">
+        <label nz-radio nzValue="C">Cliente</label>
+        <label nz-radio nzValue="F">Fornecedor</label>
+      </nz-radio-group>
     </nz-form-control>
   </nz-form-item>
 
@@ -64,14 +81,14 @@
 
   <div class="acao-form">
     <p></p>
-    <button nz-button nzShape="round" nzType="primary">
+    <button nz-button nzShape="round" nzType="primary" (click)="fechar()">
       <i nz-icon nzType="close-square" nzTheme="outline"></i>
       Cancelar
     </button>
 
     <button
       nz-button
-      (click)="contatoForm.reset()"
+      (click)="contatoForm.reset({ tipo: 'C' })"
       nzType="primary"
       nzShape="round"
       *ngIf="!editarContato"
@@ -91,3 +108,5 @@
     </button>
   </div>
 </form>
+
+<nz-alert *ngIf="contatoForm.invalid" nzType="warning" nzMessage="Necessário preencher todos os campos obrigatórios" nzShowIcon class="alerta"></nz-alert>

@@ -1,38 +1,44 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { ContatoService } from 'src/app/service/contato.service';
-import { Contato } from 'src/app/model/contato/contato.model';
-import { NzModalRef } from 'ng-zorro-antd/modal';
+import { Component, OnInit, Input } from "@angular/core";
+import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { ContatoService } from "src/app/service/contato.service";
+import { Contato } from "src/app/model/contato/contato.model";
+import { NzModalRef } from "ng-zorro-antd/modal";
+import { min } from "rxjs/operators";
+import { Router } from "@angular/router";
 
 @Component({
-  selector: 'app-cadastro-contato',
-  templateUrl: './cadastro-contato.component.html',
-  styleUrls: ['./cadastro-contato.component.css']
+  selector: "app-cadastro-contato",
+  templateUrl: "./cadastro-contato.component.html",
+  styleUrls: ["./cadastro-contato.component.css"],
 })
 export class CadastroContatoComponent implements OnInit {
-  contatoForm = new FormGroup(
-    {
-      idContato: new FormControl(null),
-      nome: new FormControl(null, [Validators.required]),
-      apelido: new FormControl(null),
-      cpf: new FormControl(null),
-      rg: new FormControl(null),
-      tipo: new FormControl(null, [Validators.required]),
-      profissao: new FormControl(null),
-      dataNascimento: new FormControl(null),
-      sexo: new FormControl(null),
-      observacao: new FormControl(null),
-    });
+  contatoForm = new FormGroup({
+    idContato: new FormControl(null),
+    nome: new FormControl(null, [Validators.required, Validators.minLength(3)]),
+    apelido: new FormControl(null),
+    cpf: new FormControl(null, [Validators.min(11)]),
+    cnpj: new FormControl(null, [Validators.min(14)]),
+    rg: new FormControl(null, [Validators.min(9)]),
+    inscricaoEstadual: new FormControl(null, [Validators.min(12)]),
+    tipo: new FormControl("C", [Validators.required]),
+    profissao: new FormControl(null),
+    dataNascimento: new FormControl(null),
+    sexo: new FormControl(null),
+    observacao: new FormControl(null),
+  });
 
   @Input() editarContato?: Contato;
 
+  @Input() venda: boolean = false;
+
   constructor(
     private contatoService: ContatoService,
-    private modal: NzModalRef
-  ) { }
+    private modal: NzModalRef,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    if(this.editarContato) {
+    if (this.editarContato) {
       this.contatoForm.patchValue({
         nome: this.editarContato.nome,
         apelido: this.editarContato.apelido,
@@ -42,36 +48,41 @@ export class CadastroContatoComponent implements OnInit {
         profissao: this.editarContato.profissao,
         dataNascimento: this.editarContato.dataNascimento,
         sexo: this.editarContato.sexo,
-        observacao: this.editarContato.observacao
+        observacao: this.editarContato.observacao,
       });
     }
   }
 
-  limpar() {
-    this.contatoForm.reset();
+  fechar() {
+    this.modal.destroy();
   }
 
   cadastrar() {
     let contato = {
       id: this.editarContato ? this.editarContato.id : 0,
-      nome: this.contatoForm.get('nome').value,
-      apelido: this.contatoForm.get('apelido').value,
-      cpf: this.contatoForm.get('cpf').value,
-      rg: this.contatoForm.get('rg').value,
-      tipo: this.contatoForm.get('tipo').value,
-      profissao: this.contatoForm.get('profissao').value,
-      dataNascimento: this.contatoForm.get('dataNascimento').value,
-      sexo: this.contatoForm.get('sexo').value,
-      observacao: this.contatoForm.get('observacao').value
+      nome: this.contatoForm.get("nome").value,
+      apelido: this.contatoForm.get("apelido").value,
+      cpf: this.contatoForm.get("cpf").value,
+      rg: this.contatoForm.get("rg").value,
+      tipo: this.contatoForm.get("tipo").value,
+      profissao: this.contatoForm.get("profissao").value,
+      dataNascimento: this.contatoForm.get("dataNascimento").value,
+      sexo: this.contatoForm.get("sexo").value,
+      observacao: this.contatoForm.get("observacao").value,
     } as Contato;
 
     if (this.editarContato) {
       this.contatoService.editar(contato).subscribe();
     } else {
-      this.contatoService.incluir(contato).subscribe(next => {
-        this.modal.destroy(next);
-      });
+      this.contatoService.incluir(contato)
+          .subscribe((next) => {
+            if (this.venda) {
+              this.modal.destroy(next);
+            } else {
+              this.router.navigate(['contato', 'sucesso']);
+              this.modal.destroy(next);
+            }
+          });
     }
-
   }
 }

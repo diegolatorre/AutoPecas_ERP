@@ -1,4 +1,5 @@
 ﻿using AutoPecas.Core.Model;
+using AutoPecas.Core.Spec;
 using AutoPecas.Service;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -14,6 +15,20 @@ namespace AutoPecas.Web.Controllers
 
         public VendaController(VendaService service) => _service = service;
 
+
+        [HttpPost("lista")]
+        public async Task<ActionResult<PaginacaoResultado<Venda>>> Lista(FiltroSpec filtro)
+        {
+            try
+            {
+                return Ok(await _service.Lista(filtro));
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
         [HttpPost]
         public async Task<IActionResult> Venda(Venda venda)
         {
@@ -27,12 +42,12 @@ namespace AutoPecas.Web.Controllers
             }
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateVenda([FromBody] Venda venda, int id)
+        [HttpPut]
+        public async Task<IActionResult> UpdateVenda(Venda venda)
         {
             try
             {
-                return Ok(await _service.UpdateVenda(venda, id));
+                return Ok(await _service.UpdateVenda(venda));
             }
             catch (Exception e)
             {

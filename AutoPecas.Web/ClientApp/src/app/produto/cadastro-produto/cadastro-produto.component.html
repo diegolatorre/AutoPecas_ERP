@@ -2,8 +2,7 @@
   <nz-form-item class="descricao">
     <nz-form-label nzRequired>Descrição</nz-form-label>
     <nz-form-control
-      nzHasFeedback
-      nzErrorTip="Deve conter pelo mensos 3 caracteres"
+      nzHasFeedback nzErrorTip="Deve conter pelo menos 3 caracteres"
     >
       <input nz-input formControlName="descricao" />
     </nz-form-control>
@@ -123,4 +122,4 @@
   </div>
 </form>
 
-<nz-alert *ngIf="produtoForm.invalid" nzType="warning" nzMessage="Necessário preencher todos os campos obrigatórios" nzShowIcon></nz-alert>
+<nz-alert *ngIf="produtoForm.invalid" nzType="warning" nzMessage="Necessário preencher todos os campos obrigatórios" nzShowIcon class="alerta"></nz-alert>

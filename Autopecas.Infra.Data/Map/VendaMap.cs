@@ -44,8 +44,8 @@ namespace Autopecas.Infra.Data.Map
                 .IsRequired();
 
             builder
-                .Property(p => p.Ativo)
-                .HasColumnName("ATIVO")
+                .Property(p => p.Valor)
+                .HasColumnName("VALOR")
                 .IsRequired();
 
             builder

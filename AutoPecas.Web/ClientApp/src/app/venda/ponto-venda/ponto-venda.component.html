@@ -87,7 +87,7 @@
   </div>
 </div>
 <div class="contato">
-  <nz-skeleton [nzActive]="true" [nzLoading]="!venda.contato">
+  <nz-skeleton [nzLoading]="!venda.contato">
     <nz-descriptions [nzColumn]="2" *ngIf="venda.contato">
       <nz-descriptions-item nzTitle="Nome">{{
         venda.contato.nome

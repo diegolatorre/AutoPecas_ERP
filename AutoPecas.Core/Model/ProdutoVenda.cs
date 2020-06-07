@@ -19,7 +19,7 @@ namespace AutoPecas.Core.Model
         public int IdProduto { get; set; }
 
         [DataMember]
-        public decimal Quantidade { get; set; }
+        public int Quantidade { get; set; }
 
         [DataMember]
         public decimal Desconto { get; set; }

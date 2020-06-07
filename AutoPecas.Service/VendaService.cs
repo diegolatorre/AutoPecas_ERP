@@ -1,5 +1,9 @@
 ﻿using Autopecas.Infra.Data;
+using AutoPecas.Core;
 using AutoPecas.Core.Model;
+using AutoPecas.Core.Spec;
+using LinqKit;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,11 +16,40 @@ namespace AutoPecas.Service
 
         public VendaService(AutoPecasDbContext autoPecasDbContext) => _AutoPecasDbContext = autoPecasDbContext;
 
+        private void AplicarFiltro(FiltroSpec filtro, out IQueryable<Venda> query)
+        {
+            query = _AutoPecasDbContext.Vendas
+                .Include(v => v.Contato)
+                .Include(v => v.Produtos)
+                .ThenInclude(p => p.Produto)
+                .AsExpandableEFCore();
+
+            var predicate = PredicateBuilder.New<Venda>(true);
+
+            query = query.Where(predicate);
+        }
+
+        public async Task<PaginacaoResultado<Venda>> Lista(FiltroSpec filtro)
+        {
+            AplicarFiltro(filtro, out var query);
+
+            var resultado = new PaginacaoResultado<Venda>(query, filtro.Pagina, filtro.Tamanho, filtro.Total);
+
+            resultado.Lista = await query
+                .Skip(filtro.Tamanho * (filtro.Pagina - 1))
+                .Take(filtro.Tamanho)
+                .ToListAsync();
+
+            return resultado;
+        }
+
         public async Task<int> Venda(Venda venda)
         {
             venda.DataCriacao = DateTime.Now;
+
             venda.DataFinalizacao = DateTime.Now;
-            venda.Ativo = true;
+
+            venda.Valor = venda.Produtos.Sum(p => p.ValorFinal);
 
             venda.Contato = null;
 
@@ -30,10 +63,12 @@ namespace AutoPecas.Service
             return t;
         }
 
-        public async Task<int> UpdateVenda(Venda venda, int id)
+        public async Task<int> UpdateVenda(Venda venda)
         {
-            if (venda.Id != id)
-                return 0;
+            if (venda.Status == StatusVenda.Finalizada)
+            {
+                venda.DataFinalizacao = DateTime.Now;
+            }
 
             _AutoPecasDbContext.Update(venda);
             return await _AutoPecasDbContext.SaveChangesAsync();

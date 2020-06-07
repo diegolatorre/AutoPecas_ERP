@@ -13,3 +13,10 @@
   grid-column-gap: 10px;
 }
 
+.observacao {
+  grid-area: 5 / 1 / 6 / 3;
+}
+
+.alerta {
+  margin-top: 10px;
+}

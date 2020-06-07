@@ -101,27 +101,11 @@ export class PontoVendaComponent implements OnInit {
       nzTitle: 'Novo Contato',
       nzContent: CadastroContatoComponent,
       nzComponentParams: {
-       editarContato: contato
+       editarContato: contato,
+       venda: true
       },
-      nzFooter: [
-        {
-          label: 'Fechar',
-          shape: 'round',
-          onClick: () => cadastroModal.destroy()
-        },
-        {
-          label: 'Limpar',
-          type: 'danger',
-          shape: 'round',
-          onClick: modal => { modal.limpar() }
-        },
-        {
-          label: 'Cadastrar',
-          type: 'primary',
-          shape: 'round',
-          onClick: modal => { modal.cadastrar() }
-        }
-      ],
+      nzWidth: "80%",
+      nzFooter: null,
       nzClosable: false
     });
 

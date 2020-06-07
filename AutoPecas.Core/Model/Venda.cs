@@ -26,7 +26,7 @@ namespace AutoPecas.Core.Model
         public decimal Desconto { get; set; }
 
         [DataMember]
-        public bool Ativo { get; set; }
+        public decimal Valor { get; set; }
 
         [DataMember]
         public Contato Contato { get; set; }

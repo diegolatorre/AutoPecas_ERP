@@ -9,7 +9,7 @@ export interface Venda {
   dataCriacao?: Date;
   dataFinalizacao?: Date;
   desconto?: number;
-  ativo?: boolean;
+  valor?: number;
   contato?: Contato;
   produtos?: ProdutoVenda[];
 }

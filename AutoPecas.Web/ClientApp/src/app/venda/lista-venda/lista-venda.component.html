@@ -1,0 +1,48 @@
+<h2>Vendas</h2>
+
+<nz-skeleton [nzActive]="true" [nzLoading]="!vendas">
+  <div class="vendas">
+    <div *ngFor="let venda of vendas">
+      <nz-card class="contato" nzType="inner" [nzActions]="[acaoDetalhes]">
+          <nz-card-meta [nzTitle]="venda.contato.nome" [nzDescription]="info"></nz-card-meta>
+      </nz-card>
+      <ng-template #info>
+        <div class="info-venda">
+          <p>{{ statusVendaLabel.get(venda.status) }}</p>
+          <p>Valor: {{ venda.valor | currency: 'BRL' }}</p>
+          <p>Data Abertura: {{ venda.dataCriacao | amLocal | amDateFormat: 'DD/MM/YYYY' }}</p>
+          <p></p>
+          <p *ngIf="venda.status == statusVendaEnum.Finalizada">Data Finalização: {{ venda.dataFinalizacao | amLocal | amDateFormat: 'DD/MM/YYYY' }}</p>
+          <p *ngIf="venda.status == statusVendaEnum.Aberta">Ultima modificação: {{ venda.dataFinalizacao | amTimeAgo: true }}</p>
+        </div>
+      </ng-template>
+      <ng-template #acaoDetalhes>
+        <!-- <a (click)="detalhes(contato)">Detalhes</a> -->
+      </ng-template>
+    </div>
+  </div>
+</nz-skeleton>
+
+<div class="acao">
+  <nz-pagination
+    [nzPageIndex]="filtro.pagina"
+    [nzPageSize]="filtro.tamanho"
+    [nzTotal]="filtro.total"
+    (nzPageIndexChange)="paginar($event)">
+  </nz-pagination>
+
+  <button nz-button nzShape="round" nzType="primary">
+    <i nz-icon nzType="clear" nzTheme="outline"></i>
+    Limpar Filtro
+  </button>
+
+  <button nz-button nzShape="round" nzType="primary">
+    <i nz-icon nzType="filter" nzTheme="outline"></i>
+    Filtrar
+  </button>
+
+  <button nz-button nzShape="round" nzType="primary" (click)="novaVenda()">
+    <i nz-icon nzType="plus-square" nzTheme="outline"></i>
+    Nova Venda
+  </button>
+</div>

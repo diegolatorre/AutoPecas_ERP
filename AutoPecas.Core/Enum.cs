@@ -2,7 +2,7 @@
 
 namespace AutoPecas.Core
 {
-    public enum StatusVenda : byte
+    public enum StatusVenda : int
     {
         [Display(Description = "Em Aberto")]
         Aberta = 0,

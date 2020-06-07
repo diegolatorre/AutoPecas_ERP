@@ -5,6 +5,7 @@ import { AutoCompleteMarcaComponent } from "./auto-complete/auto-complete-marca/
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NgxMaskModule, IConfig } from "ngx-mask";
 import { MomentModule } from "ngx-moment";
+import 'moment/locale/pt-br';
 import { AutoCompleteCategoriaComponent } from "./auto-complete/auto-complete-categoria/auto-complete-categoria.component";
 import { AutoCompleteContatoComponent } from "./auto-complete/auto-complete-contato/auto-complete-contato.component";
 import { AutoCompleteProdutoComponent } from "./auto-complete/auto-complete-produto/auto-complete-produto.component";

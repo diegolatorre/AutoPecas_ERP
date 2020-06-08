@@ -54,6 +54,9 @@ namespace AutoPecas.Service
 
         public async Task<int> Incluir(Nota nota)
         {
+            //Id Interno do sistema
+            nota.IdContatoDestino = 26;
+
             _AutoPecasDbContext.Add(nota);
 
             return await _AutoPecasDbContext.SaveChangesAsync();

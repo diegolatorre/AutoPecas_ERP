@@ -40,18 +40,7 @@
                 <li nz-menu-item [routerLink]="['/movimentacao/entrada/cadastro']">Lançar</li>
               </ul>
             </li>
-            <li nz-submenu nzTitle="Saídas">
-              <ul>
-                <li nz-menu-item [routerLink]="['/']">Consultar</li>
-                <li nz-menu-item [routerLink]="['/']">Lançar</li>
-              </ul>
-            </li>
-            <li nz-submenu nzTitle="Devoluções">
-              <ul>
-                <li nz-menu-item [routerLink]="['/']">Consultar</li>
-                <li nz-menu-item [routerLink]="['/']">Lançar</li>
-              </ul>
-            </li>
+            <li nz-menu-item [routerLink]="['/']">Saídas</li>
           </ul>
         </nz-dropdown-menu>
       </li>
@@ -62,40 +51,8 @@
         </a>
         <nz-dropdown-menu #vendas="nzDropdownMenu">
           <ul nz-menu>
-            <li nz-submenu nzTitle="Vendas">
-              <ul>
-                <li nz-menu-item [routerLink]="['/venda/lista']">Consultar</li>
-                <li nz-menu-item [routerLink]="['/venda']">Nova</li>
-              </ul>
-            </li>
-            <li nz-submenu nzTitle="Orçamentos">
-              <ul>
-                <li nz-menu-item [routerLink]="['/']">Todos</li>
-                <li nz-menu-item [routerLink]="['/']">Novo</li>
-              </ul>
-            </li>
-          </ul>
-        </nz-dropdown-menu>
-      </li>
-      <li nz-menu-item>
-        <a nz-dropdown [nzDropdownMenu]="finan">
-          Financeiro
-          <i nz-icon nzType="down"></i>
-        </a>
-        <nz-dropdown-menu #finan="nzDropdownMenu">
-          <ul nz-menu>
-            <li nz-menu-item [routerLink]="['/']">Caixa</li>
-            <li nz-submenu nzTitle="Titulos">
-              <ul>
-                <li nz-menu-item [routerLink]="['/']">Consultar</li>
-                <li nz-menu-item [routerLink]="['/']">Lançar</li>
-              </ul>
-            </li>
-            <li nz-submenu nzTitle="Contas a pagar">
-              <ul>
-                <li nz-menu-item [routerLink]="['/']">Consultar</li>
-              </ul>
-            </li>
+            <li nz-menu-item [routerLink]="['/venda/lista']">Consultar</li>
+            <li nz-menu-item [routerLink]="['/venda']">Nova</li>
           </ul>
         </nz-dropdown-menu>
       </li>
@@ -118,24 +75,6 @@
                 <li nz-menu-item (click)="cadastrarMarca()">Cadastrar</li>
               </ul>
             </li>
-          </ul>
-        </nz-dropdown-menu>
-      </li>
-      <li nz-menu-item>
-        <a nz-dropdown [nzDropdownMenu]="relatorio">
-          Relatórios
-          <i nz-icon nzType="down"></i>
-        </a>
-        <nz-dropdown-menu #relatorio="nzDropdownMenu">
-          <ul nz-menu>
-            <li nz-menu-item [routerLink]="['/']">Estoque Atual</li>
-            <li nz-menu-item [routerLink]="['/']">Estoque Baixo</li>
-            <li nz-menu-item [routerLink]="['/']">Vendas</li>
-            <li nz-menu-item [routerLink]="['/']">Entradas</li>
-            <li nz-menu-item [routerLink]="['/']">Saidas</li>
-            <li nz-menu-item [routerLink]="['/']">Caixa</li>
-            <li nz-menu-item [routerLink]="['/']">Contas a pagar</li>
-            <li nz-menu-item [routerLink]="['/']">...</li>
           </ul>
         </nz-dropdown-menu>
       </li>

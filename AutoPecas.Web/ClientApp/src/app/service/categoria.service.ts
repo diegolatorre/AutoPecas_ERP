@@ -29,4 +29,8 @@ export class CategoriaService {
   public incluir(categoria: Categoria): Observable<number> {
     return this.httpClient.post<number>(`${this.apiEndpoint}`, categoria);
   }
+
+  public editar(categoria: Categoria): Observable<number> {
+    return this.httpClient.put<number>(`${this.apiEndpoint}`, categoria);
+  }
 }

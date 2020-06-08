@@ -70,5 +70,18 @@ namespace AutoPecas.Web.Controllers
                 throw e;
             }
         }
+
+        [HttpPut]
+        public async Task<IActionResult> Editar(Categoria categoria)
+        {
+            try
+            {
+                return Ok(await _service.Editar(categoria));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
     }
 }

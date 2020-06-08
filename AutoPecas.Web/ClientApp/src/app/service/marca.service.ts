@@ -29,4 +29,8 @@ export class MarcaService {
   public incluir(marca: Marca): Observable<number> {
     return this.httpClient.post<number>(`${this.apiEndpoint}`, marca);
   }
+
+  public editar(marca: Marca): Observable<number> {
+    return this.httpClient.put<number>(`${this.apiEndpoint}`, marca);
+  }
 }

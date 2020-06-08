@@ -3,9 +3,12 @@ import { ProdutoNota } from './produto-nota.model';
 
 export default interface Entrada {
     id?: number;
-    idContato?: number;
+    idContatoOrigem?: number;
+    idContatoDestino?: number;
     chaveAcesso?: string;
+    tipo?: number;
     observacao?: string;
-    contato?: Contato;
+    contatoOrigem?: Contato;
+    contatoDestino?: Contato;
     produtos?: ProdutoNota[];
 }

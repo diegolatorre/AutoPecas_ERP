@@ -26,7 +26,7 @@
             <td>{{data.nome}}</td>
             <td>{{data.descricao || "Sem descrição."}}</td>
             <td>
-                <button nz-button nzType="primary" [routerLink]="['/produto/categoria/editar', data.id]"><i nz-icon
+                <button nz-button nzType="primary" (click)="editar(data)"><i nz-icon
                         nzType="edit" nzTheme="outline"></i></button>
                 <nz-divider nzType="vertical"></nz-divider>
                 <button nz-button nzType="danger" [routerLink]="['/produto/categoria/cadastro']"><i nz-icon

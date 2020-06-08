@@ -163,6 +163,10 @@ export class PontoVendaComponent implements OnInit {
     this.venda.idContato = this.venda.contato.id;
     this.venda.status = status;
 
-    this.vendaService.finalizar(this.venda).subscribe();
+    if (this.venda.id == null) {
+      this.vendaService.criar(this.venda).subscribe();
+    } else {
+      this.vendaService.editar(this.venda).subscribe();
+    }
   }
 }

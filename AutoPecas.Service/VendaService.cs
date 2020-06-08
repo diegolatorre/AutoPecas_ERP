@@ -76,10 +76,16 @@ namespace AutoPecas.Service
 
         public async Task<int> UpdateVenda(Venda venda)
         {
-            if (venda.Status == StatusVenda.Finalizada)
+            venda.DataFinalizacao = DateTime.Now;
+
+            venda.Contato = null;
+
+            venda.Valor = venda.Produtos.Sum(p => p.ValorFinal);
+
+            venda.Produtos.ToList().ForEach(p =>
             {
-                venda.DataFinalizacao = DateTime.Now;
-            }
+                p.Produto = null;
+            });
 
             _AutoPecasDbContext.Update(venda);
             return await _AutoPecasDbContext.SaveChangesAsync();

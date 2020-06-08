@@ -1,4 +1,5 @@
 ﻿using Autopecas.Infra.Data;
+using AutoPecas.Core;
 using AutoPecas.Core.Model;
 using AutoPecas.Core.Spec;
 using AutoPecas.Service;
@@ -59,7 +60,8 @@ namespace AutoPecas.Web.Controllers
                 {
                     await _VendaService.Venda(venda);
 
-                    await _NotaService.Venda(venda);
+                    if (venda.Status == StatusVenda.Finalizada)
+                        await _NotaService.Venda(venda);
 
                     tran.Commit();
                 }
@@ -77,7 +79,17 @@ namespace AutoPecas.Web.Controllers
         {
             try
             {
-                return Ok(await _VendaService.UpdateVenda(venda));
+                using (var tran = _AutoPecasDbContext.Database.BeginTransaction())
+                {
+                    await _VendaService.UpdateVenda(venda);
+
+                    if (venda.Status == StatusVenda.Finalizada)
+                        await _NotaService.Venda(venda);
+
+                    tran.Commit();
+                }
+
+                return Ok();
             }
             catch (Exception e)
             {

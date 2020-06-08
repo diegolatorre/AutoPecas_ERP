@@ -24,7 +24,11 @@ export class VendaService {
     return this.httpClient.get<Venda>(`${this.apiEndpoint}/${idVenda}`);
   }
 
-  public finalizar(venda: Venda) {
+  public criar(venda: Venda) {
     return this.httpClient.post<Venda>(`${this.apiEndpoint}`, venda);
+  }
+
+  public editar(venda: Venda) {
+    return this.httpClient.put<Venda>(`${this.apiEndpoint}`, venda);
   }
 }

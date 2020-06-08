@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ChangeDetectorRef, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Contato } from 'src/app/model/contato/contato.model';
 import { Subject } from 'rxjs';
@@ -21,6 +21,8 @@ export class AutoCompleteContatoComponent implements OnInit {
 
   @Output()
   readonly quandoSelecionado = new EventEmitter<Contato>();
+
+  @Input() disabled = false;
 
   constructor(
     private contatoService: ContatoService,
@@ -50,10 +52,11 @@ export class AutoCompleteContatoComponent implements OnInit {
     this.quandoSelecionado.emit(this.contatoSelecionado);
   }
 
-  selecionaManualmente(contato: Contato) {
+  selecionaManualmente(contato: Contato = null) {
     this.data = [];
-    this.data.push(contato);
+    contato ? this.data.push(contato) : null;
     this.contatoSelecionado = contato;
     this.quandoSelecionado.emit(this.contatoSelecionado);
+    this.changeDetectorRef.markForCheck();
   }
 }

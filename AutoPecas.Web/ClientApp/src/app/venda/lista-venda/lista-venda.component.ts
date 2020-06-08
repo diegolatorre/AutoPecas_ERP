@@ -53,4 +53,8 @@ export class ListaVendaComponent implements OnInit {
     this.router.navigate(['venda']);
   }
 
+  abrir(venda: Venda) {
+    this.router.navigate(['/venda', { id: venda.id }]);
+  }
+
 }

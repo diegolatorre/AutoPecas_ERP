@@ -8,6 +8,7 @@
   [(ngModel)]="contatoSelecionado"
   (ngModelChange)="seleciona($event)"
   (nzOnSearch)="contatos.next($event)"
+  [disabled]="disabled"
 >
   <ng-container *ngFor="let opcao of data">
     <nz-option *ngIf="!isLoading" [nzValue]="opcao" [nzLabel]="opcao.nome"></nz-option>

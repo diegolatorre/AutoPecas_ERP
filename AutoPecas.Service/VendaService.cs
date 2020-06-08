@@ -43,6 +43,17 @@ namespace AutoPecas.Service
             return resultado;
         }
 
+        public async Task<Venda> Obter(int idVenda)
+        {
+            return await _AutoPecasDbContext
+                .Vendas
+                .Include(v => v.Contato)
+                .Include(v => v.Produtos)
+                .ThenInclude(p => p.Produto)
+                .Where(p => p.Id == idVenda)
+                .FirstOrDefaultAsync();
+        }
+
         public async Task<int> Venda(Venda venda)
         {
             venda.DataCriacao = DateTime.Now;

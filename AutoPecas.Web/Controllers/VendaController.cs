@@ -37,6 +37,19 @@ namespace AutoPecas.Web.Controllers
             }
         }
 
+        [HttpGet("{idVenda}")]
+        public async Task<ActionResult<Venda>> Obter(int idVenda)
+        {
+            try
+            {
+                return Ok(await _VendaService.Obter(idVenda));
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
         [HttpPost]
         public async Task<IActionResult> Venda(Venda venda)
         {

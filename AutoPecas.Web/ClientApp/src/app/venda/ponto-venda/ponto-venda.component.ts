@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit, ViewChild, Input, AfterViewInit, ChangeDetectorRef } from "@angular/core";
 import { FiltroSpec } from "src/app/model/geral/filtro-spec.model";
 import { Contato } from "src/app/model/contato/contato.model";
 import { Venda } from "src/app/model/venda/venda.model.model";
@@ -11,6 +11,7 @@ import { StatusVendaEnum, StatusVendaLabel } from "src/app/model/enum/statusVend
 import { CadastroContatoComponent } from "src/app/contato/cadastro-contato/cadastro-contato.component";
 import { AutoCompleteContatoComponent } from "src/app/shared/auto-complete/auto-complete-contato/auto-complete-contato.component";
 import { ContatoService } from "src/app/service/contato.service";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: "app-ponto-venda",
@@ -30,7 +31,10 @@ export class PontoVendaComponent implements OnInit {
   statusVendaEnum = StatusVendaEnum;
   statusVendaLabel = StatusVendaLabel;
 
-  venda = { } as Venda;
+  idVenda: number;
+  venda = {
+    status: this.statusVendaEnum.Aberta
+   } as Venda;
 
   paginacao = {
     pagina: 1,
@@ -43,14 +47,48 @@ export class PontoVendaComponent implements OnInit {
   constructor(
     private modal: NzModalService,
     private vendaService: VendaService,
-    private contatoService: ContatoService
+    private contatoService: ContatoService,
+    private route: ActivatedRoute,
+    private changeDetectorRef: ChangeDetectorRef
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.idVenda = Number(this.route.snapshot.paramMap.get('id'));
+    if (this.idVenda) {
+      this.carregaVenda();
+    }
+  }
 
   contatoSelecionado(contato: Contato) {
     this.venda.contato = contato;
     this.vendaForm.get('idContato').setValue(contato ? contato.id : null);
+  }
+
+  carregaVenda() {
+    this.vendaService.obter(this.idVenda).subscribe(data => {
+      this.venda = data;
+      this.produtos = data.produtos;
+      this.paginar();
+      this.autoCompleteContato.selecionaManualmente(data.contato);
+    });
+  }
+
+  novaVenda() {
+    this.venda = {
+      status: this.statusVendaEnum.Aberta
+    } as Venda;
+
+    this.produtos = [];
+    this.produtosExibicao = [];
+    this.paginacao = {
+      pagina: 1,
+      tamanho: 4,
+      total: null,
+    } as FiltroSpec;
+
+    this.autoCompleteContato.selecionaManualmente();
+
+    this.changeDetectorRef.markForCheck();
   }
 
   paginar(pagina = this.paginacao.pagina) {

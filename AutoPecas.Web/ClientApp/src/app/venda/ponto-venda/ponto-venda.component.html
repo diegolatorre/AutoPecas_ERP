@@ -2,7 +2,13 @@
 
 <div class="produtos">
   <div *ngFor="let produtoVenda of produtosExibicao">
-    <nz-card class="produto" [nzActions]="[acaoEditar, acaoRemover]">
+    <nz-card class="produto" *ngIf="venda.status == statusVendaEnum.Aberta" [nzActions]="[acaoEditar, acaoRemover]">
+      <nz-card-meta
+        [nzTitle]="produtoVenda.produto.descricao"
+        [nzDescription]="observacao"
+      ></nz-card-meta>
+    </nz-card>
+    <nz-card class="produto" *ngIf="venda.status == statusVendaEnum.Finalizada">
       <nz-card-meta
         [nzTitle]="produtoVenda.produto.descricao"
         [nzDescription]="observacao"
@@ -35,7 +41,7 @@
     Total: {{ total }} produtos
   </ng-template>
 
-  <button nz-button nzSize="large" nzShape="round" nzType="primary" (click)="selecionaProduto()">
+  <button nz-button nzSize="large" nzShape="round" nzType="primary" *ngIf="venda.status == statusVendaEnum.Aberta" (click)="selecionaProduto()">
     <i nz-icon nzType="appstore-add" nzTheme="outline"></i>
     Incluir Produto
   </button>
@@ -46,6 +52,7 @@
     nzType="primary"
     nzSize="large"
     nzShape="round"
+    *ngIf="venda.status == statusVendaEnum.Aberta"
     [disabled]="
       vendaForm.invalid ||
       produtos.length == 0 ||
@@ -60,9 +67,21 @@
     nzType="primary"
     nzSize="large"
     nzShape="round"
+    *ngIf="venda.status == statusVendaEnum.Aberta"
     [disabled]="vendaForm.invalid || produtos.length == 0"
   >
     Finalizar
+  </button>
+
+  <button
+    nz-button
+    (click)="novaVenda()"
+    nzType="primary"
+    nzSize="large"
+    nzShape="round"
+    *ngIf="venda.status == statusVendaEnum.Finalizada"
+  >
+    Nova Venda
   </button>
 </div>
 
@@ -70,6 +89,7 @@
   <app-auto-complete-contato
     class="selecionar-contato"
     (quandoSelecionado)="contatoSelecionado($event)"
+    [disabled]="venda.status == statusVendaEnum.Finalizada"
     #AutoCompleteContato
   >
   </app-auto-complete-contato>
@@ -80,6 +100,7 @@
       nzShape="circle"
       nz-tooltip
       nzTooltipTitle="Novo Cliente"
+      *ngIf="venda.status == statusVendaEnum.Aberta"
       (click)="cadastrarContato()"
     >
       <i nz-icon nzType="user-add"></i>

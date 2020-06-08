@@ -1,0 +1,19 @@
+<nz-select
+  nzPlaceHolder="Selecione o produto"
+  nzAllowClear
+  nzShowSearch
+  nzServerSearch
+  nzNotFoundContent="Nada Encontrado"
+  [disabled]="disabled"
+  [nzLoading]="isLoading"
+  [(ngModel)]="produtoSelecionado"
+  (ngModelChange)="seleciona($event)"
+  (nzOnSearch)="produtos.next($event)"
+>
+  <ng-container *ngFor="let opcao of data">
+    <nz-option *ngIf="!isLoading" [nzValue]="opcao" [nzLabel]="opcao.descricao"></nz-option>
+  </ng-container>
+  <nz-option *ngIf="isLoading" nzDisabled nzCustomContent>
+    <i nz-icon nzType="loading" class="loading-icon"></i> Carregando...
+  </nz-option>
+</nz-select>

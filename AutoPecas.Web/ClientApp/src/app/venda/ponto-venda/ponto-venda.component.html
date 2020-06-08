@@ -1,0 +1,148 @@
+<div class="titulo"><h2>Venda</h2></div>
+
+<div class="produtos">
+  <div *ngFor="let produtoVenda of produtosExibicao">
+    <nz-card class="produto" *ngIf="venda.status == statusVendaEnum.Aberta" [nzActions]="[acaoEditar, acaoRemover]">
+      <nz-card-meta
+        [nzTitle]="produtoVenda.produto.descricao"
+        [nzDescription]="observacao"
+      ></nz-card-meta>
+    </nz-card>
+    <nz-card class="produto" *ngIf="venda.status == statusVendaEnum.Finalizada">
+      <nz-card-meta
+        [nzTitle]="produtoVenda.produto.descricao"
+        [nzDescription]="observacao"
+      ></nz-card-meta>
+    </nz-card>
+    <ng-template #observacao>
+      <p>Quantidade: {{ produtoVenda.quantidade }}</p>
+      <p>Desconto: {{ produtoVenda.desconto }}</p>
+      <p>Valor Unitário: {{ produtoVenda.produto.valorVenda | currency: "BRL" }}</p>
+      <p>Valor Total: {{ produtoVenda.valorFinal | currency: "BRL" }}</p>
+    </ng-template>
+    <ng-template #acaoEditar>
+      <a (click)="selecionaProduto(produtoVenda)">Editar</a>
+    </ng-template>
+    <ng-template #acaoRemover>
+      <a (click)="remover(produtoVenda)">Remover</a>
+    </ng-template>
+  </div>
+</div>
+<div class="acao-produto">
+  <nz-pagination
+    [nzPageIndex]="paginacao.pagina"
+    [nzTotal]="produtos.length"
+    [nzPageSize]="paginacao.tamanho"
+    [nzShowTotal]="totalTemplate"
+    [nzHideOnSinglePage]="true"
+    (nzPageIndexChange)="paginar($event)"
+  ></nz-pagination>
+  <ng-template #totalTemplate let-total>
+    Total: {{ total }} produtos
+  </ng-template>
+
+  <button nz-button nzSize="large" nzShape="round" nzType="primary" *ngIf="venda.status == statusVendaEnum.Aberta" (click)="selecionaProduto()">
+    <i nz-icon nzType="appstore-add" nzTheme="outline"></i>
+    Incluir Produto
+  </button>
+
+  <button
+    nz-button
+    (click)="finalizar(statusVendaEnum.Aberta)"
+    nzType="primary"
+    nzSize="large"
+    nzShape="round"
+    *ngIf="venda.status == statusVendaEnum.Aberta"
+    [disabled]="
+      vendaForm.invalid ||
+      produtos.length == 0 ||
+      venda.status == statusVendaEnum.Finalizada
+    "
+  >
+    Salvar
+  </button>
+  <button
+    nz-button
+    (click)="finalizar(statusVendaEnum.Finalizada)"
+    nzType="primary"
+    nzSize="large"
+    nzShape="round"
+    *ngIf="venda.status == statusVendaEnum.Aberta"
+    [disabled]="vendaForm.invalid || produtos.length == 0"
+  >
+    Finalizar
+  </button>
+
+  <button
+    nz-button
+    (click)="novaVenda()"
+    nzType="primary"
+    nzSize="large"
+    nzShape="round"
+    *ngIf="venda.status == statusVendaEnum.Finalizada"
+  >
+    Nova Venda
+  </button>
+</div>
+
+<div class="acao-contato">
+  <app-auto-complete-contato
+    class="selecionar-contato"
+    (quandoSelecionado)="contatoSelecionado($event)"
+    [disabled]="venda.status == statusVendaEnum.Finalizada"
+    #AutoCompleteContato
+  >
+  </app-auto-complete-contato>
+  <div class="cadastrar-contato">
+    <button
+      nz-button
+      nzType="primary"
+      nzShape="circle"
+      nz-tooltip
+      nzTooltipTitle="Novo Cliente"
+      *ngIf="venda.status == statusVendaEnum.Aberta"
+      (click)="cadastrarContato()"
+    >
+      <i nz-icon nzType="user-add"></i>
+    </button>
+  </div>
+</div>
+<div class="contato">
+  <nz-skeleton [nzLoading]="!venda.contato">
+    <nz-descriptions [nzColumn]="2" *ngIf="venda.contato">
+      <nz-descriptions-item nzTitle="Nome">{{
+        venda.contato.nome
+      }}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Apelido">{{
+        venda.contato.apelido
+      }}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="CPF">{{
+        venda.contato.cpf
+      }}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="RG">{{
+        venda.contato.rg
+      }}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Data de Nascimento">{{
+        venda.contato.dataNascimento | amLocal | amDateFormat: 'DD/MM/YYYY'
+      }}</nz-descriptions-item>
+        venda.contato.observacao
+    </nz-descriptions>
+  </nz-skeleton>
+</div>
+<div class="venda">
+  <nz-descriptions nzTitle="Venda">
+    <nz-descriptions-item nzTitle="Total">R$1.0000,00</nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Data">
+      01/01/2020
+    </nz-descriptions-item>
+  </nz-descriptions>
+
+  <form nz-form [formGroup]="vendaForm" class="formulario">
+    <nz-form-item class="desconto">
+      <nz-form-label>Desconto</nz-form-label>
+      <nz-form-control>
+        <input nz-input formControlName="desconto" />
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</div>

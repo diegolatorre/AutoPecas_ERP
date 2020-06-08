@@ -12,9 +12,5 @@ C:\Users\tales\Desktop\AutoPecas\AutoPecas.Infra.Database\bin\Debug\AutoPecas.In
 C:\Users\tales\Desktop\AutoPecas\AutoPecas.Infra.Database\bin\Debug\AutoPecas.Infra.Database.dll
 C:\Users\tales\Desktop\AutoPecas\AutoPecas.Infra.Database\bin\Debug\AutoPecas.Infra.Database.pdb
 C:\Users\tales\Desktop\AutoPecas\AutoPecas.Infra.Database\obj\Debug\AutoPecas.Infra.Database.sqlprojAssemblyReference.cache
-C:\Users\tales\Desktop\AutoPecas\AutoPecas.Infra.Database\obj\Debug\Model.xml
-C:\Users\tales\Desktop\AutoPecas\AutoPecas.Infra.Database\obj\Debug\refactor.xml
-C:\Users\tales\Desktop\AutoPecas\AutoPecas.Infra.Database\obj\Debug\postdeploy.sql
-C:\Users\tales\Desktop\AutoPecas\AutoPecas.Infra.Database\obj\Debug\predeploy.sql
 C:\Users\tales\Desktop\AutoPecas\AutoPecas.Infra.Database\obj\Debug\AutoPecas.Infra.Database.dll
 C:\Users\tales\Desktop\AutoPecas\AutoPecas.Infra.Database\obj\Debug\AutoPecas.Infra.Database.pdb

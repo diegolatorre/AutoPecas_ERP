@@ -20,11 +20,11 @@ namespace AutoPecas.Web.Controllers
         }
 
         [HttpPost("lista")]
-        public ActionResult<PaginacaoResultado<Produto>> Lista(FiltroSpec filtro)
+        public async Task<ActionResult<PaginacaoResultado<Produto>>> Lista(FiltroSpec filtro)
         {
             try
             {
-                return Ok(_service.Lista(filtro));
+                return Ok(await _service.Lista(filtro));
             }
             catch (Exception e)
             {
@@ -51,6 +51,32 @@ namespace AutoPecas.Web.Controllers
             try
             {
                 return Ok(await _service.Incluir(produto));
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Editar(Produto produto)
+        {
+            try
+            {
+                return Ok(await _service.Editar(produto));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpGet("busca/{texto}")]
+        public async Task<ActionResult<List<Produto>>> Busca(string texto)
+        {
+            try
+            {
+                return Ok(await _service.Busca(texto));
             }
             catch (Exception e)
             {

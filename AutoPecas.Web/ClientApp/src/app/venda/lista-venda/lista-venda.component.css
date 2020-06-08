@@ -1,0 +1,29 @@
+:host {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 50px 1fr 60px;
+  grid-column-gap: 10px;
+  height: 90vh;
+}
+.vendas {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-column-gap: 10px;
+  grid-row-gap: 15px;
+}
+
+.acao {
+  display: grid;
+  grid-template-columns: 1fr repeat(3, auto);
+  grid-column-gap: 10px;
+}
+
+.info-venda {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-column-gap: 5px;
+}
+
+.data {
+  grid-column: span 2;
+}

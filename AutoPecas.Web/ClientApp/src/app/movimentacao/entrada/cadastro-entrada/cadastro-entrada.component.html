@@ -1,0 +1,80 @@
+<h1>Nova nota</h1>
+<form nz-form [formGroup]="entradaForm">
+
+    <nz-form-item>
+        <nz-form-label>Código</nz-form-label>
+        <nz-form-control>
+            <input nz-input formControlName="chaveAcesso" placeholder="Digite o código da nota de entrada." />
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label>Produtos</nz-form-label>
+        <nz-form-control>
+            <app-auto-complete-produto (quandoSelecionado)="selecionaProduto($event)"></app-auto-complete-produto>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label>Quantidade</nz-form-label>
+        <nz-form-control>
+            <input nz-input type="number" formControlName="quantidadeProduto" placeholder="Quantidade." />
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-control>
+            <button nz-button nzType="primary" (click)="addRow()">
+                Adicionar Produto
+            </button>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label>Fornecedor</nz-form-label>
+        <nz-form-control nzErrorTip="Please input your username!">
+            <app-auto-complete-contato (quandoSelecionado)="selecionaFornecedor($event)"></app-auto-complete-contato>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label>Observação</nz-form-label>
+        <nz-form-control>
+            <input nz-input formControlName="observacao" placeholder="Digite uma observação da nota de entrada." />
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-control>
+            <button nz-button nzType="primary" (click)="submit()" [disabled]="entradaForm.invalid">
+                Lançar nota
+            </button>
+        </nz-form-control>
+    </nz-form-item>
+</form>
+
+<nz-table #editRowTable nzBordered [nzData]="produtos">
+    <thead>
+        <tr>
+            <th nzWidth="30%">Id</th>
+            <th>Descrição</th>
+            <th>Quantidade</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let data of editRowTable.data" class="editable-row">
+            <td>{{ data.produto.id }}</td>
+            <td>{{ data.produto.descricao }}</td>
+            <td>
+                <div class="editable-cell" [hidden]="editId === data.produto.id" (click)="startEdit(data.produto.id)">
+                    {{ data.quantidade }}
+                </div>
+                <input [hidden]="editId !== data.produto.id" type="text" nz-input [(ngModel)]="data.quantidade"
+                    (blur)="stopEdit()" />
+            </td>
+            <td>
+                <a nz-popconfirm nzPopconfirmTitle="Sure to delete?" (click)="deleteRow(data.produto.id)">Delete</a>
+            </td>
+        </tr>
+    </tbody>
+</nz-table>

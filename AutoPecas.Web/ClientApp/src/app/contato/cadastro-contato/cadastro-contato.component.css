@@ -1,0 +1,22 @@
+.formulario {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(5, 1fr) 30px;
+  grid-column-gap: 15px;
+  grid-row-gap: 10px;
+}
+
+.acao-form {
+  grid-area: 6 / 1 / 7 / 3;
+  display: grid;
+  grid-template-columns: 1fr auto auto auto;
+  grid-column-gap: 10px;
+}
+
+.observacao {
+  grid-area: 5 / 1 / 6 / 3;
+}
+
+.alerta {
+  margin-top: 10px;
+}

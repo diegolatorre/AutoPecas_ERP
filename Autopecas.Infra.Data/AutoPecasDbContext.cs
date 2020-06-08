@@ -20,6 +20,9 @@ namespace Autopecas.Infra.Data
         public DbSet<Contato> Contatos { get; set; }
         public DbSet<Telefone> Telefones { get; set; }
         public DbSet<Endereco> Enderecos { get; set; }
+        public DbSet<Venda> Vendas { get; set; }
+        public DbSet<ProdutoVenda> ProdutosVenda { get; set; }
+        public DbSet<Nota> Notas { get; set; }
 
         #endregion
 
@@ -37,7 +40,12 @@ namespace Autopecas.Infra.Data
                 .ApplyConfiguration(new CategoriaMap())
                 .ApplyConfiguration(new ContatoMap())
                 .ApplyConfiguration(new EnderecoMap())
-                .ApplyConfiguration(new TelefoneMap());
+                .ApplyConfiguration(new TelefoneMap())
+                .ApplyConfiguration(new VendaMap())
+                .ApplyConfiguration(new ProdutoVendaMap())
+                .ApplyConfiguration(new NotaMap())
+                .ApplyConfiguration(new ProdutoNotaMap());
+
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

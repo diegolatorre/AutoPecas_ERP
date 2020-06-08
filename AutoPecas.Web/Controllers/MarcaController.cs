@@ -1,4 +1,5 @@
 ﻿using AutoPecas.Core.Model;
+using AutoPecas.Core.Spec;
 using AutoPecas.Service;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -18,12 +19,12 @@ namespace AutoPecas.Web.Controllers
             _service = service;
         }
 
-        [HttpGet("lista")]
-        public async Task<ActionResult<List<Marca>>> Lista()
+        [HttpPost("lista")]
+        public async Task<ActionResult<IList<Marca>>> Lista(FiltroSpec filtro)
         {
             try
             {
-                return Ok(await _service.Lista());
+                return Ok(await _service.Lista(filtro));
             }
             catch (Exception e)
             {
@@ -54,6 +55,32 @@ namespace AutoPecas.Web.Controllers
             catch (Exception e)
             {
                 throw e;
+            }
+        }
+
+        [HttpGet("busca/{texto}")]
+        public async Task<ActionResult<List<Marca>>> Busca(string texto)
+        {
+            try
+            {
+                return Ok(await _service.Busca(texto));
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Editar(Marca marca)
+        {
+            try
+            {
+                return Ok(await _service.Editar(marca));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
             }
         }
     }

@@ -25,13 +25,11 @@ namespace Autopecas.Infra.Data.Map
 
             builder
                  .Property(p => p.Apelido)
-                 .HasColumnName("APELIDO")
-                 .IsRequired();
+                 .HasColumnName("APELIDO");
 
             builder
                 .Property(p => p.Cpf)
-                .HasColumnName("CPF")
-                .IsRequired();
+                .HasColumnName("CPF");
 
             builder
                 .Property(p => p.Rg)
@@ -44,8 +42,7 @@ namespace Autopecas.Infra.Data.Map
 
             builder
                 .Property(p => p.Profissao)
-                .HasColumnName("PROFISSAO")
-                .IsRequired();
+                .HasColumnName("PROFISSAO");
 
             builder
                 .Property(p => p.DataNascimento)
@@ -73,6 +70,16 @@ namespace Autopecas.Infra.Data.Map
                 .HasMany(p => p.Enderecos)
                 .WithOne(p => p.Contato)
                 .HasForeignKey(p => p.IdContato);
+
+            builder
+                .HasMany(p => p.NotasOrigem)
+                .WithOne(p => p.ContatoOrigem)
+                .HasForeignKey(p => p.IdContatoOrigem);
+
+            builder
+                .HasMany(p => p.NotasDestino)
+                .WithOne(p => p.ContatoDestino)
+                .HasForeignKey(p => p.IdContatoDestino);
         }
     }
 }

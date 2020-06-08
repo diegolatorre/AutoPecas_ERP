@@ -12,6 +12,17 @@ import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
+import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { NzAlertModule } from 'ng-zorro-antd/alert';
+import { NzResultModule } from 'ng-zorro-antd/result';
+import { NzRadioModule } from 'ng-zorro-antd/radio';
 
 const modulos = [
   NzButtonModule,
@@ -26,7 +37,18 @@ const modulos = [
   NzDividerModule,
   NzDescriptionsModule,
   NzPaginationModule,
-  NzPageHeaderModule
+  NzPageHeaderModule,
+  NzModalModule,
+  NzSelectModule,
+  NzAutocompleteModule,
+  NzTabsModule,
+  NzDatePickerModule,
+  NzToolTipModule,
+  NzSkeletonModule,
+  NzDropDownModule,
+  NzAlertModule,
+  NzResultModule,
+  NzRadioModule
 ];
 
 @NgModule({

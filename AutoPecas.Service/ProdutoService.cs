@@ -3,7 +3,6 @@ using AutoPecas.Core.Model;
 using AutoPecas.Core.Spec;
 using LinqKit;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -28,19 +27,34 @@ namespace AutoPecas.Service
 
             var predicate = PredicateBuilder.New<Produto>(true);
 
+            if (filtro.Filtros.TryGetValue("descricao", out var descricao))
+            {
+                predicate.And(p => p.Descricao.Contains((string)descricao));
+            }
+
+            if (filtro.Filtros.TryGetValue("marca", out var marca))
+            {
+                predicate.And(p => p.IdMarca == (int)(long)marca);
+            }
+
+            if (filtro.Filtros.TryGetValue("categoria", out var categoria))
+            {
+                predicate.And(p => p.IdCategoria == (int)(long)categoria);
+            }
+
             query = query.Where(predicate);
         }
 
-        public PaginacaoResultado<Produto> Lista(FiltroSpec filtro)
+        public async Task<PaginacaoResultado<Produto>> Lista(FiltroSpec filtro)
         {
             AplicarFiltro(filtro, out var query);
 
             var resultado = new PaginacaoResultado<Produto>(query, filtro.Pagina, filtro.Tamanho, filtro.Total);
 
-            resultado.Lista = query
+            resultado.Lista = await query
                 .Skip(filtro.Tamanho * (filtro.Pagina - 1))
                 .Take(filtro.Tamanho)
-                .ToListAsync().Result;
+                .ToListAsync();
 
             return resultado;
         }
@@ -59,5 +73,23 @@ namespace AutoPecas.Service
 
             return await _AutoPecasDbContext.SaveChangesAsync();
         }
+
+        public async Task<int> Editar(Produto produto)
+        {
+            _AutoPecasDbContext.Update(produto);
+            return await _AutoPecasDbContext.SaveChangesAsync();
+        }
+
+        public async Task<IList<Produto>> Busca(string texto)
+        {
+            return await _AutoPecasDbContext
+                .Produtos
+                .Include(p => p.Marca)
+                .Include(p => p.Categoria)
+                .Where(p => p.CodigoBarras.Contains(texto) || p.Descricao.Contains(texto) | p.Id.ToString().Contains(texto))
+                .Take(5)
+                .ToListAsync();
+        }
+
     }
 }

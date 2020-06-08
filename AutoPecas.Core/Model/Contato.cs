@@ -29,7 +29,7 @@ namespace AutoPecas.Core.Model
         public string Profissao { get; set; }
 
         [DataMember]
-        public DateTime DataNascimento { get; set; }
+        public DateTime? DataNascimento { get; set; }
 
         [DataMember]
         public string Sexo { get; set; }
@@ -44,5 +44,11 @@ namespace AutoPecas.Core.Model
 
         [DataMember]
         public ICollection<Endereco> Enderecos { get; set; }
+
+        [DataMember]
+        public ICollection<Nota> NotasOrigem { get; set; }
+
+        [DataMember]
+        public ICollection<Nota> NotasDestino { get; set; }
     }
 }

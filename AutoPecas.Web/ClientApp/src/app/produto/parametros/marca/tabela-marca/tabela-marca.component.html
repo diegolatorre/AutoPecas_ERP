@@ -1,0 +1,42 @@
+<h2 nz-typography>Marcas</h2>
+
+
+<button nz-button nzType="primary" (click)="cadastrarMarca()">Novo</button>
+
+<br/>
+<br/>
+
+<input nz-input [(ngModel)]="value" (ngModelChange)="busca.next($event)">
+
+<br/>
+<br/>
+
+<nz-table #basicTable [nzShowPagination]="false" [nzData]="listOfData">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nome</th>
+            <th>Descrição</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let data of basicTable.data">
+            <td>{{data.id}}</td>
+            <td>{{data.nome}}</td>
+            <td>{{data.descricao || "Sem descrição."}}</td>
+            <td>
+                <button nz-button nzType="primary" (click)="editar(data)"><i nz-icon nzType="edit" nzTheme="outline"></i></button>
+                <nz-divider nzType="vertical"></nz-divider>
+                <button nz-button nzType="danger" [routerLink]="['/produto/marca/cadastro']"><i nz-icon nzType="close" nzTheme="outline"></i></button>
+            </td>
+        </tr>
+    </tbody>
+</nz-table>
+
+<nz-pagination
+  [nzPageIndex]="filtro.pagina"
+  [nzPageSize]="filtro.tamanho"
+  [nzTotal]="filtro.total"
+  (nzPageIndexChange)="paginar($event)">
+</nz-pagination>

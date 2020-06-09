@@ -4,6 +4,7 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 import { CadastroMarcaComponent } from '../produto/parametros/marca/cadastro-marca/cadastro-marca.component';
 import { CadastroCategoriaComponent } from '../produto/parametros/categoria/cadastro-categoria/cadastro-categoria.component';
 import { CadastroProdutoComponent } from '../produto/cadastro-produto/cadastro-produto.component';
+import { CadastroUsuarioComponent } from '../usuario/cadastro-usuario/cadastro-usuario.component';
 
 @Component({
   selector: 'app-root',
@@ -23,6 +24,33 @@ export class AppComponent {
       nzContent: CadastroContatoComponent,
       nzWidth: '80%',
       nzFooter: null,
+      nzClosable: false
+    });
+  }
+  
+  cadastrarUsuario() {
+    const cadastroModal = this.modal.create({
+      nzTitle: 'Novo Usúario',
+      nzContent: CadastroUsuarioComponent,
+      nzFooter: [
+        {
+          label: 'Fechar',
+          shape: 'round',
+          onClick: () => cadastroModal.destroy()
+        },
+        {
+          label: 'Limpar',
+          type: 'danger',
+          shape: 'round',
+          onClick: modal => { modal.limpar() }
+        },
+        {
+          label: 'Cadastrar',
+          type: 'primary',
+          shape: 'round',
+          onClick: modal => { modal.submitForm() }
+        }
+      ],
       nzClosable: false
     });
   }

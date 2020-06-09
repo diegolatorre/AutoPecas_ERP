@@ -15,4 +15,5 @@ export interface Produto {
   observacao: string;
   categoria: Categoria;
   marca: Marca;
+  quantidade?: number;
 }

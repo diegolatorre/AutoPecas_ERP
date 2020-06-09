@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 
 namespace AutoPecas.Core.Model
@@ -50,5 +51,8 @@ namespace AutoPecas.Core.Model
 
         [DataMember]
         public ICollection<ProdutoNota> Notas { get; set; }
+
+        [DataMember]
+        public int? Quantidade { get; set; }
     }
 }

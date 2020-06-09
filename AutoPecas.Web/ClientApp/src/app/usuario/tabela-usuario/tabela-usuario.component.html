@@ -1,0 +1,43 @@
+<h2 nz-typography>Usúarios</h2>
+
+
+<button nz-button nzType="primary" (click)="cadastrarUsuario()">Novo</button>
+
+<br />
+<br />
+
+<input nz-input [(ngModel)]="value" (ngModelChange)="busca.next($event)">
+
+<br />
+<br />
+
+<nz-table #basicTable [nzShowPagination]="false" [nzData]="listOfData">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nome</th>
+            <th>Usúario</th>
+            <th>Permissão</th>
+            <th>Ativo</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let data of basicTable.data">
+            <td>{{data.id}}</td>
+            <td>{{data.nome}}</td>
+            <td>{{data.usuario}}</td>
+            <td>{{data.permissao}}</td>
+            <td>{{data.ativo}}</td>
+            <td>
+                <button nz-button nzType="primary" (click)="editar(data)"><i nz-icon
+                        nzType="edit" nzTheme="outline"></i></button>
+                <nz-divider nzType="vertical"></nz-divider>
+            </td>
+        </tr>
+    </tbody>
+</nz-table>
+
+<nz-pagination [nzPageIndex]="filtro.pagina" [nzPageSize]="filtro.tamanho" [nzTotal]="filtro.total"
+    (nzPageIndexChange)="paginar($event)">
+</nz-pagination>

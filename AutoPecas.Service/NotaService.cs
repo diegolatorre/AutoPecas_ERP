@@ -36,10 +36,12 @@ namespace AutoPecas.Service
 
             var resultado = new PaginacaoResultado<Nota>(query, filtro.Pagina, filtro.Tamanho, filtro.Total);
 
-            resultado.Lista = await query
-                .Skip(filtro.Tamanho * (filtro.Pagina - 1))
-                .Take(filtro.Tamanho)
-                .ToListAsync();
+            //resultado.Lista = await query
+            //    .Skip(filtro.Tamanho * (filtro.Pagina - 1))
+            //    .Take(filtro.Tamanho)
+            //    .ToListAsync();
+
+            resultado.Lista = await _AutoPecasDbContext.Notas.ToListAsync();
 
             return resultado;
         }
@@ -65,11 +67,15 @@ namespace AutoPecas.Service
 
             _AutoPecasDbContext.Add(nota);
 
-            return await _AutoPecasDbContext.SaveChangesAsync();
+            var result = await _AutoPecasDbContext.SaveChangesAsync();
+
+            return result;
         }
 
         public async Task<int> Venda(Venda venda)
         {
+
+
             var nota = new Nota();
 
             nota.ChaveAcesso = new Random().Next(10000000).ToString() + new Random().Next(10000000).ToString();
@@ -104,6 +110,28 @@ namespace AutoPecas.Service
                 .Where(p => p.Id.ToString().Contains(texto))
                 .Take(5)
                 .ToListAsync();
+        }
+
+        public bool ValidaDisponibilidadeProduto(int id, int quantidade)
+        {
+            var saidas = _AutoPecasDbContext.ProdutoNota.Where(p => p.IdProduto == id && p.Nota.Tipo == TipoNota.Saida).Sum(p => p.Quantidade);
+            var entradas = _AutoPecasDbContext.ProdutoNota.Where(p => p.IdProduto == id && p.Nota.Tipo == TipoNota.Entrada).Sum(p => p.Quantidade);
+
+            if (saidas + quantidade <= entradas)
+                return true;
+
+            return false;
+        }
+
+        public int CountProductAvailability(int id)
+        {
+            var saidas = _AutoPecasDbContext.ProdutoNota.Where(p => p.IdProduto == id && p.Nota.Tipo == TipoNota.Saida).Sum(p => p.Quantidade);
+            var entradas = _AutoPecasDbContext.ProdutoNota.Where(p => p.IdProduto == id && p.Nota.Tipo == TipoNota.Entrada).Sum(p => p.Quantidade);
+
+            if (saidas == entradas)
+                return 0;
+            else
+                return entradas - saidas;
         }
 
     }

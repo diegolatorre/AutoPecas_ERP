@@ -130,8 +130,12 @@
     <Build Include="PRODUTOVENDA.sql" />
     <Build Include="NOTAS.sql" />
     <Build Include="PRODUTONOTA.sql" />
+    <Build Include="USUARIO.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="AutoPecas.Infra.Database.refactorlog" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="AutoPecas.Infra.Database.publish.xml" />
   </ItemGroup>
 </Project>

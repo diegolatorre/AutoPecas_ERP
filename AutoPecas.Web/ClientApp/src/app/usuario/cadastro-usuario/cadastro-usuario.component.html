@@ -1,46 +1,66 @@
-<h1>{{title}}</h1>
 <form nz-form [formGroup]="usuarioForm">
 
   <nz-form-item>
-    <nz-form-label>Nome</nz-form-label>
-    <nz-form-control nzErrorTip="Please input your username!">
-        <input nz-input formControlName="nome" placeholder="input placeholder"/>
-      </nz-form-control>
+    <nz-form-label nzRequired>Nome</nz-form-label>
+    <nz-form-control nzErrorTip="Por favor digite um nome!">
+      <input nz-input formControlName="nome" placeholder="Digite o nome do usúario" />
+    </nz-form-control>
   </nz-form-item>
 
   <nz-form-item>
-    <nz-form-label>Usúario</nz-form-label>
-    <nz-form-control nzErrorTip="Please input your username!">
-        <input nz-input formControlName="usuario" placeholder="input placeholder"/>
-      </nz-form-control>
+    <nz-form-label nzRequired>Usúario</nz-form-label>
+    <nz-form-control nzErrorTip="Por favor digite um usúario!">
+      <input nz-input formControlName="usuario" placeholder="Digite o usúario da pessoa" />
+    </nz-form-control>
   </nz-form-item>
 
   <nz-form-item>
-    <nz-form-label>Senha</nz-form-label>
-    <nz-form-control nzErrorTip="Please input your username!">
-        <input nz-input type="password" formControlName="senha" placeholder="input placeholder"/>
-      </nz-form-control>
+    <nz-form-label nzRequired>Senha</nz-form-label>
+    <nz-form-control nzErrorTip="Por favor digite uma senha!">
+      <input nz-input type="password" formControlName="senha" placeholder="Escolha uma senha" />
+    </nz-form-control>
   </nz-form-item>
 
   <nz-form-item class="Permissao">
-    <nz-form-label>Permissão</nz-form-label>
+    <nz-form-label nzRequired>Permissão</nz-form-label>
     <nz-form-control>
-      <nz-radio-group formControlName="permissao" [(ngModel)]="usuarioForm.permissao">
-        <label nz-radio *ngFor="let item of valuesRadioButtonPermissao" [nzValue]="item.value" >
-            <span>{{item.name}}</span>
-          </label>
+      <nz-radio-group formControlName="permissao">
+        <label nz-radio *ngFor="let item of valuesRadioButtonPermissao" [nzValue]="item.value">
+          <span>{{item.name}}</span>
+        </label>
       </nz-radio-group>
     </nz-form-control>
   </nz-form-item>
 
-  <nz-form-item class="Status">
-    <nz-form-label>Status</nz-form-label>
+  <nz-form-item class="Status" *ngIf="btnName != 'Cadastrar'">
+    <nz-form-label nzRequired>Status</nz-form-label>
     <nz-form-control>
-      <nz-radio-group formControlName="ativo" [(ngModel)]="usuarioForm.ativo">
-        <label nz-radio *ngFor="let item of valuesRadioButtonStatus" [nzValue]="item.value" >
-            <span>{{item.name}}</span>
-          </label>
+      <nz-radio-group formControlName="ativo">
+        <label nz-radio *ngFor="let item of valuesRadioButtonStatus" [nzValue]="item.value">
+          <span>{{item.name}}</span>
+        </label>
       </nz-radio-group>
     </nz-form-control>
   </nz-form-item>
+
+  <div class="acao-form">
+    <p></p>
+    <button nz-button nzShape="round" nzType="primary" (click)="fechar()">
+      <i nz-icon nzType="close-square" nzTheme="outline"></i>
+      Cancelar
+    </button>
+
+    <button nz-button (click)="usuarioForm.reset()" nzType="primary" nzShape="round"
+      *ngIf="btnName != 'Cadastrar'">
+      <i nz-icon nzType="clear" nzTheme="outline"></i>
+      Limpar
+    </button>
+    <button nz-button (click)="submitForm()" nzType="primary" nzShape="round" [disabled]="usuarioForm.invalid">
+      <i nz-icon nzType="save" nzTheme="outline"></i>
+      {{ btnName }}
+    </button>
+  </div>
+
 </form>
+  <nz-alert *ngIf="usuarioForm.invalid" nzType="warning" nzMessage="Necessário preencher todos os campos obrigatórios"
+    nzShowIcon class="alerta"></nz-alert>

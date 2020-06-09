@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CategoriaService } from 'src/app/service/categoria.service';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Categoria } from 'src/app/model/produto/categoria.model';
-import { NzModalRef } from 'ng-zorro-antd/modal';
+import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
+import { SucessoCadastroComponent } from '../sucesso-cadastro/sucesso-cadastro.component';
 
 @Component({
   selector: 'app-cadastro-categoria',
@@ -19,13 +19,12 @@ export class CadastroCategoriaComponent implements OnInit {
 
   constructor(
     private _service: CategoriaService,
-    private router: Router,
-    private modal: NzModalRef
+    private modal: NzModalRef,
+    private modalService: NzModalService
   ) { }
 
   @Input() categoria?: Categoria;
 
-  title: string;
   btnName: string;
 
 
@@ -47,16 +46,12 @@ export class CadastroCategoriaComponent implements OnInit {
         });
 
         if (this.categoria !== undefined) {
-          this.title = `Editar Categoria: ${this.categoria.id}`;
           this.btnName = `Editar`;
         }
       });
 
     } else {
-
-      this.title = `Cadastrar Categoria`;
       this.btnName = `Cadastrar`;
-
     }
   }
 
@@ -66,24 +61,57 @@ export class CadastroCategoriaComponent implements OnInit {
 
   submitForm() {
 
-    this.categoria = {
-      nome: this.categoriaForm.get('nome').value,
-      descricao: this.categoriaForm.get('descricao').value,
-    } as Categoria;
+    if (this.btnName == 'Cadastrar') {
+      this.categoria = {
+        nome: this.categoriaForm.get('nome').value,
+        descricao: this.categoriaForm.get('descricao').value,
+      } as Categoria;
 
-    this._service.incluir(this.categoria).subscribe();
+      this._service.incluir(this.categoria).subscribe(() => {
+
+        const modalResult = this.modalService.create({
+          nzTitle: null,
+          nzContent: SucessoCadastroComponent,
+          nzComponentParams: {
+            acao: 'cadastrado'
+          },
+          nzWidth: "80%",
+          nzFooter: null,
+          nzClosable: false,
+          nzMaskClosable: false
+        });
+
+        this.modal.close();
+      });
+
+    } else {
+
+      this.categoria = {
+        id: this.categoria.id,
+        nome: this.categoriaForm.get('nome').value,
+        descricao: this.categoriaForm.get('descricao').value,
+      } as Categoria;
+
+      this._service.editar(this.categoria).subscribe(() => {
+
+        const modalResult = this.modalService.create({
+          nzTitle: null,
+          nzContent: SucessoCadastroComponent,
+          nzComponentParams: {
+            acao: 'editado'
+          },
+          nzWidth: "80%",
+          nzFooter: null,
+          nzClosable: false,
+          nzMaskClosable: false
+        });
+
+        this.modal.close();
+      });
+    }
   }
 
-  submitFormEdit() {
-
-    this.categoria = {
-      id: this.categoria.id,
-      nome: this.categoriaForm.get('nome').value,
-      descricao: this.categoriaForm.get('descricao').value,
-    } as Categoria;
-
-    this._service.editar(this.categoria).subscribe(() => {
-      this.modal.close();
-    });
+  fechar() {
+    this.modal.destroy();
   }
 }

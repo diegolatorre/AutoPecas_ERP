@@ -67,57 +67,24 @@ export class TabelaMarcaComponent implements OnInit {
 
   cadastrarMarca() {
     const cadastroModal = this.modal.create({
-      nzTitle: 'Nova Marca',
       nzContent: CadastroMarcaComponent,
-      nzFooter: [
-        {
-          label: 'Fechar',
-          shape: 'round',
-          onClick: () => cadastroModal.destroy()
-        },
-        {
-          label: 'Limpar',
-          type: 'danger',
-          shape: 'round',
-          onClick: modal => { modal.limpar() }
-        },
-        {
-          label: 'Cadastrar',
-          type: 'primary',
-          shape: 'round',
-          onClick: modal => { modal.submitForm() }
-        }
-      ],
+      nzTitle: 'Nova Marca',
+      nzWidth: '40%',
+      nzFooter: null,
       nzClosable: false
     });
+    cadastroModal.afterClose.subscribe(() => this.listar());
   }
 
   editar(marca?: Marca) {
     const cadastroModal = this.modal.create({
-      nzTitle: 'Editar Marca',
       nzContent: CadastroMarcaComponent,
       nzComponentParams: {
-        marca: marca
+       marca: marca
       },
-      nzFooter: [
-        {
-          label: 'Fechar',
-          shape: 'round',
-          onClick: () => cadastroModal.destroy()
-        },
-        {
-          label: 'Limpar',
-          type: 'danger',
-          shape: 'round',
-          onClick: modal => { modal.limpar() }
-        },
-        {
-          label: 'Salvar',
-          type: 'primary',
-          shape: 'round',
-          onClick: modal => { modal.submitFormEdit() }
-        }
-      ],
+      nzTitle: 'Editar Marca',
+      nzWidth: '40%',
+      nzFooter: null,
       nzClosable: false
     });
     cadastroModal.afterClose.subscribe(() => this.listar());

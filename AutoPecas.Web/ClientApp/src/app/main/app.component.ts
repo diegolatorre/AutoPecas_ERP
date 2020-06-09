@@ -27,57 +27,23 @@ export class AppComponent {
       nzClosable: false
     });
   }
-
+  
   cadastrarUsuario() {
-    // const cadastroModal = this.modal.create({
-    //   nzTitle: 'Novo Usúario',
-    //   nzContent: CadastroUsuarioComponent,
-    //   nzFooter: [
-    //     {
-    //       label: 'Fechar',
-    //       shape: 'round',
-    //       onClick: () => cadastroModal.destroy()
-    //     },
-    //     {
-    //       label: 'Limpar',
-    //       type: 'danger',
-    //       shape: 'round',
-    //       onClick: modal => { modal.limpar() }
-    //     },
-    //     {
-    //       label: 'Cadastrar',
-    //       type: 'primary',
-    //       shape: 'round',
-    //       onClick: modal => { modal.submitForm() }
-    //     }
-    //   ],
-    //   nzClosable: false
-    // });
+    const cadastroModal = this.modal.create({
+      nzContent: CadastroUsuarioComponent,
+      nzTitle: 'Novo Usúario',
+      nzWidth: '40%',
+      nzFooter: null,
+      nzClosable: false
+    });
   }
 
   cadastrarMarca() {
     const cadastroModal = this.modal.create({
       nzTitle: 'Nova Marca',
       nzContent: CadastroMarcaComponent,
-      nzFooter: [
-        {
-          label: 'Fechar',
-          shape: 'round',
-          onClick: () => cadastroModal.destroy()
-        },
-        {
-          label: 'Limpar',
-          type: 'danger',
-          shape: 'round',
-          onClick: modal => { modal.limpar() }
-        },
-        {
-          label: 'Cadastrar',
-          type: 'primary',
-          shape: 'round',
-          onClick: modal => { modal.submitForm() }
-        }
-      ],
+      nzWidth: '40%',
+      nzFooter: null,
       nzClosable: false
     });
   }
@@ -86,25 +52,8 @@ export class AppComponent {
     const cadastroModal = this.modal.create({
       nzTitle: 'Nova Categoria',
       nzContent: CadastroCategoriaComponent,
-      nzFooter: [
-        {
-          label: 'Fechar',
-          shape: 'round',
-          onClick: () => cadastroModal.destroy()
-        },
-        {
-          label: 'Limpar',
-          type: 'danger',
-          shape: 'round',
-          onClick: modal => { modal.limpar() }
-        },
-        {
-          label: 'Cadastrar',
-          type: 'primary',
-          shape: 'round',
-          onClick: modal => { modal.submitForm() }
-        }
-      ],
+      nzWidth: '40%',
+      nzFooter: null,
       nzClosable: false
     });
   }

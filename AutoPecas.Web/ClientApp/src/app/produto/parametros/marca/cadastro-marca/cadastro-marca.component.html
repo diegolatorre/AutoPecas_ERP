@@ -1,30 +1,36 @@
-<h1>{{title}}</h1>
 <form nz-form [formGroup]="marcaForm">
 
   <nz-form-item>
-    <nz-form-label>Nome</nz-form-label>
-    <nz-form-control nzErrorTip="Please input your username!">
-        <input nz-input formControlName="nome" placeholder="input placeholder"/>
-      </nz-form-control>
-  </nz-form-item>
-
-  <nz-form-item>
-    <nz-form-label>Descrição</nz-form-label>
-    <nz-form-control nzErrorTip="Please input your username!">
-        <input nz-input formControlName="descricao" placeholder="input placeholder"/>
-      </nz-form-control>
-  </nz-form-item>
-
-  <nz-form-item>
-    <nz-form-control>
-      <button
-      nz-button
-      nzType="primary"
-      (click)="submitForm()"
-      [disabled]="marcaForm.invalid"
-      >
-        {{btnName}}
-      </button>
+    <nz-form-label nzRequired>Nome</nz-form-label>
+    <nz-form-control nzErrorTip="Por favor digite um nome!">
+      <input nz-input formControlName="nome" placeholder="Digite o nome da marca" />
     </nz-form-control>
   </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label nzRequired>Descrição</nz-form-label>
+    <nz-form-control nzErrorTip="Por favor digite uma descrição!">
+      <input nz-input formControlName="descricao" placeholder="Digite uma descrição da marca" />
+    </nz-form-control>
+  </nz-form-item>
+
+  <div class="acao-form">
+    <p></p>
+    <button nz-button nzShape="round" nzType="primary" (click)="fechar()">
+      <i nz-icon nzType="close-square" nzTheme="outline"></i>
+      Cancelar
+    </button>
+
+    <button nz-button (click)="marcaForm.reset()" nzType="primary" nzShape="round" *ngIf="btnName != 'Cadastrar'">
+      <i nz-icon nzType="clear" nzTheme="outline"></i>
+      Limpar
+    </button>
+    <button nz-button (click)="submitForm()" nzType="primary" nzShape="round" [disabled]="marcaForm.invalid">
+      <i nz-icon nzType="save" nzTheme="outline"></i>
+      {{ btnName }}
+    </button>
+  </div>
+
 </form>
+<nz-alert *ngIf="marcaForm.invalid" nzType="warning" nzMessage="Necessário preencher todos os campos obrigatórios"
+  nzShowIcon class="alerta"></nz-alert>

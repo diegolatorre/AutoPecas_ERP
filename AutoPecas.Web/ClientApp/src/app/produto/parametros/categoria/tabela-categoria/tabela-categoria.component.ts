@@ -64,59 +64,26 @@ export class TabelaCategoriaComponent implements OnInit {
     });
   }
 
-  cadastrarCategoria(categoria?: Categoria) {
+  cadastrarCategoria() {
     const cadastroModal = this.modal.create({
-      nzTitle: 'Nova Categoria',
       nzContent: CadastroCategoriaComponent,
-      nzFooter: [
-        {
-          label: 'Fechar',
-          shape: 'round',
-          onClick: () => cadastroModal.destroy()
-        },
-        {
-          label: 'Limpar',
-          type: 'danger',
-          shape: 'round',
-          onClick: modal => { modal.limpar() }
-        },
-        {
-          label: 'Cadastrar',
-          type: 'primary',
-          shape: 'round',
-          onClick: modal => { modal.submitForm() }
-        }
-      ],
+      nzTitle: 'Nova Categoria',
+      nzWidth: '40%',
+      nzFooter: null,
       nzClosable: false
     });
+    cadastroModal.afterClose.subscribe(() => this.listar());
   }
 
   editar(categoria?: Categoria) {
     const cadastroModal = this.modal.create({
-      nzTitle: 'Editar Categoria',
       nzContent: CadastroCategoriaComponent,
       nzComponentParams: {
-       categoria: categoria
+        categoria: categoria
       },
-      nzFooter: [
-        {
-          label: 'Fechar',
-          shape: 'round',
-          onClick: () => cadastroModal.destroy()
-        },
-        {
-          label: 'Limpar',
-          type: 'danger',
-          shape: 'round',
-          onClick: modal => { modal.limpar() }
-        },
-        {
-          label: 'Salvar',
-          type: 'primary',
-          shape: 'round',
-          onClick: modal => { modal.submitFormEdit() }
-        }
-      ],
+      nzTitle: 'Editar Categoria',
+      nzWidth: '40%',
+      nzFooter: null,
       nzClosable: false
     });
     cadastroModal.afterClose.subscribe(() => this.listar());

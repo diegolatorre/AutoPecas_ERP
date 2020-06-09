@@ -123,7 +123,7 @@ namespace AutoPecas.Service
             return false;
         }
 
-        public int CountProductAvailability(int id)
+        public int VerificaEstoqueProduto(int id)
         {
             var saidas = _AutoPecasDbContext.ProdutoNota.Where(p => p.IdProduto == id && p.Nota.Tipo == TipoNota.Saida).Sum(p => p.Quantidade);
             var entradas = _AutoPecasDbContext.ProdutoNota.Where(p => p.IdProduto == id && p.Nota.Tipo == TipoNota.Entrada).Sum(p => p.Quantidade);

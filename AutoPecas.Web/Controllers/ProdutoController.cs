@@ -31,7 +31,7 @@ namespace AutoPecas.Web.Controllers
 
                 if (produtos.Lista.Count() > 0)
                     foreach (var produto in produtos.Lista)
-                        produtos.Lista.FirstOrDefault(p => p.Id == produto.Id).Quantidade = _notaService.CountProductAvailability(produto.Id);
+                        produtos.Lista.FirstOrDefault(p => p.Id == produto.Id).Quantidade = _notaService.VerificaEstoqueProduto(produto.Id);
 
                 return Ok(produtos);
             }
@@ -47,7 +47,7 @@ namespace AutoPecas.Web.Controllers
             try
             {
                 var produto = await _produtoService.Obter(idPeca);
-                produto.Quantidade = _notaService.CountProductAvailability(produto.Id);
+                produto.Quantidade = _notaService.VerificaEstoqueProduto(produto.Id);
 
                 return Ok(produto);
             }
@@ -89,6 +89,19 @@ namespace AutoPecas.Web.Controllers
             try
             {
                 return Ok(await _produtoService.Busca(texto));
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        [HttpGet("disponibilidade/{id}/{quantidade}")]
+        public IActionResult Disponibilidade(int id, int quantidade)
+        {
+            try
+            {
+                return Ok(_notaService.ValidaDisponibilidadeProduto(id, quantidade));
             }
             catch (Exception e)
             {

@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MarcaService } from 'src/app/service/marca.service';
-import { ActivatedRoute } from '@angular/router';
 import { Marca } from 'src/app/model/produto/marca.model';
-import { NzModalRef } from 'ng-zorro-antd/modal';
+import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
+import { SucessoCadastroComponent } from '../../categoria/sucesso-cadastro/sucesso-cadastro.component';
 
 @Component({
   selector: 'app-cadastro-marca',
@@ -19,14 +19,13 @@ export class CadastroMarcaComponent implements OnInit {
 
   constructor(
     private _service: MarcaService,
-    private route: ActivatedRoute,
-    private modal: NzModalRef
-    ) { }
+    private modal: NzModalRef,
+    private modalService: NzModalService
+  ) { }
 
-  title: string;
   btnName: string;
 
-@Input() marca?: Marca;
+  @Input() marca?: Marca;
 
   ngOnInit(): void {
     this.obter();
@@ -46,43 +45,71 @@ export class CadastroMarcaComponent implements OnInit {
         });
 
         if (this.marca !== undefined) {
-          this.title = `Editar Marca: ${this.marca.id}`;
           this.btnName = `Editar`;
         }
       });
 
     } else {
-
-      this.title = `Cadastrar Marca`;
       this.btnName = `Cadastrar`;
-
     }
-  }
-
-  limpar() {
-    this.marcaForm.reset();
   }
 
   submitForm() {
 
-    this.marca = {
-      nome: this.marcaForm.get('nome').value,
-      descricao: this.marcaForm.get('descricao').value,
-    } as Marca;
+    if (this.btnName == 'Cadastrar') {
+      this.marca = {
+        nome: this.marcaForm.get('nome').value,
+        descricao: this.marcaForm.get('descricao').value,
+      } as Marca;
 
-    this._service.incluir(this.marca).subscribe();
+      this._service.incluir(this.marca).subscribe(() => {
+        
+
+        const modalResult = this.modalService.create({
+          nzTitle: null,
+          nzContent: SucessoCadastroComponent,
+          nzComponentParams: {
+            acao: 'cadastrado'
+          },
+          nzWidth: "80%",
+          nzFooter: null,
+          nzClosable: false,
+          nzMaskClosable: false
+        });
+        
+        this.modal.close();
+      });
+
+    } else {
+
+      this.marca = {
+        id: this.marca.id,
+        nome: this.marcaForm.get('nome').value,
+        descricao: this.marcaForm.get('descricao').value,
+      } as Marca;
+
+      this._service.editar(this.marca).subscribe(() => {
+        
+
+        const modalResult = this.modalService.create({
+          nzTitle: null,
+          nzContent: SucessoCadastroComponent,
+          nzComponentParams: {
+            acao: 'editado'
+          },
+          nzWidth: "80%",
+          nzFooter: null,
+          nzClosable: false,
+          nzMaskClosable: false
+        });
+
+
+        this.modal.close();
+      });
+    }
   }
 
-  submitFormEdit() {
-
-    this.marca = {
-      id: this.marca.id,
-      nome: this.marcaForm.get('nome').value,
-      descricao: this.marcaForm.get('descricao').value,
-    } as Marca;
-
-    this._service.editar(this.marca).subscribe(() => {
-      this.modal.close();
-    });
+  fechar() {
+    this.modal.destroy();
   }
 }

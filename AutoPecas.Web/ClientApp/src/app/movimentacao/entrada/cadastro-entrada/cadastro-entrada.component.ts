@@ -1,10 +1,11 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Produto } from 'src/app/model/produto/produto.model';
 import Entrada from 'src/app/model/notas/entrada.model';
 import { Contato } from 'src/app/model/contato/contato.model';
 import { ProdutoNota } from 'src/app/model/notas/produto-nota.model';
 import { NotaService } from 'src/app/service/nota.service';
+import { AutoCompleteProdutoComponent } from 'src/app/shared/auto-complete/auto-complete-produto/auto-complete-produto.component';
 
 @Component({
   selector: 'app-cadastro-entrada',
@@ -12,13 +13,15 @@ import { NotaService } from 'src/app/service/nota.service';
   styleUrls: ['./cadastro-entrada.component.css']
 })
 export class CadastroEntradaComponent implements OnInit {
-
-  entradaForm = new FormGroup({
+  notaForm = new FormGroup({
     chaveAcesso: new FormControl(null, [Validators.required]),
     fornecedor: new FormControl(null, [Validators.required]),
     observacao: new FormControl(null, [Validators.required]),
-    quantidadeProduto: new FormControl(null, [Validators.required]),
-    produto: new FormControl(null, [Validators.required])
+  });
+
+  produtoForm = new FormGroup({
+    produto: new FormControl(null, [Validators.required]),
+    quantidade: new FormControl(null, [Validators.required, Validators.min(1)]),
   });
 
   entrada: Entrada;
@@ -26,12 +29,12 @@ export class CadastroEntradaComponent implements OnInit {
 
   editId: string | null = null;
 
-  constructor(
-    private service: NotaService
-  ) { }
+  @ViewChild('AutoCompleteProduto') autoCompleteProduto: AutoCompleteProdutoComponent;
 
-  @Output()
-  readonly quandoSelecionado = new EventEmitter<Produto>();
+  constructor(
+    private service: NotaService,
+    private changeDetectorRef: ChangeDetectorRef
+  ) { }
 
   ngOnInit(): void { }
 
@@ -41,39 +44,36 @@ export class CadastroEntradaComponent implements OnInit {
 
   stopEdit = (): void => this.editId = null;
 
-  deleteRow(id: number): void {
+  removerProduto(id: number): void {
     this.produtos = this.produtos.filter(d => d.produto.id !== id);
   }
 
-  addRow = () => {
-    if (this.entradaForm.get('quantidadeProduto').value <= 0) {
-      return;
-    }
-
+  incluirProduto() {
     this.produtos = [
       ...this.produtos,
       {
-        idProduto: this.entradaForm.get('produto').value.id,
-        produto: this.entradaForm.get('produto').value,
-        quantidade: this.entradaForm.get('quantidadeProduto').value
+        idProduto: this.produtoForm.get('produto').value.id,
+        produto: this.produtoForm.get('produto').value,
+        quantidade: this.produtoForm.get('quantidade').value
       }
     ];
-    this.entradaForm.get('quantidadeProduto').setValue(0);
+
+    this.produtoForm.reset();
+    this.autoCompleteProduto.selecionaManualmente(null);
   }
 
-  selecionaProduto = (produto: Produto) => this.entradaForm.get('produto').setValue(produto);
+  selecionaProduto = (produto: Produto) => this.produtoForm.get('produto').setValue(produto);
 
-  selecionaFornecedor = (fornecedor: Contato) => this.entradaForm.get('fornecedor').setValue(fornecedor);
+  selecionaFornecedor = (fornecedor: Contato) => this.notaForm.get('fornecedor').setValue(fornecedor);
 
   submit = () => {
-
     if (this.produtos.length <= 0) {
       return;
     }
     this.entrada = {
-      chaveAcesso: this.entradaForm.get('chaveAcesso').value,
-      idContatoOrigem: this.entradaForm.get('fornecedor').value.id,
-      observacao: this.entradaForm.get('observacao').value
+      chaveAcesso: this.notaForm.get('chaveAcesso').value,
+      idContatoOrigem: this.notaForm.get('fornecedor').value.id,
+      observacao: this.notaForm.get('observacao').value
     };
     console.log(this.entrada);
     this.service.finalizar(this.entrada).subscribe();

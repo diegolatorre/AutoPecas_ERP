@@ -1,55 +1,50 @@
 <h1>Nova nota</h1>
-<form nz-form [formGroup]="entradaForm">
-
-    <nz-form-item>
-        <nz-form-label>Código</nz-form-label>
-        <nz-form-control>
-            <input nz-input formControlName="chaveAcesso" placeholder="Digite o código da nota de entrada." />
-        </nz-form-control>
-    </nz-form-item>
-
-    <nz-form-item>
-        <nz-form-label>Produtos</nz-form-label>
-        <nz-form-control>
-            <app-auto-complete-produto (quandoSelecionado)="selecionaProduto($event)"></app-auto-complete-produto>
-        </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-        <nz-form-label>Quantidade</nz-form-label>
-        <nz-form-control>
-            <input nz-input type="number" formControlName="quantidadeProduto" placeholder="Quantidade." />
-        </nz-form-control>
-    </nz-form-item>
-
-    <nz-form-item>
-        <nz-form-control>
-            <button nz-button nzType="primary" (click)="addRow()">
-                Adicionar Produto
-            </button>
-        </nz-form-control>
-    </nz-form-item>
-
+<form nz-form class="form-nota" [formGroup]="notaForm">
     <nz-form-item>
         <nz-form-label>Fornecedor</nz-form-label>
-        <nz-form-control nzErrorTip="Please input your username!">
+        <nz-form-control nzErrorTip="">
             <app-auto-complete-contato (quandoSelecionado)="selecionaFornecedor($event)"></app-auto-complete-contato>
         </nz-form-control>
     </nz-form-item>
 
     <nz-form-item>
-        <nz-form-label>Observação</nz-form-label>
-        <nz-form-control>
-            <input nz-input formControlName="observacao" placeholder="Digite uma observação da nota de entrada." />
-        </nz-form-control>
+      <nz-form-label>Chave de Acesso</nz-form-label>
+      <nz-form-control>
+          <input nz-input formControlName="chaveAcesso" placeholder="Digite a chave de acesso" />
+      </nz-form-control>
     </nz-form-item>
 
-    <nz-form-item>
+    <nz-form-item class="observacao">
+        <nz-form-label>Observação</nz-form-label>
         <nz-form-control>
-            <button nz-button nzType="primary" (click)="submit()" [disabled]="entradaForm.invalid">
-                Lançar nota
-            </button>
+            <input nz-input formControlName="observacao" placeholder="Digite a observação" />
         </nz-form-control>
     </nz-form-item>
+</form>
+
+<nz-divider nzText="Produtos"></nz-divider>
+
+<form nz-form class="form-produto" [formGroup]="produtoForm">
+  <nz-form-item>
+      <nz-form-label>Produto</nz-form-label>
+      <nz-form-control>
+          <app-auto-complete-produto #AutoCompleteProduto (quandoSelecionado)="selecionaProduto($event)"></app-auto-complete-produto>
+      </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+      <nz-form-label>Quantidade</nz-form-label>
+      <nz-form-control>
+          <input nz-input type="number" formControlName="quantidade" placeholder="Quantidade." />
+      </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+      <nz-form-control>
+          <button nz-button nzType="primary" (click)="incluirProduto()" [disabled]="produtoForm.invalid">
+              Incluir Produto
+          </button>
+      </nz-form-control>
+  </nz-form-item>
 </form>
 
 <nz-table #editRowTable nzBordered [nzData]="produtos">
@@ -73,7 +68,7 @@
                     (blur)="stopEdit()" />
             </td>
             <td>
-                <a nz-popconfirm nzPopconfirmTitle="Sure to delete?" (click)="deleteRow(data.produto.id)">Delete</a>
+                <a nz-popconfirm nzPopconfirmTitle="Sure to delete?" (click)="removerProduto(data.produto.id)">Delete</a>
             </td>
         </tr>
     </tbody>

@@ -2,7 +2,7 @@
   <nz-form-item class="contato">
     <nz-form-label>Cliente</nz-form-label>
     <nz-form-control>
-      <app-auto-complete-contato (quandoSelecionado)="selecionaContato($event)"></app-auto-complete-contato>
+      <app-auto-complete-contato #AutoCompleteContato (quandoSelecionado)="selecionaContato($event)"></app-auto-complete-contato>
     </nz-form-control>
   </nz-form-item>
 

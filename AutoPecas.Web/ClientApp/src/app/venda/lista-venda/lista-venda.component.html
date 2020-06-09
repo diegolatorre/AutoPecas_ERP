@@ -30,7 +30,7 @@
     (nzPageIndexChange)="paginar($event)">
   </nz-pagination>
 
-  <button nz-button nzShape="round" nzType="primary">
+  <button nz-button nzShape="round" nzType="primary" (click)="limparFiltro()">
     <i nz-icon nzType="clear" nzTheme="outline"></i>
     Limpar Filtro
   </button>

@@ -12,6 +12,7 @@ import { CadastroContatoComponent } from "src/app/contato/cadastro-contato/cadas
 import { AutoCompleteContatoComponent } from "src/app/shared/auto-complete/auto-complete-contato/auto-complete-contato.component";
 import { ContatoService } from "src/app/service/contato.service";
 import { ActivatedRoute } from "@angular/router";
+import { SucessoCadastroComponent } from "../sucesso-cadastro/sucesso-cadastro.component";
 
 @Component({
   selector: "app-ponto-venda",
@@ -164,9 +165,37 @@ export class PontoVendaComponent implements OnInit {
     this.venda.status = status;
 
     if (this.venda.id == null) {
-      this.vendaService.criar(this.venda).subscribe();
+      this.vendaService.criar(this.venda).subscribe(() => {
+        const modalResult = this.modal.create({
+          nzTitle: null,
+          nzContent: SucessoCadastroComponent,
+          nzComponentParams: {
+            acao: this.statusVendaLabel.get(this.venda.status)
+          },
+          nzWidth: "80%",
+          nzFooter: null,
+          nzClosable: false,
+          nzMaskClosable: false
+        });
+
+        modalResult.afterClose.subscribe(next => { this.novaVenda() });
+      });
     } else {
-      this.vendaService.editar(this.venda).subscribe();
+      this.vendaService.editar(this.venda).subscribe(() => {
+        const modalResult = this.modal.create({
+          nzTitle: null,
+          nzContent: SucessoCadastroComponent,
+          nzComponentParams: {
+            acao: this.statusVendaLabel.get(this.venda.status)
+          },
+          nzWidth: "80%",
+          nzFooter: null,
+          nzClosable: false,
+          nzMaskClosable: false
+        });
+
+        modalResult.afterClose.subscribe(next => { this.novaVenda() });
+      });
     }
   }
 }

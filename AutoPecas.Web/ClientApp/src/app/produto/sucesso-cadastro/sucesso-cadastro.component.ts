@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { NzModalRef } from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'app-sucesso-cadastro',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SucessoCadastroComponent implements OnInit {
 
-  constructor() { }
+  @Input() acao?: string;
+
+  constructor(
+    private modal: NzModalRef,
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  fechar() {
+    this.modal.destroy()
   }
 
 }

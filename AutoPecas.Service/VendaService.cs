@@ -26,6 +26,60 @@ namespace AutoPecas.Service
 
             var predicate = PredicateBuilder.New<Venda>(true);
 
+            if (filtro.Filtros.TryGetValue("idContato", out var idContato))
+            {
+                predicate.And(p => p.IdContato == (int)(long)idContato);
+            }
+
+            if (filtro.Filtros.TryGetValue("statusAberto", out var statusAberto))
+            {
+                if (filtro.Filtros.TryGetValue("statusFinalizada", out var statusFinalizada))
+                {
+                    if ((bool)statusAberto && (bool)statusFinalizada)
+                    {
+                        predicate.And(p => p.Status == StatusVenda.Aberta || p.Status == StatusVenda.Finalizada);
+                    }
+                    else if ((bool)statusAberto)
+                    {
+                        predicate.And(p => p.Status == StatusVenda.Aberta);
+                    }
+                    else if ((bool)statusFinalizada)
+                    {
+                        predicate.And(p => p.Status == StatusVenda.Finalizada);
+                    }
+                }
+            }
+
+            if (filtro.Filtros.TryGetValue("valorInicial", out var valorInicial))
+            {
+                predicate.And(p => p.Valor >= (decimal)(long)valorInicial);
+            }
+
+            if (filtro.Filtros.TryGetValue("valorFinal", out var valorFinal))
+            {
+                predicate.And(p => p.Valor <= (decimal)(long)valorFinal);
+            }
+
+            if (filtro.Filtros.TryGetValue("dataAberturaInicial", out var dataAberturaInicial))
+            {
+                predicate.And(p => p.DataCriacao >= (DateTime)dataAberturaInicial);
+            }
+
+            if (filtro.Filtros.TryGetValue("dataAberturaFinal", out var dataAberturaFinal))
+            {
+                predicate.And(p => p.DataCriacao <= (DateTime)dataAberturaFinal);
+            }
+
+            if (filtro.Filtros.TryGetValue("dataFinalizacaoInicial", out var dataFinalizacaoInicial))
+            {
+                predicate.And(p => p.DataFinalizacao >= (DateTime)dataFinalizacaoInicial);
+            }
+
+            if (filtro.Filtros.TryGetValue("dataFinalizacaoFinal", out var dataFinalizacaoFinal))
+            {
+                predicate.And(p => p.DataFinalizacao <= (DateTime)dataFinalizacaoFinal);
+            }
+
             query = query.Where(predicate);
         }
 

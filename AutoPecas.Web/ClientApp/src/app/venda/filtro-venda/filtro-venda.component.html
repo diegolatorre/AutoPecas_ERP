@@ -6,31 +6,32 @@
     </nz-form-control>
   </nz-form-item>
 
-  <nz-form-item class="data-abertura-inicial">
-    <nz-form-label>Data Abertura Inicial</nz-form-label>
+  <nz-form-item class="Status">
+    <nz-form-label>Status</nz-form-label>
     <nz-form-control>
-      <input nz-input formControlName="dataAberturaInicial">
+      <nz-checkbox-group [(ngModel)]="statusCheckbox" (ngModelChange)="selecionaStatus()" [ngModelOptions]="{ standalone: true }"></nz-checkbox-group>
     </nz-form-control>
   </nz-form-item>
 
-  <nz-form-item class="data-abertura-final">
-    <nz-form-label>Data Abertura Final</nz-form-label>
+  <nz-form-item class="data-abertura">
+    <nz-form-label>Data Abertura</nz-form-label>
     <nz-form-control>
-      <input nz-input formControlName="dataAberturaFinal">
+      <nz-range-picker
+        [(ngModel)]="dateRangeAbertura"
+        (ngModelChange)="selecionaDataAbertura($event)"
+        [ngModelOptions]="{ standalone: true }"
+      ></nz-range-picker>
     </nz-form-control>
   </nz-form-item>
 
-  <nz-form-item class="data-finalizacao-inicial">
-    <nz-form-label>Data Finalização Inicial</nz-form-label>
+  <nz-form-item class="data-finalizacao">
+    <nz-form-label>Data Finalização</nz-form-label>
     <nz-form-control>
-      <input nz-input formControlName="dataFinalizacaoInicial">
-    </nz-form-control>
-  </nz-form-item>
-
-  <nz-form-item class="data-finalizacao-final">
-    <nz-form-label>Data Finalizacao Final</nz-form-label>
-    <nz-form-control>
-      <input nz-input formControlName="dataFinalizacaoFinal">
+      <nz-range-picker
+        [(ngModel)]="dateRangeFinalizacao"
+        (ngModelChange)="selecionaDataFinalizacao($event)"
+        [ngModelOptions]="{ standalone: true }"
+      ></nz-range-picker>
     </nz-form-control>
   </nz-form-item>
 
@@ -45,7 +46,7 @@
         [(ngModel)]="rangeValue"
         [nzTooltipVisible]="'always'"
         [ngModelOptions]="{ standalone: true }"
-        (nzOnAfterChange)="onAfterChange($event)"
+        (nzOnAfterChange)="selecionaValor($event)"
       ></nz-slider>
     </nz-form-control>
   </nz-form-item>

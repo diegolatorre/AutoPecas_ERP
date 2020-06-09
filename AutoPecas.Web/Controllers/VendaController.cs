@@ -61,7 +61,16 @@ namespace AutoPecas.Web.Controllers
                     await _VendaService.Venda(venda);
 
                     if (venda.Status == StatusVenda.Finalizada)
+                    {
+                        foreach (var produto in venda.Produtos)
+                            if (!_NotaService.ValidaDisponibilidadeProduto(produto.IdProduto, produto.Quantidade))
+                            {
+                                tran.Rollback();
+                                throw new Exception($"Produto: {produto.IdProduto} indísponivel.");
+                            }
+
                         await _NotaService.Venda(venda);
+                    }
 
                     tran.Commit();
                 }
@@ -84,7 +93,16 @@ namespace AutoPecas.Web.Controllers
                     await _VendaService.UpdateVenda(venda);
 
                     if (venda.Status == StatusVenda.Finalizada)
+                    {
+                        foreach (var produto in venda.Produtos)
+                            if (!_NotaService.ValidaDisponibilidadeProduto(produto.IdProduto, produto.Quantidade))
+                            {
+                                tran.Rollback();
+                                throw new Exception($"Produto: {produto.IdProduto} indísponivel.");
+                            }
+
                         await _NotaService.Venda(venda);
+                    }
 
                     tran.Commit();
                 }

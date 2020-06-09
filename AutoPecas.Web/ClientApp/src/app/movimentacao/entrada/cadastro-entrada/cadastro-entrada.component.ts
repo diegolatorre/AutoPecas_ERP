@@ -73,7 +73,8 @@ export class CadastroEntradaComponent implements OnInit {
     this.entrada = {
       chaveAcesso: this.entradaForm.get('chaveAcesso').value,
       idContatoOrigem: this.entradaForm.get('fornecedor').value.id,
-      observacao: this.entradaForm.get('observacao').value
+      observacao: this.entradaForm.get('observacao').value,
+      produtos: this.produtos
     };
     console.log(this.entrada);
     this.service.finalizar(this.entrada).subscribe();

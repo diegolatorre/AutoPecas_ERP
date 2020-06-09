@@ -1,0 +1,46 @@
+<h1>{{title}}</h1>
+<form nz-form [formGroup]="usuarioForm">
+
+  <nz-form-item>
+    <nz-form-label>Nome</nz-form-label>
+    <nz-form-control nzErrorTip="Please input your username!">
+        <input nz-input formControlName="nome" placeholder="input placeholder"/>
+      </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label>Usúario</nz-form-label>
+    <nz-form-control nzErrorTip="Please input your username!">
+        <input nz-input formControlName="usuario" placeholder="input placeholder"/>
+      </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label>Senha</nz-form-label>
+    <nz-form-control nzErrorTip="Please input your username!">
+        <input nz-input type="password" formControlName="senha" placeholder="input placeholder"/>
+      </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item class="Permissao">
+    <nz-form-label>Permissão</nz-form-label>
+    <nz-form-control>
+      <nz-radio-group formControlName="permissao" [(ngModel)]="usuarioForm.permissao">
+        <label nz-radio *ngFor="let item of valuesRadioButtonPermissao" [nzValue]="item.value" >
+            <span>{{item.name}}</span>
+          </label>
+      </nz-radio-group>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item class="Status">
+    <nz-form-label>Status</nz-form-label>
+    <nz-form-control>
+      <nz-radio-group formControlName="ativo" [(ngModel)]="usuarioForm.ativo">
+        <label nz-radio *ngFor="let item of valuesRadioButtonStatus" [nzValue]="item.value" >
+            <span>{{item.name}}</span>
+          </label>
+      </nz-radio-group>
+    </nz-form-control>
+  </nz-form-item>
+</form>

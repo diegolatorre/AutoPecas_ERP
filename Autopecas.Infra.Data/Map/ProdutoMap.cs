@@ -81,6 +81,9 @@ namespace Autopecas.Infra.Data.Map
               .HasOne(p => p.Categoria)
               .WithMany()
               .HasForeignKey(p => p.IdCategoria);
+
+            builder
+                .Ignore(p => p.Quantidade);
         }
     }
 }

@@ -65,61 +65,61 @@ export class TabelaUsuarioComponent implements OnInit {
   }
 
   cadastrarUsuario(usuario?: Usuario) {
-    const cadastroModal = this.modal.create({
-      nzTitle: 'Novo Usúario',
-      nzContent: CadastroUsuarioComponent,
-      nzFooter: [
-        {
-          label: 'Fechar',
-          shape: 'round',
-          onClick: () => cadastroModal.destroy()
-        },
-        {
-          label: 'Limpar',
-          type: 'danger',
-          shape: 'round',
-          onClick: modal => { modal.limpar() }
-        },
-        {
-          label: 'Cadastrar',
-          type: 'primary',
-          shape: 'round',
-          onClick: modal => { modal.submitForm() }
-        }
-      ],
-      nzClosable: false
-    });
-    cadastroModal.afterClose.subscribe(() => this.listar());
+    // const cadastroModal = this.modal.create({
+    //   nzTitle: 'Novo Usúario',
+    //   nzContent: CadastroUsuarioComponent,
+    //   nzFooter: [
+    //     {
+    //       label: 'Fechar',
+    //       shape: 'round',
+    //       onClick: () => cadastroModal.destroy()
+    //     },
+    //     {
+    //       label: 'Limpar',
+    //       type: 'danger',
+    //       shape: 'round',
+    //       onClick: modal => { modal.limpar() }
+    //     },
+    //     {
+    //       label: 'Cadastrar',
+    //       type: 'primary',
+    //       shape: 'round',
+    //       onClick: modal => { modal.submitForm() }
+    //     }
+    //   ],
+    //   nzClosable: false
+    // });
+    // cadastroModal.afterClose.subscribe(() => this.listar());
   }
 
   editar(usuario?: Usuario) {
-    const cadastroModal = this.modal.create({
-      nzTitle: 'Editar Usúario',
-      nzContent: CadastroUsuarioComponent,
-      nzComponentParams: {
-       usuario: usuario
-      },
-      nzFooter: [
-        {
-          label: 'Fechar',
-          shape: 'round',
-          onClick: () => cadastroModal.destroy()
-        },
-        {
-          label: 'Limpar',
-          type: 'danger',
-          shape: 'round',
-          onClick: modal => { modal.limpar() }
-        },
-        {
-          label: 'Salvar',
-          type: 'primary',
-          shape: 'round',
-          onClick: modal => { modal.submitFormEdit() }
-        }
-      ],
-      nzClosable: false
-    });
-    cadastroModal.afterClose.subscribe(() => this.listar());
+    // const cadastroModal = this.modal.create({
+    //   nzTitle: 'Editar Usúario',
+    //   nzContent: CadastroUsuarioComponent,
+    //   nzComponentParams: {
+    //    usuario: usuario
+    //   },
+    //   nzFooter: [
+    //     {
+    //       label: 'Fechar',
+    //       shape: 'round',
+    //       onClick: () => cadastroModal.destroy()
+    //     },
+    //     {
+    //       label: 'Limpar',
+    //       type: 'danger',
+    //       shape: 'round',
+    //       onClick: modal => { modal.limpar() }
+    //     },
+    //     {
+    //       label: 'Salvar',
+    //       type: 'primary',
+    //       shape: 'round',
+    //       onClick: modal => { modal.submitFormEdit() }
+    //     }
+    //   ],
+    //   nzClosable: false
+    // });
+    // cadastroModal.afterClose.subscribe(() => this.listar());
   }
 }

@@ -26,6 +26,21 @@ namespace AutoPecas.Service
 
             var predicate = PredicateBuilder.New<Venda>(true);
 
+            if (filtro.Filtros.TryGetValue("idContato", out var idContato))
+            {
+                predicate.And(p => p.IdContato == (int)(long)idContato);
+            }
+
+            if (filtro.Filtros.TryGetValue("valorInicial", out var valorInicial))
+            {
+                predicate.And(p => p.Valor > (decimal)(long)valorInicial);
+            }
+
+            if (filtro.Filtros.TryGetValue("valorFinal", out var valorFinal))
+            {
+                predicate.And(p => p.Valor < (decimal)(long)valorFinal);
+            }
+
             query = query.Where(predicate);
         }
 

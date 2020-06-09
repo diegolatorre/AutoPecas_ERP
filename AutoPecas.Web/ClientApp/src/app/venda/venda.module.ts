@@ -5,9 +5,10 @@ import { PontoVendaComponent } from './ponto-venda/ponto-venda.component';
 import { SelecionaProdutoComponent } from './seleciona-produto/seleciona-produto.component';
 import { ListaVendaComponent } from './lista-venda/lista-venda.component';
 import { SucessoCadastroComponent } from './sucesso-cadastro/sucesso-cadastro.component';
+import { FiltroVendaComponent } from './filtro-venda/filtro-venda.component';
 
 @NgModule({
-  declarations: [PontoVendaComponent, SelecionaProdutoComponent, ListaVendaComponent, SucessoCadastroComponent],
+  declarations: [PontoVendaComponent, SelecionaProdutoComponent, ListaVendaComponent, SucessoCadastroComponent, FiltroVendaComponent],
   entryComponents: [SelecionaProdutoComponent],
   imports: [
     VendaRoutingModule,

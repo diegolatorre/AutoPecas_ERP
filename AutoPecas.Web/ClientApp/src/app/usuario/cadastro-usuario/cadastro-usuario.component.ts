@@ -36,71 +36,71 @@ export class CadastroUsuarioComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.obter();
+    // this.obter();
   }
 
-  obter() {
+  // obter() {
 
-    if (this.usuario !== undefined) {
+  //   if (this.usuario !== undefined) {
 
-      this._service.obter(this.usuario.id).subscribe(next => {
+  //     this._service.obter(this.usuario.id).subscribe(next => {
 
-        this.usuario = next;
+  //       this.usuario = next;
 
-        this.usuarioForm = new FormGroup({
-          nome: new FormControl(this.usuario.nome, [Validators.required]),
-          usuario: new FormControl(this.usuario.usuario, [Validators.required]),
-          senha: new FormControl(this.usuario.senha, [Validators.required]),
-          ativo: new FormControl(this.usuario.ativo, [Validators.required]),
-          permissao: new FormControl(this.usuario.permissao, [Validators.required]),
-        });
+  //       this.usuarioForm = new FormGroup({
+  //         nome: new FormControl(this.usuario.nome, [Validators.required]),
+  //         usuario: new FormControl(this.usuario.usuario, [Validators.required]),
+  //         senha: new FormControl(this.usuario.senha, [Validators.required]),
+  //         ativo: new FormControl(this.usuario.ativo, [Validators.required]),
+  //         permissao: new FormControl(this.usuario.permissao, [Validators.required]),
+  //       });
 
-        if (this.usuario !== undefined) {
-          this.title = `Editar usúario: ${this.usuario.id}`;
-          this.btnName = `Editar`;
-        }
-      });
+  //       if (this.usuario !== undefined) {
+  //         this.title = `Editar usúario: ${this.usuario.id}`;
+  //         this.btnName = `Editar`;
+  //       }
+  //     });
 
-    } else {
+  //   } else {
 
-      this.title = `Cadastrar usúario`;
-      this.btnName = `Cadastrar`;
+  //     this.title = `Cadastrar usúario`;
+  //     this.btnName = `Cadastrar`;
 
-    }
-  }
+  //   }
+  // }
 
-  limpar() {
-    this.usuarioForm.reset();
-  }
+  // limpar() {
+  //   this.usuarioForm.reset();
+  // }
 
-  submitForm() {
+  // submitForm() {
 
-    this.usuario = {
-      nome: this.usuarioForm.get('nome').value,
-      usuario: this.usuarioForm.get('usuario').value,
-      senha: this.usuarioForm.get('senha').value,
-      ativo: true,
-      permissao: this.usuarioForm.get('permissao').value,
-    } as Usuario;
+  //   this.usuario = {
+  //     nome: this.usuarioForm.get('nome').value,
+  //     usuario: this.usuarioForm.get('usuario').value,
+  //     senha: this.usuarioForm.get('senha').value,
+  //     ativo: true,
+  //     permissao: this.usuarioForm.get('permissao').value,
+  //   } as Usuario;
 
-    this._service.incluir(this.usuario).subscribe(() => {
-      this.modal.close();
-    });
-  }
+  //   this._service.incluir(this.usuario).subscribe(() => {
+  //     this.modal.close();
+  //   });
+  // }
 
-  submitFormEdit() {
+  // submitFormEdit() {
 
-    this.usuario = {
-      id: this.usuario.id,
-      nome: this.usuarioForm.get('nome').value,
-      usuario: this.usuarioForm.get('usuario').value,
-      senha: this.usuarioForm.get('senha').value,
-      ativo: this.usuarioForm.get('ativo').value,
-      permissao: this.usuarioForm.get('permissao').value,
-    } as Usuario;
+  //   this.usuario = {
+  //     id: this.usuario.id,
+  //     nome: this.usuarioForm.get('nome').value,
+  //     usuario: this.usuarioForm.get('usuario').value,
+  //     senha: this.usuarioForm.get('senha').value,
+  //     ativo: this.usuarioForm.get('ativo').value,
+  //     permissao: this.usuarioForm.get('permissao').value,
+  //   } as Usuario;
 
-    this._service.editar(this.usuario).subscribe(() => {
-      this.modal.close();
-    });
-  }
+  //   this._service.editar(this.usuario).subscribe(() => {
+  //     this.modal.close();
+  //   });
+  // }
 }

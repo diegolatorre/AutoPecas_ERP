@@ -27,32 +27,32 @@ export class AppComponent {
       nzClosable: false
     });
   }
-  
+
   cadastrarUsuario() {
-    const cadastroModal = this.modal.create({
-      nzTitle: 'Novo Usúario',
-      nzContent: CadastroUsuarioComponent,
-      nzFooter: [
-        {
-          label: 'Fechar',
-          shape: 'round',
-          onClick: () => cadastroModal.destroy()
-        },
-        {
-          label: 'Limpar',
-          type: 'danger',
-          shape: 'round',
-          onClick: modal => { modal.limpar() }
-        },
-        {
-          label: 'Cadastrar',
-          type: 'primary',
-          shape: 'round',
-          onClick: modal => { modal.submitForm() }
-        }
-      ],
-      nzClosable: false
-    });
+    // const cadastroModal = this.modal.create({
+    //   nzTitle: 'Novo Usúario',
+    //   nzContent: CadastroUsuarioComponent,
+    //   nzFooter: [
+    //     {
+    //       label: 'Fechar',
+    //       shape: 'round',
+    //       onClick: () => cadastroModal.destroy()
+    //     },
+    //     {
+    //       label: 'Limpar',
+    //       type: 'danger',
+    //       shape: 'round',
+    //       onClick: modal => { modal.limpar() }
+    //     },
+    //     {
+    //       label: 'Cadastrar',
+    //       type: 'primary',
+    //       shape: 'round',
+    //       onClick: modal => { modal.submitForm() }
+    //     }
+    //   ],
+    //   nzClosable: false
+    // });
   }
 
   cadastrarMarca() {

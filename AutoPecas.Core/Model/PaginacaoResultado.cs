@@ -25,7 +25,7 @@ namespace AutoPecas.Core.Model
             }
             else
             {
-                Total = (int)query.CountAsync().Result;
+                Total = query.CountAsync().Result;
             }
 
             Pagina = pagina;

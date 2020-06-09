@@ -6,6 +6,9 @@ import { Contato } from 'src/app/model/contato/contato.model';
 import { ProdutoNota } from 'src/app/model/notas/produto-nota.model';
 import { NotaService } from 'src/app/service/nota.service';
 import { AutoCompleteProdutoComponent } from 'src/app/shared/auto-complete/auto-complete-produto/auto-complete-produto.component';
+import { FiltroSpec } from 'src/app/model/geral/filtro-spec.model';
+import { SucessoCadastroComponent } from '../../sucesso-cadastro/sucesso-cadastro.component';
+import { NzModalService } from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'app-cadastro-entrada',
@@ -26,6 +29,14 @@ export class CadastroEntradaComponent implements OnInit {
 
   entrada: Entrada;
   produtos: Array<ProdutoNota> = [];
+  produtosExibicao: Array<ProdutoNota> = [];
+
+
+  paginacao = {
+    pagina: 1,
+    tamanho: 3,
+    total: null,
+  } as FiltroSpec;
 
   editId: string | null = null;
 
@@ -33,7 +44,7 @@ export class CadastroEntradaComponent implements OnInit {
 
   constructor(
     private service: NotaService,
-    private changeDetectorRef: ChangeDetectorRef
+    private modalResult: NzModalService,
   ) { }
 
   ngOnInit(): void { }
@@ -46,6 +57,7 @@ export class CadastroEntradaComponent implements OnInit {
 
   removerProduto(id: number): void {
     this.produtos = this.produtos.filter(d => d.produto.id !== id);
+    this.paginar();
   }
 
   incluirProduto() {
@@ -60,6 +72,15 @@ export class CadastroEntradaComponent implements OnInit {
 
     this.produtoForm.reset();
     this.autoCompleteProduto.selecionaManualmente(null);
+    this.paginar();
+  }
+
+  paginar(pagina = this.paginacao.pagina) {
+    this.paginacao.pagina = pagina;
+    this.produtosExibicao = this.produtos.slice(
+      (this.paginacao.pagina - 1) * this.paginacao.tamanho,
+      this.paginacao.tamanho * this.paginacao.pagina
+    );
   }
 
   selecionaProduto = (produto: Produto) => this.produtoForm.get('produto').setValue(produto);
@@ -73,9 +94,29 @@ export class CadastroEntradaComponent implements OnInit {
     this.entrada = {
       chaveAcesso: this.notaForm.get('chaveAcesso').value,
       idContatoOrigem: this.notaForm.get('fornecedor').value.id,
-      observacao: this.notaForm.get('observacao').value
+      observacao: this.notaForm.get('observacao').value,
+      produtos: this.produtos
     };
-    console.log(this.entrada);
-    this.service.finalizar(this.entrada).subscribe();
+
+    this.service.finalizar(this.entrada).subscribe(() => {
+      const modalResult = this.modalResult.create({
+        nzTitle: null,
+        nzContent: SucessoCadastroComponent,
+        nzComponentParams: {
+          acao: "cadastrado",
+        },
+        nzWidth: "80%",
+        nzFooter: null,
+        nzClosable: false,
+        nzMaskClosable: false,
+      });
+
+      modalResult.afterClose.subscribe(next => {
+        this.notaForm.reset();
+        this.produtos = [];
+        this.entrada = { };
+        this.paginar();
+      });
+    });
   }
 }

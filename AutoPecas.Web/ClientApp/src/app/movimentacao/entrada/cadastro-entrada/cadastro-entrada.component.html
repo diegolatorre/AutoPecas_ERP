@@ -1,4 +1,4 @@
-<h1>Nova nota</h1>
+<h1>Nota de Entrada</h1>
 <form nz-form class="form-nota" [formGroup]="notaForm">
     <nz-form-item>
         <nz-form-label>Fornecedor</nz-form-label>
@@ -47,7 +47,8 @@
   </nz-form-item>
 </form>
 
-<nz-table #editRowTable nzBordered [nzData]="produtos">
+<div class="produtos">
+  <nz-table #editRowTable [nzShowPagination]="false" nzBordered [nzData]="produtosExibicao" class="tabela-produtos">
     <thead>
         <tr>
             <th nzWidth="30%">Id</th>
@@ -68,8 +69,32 @@
                     (blur)="stopEdit()" />
             </td>
             <td>
-                <a nz-popconfirm nzPopconfirmTitle="Sure to delete?" (click)="removerProduto(data.produto.id)">Delete</a>
+                <a nz-popconfirm nzPopconfirmTitle="Deseja realmente remover?" (nzOnConfirm)="removerProduto(data.produto.id)" nzPopconfirmPlacement="top">Remover</a>
             </td>
         </tr>
     </tbody>
-</nz-table>
+  </nz-table>
+  <nz-pagination
+    [nzPageIndex]="paginacao.pagina"
+    [nzTotal]="produtos.length"
+    [nzPageSize]="paginacao.tamanho"
+    [nzShowTotal]="totalTemplate"
+    (nzPageIndexChange)="paginar($event)"
+    class="paginacao"
+  ></nz-pagination>
+  <ng-template #totalTemplate let-total>
+    Total: {{ total }} produtos
+  </ng-template>
+
+  <button
+    nz-button
+    (click)="submit()"
+    nzType="primary"
+    nzSize="large"
+    nzShape="round"
+    [disabled]="notaForm.invalid || produtos.length == 0"
+  >
+    Salvar Nota
+  </button>
+</div>
+

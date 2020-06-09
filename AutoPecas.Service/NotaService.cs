@@ -57,6 +57,12 @@ namespace AutoPecas.Service
             //Id Interno do sistema
             nota.IdContatoDestino = 26;
 
+            nota.Produtos = nota.Produtos.Select(p => new ProdutoNota()
+            {
+                IdProduto = p.IdProduto,
+                Quantidade = p.Quantidade
+            }).ToList();
+
             _AutoPecasDbContext.Add(nota);
 
             return await _AutoPecasDbContext.SaveChangesAsync();

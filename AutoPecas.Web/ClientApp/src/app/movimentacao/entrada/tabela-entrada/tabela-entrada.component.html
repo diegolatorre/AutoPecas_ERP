@@ -1,3 +1,41 @@
-<p>tabela-entrada works!</p>
+<h2>Notas</h2>
 
-{{entradas}}
+<nz-skeleton [nzActive]="true" [nzLoading]="!notas">
+  <div class="notas">
+    <div *ngFor="let nota of notas">
+      <nz-card class="nota" nzType="inner" [nzActions]="[acaoDetalhes]">
+          <nz-card-meta [nzTitle]="nota.contatoOrigem.nome" [nzDescription]="observacao"></nz-card-meta>
+      </nz-card>
+      <ng-template #observacao>
+        {{ nota.contatoOrigem.nome || "nota sem descrição."}}
+      </ng-template>
+      <ng-template #acaoDetalhes>
+        <a (click)="cadastrar(nota)">Abrir Nota</a>
+      </ng-template>
+    </div>
+  </div>
+</nz-skeleton>
+
+<div class="acao">
+  <nz-pagination
+    [nzPageIndex]="filtro.pagina"
+    [nzPageSize]="filtro.tamanho"
+    [nzTotal]="filtro.total"
+    (nzPageIndexChange)="paginar($event)">
+  </nz-pagination>
+
+  <button nz-button nzShape="round" nzType="primary">
+    <i nz-icon nzType="clear" nzTheme="outline"></i>
+    Limpar Filtro
+  </button>
+
+  <button nz-button nzShape="round" nzType="primary">
+    <i nz-icon nzType="filter" nzTheme="outline"></i>
+    Filtrar
+  </button>
+
+  <button nz-button nzShape="round" nzType="primary" (click)="cadastrar()">
+    <i nz-icon nzType="plus-square" nzTheme="outline"></i>
+    Novo nota
+  </button>
+</div>

@@ -23,7 +23,11 @@ namespace AutoPecas.Service
         private void AplicarFiltro(FiltroSpec filtro, out IQueryable<Nota> query)
         {
             query = _AutoPecasDbContext.Notas
-                        .AsExpandableEFCore();
+                .Include(n => n.ContatoOrigem)
+                .Include(n => n.ContatoDestino)
+                .Include(n => n.Produtos)
+                .ThenInclude(n => n.Produto)
+                .AsExpandableEFCore();
 
             var predicate = PredicateBuilder.New<Nota>(true);
 
@@ -57,18 +61,28 @@ namespace AutoPecas.Service
             //Id Interno do sistema
             nota.IdContatoDestino = 26;
 
+            nota.Produtos = nota.Produtos.Select(p => new ProdutoNota()
+            {
+                IdProduto = p.IdProduto,
+                Quantidade = p.Quantidade
+            }).ToList();
+
             _AutoPecasDbContext.Add(nota);
 
-            return await _AutoPecasDbContext.SaveChangesAsync();
+            var result = await _AutoPecasDbContext.SaveChangesAsync();
+
+            return result;
         }
 
         public async Task<int> Venda(Venda venda)
         {
+
+
             var nota = new Nota();
 
             nota.ChaveAcesso = new Random().Next(10000000).ToString() + new Random().Next(10000000).ToString();
             nota.Tipo = TipoNota.Saida;
-            nota.IdContatoOrigem = 1;
+            nota.IdContatoOrigem = 26;
             nota.IdContatoDestino = venda.IdContato;
 
             nota.Produtos = venda.Produtos.Select(p => new ProdutoNota()
@@ -98,6 +112,28 @@ namespace AutoPecas.Service
                 .Where(p => p.Id.ToString().Contains(texto))
                 .Take(5)
                 .ToListAsync();
+        }
+
+        public bool ValidaDisponibilidadeProduto(int id, int quantidade)
+        {
+            var saidas = _AutoPecasDbContext.ProdutoNota.Where(p => p.IdProduto == id && p.Nota.Tipo == TipoNota.Saida).Sum(p => p.Quantidade);
+            var entradas = _AutoPecasDbContext.ProdutoNota.Where(p => p.IdProduto == id && p.Nota.Tipo == TipoNota.Entrada).Sum(p => p.Quantidade);
+
+            if (saidas + quantidade <= entradas)
+                return true;
+
+            return false;
+        }
+
+        public int VerificaEstoqueProduto(int id)
+        {
+            var saidas = _AutoPecasDbContext.ProdutoNota.Where(p => p.IdProduto == id && p.Nota.Tipo == TipoNota.Saida).Sum(p => p.Quantidade);
+            var entradas = _AutoPecasDbContext.ProdutoNota.Where(p => p.IdProduto == id && p.Nota.Tipo == TipoNota.Entrada).Sum(p => p.Quantidade);
+
+            if (saidas == entradas)
+                return 0;
+            else
+                return entradas - saidas;
         }
 
     }

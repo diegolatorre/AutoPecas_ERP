@@ -4,6 +4,7 @@ using AutoPecas.Service;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace AutoPecas.Web.Controllers
@@ -12,11 +13,13 @@ namespace AutoPecas.Web.Controllers
     [ApiController]
     public class ProdutoController : Controller
     {
-        private readonly ProdutoService _service;
+        private readonly ProdutoService _produtoService;
+        private readonly NotaService _notaService;
 
-        public ProdutoController(ProdutoService service)
+        public ProdutoController(ProdutoService produtoService, NotaService notaService)
         {
-            _service = service;
+            _produtoService = produtoService;
+            _notaService = notaService;
         }
 
         [HttpPost("lista")]
@@ -24,7 +27,13 @@ namespace AutoPecas.Web.Controllers
         {
             try
             {
-                return Ok(await _service.Lista(filtro));
+                var produtos = await _produtoService.Lista(filtro);
+
+                if (produtos.Lista.Count() > 0)
+                    foreach (var produto in produtos.Lista)
+                        produtos.Lista.FirstOrDefault(p => p.Id == produto.Id).Quantidade = _notaService.VerificaEstoqueProduto(produto.Id);
+
+                return Ok(produtos);
             }
             catch (Exception e)
             {
@@ -37,7 +46,10 @@ namespace AutoPecas.Web.Controllers
         {
             try
             {
-                return Ok(await _service.Obter(idPeca));
+                var produto = await _produtoService.Obter(idPeca);
+                produto.Quantidade = _notaService.VerificaEstoqueProduto(produto.Id);
+
+                return Ok(produto);
             }
             catch (Exception e)
             {
@@ -50,7 +62,7 @@ namespace AutoPecas.Web.Controllers
         {
             try
             {
-                return Ok(await _service.Incluir(produto));
+                return Ok(await _produtoService.Incluir(produto));
             }
             catch (Exception e)
             {
@@ -63,7 +75,7 @@ namespace AutoPecas.Web.Controllers
         {
             try
             {
-                return Ok(await _service.Editar(produto));
+                return Ok(await _produtoService.Editar(produto));
             }
             catch (Exception e)
             {
@@ -76,7 +88,20 @@ namespace AutoPecas.Web.Controllers
         {
             try
             {
-                return Ok(await _service.Busca(texto));
+                return Ok(await _produtoService.Busca(texto));
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        [HttpGet("disponibilidade/{id}/{quantidade}")]
+        public IActionResult Disponibilidade(int id, int quantidade)
+        {
+            try
+            {
+                return Ok(_notaService.ValidaDisponibilidadeProduto(id, quantidade));
             }
             catch (Exception e)
             {

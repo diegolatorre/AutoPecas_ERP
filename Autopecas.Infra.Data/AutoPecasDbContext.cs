@@ -23,6 +23,8 @@ namespace Autopecas.Infra.Data
         public DbSet<Venda> Vendas { get; set; }
         public DbSet<ProdutoVenda> ProdutosVenda { get; set; }
         public DbSet<Nota> Notas { get; set; }
+        public DbSet<ProdutoNota> ProdutoNota { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; }
 
         #endregion
 
@@ -44,7 +46,8 @@ namespace Autopecas.Infra.Data
                 .ApplyConfiguration(new VendaMap())
                 .ApplyConfiguration(new ProdutoVendaMap())
                 .ApplyConfiguration(new NotaMap())
-                .ApplyConfiguration(new ProdutoNotaMap());
+                .ApplyConfiguration(new ProdutoNotaMap())
+                .ApplyConfiguration(new UsuarioMap());
 
         }
 

@@ -21,6 +21,8 @@ export class SelecionaProdutoComponent implements OnInit {
   produto: Produto;
   produtoVenda: ProdutoVenda;
 
+  valido = true;
+
   @Input() editarProduto?: any;
 
   constructor(
@@ -49,7 +51,12 @@ export class SelecionaProdutoComponent implements OnInit {
     this.modal.destroy(this.produto.id ? this.produtoVenda : null);
   }
 
+  destroy() {
+    this.modal.destroy();
+  }
+
   selecionaProduto(produto: Produto) {
     this.produto = produto;
+    produto.quantidade <= 0 ? this.valido = false : this.valido = true;
   }
 }

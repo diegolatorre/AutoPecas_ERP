@@ -16,7 +16,7 @@
         </div>
       </ng-template>
       <ng-template #acaoDetalhes>
-        <a (click)="abrir(venda)">Detalhes</a>
+        <a (click)="abrir(venda)">Abrir Venda</a>
       </ng-template>
     </div>
   </div>
@@ -30,12 +30,12 @@
     (nzPageIndexChange)="paginar($event)">
   </nz-pagination>
 
-  <button nz-button nzShape="round" nzType="primary">
+  <button nz-button nzShape="round" nzType="primary" (click)="limparFiltro()">
     <i nz-icon nzType="clear" nzTheme="outline"></i>
     Limpar Filtro
   </button>
 
-  <button nz-button nzShape="round" nzType="primary">
+  <button nz-button nzShape="round" nzType="primary" (click)="filtrar()">
     <i nz-icon nzType="filter" nzTheme="outline"></i>
     Filtrar
   </button>

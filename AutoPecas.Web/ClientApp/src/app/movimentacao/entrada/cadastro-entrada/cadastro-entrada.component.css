@@ -1,11 +1,52 @@
-.editable-cell {
-    position: relative;
-    padding: 5px 12px;
-    cursor: pointer;
-  }
+:host {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(4, auto) 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
 
-  .editable-row:hover .editable-cell {
-    border: 1px solid #d9d9d9;
-    border-radius: 4px;
-    padding: 4px 11px;
-  }
+.form-nota {
+  grid-area: 2 / 1 / 3 / 2;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: repeat(2, 1fr);
+  grid-column-gap: 25px;
+  grid-row-gap: 0px;
+}
+.observacao {
+  grid-area: 2 / 1 / 3 / 3;
+}
+
+.divider {
+  grid-area: 3 / 1 / 4 / 2;
+}
+
+.form-produto {
+  grid-area: 4 / 1 / 5 / 2;
+  display: grid;
+  grid-template-columns: 2fr 1fr auto;
+  grid-column-gap: 25px;
+}
+
+.produtos {
+  grid-area: 5 / 1 / 6 / 2;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: repeat(2, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 10px;
+}
+.tabela-produtos {
+  grid-area: 1 / 1 / 2 / 3;
+  min-height: max-content;
+}
+.titulo {
+  grid-area: 1 / 1 / 2 / 2;
+}
+
+.editable-row:hover .editable-cell {
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  padding: 4px 11px;
+}

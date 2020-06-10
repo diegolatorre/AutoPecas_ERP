@@ -1,58 +1,61 @@
-<h1>Nova nota</h1>
-<form nz-form [formGroup]="entradaForm">
-
+<h2 class="titulo" *ngIf="!visualizarNota">Nova nota</h2>
+<form nz-form class="form-nota" [formGroup]="notaForm">
     <nz-form-item>
-        <nz-form-label>Código</nz-form-label>
-        <nz-form-control>
-            <input nz-input formControlName="chaveAcesso" placeholder="Digite o código da nota de entrada." />
-        </nz-form-control>
+      <nz-form-label>Fornecedor</nz-form-label>
+      <nz-form-control nzErrorTip="">
+          <app-auto-complete-contato [disabled]="visualizarNota" #AutoCompleteContatoOrigem (quandoSelecionado)="selecionaOrigem($event)"></app-auto-complete-contato>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item *ngIf="visualizarNota">
+      <nz-form-label>Cliente</nz-form-label>
+      <nz-form-control>
+          <app-auto-complete-contato [disabled]="true" #AutoCompleteContatoDestino (quandoSelecionado)="selecionaDestino($event)"></app-auto-complete-contato>
+      </nz-form-control>
     </nz-form-item>
 
     <nz-form-item>
-        <nz-form-label>Produtos</nz-form-label>
-        <nz-form-control>
-            <app-auto-complete-produto (quandoSelecionado)="selecionaProduto($event)"></app-auto-complete-produto>
-        </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-        <nz-form-label>Quantidade</nz-form-label>
-        <nz-form-control>
-            <input nz-input type="number" formControlName="quantidadeProduto" placeholder="Quantidade." />
-        </nz-form-control>
+      <nz-form-label>Chave de Acesso</nz-form-label>
+      <nz-form-control>
+          <input nz-input formControlName="chaveAcesso" placeholder="Digite a chave de acesso" />
+      </nz-form-control>
     </nz-form-item>
 
-    <nz-form-item>
-        <nz-form-control>
-            <button nz-button nzType="primary" (click)="addRow()">
-                Adicionar Produto
-            </button>
-        </nz-form-control>
-    </nz-form-item>
-
-    <nz-form-item>
-        <nz-form-label>Fornecedor</nz-form-label>
-        <nz-form-control nzErrorTip="Please input your username!">
-            <app-auto-complete-contato (quandoSelecionado)="selecionaFornecedor($event)"></app-auto-complete-contato>
-        </nz-form-control>
-    </nz-form-item>
-
-    <nz-form-item>
+    <nz-form-item class="observacao">
         <nz-form-label>Observação</nz-form-label>
         <nz-form-control>
-            <input nz-input formControlName="observacao" placeholder="Digite uma observação da nota de entrada." />
-        </nz-form-control>
-    </nz-form-item>
-
-    <nz-form-item>
-        <nz-form-control>
-            <button nz-button nzType="primary" (click)="submit()" [disabled]="entradaForm.invalid">
-                Lançar nota
-            </button>
+            <input nz-input formControlName="observacao" placeholder="Digite a observação" />
         </nz-form-control>
     </nz-form-item>
 </form>
 
-<nz-table #editRowTable nzBordered [nzData]="produtos">
+<nz-divider class="divider" nzText="Produtos" *ngIf="!visualizarNota"></nz-divider>
+
+<form nz-form class="form-produto" [formGroup]="produtoForm" *ngIf="!visualizarNota">
+  <nz-form-item>
+      <nz-form-label>Produto</nz-form-label>
+      <nz-form-control>
+          <app-auto-complete-produto #AutoCompleteProduto (quandoSelecionado)="selecionaProduto($event)"></app-auto-complete-produto>
+      </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+      <nz-form-label>Quantidade</nz-form-label>
+      <nz-form-control>
+          <input nz-input type="number" formControlName="quantidade" placeholder="Quantidade" />
+      </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+      <nz-form-control>
+          <button nz-button nzType="primary" (click)="incluirProduto()" [disabled]="produtoForm.invalid">
+              Incluir Produto
+          </button>
+      </nz-form-control>
+  </nz-form-item>
+</form>
+
+<div class="produtos">
+  <nz-table #editRowTable [nzShowPagination]="false" nzBordered [nzData]="produtosExibicao" class="tabela-produtos">
     <thead>
         <tr>
             <th nzWidth="30%">Id</th>
@@ -65,16 +68,35 @@
         <tr *ngFor="let data of editRowTable.data" class="editable-row">
             <td>{{ data.produto.id }}</td>
             <td>{{ data.produto.descricao }}</td>
+            <td>{{ data.quantidade }}</td>
             <td>
-                <div class="editable-cell" [hidden]="editId === data.produto.id" (click)="startEdit(data.produto.id)">
-                    {{ data.quantidade }}
-                </div>
-                <input [hidden]="editId !== data.produto.id" type="text" nz-input [(ngModel)]="data.quantidade"
-                    (blur)="stopEdit()" />
-            </td>
-            <td>
-                <a nz-popconfirm nzPopconfirmTitle="Sure to delete?" (click)="deleteRow(data.produto.id)">Delete</a>
+                <a *ngIf="!visualizarNota" nz-popconfirm nzPopconfirmTitle="Deseja realmente remover?" (nzOnConfirm)="removerProduto(data.produto.id)" nzPopconfirmPlacement="top">Remover</a>
             </td>
         </tr>
     </tbody>
-</nz-table>
+  </nz-table>
+  <nz-pagination
+    [nzPageIndex]="paginacao.pagina"
+    [nzTotal]="produtos.length"
+    [nzPageSize]="paginacao.tamanho"
+    [nzShowTotal]="totalTemplate"
+    (nzPageIndexChange)="paginar($event)"
+    class="paginacao"
+  ></nz-pagination>
+  <ng-template #totalTemplate let-total>
+    Total: {{ total }} produtos
+  </ng-template>
+
+  <button
+    nz-button
+    (click)="submit()"
+    nzType="primary"
+    nzSize="large"
+    nzShape="round"
+    *ngIf="!visualizarNota"
+    [disabled]="notaForm.invalid || produtos.length == 0"
+  >
+    Salvar Nota
+  </button>
+</div>
+

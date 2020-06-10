@@ -4,6 +4,9 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 import { CadastroMarcaComponent } from '../produto/parametros/marca/cadastro-marca/cadastro-marca.component';
 import { CadastroCategoriaComponent } from '../produto/parametros/categoria/cadastro-categoria/cadastro-categoria.component';
 import { CadastroProdutoComponent } from '../produto/cadastro-produto/cadastro-produto.component';
+import { CadastroUsuarioComponent } from '../usuario/cadastro-usuario/cadastro-usuario.component';
+import { getPerfil } from '../shared/sessao';
+import Usuario from '../model/usuario/usuario.model';
 
 @Component({
   selector: 'app-root',
@@ -12,6 +15,7 @@ import { CadastroProdutoComponent } from '../produto/cadastro-produto/cadastro-p
 })
 export class AppComponent {
   title = 'app';
+  perfilSessao: Usuario = getPerfil();
 
   constructor(
     private modal: NzModalService
@@ -27,29 +31,22 @@ export class AppComponent {
     });
   }
 
+  cadastrarUsuario() {
+    const cadastroModal = this.modal.create({
+      nzContent: CadastroUsuarioComponent,
+      nzTitle: 'Novo Usúario',
+      nzWidth: '40%',
+      nzFooter: null,
+      nzClosable: false
+    });
+  }
+
   cadastrarMarca() {
     const cadastroModal = this.modal.create({
       nzTitle: 'Nova Marca',
       nzContent: CadastroMarcaComponent,
-      nzFooter: [
-        {
-          label: 'Fechar',
-          shape: 'round',
-          onClick: () => cadastroModal.destroy()
-        },
-        {
-          label: 'Limpar',
-          type: 'danger',
-          shape: 'round',
-          onClick: modal => { modal.limpar() }
-        },
-        {
-          label: 'Cadastrar',
-          type: 'primary',
-          shape: 'round',
-          onClick: modal => { modal.submitForm() }
-        }
-      ],
+      nzWidth: '40%',
+      nzFooter: null,
       nzClosable: false
     });
   }
@@ -58,25 +55,8 @@ export class AppComponent {
     const cadastroModal = this.modal.create({
       nzTitle: 'Nova Categoria',
       nzContent: CadastroCategoriaComponent,
-      nzFooter: [
-        {
-          label: 'Fechar',
-          shape: 'round',
-          onClick: () => cadastroModal.destroy()
-        },
-        {
-          label: 'Limpar',
-          type: 'danger',
-          shape: 'round',
-          onClick: modal => { modal.limpar() }
-        },
-        {
-          label: 'Cadastrar',
-          type: 'primary',
-          shape: 'round',
-          onClick: modal => { modal.submitForm() }
-        }
-      ],
+      nzWidth: '40%',
+      nzFooter: null,
       nzClosable: false
     });
   }

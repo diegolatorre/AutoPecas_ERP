@@ -2,9 +2,10 @@ import { Component, OnInit, Input } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { ContatoService } from "src/app/service/contato.service";
 import { Contato } from "src/app/model/contato/contato.model";
-import { NzModalRef } from "ng-zorro-antd/modal";
+import { NzModalRef, NzModalService } from "ng-zorro-antd/modal";
 import { min } from "rxjs/operators";
 import { Router } from "@angular/router";
+import { SucessoCadastroComponent } from "../sucesso-cadastro/sucesso-cadastro.component";
 
 @Component({
   selector: "app-cadastro-contato",
@@ -34,6 +35,7 @@ export class CadastroContatoComponent implements OnInit {
   constructor(
     private contatoService: ContatoService,
     private modal: NzModalRef,
+    private modalResult: NzModalService,
     private router: Router
   ) {}
 
@@ -72,17 +74,41 @@ export class CadastroContatoComponent implements OnInit {
     } as Contato;
 
     if (this.editarContato) {
-      this.contatoService.editar(contato).subscribe();
+      this.contatoService.editar(contato).subscribe(() => {
+        const modalResult = this.modalResult.create({
+          nzTitle: null,
+          nzContent: SucessoCadastroComponent,
+          nzComponentParams: {
+            acao: "editado",
+          },
+          nzWidth: "80%",
+          nzFooter: null,
+          nzClosable: false,
+          nzMaskClosable: false,
+        });
+
+        modalResult.afterClose.subscribe(next => { this.modal.destroy() });
+      });
     } else {
-      this.contatoService.incluir(contato)
-          .subscribe((next) => {
-            if (this.venda) {
-              this.modal.destroy(next);
-            } else {
-              this.router.navigate(['contato', 'sucesso']);
-              this.modal.destroy(next);
-            }
+      this.contatoService.incluir(contato).subscribe((next) => {
+        if (this.venda) {
+          this.modal.destroy(next);
+        } else {
+          const modalResult = this.modalResult.create({
+            nzTitle: null,
+            nzContent: SucessoCadastroComponent,
+            nzComponentParams: {
+              acao: "cadastrado",
+            },
+            nzWidth: "80%",
+            nzFooter: null,
+            nzClosable: false,
+            nzMaskClosable: false,
           });
+
+          modalResult.afterClose.subscribe(next => { this.modal.destroy() });
+        }
+      });
     }
   }
 }

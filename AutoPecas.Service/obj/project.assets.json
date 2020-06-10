@@ -5788,19 +5788,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\tales\\.nuget\\packages\\": {}
+    "C:\\Users\\dflim\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\tales\\Desktop\\AutoPecas\\AutoPecas.Service\\AutoPecas.Service.csproj",
+      "projectUniqueName": "C:\\Users\\dflim\\projetos\\AutoPecas\\AutoPecas.Service\\AutoPecas.Service.csproj",
       "projectName": "AutoPecas.Service",
-      "projectPath": "C:\\Users\\tales\\Desktop\\AutoPecas\\AutoPecas.Service\\AutoPecas.Service.csproj",
-      "packagesPath": "C:\\Users\\tales\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\tales\\Desktop\\AutoPecas\\AutoPecas.Service\\obj\\",
+      "projectPath": "C:\\Users\\dflim\\projetos\\AutoPecas\\AutoPecas.Service\\AutoPecas.Service.csproj",
+      "packagesPath": "C:\\Users\\dflim\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\dflim\\projetos\\AutoPecas\\AutoPecas.Service\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "C:\\Users\\tales\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\dflim\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5813,11 +5817,11 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "C:\\Users\\tales\\Desktop\\AutoPecas\\AutoPecas.Core\\AutoPecas.Core.csproj": {
-              "projectPath": "C:\\Users\\tales\\Desktop\\AutoPecas\\AutoPecas.Core\\AutoPecas.Core.csproj"
+            "C:\\Users\\dflim\\projetos\\AutoPecas\\AutoPecas.Core\\AutoPecas.Core.csproj": {
+              "projectPath": "C:\\Users\\dflim\\projetos\\AutoPecas\\AutoPecas.Core\\AutoPecas.Core.csproj"
             },
-            "C:\\Users\\tales\\Desktop\\AutoPecas\\Autopecas.Infra.Data\\Autopecas.Infra.Data.csproj": {
-              "projectPath": "C:\\Users\\tales\\Desktop\\AutoPecas\\Autopecas.Infra.Data\\Autopecas.Infra.Data.csproj"
+            "C:\\Users\\dflim\\projetos\\AutoPecas\\Autopecas.Infra.Data\\Autopecas.Infra.Data.csproj": {
+              "projectPath": "C:\\Users\\dflim\\projetos\\AutoPecas\\Autopecas.Infra.Data\\Autopecas.Infra.Data.csproj"
             }
           }
         }
@@ -5840,6 +5844,12 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[3.1.2, 3.1.2]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -5848,7 +5858,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.300\\RuntimeIdentifierGraph.json"
       }
     }
   }

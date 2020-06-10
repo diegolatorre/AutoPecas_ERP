@@ -4,13 +4,14 @@ import { Observable } from 'rxjs';
 import { FiltroSpec } from '../model/geral/filtro-spec.model';
 import { PaginacaoResultado } from '../model/geral/paginacao-resultado.model';
 import { Marca } from '../model/produto/marca.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 
 export class MarcaService {
-  private readonly apiEndpoint = `http://localhost:50595/api/marca`;
+  private readonly apiEndpoint = `${environment.apiUrl}marca`;
 
   constructor(private httpClient: HttpClient) { }
 

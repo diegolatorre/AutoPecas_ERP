@@ -1,0 +1,55 @@
+<form nz-form [formGroup]="filtroForm" class="formulario">
+  <nz-form-item class="contato">
+    <nz-form-label>Cliente</nz-form-label>
+    <nz-form-control>
+      <app-auto-complete-contato #AutoCompleteContato (quandoSelecionado)="selecionaContato($event)"></app-auto-complete-contato>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item class="Status">
+    <nz-form-label>Status</nz-form-label>
+    <nz-form-control>
+      <nz-checkbox-group [(ngModel)]="statusCheckbox" (ngModelChange)="selecionaStatus()" [ngModelOptions]="{ standalone: true }"></nz-checkbox-group>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item class="data-abertura">
+    <nz-form-label>Data Abertura</nz-form-label>
+    <nz-form-control>
+      <nz-range-picker
+        [(ngModel)]="dateRangeAbertura"
+        (ngModelChange)="selecionaDataAbertura($event)"
+        [ngModelOptions]="{ standalone: true }"
+      ></nz-range-picker>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item class="data-finalizacao">
+    <nz-form-label>Data Finalização</nz-form-label>
+    <nz-form-control>
+      <nz-range-picker
+        [(ngModel)]="dateRangeFinalizacao"
+        (ngModelChange)="selecionaDataFinalizacao($event)"
+        [ngModelOptions]="{ standalone: true }"
+      ></nz-range-picker>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item class="range-valor">
+    <nz-form-label>Valor da Venda</nz-form-label>
+    <nz-form-control>
+      <nz-slider
+        nzRange
+        [nzMin]="minRange"
+        [nzMax]="maxRange"
+        [nzStep]="50"
+        [(ngModel)]="rangeValue"
+        [nzTooltipVisible]="'always'"
+        [ngModelOptions]="{ standalone: true }"
+        (nzOnAfterChange)="selecionaValor($event)"
+      ></nz-slider>
+    </nz-form-control>
+  </nz-form-item>
+</form>
+
+

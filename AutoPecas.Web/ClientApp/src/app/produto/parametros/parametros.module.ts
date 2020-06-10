@@ -6,9 +6,10 @@ import { TabelaCategoriaComponent } from './categoria/tabela-categoria/tabela-ca
 import { CadastroCategoriaComponent } from './categoria/cadastro-categoria/cadastro-categoria.component';
 import { TabelaMarcaComponent } from './marca/tabela-marca/tabela-marca.component';
 import { CadastroMarcaComponent } from './marca/cadastro-marca/cadastro-marca.component';
+import { SucessoCadastroComponent } from './categoria/sucesso-cadastro/sucesso-cadastro.component';
 
 @NgModule({
-  declarations: [RoutedComponents, CadastroCategoriaComponent, TabelaCategoriaComponent, TabelaMarcaComponent, CadastroMarcaComponent],
+  declarations: [RoutedComponents, CadastroCategoriaComponent, TabelaCategoriaComponent, TabelaMarcaComponent, CadastroMarcaComponent, SucessoCadastroComponent],
   entryComponents: [EntryComponents],
   imports: [
     CadeiraRoutingModule,

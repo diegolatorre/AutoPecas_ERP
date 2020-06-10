@@ -5,13 +5,14 @@ import { Observable } from 'rxjs';
 import { FiltroSpec } from '../model/geral/filtro-spec.model';
 import { PaginacaoResultado } from '../model/geral/paginacao-resultado.model';
 import { Contato } from '../model/contato/contato.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 
 export class ContatoService {
-  private readonly apiEndpoint = `http://localhost:50595/api/contato`;
+  private readonly apiEndpoint = `${environment.apiUrl}contato`;
 
   constructor(private httpClient: HttpClient) { }
 

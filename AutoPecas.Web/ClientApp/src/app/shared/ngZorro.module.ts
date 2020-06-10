@@ -23,6 +23,8 @@ import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzAlertModule } from 'ng-zorro-antd/alert';
 import { NzResultModule } from 'ng-zorro-antd/result';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
+import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
+import { NzSliderModule } from 'ng-zorro-antd/slider';
 
 const modulos = [
   NzButtonModule,
@@ -48,7 +50,9 @@ const modulos = [
   NzDropDownModule,
   NzAlertModule,
   NzResultModule,
-  NzRadioModule
+  NzRadioModule,
+  NzPopconfirmModule,
+  NzSliderModule
 ];
 
 @NgModule({

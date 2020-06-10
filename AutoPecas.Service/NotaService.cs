@@ -59,7 +59,7 @@ namespace AutoPecas.Service
         public async Task<int> Incluir(Nota nota)
         {
             //Id Interno do sistema
-            nota.IdContatoDestino = 26;
+            nota.IdContatoDestino = 47;
 
             nota.Produtos = nota.Produtos.Select(p => new ProdutoNota()
             {
@@ -82,7 +82,7 @@ namespace AutoPecas.Service
 
             nota.ChaveAcesso = new Random().Next(10000000).ToString() + new Random().Next(10000000).ToString();
             nota.Tipo = TipoNota.Saida;
-            nota.IdContatoOrigem = 26;
+            nota.IdContatoOrigem = 47;
             nota.IdContatoDestino = venda.IdContato;
 
             nota.Produtos = venda.Produtos.Select(p => new ProdutoNota()

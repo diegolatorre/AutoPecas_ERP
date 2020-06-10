@@ -3,7 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MarcaService } from 'src/app/service/marca.service';
 import { Marca } from 'src/app/model/produto/marca.model';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
-import { SucessoCadastroComponent } from '../../categoria/sucesso-cadastro/sucesso-cadastro.component';
+import { SucessoCadastroComponent } from '../sucesso-cadastro/sucesso-cadastro.component';
 
 @Component({
   selector: 'app-cadastro-marca',
@@ -63,8 +63,6 @@ export class CadastroMarcaComponent implements OnInit {
       } as Marca;
 
       this._service.incluir(this.marca).subscribe(() => {
-        
-
         const modalResult = this.modalService.create({
           nzTitle: null,
           nzContent: SucessoCadastroComponent,
@@ -76,7 +74,7 @@ export class CadastroMarcaComponent implements OnInit {
           nzClosable: false,
           nzMaskClosable: false
         });
-        
+
         this.modal.close();
       });
 
@@ -89,7 +87,7 @@ export class CadastroMarcaComponent implements OnInit {
       } as Marca;
 
       this._service.editar(this.marca).subscribe(() => {
-        
+
 
         const modalResult = this.modalService.create({
           nzTitle: null,

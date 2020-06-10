@@ -27,7 +27,7 @@ export class AppComponent {
       nzClosable: false
     });
   }
-  
+
   cadastrarUsuario() {
     const cadastroModal = this.modal.create({
       nzContent: CadastroUsuarioComponent,

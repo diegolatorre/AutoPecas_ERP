@@ -1,10 +1,17 @@
-<h1>Nota de Entrada</h1>
+<h2 class="titulo" *ngIf="!visualizarNota">Nova nota</h2>
 <form nz-form class="form-nota" [formGroup]="notaForm">
     <nz-form-item>
-        <nz-form-label>Fornecedor</nz-form-label>
-        <nz-form-control nzErrorTip="">
-            <app-auto-complete-contato (quandoSelecionado)="selecionaFornecedor($event)"></app-auto-complete-contato>
-        </nz-form-control>
+      <nz-form-label>Fornecedor</nz-form-label>
+      <nz-form-control nzErrorTip="">
+          <app-auto-complete-contato [disabled]="visualizarNota" #AutoCompleteContatoOrigem (quandoSelecionado)="selecionaOrigem($event)"></app-auto-complete-contato>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item *ngIf="visualizarNota">
+      <nz-form-label>Cliente</nz-form-label>
+      <nz-form-control>
+          <app-auto-complete-contato [disabled]="true" #AutoCompleteContatoDestino (quandoSelecionado)="selecionaDestino($event)"></app-auto-complete-contato>
+      </nz-form-control>
     </nz-form-item>
 
     <nz-form-item>
@@ -22,9 +29,9 @@
     </nz-form-item>
 </form>
 
-<nz-divider nzText="Produtos"></nz-divider>
+<nz-divider class="divider" nzText="Produtos" *ngIf="!visualizarNota"></nz-divider>
 
-<form nz-form class="form-produto" [formGroup]="produtoForm">
+<form nz-form class="form-produto" [formGroup]="produtoForm" *ngIf="!visualizarNota">
   <nz-form-item>
       <nz-form-label>Produto</nz-form-label>
       <nz-form-control>
@@ -34,7 +41,7 @@
   <nz-form-item>
       <nz-form-label>Quantidade</nz-form-label>
       <nz-form-control>
-          <input nz-input type="number" formControlName="quantidade" placeholder="Quantidade." />
+          <input nz-input type="number" formControlName="quantidade" placeholder="Quantidade" />
       </nz-form-control>
   </nz-form-item>
 
@@ -61,15 +68,9 @@
         <tr *ngFor="let data of editRowTable.data" class="editable-row">
             <td>{{ data.produto.id }}</td>
             <td>{{ data.produto.descricao }}</td>
+            <td>{{ data.quantidade }}</td>
             <td>
-                <div class="editable-cell" [hidden]="editId === data.produto.id" (click)="startEdit(data.produto.id)">
-                    {{ data.quantidade }}
-                </div>
-                <input [hidden]="editId !== data.produto.id" type="text" nz-input [(ngModel)]="data.quantidade"
-                    (blur)="stopEdit()" />
-            </td>
-            <td>
-                <a nz-popconfirm nzPopconfirmTitle="Deseja realmente remover?" (nzOnConfirm)="removerProduto(data.produto.id)" nzPopconfirmPlacement="top">Remover</a>
+                <a *ngIf="!visualizarNota" nz-popconfirm nzPopconfirmTitle="Deseja realmente remover?" (nzOnConfirm)="removerProduto(data.produto.id)" nzPopconfirmPlacement="top">Remover</a>
             </td>
         </tr>
     </tbody>
@@ -92,6 +93,7 @@
     nzType="primary"
     nzSize="large"
     nzShape="round"
+    *ngIf="!visualizarNota"
     [disabled]="notaForm.invalid || produtos.length == 0"
   >
     Salvar Nota

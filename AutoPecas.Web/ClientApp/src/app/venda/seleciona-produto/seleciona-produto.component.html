@@ -54,4 +54,29 @@
     </div>
   </nz-tab>
 </nz-tabset>
+<div class="acao-produto">
+  <p></p>
+  <button
+    nz-button
+    (click)="destroy()"
+    nzType="primary"
+    nzShape="round"
+  >
+    <i nz-icon nzType="save" nzTheme="outline"></i>
+    Cancelar
+  </button>
+
+  <button
+    nz-button
+    (click)="fechar()"
+    nzType="primary"
+    nzShape="round"
+    [disabled]="!valido"
+  >
+    <i nz-icon nzType="save" nzTheme="outline"></i>
+    Incluir Produto
+  </button>
+</div>
+
+<nz-alert *ngIf="!valido" nzType="warning" nzMessage="Produto sem quantidade em estoque" nzShowIcon class="alerta"></nz-alert>
 

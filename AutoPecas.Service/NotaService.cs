@@ -23,7 +23,11 @@ namespace AutoPecas.Service
         private void AplicarFiltro(FiltroSpec filtro, out IQueryable<Nota> query)
         {
             query = _AutoPecasDbContext.Notas
-                        .AsExpandableEFCore();
+                .Include(n => n.ContatoOrigem)
+                .Include(n => n.ContatoDestino)
+                .Include(n => n.Produtos)
+                .ThenInclude(n => n.Produto)
+                .AsExpandableEFCore();
 
             var predicate = PredicateBuilder.New<Nota>(true);
 
@@ -36,12 +40,10 @@ namespace AutoPecas.Service
 
             var resultado = new PaginacaoResultado<Nota>(query, filtro.Pagina, filtro.Tamanho, filtro.Total);
 
-            //resultado.Lista = await query
-            //    .Skip(filtro.Tamanho * (filtro.Pagina - 1))
-            //    .Take(filtro.Tamanho)
-            //    .ToListAsync();
-
-            resultado.Lista = await _AutoPecasDbContext.Notas.ToListAsync();
+            resultado.Lista = await query
+                .Skip(filtro.Tamanho * (filtro.Pagina - 1))
+                .Take(filtro.Tamanho)
+                .ToListAsync();
 
             return resultado;
         }
@@ -80,7 +82,7 @@ namespace AutoPecas.Service
 
             nota.ChaveAcesso = new Random().Next(10000000).ToString() + new Random().Next(10000000).ToString();
             nota.Tipo = TipoNota.Saida;
-            nota.IdContatoOrigem = 1;
+            nota.IdContatoOrigem = 26;
             nota.IdContatoDestino = venda.IdContato;
 
             nota.Produtos = venda.Produtos.Select(p => new ProdutoNota()

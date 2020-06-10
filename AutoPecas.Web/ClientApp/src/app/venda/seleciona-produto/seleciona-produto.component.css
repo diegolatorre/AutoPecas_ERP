@@ -1,0 +1,5 @@
+.acao-produto {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  grid-column-gap: 15px;
+}

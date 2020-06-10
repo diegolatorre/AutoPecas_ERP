@@ -27,7 +27,8 @@ import {
   SaveOutline,
   RollbackOutline,
   CloseSquareOutline,
-  DollarTwoTone
+  DollarTwoTone,
+  ArrowsAltOutline
 } from "@ant-design/icons-angular/icons";
 const icons: IconDefinition[] = [
   AccountBookFill,
@@ -43,7 +44,8 @@ const icons: IconDefinition[] = [
   SaveOutline,
   RollbackOutline,
   CloseSquareOutline,
-  DollarTwoTone
+  DollarTwoTone,
+  ArrowsAltOutline
 ];
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = {

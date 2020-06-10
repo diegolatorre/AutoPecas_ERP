@@ -6,9 +6,9 @@
     <form nz-form [formGroup]="usuarioForm">
 
         <nz-form-item>
-            <nz-form-label nzRequired>Usúario</nz-form-label>
-            <nz-form-control nzErrorTip="Por favor digite um usúario!">
-                <input nz-input formControlName="usuario" placeholder="Digite o usúario da pessoa" />
+            <nz-form-label nzRequired>Usuário</nz-form-label>
+            <nz-form-control nzErrorTip="Por favor digite um usuário!">
+                <input nz-input formControlName="usuario" placeholder="Digite o usuário da pessoa" />
             </nz-form-control>
         </nz-form-item>
 
@@ -33,10 +33,7 @@
         </div>
 
     </form>
-    <nz-alert *ngIf="usuarioForm.invalid" nzType="warning" nzMessage="Necessário preencher todos os campos obrigatórios"
-        nzShowIcon class="alerta"></nz-alert>
-
-    <nz-alert *ngIf="mensagemErro" nzType="error" nzMessage="Usúario e/ou Senha inválidos!" nzShowIcon class="alerta">
+    <nz-alert *ngIf="mensagemErro" nzType="error" nzMessage="Usuário e/ou Senha inválidos!" nzShowIcon class="alerta">
     </nz-alert>
 
 

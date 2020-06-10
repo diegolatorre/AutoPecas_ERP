@@ -1,30 +1,31 @@
 <app-auto-complete-produto *ngIf="!editarProduto" (quandoSelecionado)="selecionaProduto($event)"></app-auto-complete-produto>
 <nz-tabset>
   <nz-tab nzTitle="Informações da Venda">
-    <div *ngIf="produto">
+    <div class="produto-venda" *ngIf="produto">
       <nz-descriptions [nzColumn]="2" nzTitle="Produto">
         <nz-descriptions-item nzTitle="Descricao" [nzSpan]="1">{{ produto.descricao }}</nz-descriptions-item>
         <nz-descriptions-item nzTitle="Codigo de Barras" [nzSpan]="1">{{ produto.codigoBarras }}</nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Quantidade em estoque" [nzSpan]="1">{{ produto.quantidade }}</nz-descriptions-item>
         <nz-descriptions-item nzTitle="Valor de Venda" [nzSpan]="1">{{ produto.valorVenda | currency: 'BRL' }}</nz-descriptions-item>
       </nz-descriptions>
 
       <form nz-form [formGroup]="produtoVendaForm" class="formulario">
         <nz-form-item class="quantidade">
           <nz-form-label>Quantidade</nz-form-label>
-          <nz-form-control>
+          <nz-form-control nzHasFeedback nzErrorTip="Quantidade não disponível">
             <input nz-input formControlName="quantidade">
           </nz-form-control>
         </nz-form-item>
 
         <nz-form-item class="desconto">
           <nz-form-label>Desconto</nz-form-label>
-          <nz-form-control>
+          <nz-form-control nzHasFeedback nzErrorTip="desconto deve ser entre 0% e 100%">
             <input nz-input formControlName="desconto">
           </nz-form-control>
         </nz-form-item>
       </form>
 
-      <p>Valor Final: {{ produto.valorVenda * produtoVendaForm.get('quantidade').value | currency: 'BRL' }}</p>
+      <p>Valor Final: {{ (produto.valorVenda * produtoVendaForm.get('quantidade').value) - (produtoVendaForm.get('desconto').value * (produto.valorVenda * produtoVendaForm.get('quantidade').value)) / 100 | currency: 'BRL' }}</p>
     </div>
   </nz-tab>
 
@@ -71,7 +72,7 @@
     (click)="fechar()"
     nzType="primary"
     nzShape="round"
-    [disabled]="!valido"
+    [disabled]="!valido || !produto"
   >
     <i nz-icon nzType="save" nzTheme="outline"></i>
     Incluir Produto

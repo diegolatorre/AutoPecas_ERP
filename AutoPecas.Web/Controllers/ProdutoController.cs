@@ -88,7 +88,13 @@ namespace AutoPecas.Web.Controllers
         {
             try
             {
-                return Ok(await _produtoService.Busca(texto));
+                var produtos = await _produtoService.Busca(texto);
+
+                if (produtos.Count() > 0)
+                    foreach (var produto in produtos)
+                        produtos.FirstOrDefault(p => p.Id == produto.Id).Quantidade = _notaService.VerificaEstoqueProduto(produto.Id);
+
+                return Ok(produtos);
             }
             catch (Exception e)
             {

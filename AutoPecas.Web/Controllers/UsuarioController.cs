@@ -32,6 +32,19 @@ namespace AutoPecas.Web.Controllers
             }
         }
 
+        [HttpPost("login")]
+        public async Task<ActionResult<Usuario>> Login(Usuario usuario)
+        {
+            try
+            {
+                return Ok(await _service.Login(usuario));
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
         [HttpGet("{idUsuario}")]
         public async Task<ActionResult<Usuario>> Obter(int idUsuario)
         {

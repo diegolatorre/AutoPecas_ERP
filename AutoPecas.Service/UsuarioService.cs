@@ -35,6 +35,14 @@ namespace AutoPecas.Service
             query = query.Where(predicate);
         }
 
+        public async Task<Usuario> Login(Usuario usuario)
+        {
+            return await _AutoPecasDbContext
+                .Usuarios
+                .Where(p => p.NomeUsuario == usuario.NomeUsuario && p.Senha == usuario.Senha)
+                .FirstOrDefaultAsync();
+        }
+
         public UsuarioService(AutoPecasDbContext autoPecasDbContext)
         {
             _AutoPecasDbContext = autoPecasDbContext;

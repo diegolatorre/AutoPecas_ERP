@@ -16,7 +16,7 @@
             </ul>
           </nz-dropdown-menu>
         </li>
-        <li nz-menu-item>
+        <li nz-menu-item *ngIf="perfilSessao.permissao">
           <a nz-dropdown [nzDropdownMenu]="usuario">
             Usúarios
             <i nz-icon nzType="down"></i>
@@ -40,7 +40,7 @@
             </ul>
           </nz-dropdown-menu>
         </li>
-        <li nz-menu-item>
+        <li nz-menu-item *ngIf="perfilSessao.permissao">
           <a nz-dropdown [nzDropdownMenu]="mov">
             Movimentações
             <i nz-icon nzType="down"></i>
@@ -69,7 +69,7 @@
             </ul>
           </nz-dropdown-menu>
         </li>
-        <li nz-menu-item>
+        <li nz-menu-item *ngIf="perfilSessao.permissao">
           <a nz-dropdown [nzDropdownMenu]="parametros">
             Parâmetros Globais
             <i nz-icon nzType="down"></i>
@@ -98,8 +98,8 @@
           </a>
           <nz-dropdown-menu #settings="nzDropdownMenu">
             <ul nz-menu>
-              <li nz-menu-item [routerLink]="['/']">Meu Perfil</li>
-              <li nz-menu-item [routerLink]="['/']">Sair</li>
+              <!-- <li nz-menu-item (click)="meuPerfil()">Meu Perfil</li> -->
+              <li nz-menu-item (click)="sair()">Sair</li>
             </ul>
           </nz-dropdown-menu>
         </li>

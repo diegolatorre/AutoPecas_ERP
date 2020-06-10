@@ -20,4 +20,13 @@
   .alerta {
     margin-top: 10px;
   }
-  
+  .conteudo{
+    width: 25%;
+    left:37%;
+    top:25%;
+
+    position:absolute;
+  }
+  .conteudo h1{
+    text-align: center;
+  }

@@ -5,6 +5,8 @@ import { CadastroMarcaComponent } from '../produto/parametros/marca/cadastro-mar
 import { CadastroCategoriaComponent } from '../produto/parametros/categoria/cadastro-categoria/cadastro-categoria.component';
 import { CadastroProdutoComponent } from '../produto/cadastro-produto/cadastro-produto.component';
 import { CadastroUsuarioComponent } from '../usuario/cadastro-usuario/cadastro-usuario.component';
+import { getPerfil } from '../shared/sessao';
+import Usuario from '../model/usuario/usuario.model';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +15,7 @@ import { CadastroUsuarioComponent } from '../usuario/cadastro-usuario/cadastro-u
 })
 export class AppComponent {
   title = 'app';
+  perfilSessao: Usuario = getPerfil();
 
   constructor(
     private modal: NzModalService

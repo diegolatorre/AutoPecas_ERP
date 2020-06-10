@@ -37,4 +37,10 @@ export class UsuarioService {
     
     return this.httpClient.put<number>(`${this.apiEndpoint}`, usuario);
   }
+
+  public login(usuario: Usuario): Observable<Usuario> {
+    console.log(usuario);
+    
+    return this.httpClient.post<Usuario>(`${this.apiEndpoint}/login`, usuario);
+  }
 }

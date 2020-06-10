@@ -1,112 +1,112 @@
 <nz-layout class="layout">
   <nz-header>
     <div class="logo"></div>
-    <ul nz-menu nzTheme="dark" nzMode="horizontal">
-      <li nz-menu-item [routerLink]="['/']">Inicio</li>
-      <li nz-menu-item>
-        <a nz-dropdown [nzDropdownMenu]="contato">
-          Contatos
-          <i nz-icon nzType="down"></i>
-        </a>
-        <nz-dropdown-menu #contato="nzDropdownMenu">
-          <ul nz-menu>
-            <li nz-menu-item [routerLink]="['/contato']">Consultar</li>
-            <li nz-menu-item (click)="cadastrarContato()">Novo</li>
-          </ul>
-        </nz-dropdown-menu>
-      </li>
-      <li nz-menu-item>
-        <a nz-dropdown [nzDropdownMenu]="usuario">
-          Usúarios
-          <i nz-icon nzType="down"></i>
-        </a>
-        <nz-dropdown-menu #usuario="nzDropdownMenu">
-          <ul nz-menu>
-            <li nz-menu-item [routerLink]="['/usuario']">Consultar</li>
-            <li nz-menu-item (click)="cadastrarUsuario()">Novo</li>
-          </ul>
-        </nz-dropdown-menu>
-      </li>
-      <li nz-menu-item>
-        <a nz-dropdown [nzDropdownMenu]="produto">
-          Produtos
-          <i nz-icon nzType="down"></i>
-        </a>
-        <nz-dropdown-menu #produto="nzDropdownMenu">
-          <ul nz-menu>
-            <li nz-menu-item [routerLink]="['/produto']">Consultar</li>
-            <li nz-menu-item (click)="cadastrarProduto()">Cadastrar</li>
-          </ul>
-        </nz-dropdown-menu>
-      </li>
-      <li nz-menu-item>
-        <a nz-dropdown [nzDropdownMenu]="mov">
-          Movimentações
-          <i nz-icon nzType="down"></i>
-        </a>
-        <nz-dropdown-menu #mov="nzDropdownMenu">
-          <ul nz-menu>
-            <li nz-submenu nzTitle="Entradas">
-              <ul>
-                <li nz-menu-item [routerLink]="['/movimentacao/entrada']">Consultar</li>
-                <li nz-menu-item [routerLink]="['/movimentacao/entrada/cadastro']">Lançar</li>
-              </ul>
-            </li>
-            <li nz-menu-item [routerLink]="['/']">Saídas</li>
-          </ul>
-        </nz-dropdown-menu>
-      </li>
-      <li nz-menu-item>
-        <a nz-dropdown [nzDropdownMenu]="vendas">
-          Vendas
-          <i nz-icon nzType="down"></i>
-        </a>
-        <nz-dropdown-menu #vendas="nzDropdownMenu">
-          <ul nz-menu>
-            <li nz-menu-item [routerLink]="['/venda/lista']">Consultar</li>
-            <li nz-menu-item [routerLink]="['/venda']">Nova</li>
-          </ul>
-        </nz-dropdown-menu>
-      </li>
-      <li nz-menu-item>
-        <a nz-dropdown [nzDropdownMenu]="parametros">
-          Parâmetros Globais
-          <i nz-icon nzType="down"></i>
-        </a>
-        <nz-dropdown-menu #parametros="nzDropdownMenu">
-          <ul nz-menu>
-            <li nz-submenu nzTitle="Categorias">
-              <ul>
-                <li nz-menu-item [routerLink]="['/produto/categoria']">Consultar</li>
-                <li nz-menu-item (click)="cadastrarCategoria()">Cadastrar</li>
-              </ul>
-            </li>
-            <li nz-submenu nzTitle="Marcas">
-              <ul>
-                <li nz-menu-item [routerLink]="['/produto/marca']">Consultar</li>
-                <li nz-menu-item (click)="cadastrarMarca()">Cadastrar</li>
-              </ul>
-            </li>
-          </ul>
-        </nz-dropdown-menu>
-      </li>
-      <li class="settings" nz-menu-item>
-        <a nz-dropdown [nzDropdownMenu]="settings">
-          Perfil
-          <i nz-icon nzType="down"></i>
-        </a>
-        <nz-dropdown-menu #settings="nzDropdownMenu">
-          <ul nz-menu>
-            <li nz-menu-item [routerLink]="['/']">Meu Perfil</li>
-            <li nz-menu-item [routerLink]="['/']">Sair</li>
-          </ul>
-        </nz-dropdown-menu>
-      </li>
-    </ul>
-
+    <div *ngIf="perfilSessao">
+      <ul nz-menu nzTheme="dark" nzMode="horizontal">
+        <li nz-menu-item [routerLink]="['/']">Inicio</li>
+        <li nz-menu-item>
+          <a nz-dropdown [nzDropdownMenu]="contato">
+            Contatos
+            <i nz-icon nzType="down"></i>
+          </a>
+          <nz-dropdown-menu #contato="nzDropdownMenu">
+            <ul nz-menu>
+              <li nz-menu-item [routerLink]="['/contato']">Consultar</li>
+              <li nz-menu-item (click)="cadastrarContato()">Novo</li>
+            </ul>
+          </nz-dropdown-menu>
+        </li>
+        <li nz-menu-item>
+          <a nz-dropdown [nzDropdownMenu]="usuario">
+            Usúarios
+            <i nz-icon nzType="down"></i>
+          </a>
+          <nz-dropdown-menu #usuario="nzDropdownMenu">
+            <ul nz-menu>
+              <li nz-menu-item [routerLink]="['/usuario']">Consultar</li>
+              <li nz-menu-item (click)="cadastrarUsuario()">Novo</li>
+            </ul>
+          </nz-dropdown-menu>
+        </li>
+        <li nz-menu-item>
+          <a nz-dropdown [nzDropdownMenu]="produto">
+            Produtos
+            <i nz-icon nzType="down"></i>
+          </a>
+          <nz-dropdown-menu #produto="nzDropdownMenu">
+            <ul nz-menu>
+              <li nz-menu-item [routerLink]="['/produto']">Consultar</li>
+              <li nz-menu-item (click)="cadastrarProduto()">Cadastrar</li>
+            </ul>
+          </nz-dropdown-menu>
+        </li>
+        <li nz-menu-item>
+          <a nz-dropdown [nzDropdownMenu]="mov">
+            Movimentações
+            <i nz-icon nzType="down"></i>
+          </a>
+          <nz-dropdown-menu #mov="nzDropdownMenu">
+            <ul nz-menu>
+              <li nz-submenu nzTitle="Entradas">
+                <ul>
+                  <li nz-menu-item [routerLink]="['/movimentacao/entrada']">Consultar</li>
+                  <li nz-menu-item [routerLink]="['/movimentacao/entrada/cadastro']">Lançar</li>
+                </ul>
+              </li>
+              <li nz-menu-item [routerLink]="['/']">Saídas</li>
+            </ul>
+          </nz-dropdown-menu>
+        </li>
+        <li nz-menu-item>
+          <a nz-dropdown [nzDropdownMenu]="vendas">
+            Vendas
+            <i nz-icon nzType="down"></i>
+          </a>
+          <nz-dropdown-menu #vendas="nzDropdownMenu">
+            <ul nz-menu>
+              <li nz-menu-item [routerLink]="['/venda/lista']">Consultar</li>
+              <li nz-menu-item [routerLink]="['/venda']">Nova</li>
+            </ul>
+          </nz-dropdown-menu>
+        </li>
+        <li nz-menu-item>
+          <a nz-dropdown [nzDropdownMenu]="parametros">
+            Parâmetros Globais
+            <i nz-icon nzType="down"></i>
+          </a>
+          <nz-dropdown-menu #parametros="nzDropdownMenu">
+            <ul nz-menu>
+              <li nz-submenu nzTitle="Categorias">
+                <ul>
+                  <li nz-menu-item [routerLink]="['/produto/categoria']">Consultar</li>
+                  <li nz-menu-item (click)="cadastrarCategoria()">Cadastrar</li>
+                </ul>
+              </li>
+              <li nz-submenu nzTitle="Marcas">
+                <ul>
+                  <li nz-menu-item [routerLink]="['/produto/marca']">Consultar</li>
+                  <li nz-menu-item (click)="cadastrarMarca()">Cadastrar</li>
+                </ul>
+              </li>
+            </ul>
+          </nz-dropdown-menu>
+        </li>
+        <li class="settings" nz-menu-item>
+          <a nz-dropdown [nzDropdownMenu]="settings">
+            Perfil
+            <i nz-icon nzType="down"></i>
+          </a>
+          <nz-dropdown-menu #settings="nzDropdownMenu">
+            <ul nz-menu>
+              <li nz-menu-item [routerLink]="['/']">Meu Perfil</li>
+              <li nz-menu-item [routerLink]="['/']">Sair</li>
+            </ul>
+          </nz-dropdown-menu>
+        </li>
+      </ul>
+    </div>
   </nz-header>
   <nz-content>
     <router-outlet></router-outlet>
   </nz-content>
 </nz-layout>
-

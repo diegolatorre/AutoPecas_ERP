@@ -1,0 +1,35 @@
+<form nz-form [formGroup]="usuarioForm">
+
+    <nz-form-item>
+        <nz-form-label nzRequired>Usúario</nz-form-label>
+        <nz-form-control nzErrorTip="Por favor digite um usúario!">
+            <input nz-input formControlName="usuario" placeholder="Digite o usúario da pessoa" />
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label nzRequired>Senha</nz-form-label>
+        <nz-form-control nzErrorTip="Por favor digite uma senha!">
+            <input nz-input type="password" formControlName="senha" placeholder="Escolha uma senha" />
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-alert *ngIf="mensagemErro" nzType="error" nzMessage="Usúario e/ou Senha inválidos!" nzShowIcon class="alerta">
+    </nz-alert>
+
+    <div class="acao-form">
+        <p></p>
+
+        <button nz-button (click)="usuarioForm.reset()" nzType="primary" nzShape="round">
+            <i nz-icon nzType="clear" nzTheme="outline"></i>
+            Limpar
+        </button>
+        <button nz-button (click)="submitForm()" nzType="primary" nzShape="round" [disabled]="usuarioForm.invalid">
+            <i nz-icon nzType="save" nzTheme="outline"></i>
+            Acessar
+        </button>
+    </div>
+
+</form>
+<nz-alert *ngIf="usuarioForm.invalid" nzType="warning" nzMessage="Necessário preencher todos os campos obrigatórios"
+    nzShowIcon class="alerta"></nz-alert>

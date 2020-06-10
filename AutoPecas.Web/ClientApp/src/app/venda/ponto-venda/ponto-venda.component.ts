@@ -22,7 +22,7 @@ import { SucessoCadastroComponent } from "../sucesso-cadastro/sucesso-cadastro.c
 export class PontoVendaComponent implements OnInit {
   vendaForm = new FormGroup(
     {
-      desconto: new FormControl(0.00, [Validators.required]),
+      desconto: new FormControl(0.00, [Validators.required, Validators.min(0), Validators.max(100)]),
       idContato: new FormControl(null, [Validators.required])
     });
 
@@ -32,10 +32,13 @@ export class PontoVendaComponent implements OnInit {
   statusVendaEnum = StatusVendaEnum;
   statusVendaLabel = StatusVendaLabel;
 
+  date = new Date();
+
   idVenda: number;
   venda = {
     status: this.statusVendaEnum.Aberta
    } as Venda;
+  valorVenda = 0;
 
   paginacao = {
     pagina: 1,
@@ -58,6 +61,8 @@ export class PontoVendaComponent implements OnInit {
     if (this.idVenda) {
       this.carregaVenda();
     }
+
+    console.log(this.date.getDate());
   }
 
   contatoSelecionado(contato: Contato) {
@@ -69,6 +74,11 @@ export class PontoVendaComponent implements OnInit {
     this.vendaService.obter(this.idVenda).subscribe(data => {
       this.venda = data;
       this.produtos = data.produtos;
+      this.vendaForm.get('desconto').setValue(data.desconto);
+
+      if (data.status == this.statusVendaEnum.Finalizada)
+        this.vendaForm.get('desconto').disable();
+
       this.paginar();
       this.autoCompleteContato.selecionaManualmente(data.contato);
     });
@@ -121,6 +131,16 @@ export class PontoVendaComponent implements OnInit {
     });
   }
 
+  totalVenda() {
+    let total = 0
+    if (this.produtos)
+      this.produtos.forEach(p => total += p.valorFinal);
+
+    total = total - ((this.vendaForm.get('desconto').value * total) / 100);
+
+    return total;
+  }
+
   cadastrarContato(contato?: Contato) {
     const cadastroModal = this.modal.create({
       nzTitle: 'Novo Contato',
@@ -145,10 +165,13 @@ export class PontoVendaComponent implements OnInit {
   }
 
   finalizar(status: StatusVendaEnum) {
+    debugger;
     this.venda.produtos = this.produtos;
     this.venda.desconto = Number(this.vendaForm.get('desconto').value);
     this.venda.idContato = this.venda.contato.id;
     this.venda.status = status;
+    this.venda.valor = Number(this.totalVenda().toFixed(2));
+    console.log(this.venda.valor);
 
     if (this.venda.id == null) {
       this.vendaService.criar(this.venda).subscribe(() => {
@@ -156,7 +179,7 @@ export class PontoVendaComponent implements OnInit {
           nzTitle: null,
           nzContent: SucessoCadastroComponent,
           nzComponentParams: {
-            acao: this.statusVendaLabel.get(this.venda.status)
+            acao: this.venda.status === this.statusVendaEnum.Finalizada ? 'finalizada' : 'salva'
           },
           nzWidth: "80%",
           nzFooter: null,
@@ -172,7 +195,7 @@ export class PontoVendaComponent implements OnInit {
           nzTitle: null,
           nzContent: SucessoCadastroComponent,
           nzComponentParams: {
-            acao: 'editada'
+            acao: this.venda.status === this.statusVendaEnum.Finalizada ? 'finalizada' : 'salva'
           },
           nzWidth: "80%",
           nzFooter: null,

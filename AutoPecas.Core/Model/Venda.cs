@@ -23,10 +23,10 @@ namespace AutoPecas.Core.Model
         public DateTime DataFinalizacao { get; set; }
 
         [DataMember]
-        public decimal Desconto { get; set; }
+        public float Desconto { get; set; }
 
         [DataMember]
-        public decimal Valor { get; set; }
+        public float Valor { get; set; }
 
         [DataMember]
         public Contato Contato { get; set; }

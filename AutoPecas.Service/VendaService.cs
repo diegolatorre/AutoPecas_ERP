@@ -52,12 +52,12 @@ namespace AutoPecas.Service
 
             if (filtro.Filtros.TryGetValue("valorInicial", out var valorInicial))
             {
-                predicate.And(p => p.Valor >= (decimal)(long)valorInicial);
+                predicate.And(p => p.Valor >= (float)(long)valorInicial);
             }
 
             if (filtro.Filtros.TryGetValue("valorFinal", out var valorFinal))
             {
-                predicate.And(p => p.Valor <= (decimal)(long)valorFinal);
+                predicate.And(p => p.Valor <= (float)(long)valorFinal);
             }
 
             if (filtro.Filtros.TryGetValue("dataAberturaInicial", out var dataAberturaInicial))
@@ -114,8 +114,6 @@ namespace AutoPecas.Service
 
             venda.DataFinalizacao = DateTime.Now;
 
-            venda.Valor = venda.Produtos.Sum(p => p.ValorFinal);
-
             venda.Contato = null;
 
             venda.Produtos.ToList().ForEach(p =>
@@ -133,8 +131,6 @@ namespace AutoPecas.Service
             venda.DataFinalizacao = DateTime.Now;
 
             venda.Contato = null;
-
-            venda.Valor = venda.Produtos.Sum(p => p.ValorFinal);
 
             venda.Produtos.ToList().ForEach(p =>
             {

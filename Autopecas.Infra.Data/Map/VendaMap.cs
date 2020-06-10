@@ -41,11 +41,13 @@ namespace Autopecas.Infra.Data.Map
             builder
                 .Property(p => p.Desconto)
                 .HasColumnName("DESCONTO")
+                .HasColumnType("FLOAT")
                 .IsRequired();
 
             builder
                 .Property(p => p.Valor)
                 .HasColumnName("VALOR")
+                .HasColumnType("FLOAT")
                 .IsRequired();
 
             builder

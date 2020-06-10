@@ -39,7 +39,7 @@ namespace AutoPecas.Service
         {
             return await _AutoPecasDbContext
                 .Usuarios
-                .Where(p => p.NomeUsuario == usuario.NomeUsuario && p.Senha == usuario.Senha)
+                .Where(p => p.NomeUsuario == usuario.NomeUsuario && p.Senha == usuario.Senha && p.Ativo == true)
                 .FirstOrDefaultAsync();
         }
 

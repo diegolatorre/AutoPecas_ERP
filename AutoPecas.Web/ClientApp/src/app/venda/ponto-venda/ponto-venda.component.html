@@ -130,19 +130,22 @@
   </nz-skeleton>
 </div>
 <div class="venda">
-  <nz-descriptions nzTitle="Venda">
-    <nz-descriptions-item nzTitle="Total">R$1.0000,00</nz-descriptions-item>
-    <nz-descriptions-item nzTitle="Data">
-      01/01/2020
-    </nz-descriptions-item>
-  </nz-descriptions>
-
   <form nz-form [formGroup]="vendaForm" class="formulario">
     <nz-form-item class="desconto">
-      <nz-form-label>Desconto</nz-form-label>
+      <nz-form-label>Desconto sobre o total da venda</nz-form-label>
       <nz-form-control>
         <input nz-input formControlName="desconto" />
       </nz-form-control>
     </nz-form-item>
   </form>
+
+  <p></p>
+
+  <nz-statistic
+    class="total-venda"
+    [nzValue]="totalVenda() | currency: 'BRL'"
+    [nzTitle]="'Valor Total'"
+    [nzValueStyle]="{ color: '#3F8600', 'font-size': '5em' }"
+  >
+  </nz-statistic>
 </div>

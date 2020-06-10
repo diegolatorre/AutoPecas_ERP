@@ -15,7 +15,7 @@ export class SelecionaProdutoComponent implements OnInit {
   produtoVendaForm = new FormGroup(
     {
       quantidade: new FormControl(1, [Validators.required]),
-      desconto: new FormControl(0.00, [Validators.required]),
+      desconto: new FormControl(0.00, [Validators.required, Validators.min(0), Validators.max(100)]),
     });
 
   produto: Produto;
@@ -44,7 +44,7 @@ export class SelecionaProdutoComponent implements OnInit {
       idProduto: this.produto.id,
       quantidade: Number(this.produtoVendaForm.get('quantidade').value),
       desconto: this.produtoVendaForm.get('desconto').value,
-      valorFinal: this.produto.valorVenda * this.produtoVendaForm.get('quantidade').value,
+      valorFinal: (this.produto.valorVenda * this.produtoVendaForm.get('quantidade').value) - (this.produtoVendaForm.get('desconto').value * (this.produto.valorVenda * this.produtoVendaForm.get('quantidade').value)) / 100,
       produto: this.produto
     } as ProdutoVenda;
 
@@ -56,7 +56,9 @@ export class SelecionaProdutoComponent implements OnInit {
   }
 
   selecionaProduto(produto: Produto) {
+    console.log(produto);
     this.produto = produto;
     produto.quantidade <= 0 ? this.valido = false : this.valido = true;
+    this.produtoVendaForm.get('quantidade').setValidators(Validators.max(produto.quantidade));
   }
 }

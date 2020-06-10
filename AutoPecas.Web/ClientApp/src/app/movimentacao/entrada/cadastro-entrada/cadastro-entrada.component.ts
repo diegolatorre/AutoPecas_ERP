@@ -71,12 +71,6 @@ export class CadastroEntradaComponent implements OnInit, AfterViewInit {
     }
   }
 
-  startEdit(id: string): void {
-    this.editId = id;
-  }
-
-  stopEdit = (): void => this.editId = null;
-
   removerProduto(id: number): void {
     this.produtos = this.produtos.filter(d => d.produto.id !== id);
     this.paginar();
@@ -139,6 +133,7 @@ export class CadastroEntradaComponent implements OnInit, AfterViewInit {
         this.notaForm.reset();
         this.produtos = [];
         this.entrada = { };
+        this.autoCompleteContatoOrigem.selecionaManualmente();
         this.paginar();
       });
     });

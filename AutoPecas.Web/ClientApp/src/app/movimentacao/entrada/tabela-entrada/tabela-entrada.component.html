@@ -10,7 +10,7 @@
         {{ nota.contatoOrigem.nome || "nota sem descrição."}}
       </ng-template>
       <ng-template #acaoDetalhes>
-        <a (click)="cadastrar(nota)">Abrir Nota</a>
+        <a (click)="visualizar(nota)">Abrir Nota</a>
       </ng-template>
     </div>
   </div>
@@ -36,6 +36,6 @@
 
   <button nz-button nzShape="round" nzType="primary" (click)="cadastrar()">
     <i nz-icon nzType="plus-square" nzTheme="outline"></i>
-    Novo nota
+    Nova nota
   </button>
 </div>

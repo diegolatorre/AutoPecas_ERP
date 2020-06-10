@@ -1,15 +1,16 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, AfterViewInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { NzModalRef } from 'ng-zorro-antd/modal';
 import { Contato } from 'src/app/model/contato/contato.model';
 import { StatusVendaEnum } from 'src/app/model/enum/statusVenda.enum';
+import { AutoCompleteContatoComponent } from 'src/app/shared/auto-complete/auto-complete-contato/auto-complete-contato.component';
 
 @Component({
   selector: 'app-filtro-venda',
   templateUrl: './filtro-venda.component.html',
   styleUrls: ['./filtro-venda.component.css']
 })
-export class FiltroVendaComponent implements OnInit {
+export class FiltroVendaComponent implements OnInit, AfterViewInit {
   filtroForm = new FormGroup(
   {
       idContato: new FormControl(null),
@@ -39,9 +40,37 @@ export class FiltroVendaComponent implements OnInit {
 
   @Input() filtro?: any;
 
+  @ViewChild('AutoCompleteContato') autoCompleteContato: AutoCompleteContatoComponent;
+
   constructor(private modal: NzModalRef) { }
 
   ngOnInit(): void {
+    this.filtroForm.patchValue({
+      idContato: this.filtro.idContato,
+      statusAberto: this.filtro.statusAberto,
+      statusFinalizada: this.filtro.statusFinalizada,
+      dataAberturaInicial: this.filtro.dataAberturaInicial,
+      dataAberturaFinal: this.filtro.dataAberturaFinal,
+      dataFinalizacaoInicial: this.filtro.dataFinalizacaoInicial,
+      dataFinalizacaoFinal: this.filtro.dataFinalizacaoFinal,
+      valorInicial: this.filtro.valorInicial,
+      valorFinal: this.filtro.valorFinal,
+    });
+
+    this.rangeValue = [this.filtro.valorInicial, this.filtro.valorFinal];
+
+    if (this.filtro.dataAberturaInicial || this.filtro.dataAberturaFinal)
+      this.dateRangeAbertura = [this.filtro.dataAberturaInicial, this.filtro.dataAberturaFinal];
+
+    if (this.filtro.dataFinalizacaoInicial || this.filtro.dataFinalizacaoFinal)
+      this.dateRangeFinalizacao = [this.filtro.dataFinalizacaoInicial, this.filtro.dataFinalizacaoFinal];
+  }
+
+  ngAfterViewInit() {
+    this.autoCompleteContato.selecionaManualmente(this.filtro.idContato);
+    this.statusCheckbox[0].checked = this.filtro.statusAberto;
+    this.statusCheckbox[1].checked = this.filtro.statusFinalizada;
+    this.selecionaStatus();
   }
 
   limpar(): void {
@@ -49,6 +78,10 @@ export class FiltroVendaComponent implements OnInit {
     this.rangeValue = [0, 50000];
     this.dateRangeAbertura = [];
     this.dateRangeFinalizacao = [];
+    this.statusCheckbox[0].checked = true;
+    this.statusCheckbox[1].checked = true;
+    this.autoCompleteContato.selecionaManualmente();
+    this.selecionaStatus();
   }
 
   filtrar(): void {
@@ -56,7 +89,7 @@ export class FiltroVendaComponent implements OnInit {
   }
 
   selecionaContato(contato: Contato) {
-    this.filtroForm.get('idContato').setValue(contato.id);
+    this.filtroForm.get('idContato').setValue(contato);
   }
 
   selecionaValor(valor: any) {

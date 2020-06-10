@@ -4,12 +4,13 @@ import { Venda } from "../model/venda/venda.model.model";
 import { FiltroSpec } from "../model/geral/filtro-spec.model";
 import { PaginacaoResultado } from "../model/geral/paginacao-resultado.model";
 import { Observable } from "rxjs";
+import { environment } from "src/environments/environment";
 
 @Injectable({
   providedIn: "root",
 })
 export class VendaService {
-  private readonly apiEndpoint = `http://localhost:50595/api/venda`;
+  private readonly apiEndpoint = `${environment.apiUrl}venda`;
 
   constructor(private httpClient: HttpClient) {}
 

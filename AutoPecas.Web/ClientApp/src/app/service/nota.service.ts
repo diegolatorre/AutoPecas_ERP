@@ -3,12 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { FiltroSpec } from '../model/geral/filtro-spec.model';
 import { PaginacaoResultado } from '../model/geral/paginacao-resultado.model';
 import Entrada from '../model/notas/entrada.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class NotaService {
-  private readonly apiEndpoint = `http://localhost:50595/api/nota`;
+  private readonly apiEndpoint = `${environment.apiUrl}nota`;
 
   constructor(private httpClient: HttpClient) {}
 

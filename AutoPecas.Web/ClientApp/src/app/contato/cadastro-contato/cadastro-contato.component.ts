@@ -74,7 +74,21 @@ export class CadastroContatoComponent implements OnInit {
     } as Contato;
 
     if (this.editarContato) {
-      this.contatoService.editar(contato).subscribe();
+      this.contatoService.editar(contato).subscribe(() => {
+        const modalResult = this.modalResult.create({
+          nzTitle: null,
+          nzContent: SucessoCadastroComponent,
+          nzComponentParams: {
+            acao: "editado",
+          },
+          nzWidth: "80%",
+          nzFooter: null,
+          nzClosable: false,
+          nzMaskClosable: false,
+        });
+
+        modalResult.afterClose.subscribe(next => { this.modal.destroy() });
+      });
     } else {
       this.contatoService.incluir(contato).subscribe((next) => {
         if (this.venda) {

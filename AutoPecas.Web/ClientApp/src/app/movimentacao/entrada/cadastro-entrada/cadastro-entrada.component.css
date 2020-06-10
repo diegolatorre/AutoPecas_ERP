@@ -18,6 +18,10 @@
   grid-area: 2 / 1 / 3 / 3;
 }
 
+.divider {
+  grid-area: 3 / 1 / 4 / 2;
+}
+
 .form-produto {
   grid-area: 4 / 1 / 5 / 2;
   display: grid;
@@ -37,13 +41,8 @@
   grid-area: 1 / 1 / 2 / 3;
   min-height: max-content;
 }
-
-
-
-.editable-cell {
-    position: relative;
-    padding: 5px 12px;
-    cursor: pointer;
+.titulo {
+  grid-area: 1 / 1 / 2 / 2;
 }
 
 .editable-row:hover .editable-cell {

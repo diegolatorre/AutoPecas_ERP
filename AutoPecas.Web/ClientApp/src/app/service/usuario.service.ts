@@ -4,13 +4,14 @@ import { Observable } from 'rxjs';
 import { FiltroSpec } from '../model/geral/filtro-spec.model';
 import { PaginacaoResultado } from '../model/geral/paginacao-resultado.model';
 import Usuario from '../model/usuario/usuario.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 
 export class UsuarioService {
-  private readonly apiEndpoint = `http://localhost:50595/api/usuario`;
+  private readonly apiEndpoint = `${environment.apiUrl}usuario`;
 
   constructor(private httpClient: HttpClient) { }
 
@@ -28,13 +29,13 @@ export class UsuarioService {
 
   public incluir(usuario: Usuario): Observable<number> {
     console.log(usuario);
-    
+
     return this.httpClient.post<number>(`${this.apiEndpoint}`, usuario);
   }
 
   public editar(usuario: Usuario): Observable<number> {
     console.log(usuario);
-    
+
     return this.httpClient.put<number>(`${this.apiEndpoint}`, usuario);
   }
 

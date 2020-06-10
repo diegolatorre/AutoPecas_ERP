@@ -5,13 +5,14 @@ import { Produto } from '../model/produto/produto.model';
 import { FiltroSpec } from '../model/geral/filtro-spec.model';
 import { PaginacaoResultado } from '../model/geral/paginacao-resultado.model';
 import { Marca } from '../model/produto/marca.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 
 export class ProdutoService {
-  private readonly apiEndpoint = `http://localhost:50595/api/produto`;
+  private readonly apiEndpoint = `${environment.apiUrl}produto`;
 
   constructor(private httpClient: HttpClient) { }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild, ChangeDetectorRef, Input, AfterViewInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Produto } from 'src/app/model/produto/produto.model';
 import Entrada from 'src/app/model/notas/entrada.model';
@@ -9,13 +9,14 @@ import { AutoCompleteProdutoComponent } from 'src/app/shared/auto-complete/auto-
 import { FiltroSpec } from 'src/app/model/geral/filtro-spec.model';
 import { SucessoCadastroComponent } from '../../sucesso-cadastro/sucesso-cadastro.component';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import { AutoCompleteContatoComponent } from 'src/app/shared/auto-complete/auto-complete-contato/auto-complete-contato.component';
 
 @Component({
   selector: 'app-cadastro-entrada',
   templateUrl: './cadastro-entrada.component.html',
   styleUrls: ['./cadastro-entrada.component.css']
 })
-export class CadastroEntradaComponent implements OnInit {
+export class CadastroEntradaComponent implements OnInit, AfterViewInit {
   notaForm = new FormGroup({
     chaveAcesso: new FormControl(null, [Validators.required]),
     fornecedor: new FormControl(null, [Validators.required]),
@@ -27,10 +28,9 @@ export class CadastroEntradaComponent implements OnInit {
     quantidade: new FormControl(null, [Validators.required, Validators.min(1)]),
   });
 
-  entrada: Entrada;
+  entrada = { } as Entrada;
   produtos: Array<ProdutoNota> = [];
   produtosExibicao: Array<ProdutoNota> = [];
-
 
   paginacao = {
     pagina: 1,
@@ -40,14 +40,36 @@ export class CadastroEntradaComponent implements OnInit {
 
   editId: string | null = null;
 
+  @Input() visualizarNota?: Entrada = null;
+
   @ViewChild('AutoCompleteProduto') autoCompleteProduto: AutoCompleteProdutoComponent;
+  @ViewChild('AutoCompleteContatoOrigem') autoCompleteContatoOrigem: AutoCompleteContatoComponent;
+  @ViewChild('AutoCompleteContatoDestino') autoCompleteContatoDestino: AutoCompleteContatoComponent;
 
   constructor(
     private service: NotaService,
     private modalResult: NzModalService,
   ) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    if (this.visualizarNota) {
+      this.entrada = this.visualizarNota
+      this.produtos = this.visualizarNota.produtos;
+
+      this.notaForm.get('chaveAcesso').setValue(this.visualizarNota.chaveAcesso);
+      this.notaForm.get('observacao').setValue(this.visualizarNota.observacao);
+      this.notaForm.get('chaveAcesso').disable();
+      this.notaForm.get('observacao').disable();
+      this.paginar();
+    }
+  }
+
+  ngAfterViewInit() {
+    if (this.visualizarNota) {
+      this.autoCompleteContatoOrigem.selecionaManualmente(this.visualizarNota.contatoOrigem);
+      this.autoCompleteContatoDestino.selecionaManualmente(this.visualizarNota.contatoDestino);
+    }
+  }
 
   startEdit(id: string): void {
     this.editId = id;
@@ -85,7 +107,9 @@ export class CadastroEntradaComponent implements OnInit {
 
   selecionaProduto = (produto: Produto) => this.produtoForm.get('produto').setValue(produto);
 
-  selecionaFornecedor = (fornecedor: Contato) => this.notaForm.get('fornecedor').setValue(fornecedor);
+  selecionaOrigem = (fornecedor: Contato) => this.notaForm.get('fornecedor').setValue(fornecedor);
+
+  selecionaDestino = (fornecedor: Contato) => this.notaForm.get('fornecedor').setValue(fornecedor);
 
   submit = () => {
     if (this.produtos.length <= 0) {

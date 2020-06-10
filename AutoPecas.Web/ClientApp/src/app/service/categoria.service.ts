@@ -4,13 +4,14 @@ import { Observable } from 'rxjs';
 import { FiltroSpec } from '../model/geral/filtro-spec.model';
 import { PaginacaoResultado } from '../model/geral/paginacao-resultado.model';
 import { Categoria } from '../model/produto/categoria.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 
 export class CategoriaService {
-  private readonly apiEndpoint = `http://localhost:50595/api/categoria`;
+  private readonly apiEndpoint = `${environment.apiUrl}categoria`;
 
   constructor(private httpClient: HttpClient) { }
 

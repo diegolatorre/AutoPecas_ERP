@@ -45,7 +45,7 @@ export class TabelaProdutoComponent implements OnInit {
       console.log(next.lista);
       this.filtro.total = next.total;
       this.produtos = next.lista;
-      
+
     });
   }
 
@@ -114,6 +114,7 @@ export class TabelaProdutoComponent implements OnInit {
 
   limparFiltro() {
     this.filtro.filtros = { };
+    this.filtro.total = null;
     this.listar();
   }
 

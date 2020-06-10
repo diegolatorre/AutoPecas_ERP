@@ -106,21 +106,7 @@ export class PontoVendaComponent implements OnInit {
       nzContent: SelecionaProdutoComponent,
       nzComponentParams: { editarProduto: produto },
       nzWidth: "80%",
-      nzFooter: [
-        {
-          label: "Cancelar",
-          shape: "round",
-          onClick: () => selecionaModal.destroy(),
-        },
-        {
-          label: produto ? "salvar" : "Adicionar",
-          type: "primary",
-          shape: "round",
-          onClick: (modal) => {
-            modal.fechar();
-          },
-        },
-      ],
+      nzFooter: null,
       nzClosable: false,
     });
 
@@ -186,7 +172,7 @@ export class PontoVendaComponent implements OnInit {
           nzTitle: null,
           nzContent: SucessoCadastroComponent,
           nzComponentParams: {
-            acao: this.statusVendaLabel.get(this.venda.status)
+            acao: 'editada'
           },
           nzWidth: "80%",
           nzFooter: null,

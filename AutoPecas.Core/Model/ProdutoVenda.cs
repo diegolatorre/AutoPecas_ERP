@@ -22,10 +22,10 @@ namespace AutoPecas.Core.Model
         public int Quantidade { get; set; }
 
         [DataMember]
-        public decimal Desconto { get; set; }
+        public float Desconto { get; set; }
 
         [DataMember]
-        public decimal ValorFinal { get; set; }
+        public float ValorFinal { get; set; }
 
         [DataMember]
         public Venda Venda { get; set; }

@@ -52,3 +52,7 @@
 .venda {
   grid-area: 4 / 1 / 5 / 2;
 }
+
+.ant-statistic-content-value-int {
+  font-size: 2.5em !important;
+}

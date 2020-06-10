@@ -5,8 +5,9 @@ import { CadastroMarcaComponent } from '../produto/parametros/marca/cadastro-mar
 import { CadastroCategoriaComponent } from '../produto/parametros/categoria/cadastro-categoria/cadastro-categoria.component';
 import { CadastroProdutoComponent } from '../produto/cadastro-produto/cadastro-produto.component';
 import { CadastroUsuarioComponent } from '../usuario/cadastro-usuario/cadastro-usuario.component';
-import { getPerfil } from '../shared/sessao';
+import { getPerfil, clear } from '../shared/sessao';
 import Usuario from '../model/usuario/usuario.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -18,8 +19,14 @@ export class AppComponent {
   perfilSessao: Usuario = getPerfil();
 
   constructor(
-    private modal: NzModalService
+    private modal: NzModalService,
+    private router: Router
   ) { }
+
+  ngOnInit() {
+    if (!getPerfil())
+      this.router.navigateByUrl('/');
+  }
 
   cadastrarContato() {
     const cadastroModal = this.modal.create({
@@ -39,6 +46,24 @@ export class AppComponent {
       nzFooter: null,
       nzClosable: false
     });
+  }
+
+  meuPerfil() {
+    const cadastroModal = this.modal.create({
+      nzContent: CadastroUsuarioComponent,
+      nzComponentParams: {
+       usuario: getPerfil()
+      },
+      nzTitle: 'Editar Usúario',
+      nzWidth: '40%',
+      nzFooter: null,
+      nzClosable: false
+    });
+  }
+
+  sair() {
+    clear();
+    location.reload();
   }
 
   cadastrarMarca() {

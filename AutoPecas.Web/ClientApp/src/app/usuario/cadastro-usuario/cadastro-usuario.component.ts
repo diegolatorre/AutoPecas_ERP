@@ -6,6 +6,7 @@ import { UsuarioService } from 'src/app/service/usuario.service';
 import Usuario from 'src/app/model/usuario/usuario.model';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { SucessoCadastroComponent } from 'src/app/usuario/sucesso-cadastro/sucesso-cadastro.component';
+import { getPerfil } from 'src/app/shared/sessao';
 
 @Component({
   selector: 'app-cadastro-usuario',
@@ -108,22 +109,26 @@ export class CadastroUsuarioComponent implements OnInit {
         permissao: this.usuarioForm.get('permissao').value,
       } as Usuario;
 
-      this._service.editar(this.usuario).subscribe(() => {
+        this._service.editar(this.usuario).subscribe(() => {
 
-        const modalResult = this.modalService.create({
-          nzTitle: null,
-          nzContent: SucessoCadastroComponent,
-          nzComponentParams: {
-            acao: 'editado'
-          },
-          nzWidth: "80%",
-          nzFooter: null,
-          nzClosable: false,
-          nzMaskClosable: false
+          if (getPerfil().permissao) {
+          const modalResult = this.modalService.create({
+            nzTitle: null,
+            nzContent: SucessoCadastroComponent,
+            nzComponentParams: {
+              acao: 'editado'
+            },
+            nzWidth: "80%",
+            nzFooter: null,
+            nzClosable: false,
+            nzMaskClosable: false
+          });
+
+          this.modal.close();
+        } else {
+          this.modal.close();
+        }
         });
-
-        this.modal.close();
-      });
     }
 
   }

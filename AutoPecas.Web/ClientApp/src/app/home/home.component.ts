@@ -40,7 +40,7 @@ export class HomeComponent implements OnInit {
     this._service.login(this.usuario).subscribe(next => {
       if (next != null) {
         console.log(next);
-        setPerfil(this.usuario);
+        setPerfil(next);
         location.reload()
       } else {
         this.mensagemErro = "Usúario e/ou Senha inválidos!";

@@ -7,3 +7,7 @@ export function getPerfil() {
 export function setPerfil(perfil: Usuario) {
     return localStorage.setItem("perfil", JSON.stringify(perfil));
 }
+
+export function clear() {
+    return localStorage.removeItem("perfil");
+}
